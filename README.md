@@ -1,1 +1,1 @@
-# minimum-viable-product
+# EconomiaCircularMVP
