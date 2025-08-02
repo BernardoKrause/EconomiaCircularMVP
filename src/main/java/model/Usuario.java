@@ -25,6 +25,7 @@ public class Usuario {
         
         this.email = email;
         this.senha = senha;
+        this.admin = false;
         this.autenticado = false;                
     } 
     
@@ -46,5 +47,9 @@ public class Usuario {
     
     public boolean isAutenticado() {
         return this.autenticado;
+    }
+    
+    public boolean isAdmin() {
+        return this.admin;
     }
 }
