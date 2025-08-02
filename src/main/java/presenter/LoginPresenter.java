@@ -49,8 +49,8 @@ public class LoginPresenter {
            }
         });
         
-        view.getTxtEmail().setText("exemplo@hotmail.com");
-        view.getTxtSenha().setText("senha");
+        view.getTxtEmail().setText("");
+        view.getTxtSenha().setText("");
         view.setVisible(true);
     }
     
