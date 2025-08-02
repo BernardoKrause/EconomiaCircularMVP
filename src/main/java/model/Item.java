@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Item {
     private String idC;
     private String tipo;
@@ -13,6 +16,7 @@ public class Item {
     private Integer GPWEvitado;
     private Double MCIItem;
     private Integer numeroCiclo;
+    private List<Defeito> defeitos;
 
     public Item(String tipo, String subcategoria, String tamanho, String cor, Double peso, String composicao,Double precoBase) {
         if (tipo.isEmpty()){
@@ -47,6 +51,43 @@ public class Item {
         this.GPWEvitado = 0;
         this.MCIItem=0.0;
         this.numeroCiclo=0;
+        this.defeitos = new ArrayList<Defeito>();
+    }
+
+    public Item(String tipo, String subcategoria, String tamanho, String cor, Double peso, String composicao,Double precoBase, List<Defeito> defeitos) {
+        if (tipo.isEmpty()){
+            throw new IllegalArgumentException("Tipo é obrigatorio!");
+        }
+        if (subcategoria.isEmpty()){
+            throw new IllegalArgumentException("Subcategoria é obrigatorio!");
+        }
+        if (tamanho.isEmpty()){
+            throw new IllegalArgumentException("Tamanho é obrigatorio!");
+        }
+        if (cor.isEmpty()){
+            throw new IllegalArgumentException("Cor é obrigatorio!");
+        }
+        if (peso==null || peso<0){
+            throw new IllegalArgumentException("Peso é obrigatorio!");
+        }
+        if (composicao.isEmpty()){
+            throw new IllegalArgumentException("Composicao é obrigatorio!");
+        }
+        if (precoBase == null || precoBase<0){
+            throw new IllegalArgumentException("Preco Base é obrigatorio!");
+        }
+        this.tipo = tipo;
+        this.subcategoria = subcategoria;
+        this.tamanho = tamanho;
+        this.cor = cor;
+        this.peso = peso;
+        this.composicao = composicao;
+        this.precoBase = precoBase;
+        this.precoFinal = precoBase;
+        this.GPWEvitado = 0;
+        this.MCIItem=0.0;
+        this.numeroCiclo=0;
+        this.defeitos = defeitos;
     }
 
     public String getIdC() {
@@ -97,6 +138,10 @@ public class Item {
         return numeroCiclo;
     }
 
+    public List<Defeito> getDefeitos() {
+        return defeitos;
+    }
+
     public void setPrecoFinal(Double precoFinal) {
         this.precoFinal = precoFinal;
     }
@@ -128,5 +173,9 @@ public class Item {
 
     public void calcularIndicadoresAmbientais(){
         //codigo
+    }
+
+    public void addDefeito(Defeito defeito){
+        this.defeitos.add(defeito);
     }
 }
