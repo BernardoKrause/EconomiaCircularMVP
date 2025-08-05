@@ -1,26 +1,26 @@
 package service;
 
 import model.Item;
-import strategy.defectSystem.IRegraDefeitoStrategy;
-import strategy.defectSystem.RegraDefeitosPercentual;
+import strategy.SistemaDefeitos.IRegraDefeitoStrategy;
+import strategy.SistemaDefeitos.RegraDefeitosPercentual;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DefectSystemService {
+public class SistemaDefeitosService {
     private static List<IRegraDefeitoStrategy> regrasDefeito;
-    private static DefectSystemService defectSystemService;
+    private static SistemaDefeitosService sistemaDefeitosService;
 
-    private DefectSystemService() {
+    private SistemaDefeitosService() {
         regrasDefeito = new ArrayList<IRegraDefeitoStrategy>();
         regrasDefeito.add(new RegraDefeitosPercentual());
     }
 
-    public DefectSystemService getInstance() {
-        if(defectSystemService == null) {
-            defectSystemService = new DefectSystemService();
+    public SistemaDefeitosService getInstance() {
+        if(sistemaDefeitosService == null) {
+            sistemaDefeitosService = new SistemaDefeitosService();
         }
-        return defectSystemService;
+        return sistemaDefeitosService;
     }
 
     public static void AplicarDefeitos(Item item, List<String> defeitos) {

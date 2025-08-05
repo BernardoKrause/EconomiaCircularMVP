@@ -1,4 +1,4 @@
-package strategy.defectSystem;
+package strategy.SistemaDefeitos;
 
 import model.Item;
 import java.util.List;
