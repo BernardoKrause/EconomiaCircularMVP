@@ -1,4 +1,4 @@
-package strategy.defectSystem;
+package strategy.SistemaDefeitos;
 
 import model.Defeito;
 import model.Item;
@@ -11,13 +11,13 @@ public class RegraDefeitosPercentual implements IRegraDefeitoStrategy{
     private Map<String,Double> descontoDefeitoPercentual;
     private TiposDefeitoRepository tiposDefeitoRepository;
 
-    public RegraDefeitosPercentual(Item item){
+    public RegraDefeitosPercentual(){
         this.tiposDefeitoRepository = TiposDefeitoRepository.getInstance();
-        this.descontoDefeitoPercentual = tiposDefeitoRepository.getMapTipoDefeitos(item.getTipo());
     }
 
     @Override
-    public void calcularDefeitos(Item item, List<String> defeitosAplicados) {
+    public void AplicarDefeitos(Item item, List<String> defeitosAplicados) {
+        this.descontoDefeitoPercentual = tiposDefeitoRepository.getMapTipoDefeitos(item.getTipo());
         for(String tipoDefeito : defeitosAplicados){
             if(!seAplica(tipoDefeito)){
                 throw new RuntimeException("Defeito passado não encontrado!");
