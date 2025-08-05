@@ -18,8 +18,8 @@ public class UsuarioRepository {
 
     public UsuarioRepository() {
         usuariosCadastrados = new ArrayList<>();
-        usuariosCadastrados.add(new Usuario("bk@gmail.com", "senha123"));
-        usuariosCadastrados.add(new Usuario("caiofreire@gmail.com", "321senha"));
+        usuariosCadastrados.add(new Usuario("bernardo", "bk@gmail.com", "senha123"));
+        usuariosCadastrados.add(new Usuario("caio", "caiofreire@gmail.com", "321senha"));
     }
     
     public Optional<Usuario> buscarPorEmail(String email) {
@@ -32,7 +32,7 @@ public class UsuarioRepository {
     }
     
     public int totalUsuarios() {
-        return 0;
+        return this.usuariosCadastrados.size();
     }
     
     public void salvarUsuario(Usuario usuario) {
