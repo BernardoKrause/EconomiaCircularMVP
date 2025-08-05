@@ -4,6 +4,10 @@
 
 package main;
 
+import presenter.LoginPresenter;
+import repository.UsuarioRepository;
+import service.AutenticacaoService;
+
 /**
  *
  * @author caiof
@@ -11,6 +15,9 @@ package main;
 public class EconomiaCircularMVP {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        
+        UsuarioRepository usuarioRepository = new UsuarioRepository();
+        AutenticacaoService autenticacaoService = new AutenticacaoService(usuarioRepository);
+        LoginPresenter loginPresenter = new LoginPresenter(autenticacaoService);
     }
 }

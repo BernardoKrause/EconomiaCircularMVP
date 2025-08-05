@@ -18,10 +18,10 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
     
-    public void criarUsuario(String email, String senha) {
+    public void cadastrarUsuario(String nome, String email, String telefone, String senha) {
         long totalUsuarios = usuarioRepository.totalUsuarios();
         
-        Usuario novoUsuario = new Usuario(email, senha);
+        Usuario novoUsuario = new Usuario(nome, email, telefone, senha);
         
         if (totalUsuarios == 0){
             novoUsuario.setAdmin(true);

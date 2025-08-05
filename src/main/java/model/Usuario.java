@@ -4,17 +4,23 @@
  */
 package model;
 
+import java.time.LocalDateTime;
+
 /**
  *
  * @author berna
  */
 public class Usuario {
+    private String nome;
     private String email;
+    private String telefone;
+    private LocalDateTime dataCriacaoDaConta;
     private String senha;
     private boolean admin;
     private boolean autenticado;
     
-    public Usuario(String email, String senha) {        
+    public Usuario(String email, String senha) {     
+        
         if (email == null) {
             throw new IllegalArgumentException("Email precisa ser informado.");
         }
@@ -24,6 +30,49 @@ public class Usuario {
         }
         
         this.email = email;
+        this.senha = senha;
+        this.admin = false;
+        this.autenticado = false;                
+    } 
+    
+    public Usuario(String nome, String email, String senha) {     
+        
+        if (nome == null) {
+            throw new IllegalArgumentException("Nome precisa ser informado.");
+        }
+        
+        if (email == null) {
+            throw new IllegalArgumentException("Email precisa ser informado.");
+        }
+        
+        if (senha == null) {
+            throw new IllegalArgumentException("Senha precisa ser informada.");
+        }
+        
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.admin = false;
+        this.autenticado = false;                
+    } 
+    
+    public Usuario(String nome, String email, String telefone, String senha) {    
+        
+        if (nome == null) {
+            throw new IllegalArgumentException("Nome precisa ser informado.");
+        }
+        
+        if (email == null) {
+            throw new IllegalArgumentException("Email precisa ser informado.");
+        }
+        
+        if (senha == null) {
+            throw new IllegalArgumentException("Senha precisa ser informada.");
+        }
+        
+        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone;
         this.senha = senha;
         this.admin = false;
         this.autenticado = false;                
