@@ -4,8 +4,9 @@ import java.util.*;
 
 public class TiposDefeitoRepository {
     private Map<String,Map<String,Double>> tiposDefeito;
+    private static TiposDefeitoRepository tipoDefeitoRepository;
 
-    public TiposDefeitoRepository() {
+    private TiposDefeitoRepository() {
         Map<String,Double> tiposDefeitoVestuario = new HashMap<>();
             tiposDefeitoVestuario.put("rasgo estruturante",0.3);
             tiposDefeitoVestuario.put("Ausência de botão principal",0.15);
@@ -35,7 +36,14 @@ public class TiposDefeitoRepository {
         tiposDefeito.put("vestuario",tiposDefeitoVestuario);
         tiposDefeito.put("calcado",tiposDefeitoCalcado);
         tiposDefeito.put("bolsas e mochilas",tiposDefeitoBolsa);
-        tiposDefeito.put("bijuterias e acessorios",new HashMap<>());
+        tiposDefeito.put("bijuterias e acessorios",tiposDefeitoBijuteria);
+    }
+
+    public static TiposDefeitoRepository getInstance() {
+        if (tipoDefeitoRepository == null){
+            tipoDefeitoRepository = new TiposDefeitoRepository();
+        }
+        return tipoDefeitoRepository;
     }
 
     public Optional<List<String>> getTiposDefeito(String tipoItem) {
@@ -57,5 +65,12 @@ public class TiposDefeitoRepository {
             throw new IllegalArgumentException("O defeito informado não existe!");
         }
         return tiposDefeito.get(tipoItem).get(defeito);
+    }
+
+    public Map<String,Double> getMapTipoDefeitos(String tipoItem){
+        if(!tiposDefeito.containsKey(tipoItem)){
+            throw new IllegalArgumentException("O tipo informado não existe!");
+        }
+        return tiposDefeito.get(tipoItem);
     }
 }
