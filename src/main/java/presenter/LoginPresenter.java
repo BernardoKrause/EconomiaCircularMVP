@@ -63,9 +63,10 @@ public class LoginPresenter {
         
         if (usuario.isAutenticado()) {
             try {
-                
+                HomePresenter homePresenter = new HomePresenter(usuario);
+                view.dispose();
             } catch (Exception ex) {
-                
+                throw new RuntimeException(ex.getMessage());
             }
         }
     }
