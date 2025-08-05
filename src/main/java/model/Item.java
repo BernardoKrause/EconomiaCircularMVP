@@ -17,6 +17,8 @@ public class Item {
     private Double MCIItem;
     private Integer numeroCiclo;
     private List<Defeito> defeitos;
+    
+    private Vendedor vendedor;
 
     public Item(String tipo, String subcategoria, String tamanho, String cor, Double peso, String composicao,Double precoBase) {
         if (tipo.isEmpty()){
@@ -52,6 +54,7 @@ public class Item {
         this.MCIItem=0.0;
         this.numeroCiclo=0;
         this.defeitos = new ArrayList<Defeito>();
+        this.vendedor = null;
     }
 
     public Item(String tipo, String subcategoria, String tamanho, String cor, Double peso, String composicao,Double precoBase, List<Defeito> defeitos) {
@@ -156,6 +159,16 @@ public class Item {
 
     public void setNumeroCiclo(Integer numeroCiclo) {
         this.numeroCiclo = numeroCiclo;
+    }
+    
+    public void setVendedor(Vendedor vendedor){
+        if(vendedor==null){
+            throw new RuntimeException("Vendedor informado não existe!");
+        }
+        if(this.vendedor!=null){
+            throw new RuntimeException("Esse Item ja possui um Vendedor!");
+        }
+        this.vendedor=vendedor;
     }
 
     protected void gerarIdC(Integer codigo) {

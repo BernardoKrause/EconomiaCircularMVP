@@ -10,8 +10,8 @@ package model;
  */
 public class Comprador extends Perfil {
     
-    public Comprador (Integer id) {
-        this.id = id;
+    public Comprador (Integer idComprador) {
+        this.id = ("C-"+idComprador);
     }
     
     /*

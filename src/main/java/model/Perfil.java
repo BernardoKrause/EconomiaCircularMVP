@@ -9,10 +9,10 @@ package model;
  * @author berna
  */
 public abstract class Perfil {
-    protected Integer id;
+    protected String id;
     protected Double beneficioClimatico;
     
-    public Integer getId() {
+    public String getId() {
         return this.id;
     }
     
