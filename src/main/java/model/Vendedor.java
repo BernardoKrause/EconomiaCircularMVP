@@ -6,6 +6,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import repository.ItemRepository;
 
 /**
  *
@@ -19,10 +20,10 @@ public class Vendedor extends Perfil {
         this.itens=new ArrayList<>();
     }
     
-    public void publicarItem(Item item) {
+    public void publicarItem(Item item, ItemRepository repository) {
         item.setVendedor(this);
-        //item.gerarIdC(2);
-        
+        item.gerarIdC(repository.getQuantidadeItens());
+        repository.salvarItem(item);
     }
     
     /*
