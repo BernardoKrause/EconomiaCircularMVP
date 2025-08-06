@@ -144,6 +144,10 @@ public class Item {
     public List<Defeito> getDefeitos() {
         return defeitos;
     }
+    
+    public Vendedor getVendedor(){
+        return vendedor;
+    }
 
     public void setPrecoFinal(Double precoFinal) {
         this.precoFinal = precoFinal;
