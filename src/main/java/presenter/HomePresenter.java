@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import model.Usuario;
-import repository.PerfilRepository;
+import service.PerfilService;
 import view.HomeView;
 
 /**
@@ -18,11 +18,10 @@ import view.HomeView;
 public class HomePresenter {
     
     private HomeView view;
-    private Usuario usuario;
+    private PerfilService perfilService;
     
     public HomePresenter(Usuario usuario) {
-        this.usuario = usuario;
-        PerfilRepository perfilRepository = new PerfilRepository();
+        this.perfilService = new PerfilService();
         
         view = new HomeView();
         
@@ -32,7 +31,7 @@ public class HomePresenter {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    perfilRepository.criarPerfilVendedor(usuario);
+                    perfilService.criarPerfilVendedor(usuario);
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(view, ex);
                 }
