@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import model.Usuario;
 import service.AutenticacaoService;
-import view.LoginView;
+import view.LoginView1;
 
 /**
  *
@@ -17,14 +17,14 @@ import view.LoginView;
  */
 public class LoginPresenter {
     
-    private LoginView view;
+    private LoginView1 view;
     private AutenticacaoService autenticacaoService;
     private Usuario usuario;
     
     public LoginPresenter(AutenticacaoService autenticacaoService) {
         this.autenticacaoService = autenticacaoService;
         
-        view = new LoginView();
+        view = new LoginView1();
         
         view.setVisible(false);
         view.getBtnAcessar().addActionListener(new ActionListener() {

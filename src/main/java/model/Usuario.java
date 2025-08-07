@@ -5,6 +5,8 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -18,6 +20,7 @@ public class Usuario {
     private String senha;
     private boolean admin;
     private boolean autenticado;
+    private List<Perfil> perfis;
     
     public Usuario(String email, String senha) {     
         
@@ -29,6 +32,7 @@ public class Usuario {
             throw new IllegalArgumentException("Senha precisa ser informada.");
         }
         
+        this.perfis = new ArrayList<>();
         this.email = email;
         this.senha = senha;
         this.admin = false;
@@ -92,6 +96,10 @@ public class Usuario {
     
     public void setAutenticado(boolean autenticado) {
         this.autenticado = autenticado;
+    }
+    
+    public void addPerfil(Perfil perfil) {
+        this.perfis.add(perfil);
     }
     
     public boolean isAutenticado() {

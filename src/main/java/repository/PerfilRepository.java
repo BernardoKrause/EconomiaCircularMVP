@@ -4,7 +4,11 @@
  */
 package repository;
 
-import model.Usuario;
+import java.util.ArrayList;
+import java.util.List;
+import model.Comprador;
+import model.Perfil;
+import model.Vendedor;
 
 /**
  *
@@ -12,12 +16,11 @@ import model.Usuario;
  */
 public class PerfilRepository {
     
+    private List<Perfil> perfis; 
     
     public PerfilRepository() {
-        
-    }
-    
-    public void criarPerfilVendedor(Usuario usuario) {
-        
+        perfis = new ArrayList<>();
+        perfis.add(new Comprador("v-001"));
+        perfis.add(new Vendedor("c-001"));
     }
 }
