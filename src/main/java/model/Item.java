@@ -175,7 +175,7 @@ public class Item {
         this.vendedor=vendedor;
     }
 
-    protected void gerarIdC(Integer codigo) {
+    public void gerarIdC(Integer codigo) {
         String idC = String.valueOf(codigo);
         //codigo
         if (!idC.isEmpty()){

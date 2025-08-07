@@ -4,6 +4,7 @@
  */
 package view.item;
 
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JList;
@@ -288,5 +289,13 @@ public class FormItemView extends javax.swing.JFrame {
     
     public JList<JCheckBox> getLTiposDefeito(){
         return lTiposDefeito;
+    }
+    
+    public JButton getBtnPublicar(){
+        return btnPublicar;
+    }
+    
+    public JButton getBtnCancelar(){
+        return btnCancelar;
     }
 }

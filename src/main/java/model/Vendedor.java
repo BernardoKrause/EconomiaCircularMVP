@@ -20,10 +20,12 @@ public class Vendedor extends Perfil {
         this.itens=new ArrayList<>();
     }
     
-    public void publicarItem(Item item, ItemRepository repository) {
+    public void publicarItem(Item item) {
+        if(item==null){
+            throw new IllegalArgumentException("O item que esta tentando publicar não existe!");
+        }
         item.setVendedor(this);
-        item.gerarIdC(repository.getQuantidadeItens());
-        repository.salvarItem(item);
+        itens.add(item);
     }
     
     /*
