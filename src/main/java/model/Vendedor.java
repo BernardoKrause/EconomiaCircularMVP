@@ -13,10 +13,10 @@ import repository.ItemRepository;
  * @author berna
  */
 public class Vendedor extends Perfil {
-    private List<Item> itens;
     
-    public Vendedor(Integer idVendedor) {
-        this.id = ("V-"+idVendedor);
+    private List<Item> itens;
+    public Vendedor(String idVendedor) {
+        this.id = idVendedor;
         this.itens=new ArrayList<>();
     }
     

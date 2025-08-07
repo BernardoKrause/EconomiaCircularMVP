@@ -2,25 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package model;
+package service;
+
+import model.Usuario;
+import model.Vendedor;
 
 /**
  *
  * @author berna
  */
-public class Comprador extends Perfil {
-    
-    public Comprador (String id) {
-        this.id = id;
+public class PerfilService {
+        
+    public void criarPerfilVendedor(Usuario usuario) {
+        
+        usuario.addPerfil(new Vendedor(""));
     }
     
-    /*
-    public void enviarOferta (Item item, Double valor) {
+    public void criarPerfilComprador(Usuario usuario) {
         
     }
-    
-    public void enviarReclamcao(Item item, String reclamacao) {
-        
-    }
-    */
 }
