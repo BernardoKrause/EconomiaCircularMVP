@@ -178,7 +178,7 @@ public class Item {
     public void gerarIdC(Integer codigo) {
         String idC = String.valueOf(codigo);
         //codigo
-        if (!idC.isEmpty()){
+        if (this.idC != null){
             throw new IllegalArgumentException("O ID-C desse item ja foi gerado!");
         }
         this.idC=idC;
@@ -194,5 +194,25 @@ public class Item {
 
     public void addDefeito(Defeito defeito){
         this.defeitos.add(defeito);
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "idC='" + idC + '\'' +
+                ", tipo='" + tipo + '\'' +
+                ", subcategoria='" + subcategoria + '\'' +
+                ", tamanho='" + tamanho + '\'' +
+                ", cor='" + cor + '\'' +
+                ", peso=" + peso +
+                ", composicao='" + composicao + '\'' +
+                ", precoBase=" + precoBase +
+                ", precoFinal=" + precoFinal +
+                ", GPWEvitado=" + GPWEvitado +
+                ", MCIItem=" + MCIItem +
+                ", numeroCiclo=" + numeroCiclo +
+                ", defeitos=" + defeitos +
+                ", vendedor=" + vendedor +
+                '}';
     }
 }

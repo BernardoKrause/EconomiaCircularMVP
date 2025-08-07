@@ -4,9 +4,8 @@ import java.util.*;
 
 public class TiposDefeitoRepository {
     private Map<String,Map<String,Double>> tiposDefeito;
-    private static TiposDefeitoRepository tipoDefeitoRepository;
 
-    private TiposDefeitoRepository() {
+    public TiposDefeitoRepository() {
         Map<String,Double> tiposDefeitoVestuario = new HashMap<>();
             tiposDefeitoVestuario.put("rasgo estruturante",0.3);
             tiposDefeitoVestuario.put("Ausência de botão principal",0.15);
@@ -38,23 +37,24 @@ public class TiposDefeitoRepository {
         tiposDefeito.put("bolsas e mochilas",tiposDefeitoBolsa);
         tiposDefeito.put("bijuterias e acessorios",tiposDefeitoBijuteria);
     }
-
-    public static TiposDefeitoRepository getInstance() {
-        if (tipoDefeitoRepository == null){
-            tipoDefeitoRepository = new TiposDefeitoRepository();
-        }
-        return tipoDefeitoRepository;
-    }
-
-    public Optional<List<String>> getTiposDefeito(String tipoItem) {
-        if(!tiposDefeito.containsKey(tipoItem)){
-            return Optional.empty();
-        }
+    
+    public Optional<List<String>> getTipos() {
         List<String> listaTipos = new ArrayList<>();
-        tiposDefeito.get(tipoItem).keySet().forEach(key -> {
+        tiposDefeito.keySet().forEach(key -> {
             listaTipos.add(key);
         });
         return Optional.of(listaTipos);
+    }
+
+    public Optional<List<String>> getDefeitosTipo(String tipoItem) {
+        if(!tiposDefeito.containsKey(tipoItem)){
+            return Optional.empty();
+        }
+        List<String> listaDefeitos = new ArrayList<>();
+        tiposDefeito.get(tipoItem).keySet().forEach(key -> {
+            listaDefeitos.add(key);
+        });
+        return Optional.of(listaDefeitos);
     }
 
     public Double getValor(String tipoItem,String defeito) {

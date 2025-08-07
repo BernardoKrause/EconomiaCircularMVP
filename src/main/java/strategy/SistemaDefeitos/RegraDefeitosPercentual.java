@@ -12,7 +12,7 @@ public class RegraDefeitosPercentual implements IRegraDefeitoStrategy{
     private TiposDefeitoRepository tiposDefeitoRepository;
 
     public RegraDefeitosPercentual(){
-        this.tiposDefeitoRepository = TiposDefeitoRepository.getInstance();
+        this.tiposDefeitoRepository = new TiposDefeitoRepository();
     }
 
     @Override

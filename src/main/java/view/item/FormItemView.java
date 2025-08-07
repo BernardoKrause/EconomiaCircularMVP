@@ -59,7 +59,11 @@ public class FormItemView extends javax.swing.JFrame {
 
         lblTipo.setText("Tipo:");
 
-        cbTipos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbTipos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTiposActionPerformed(evt);
+            }
+        });
 
         lblSubcategoria.setText("Sub-Categoria:");
 
@@ -76,8 +80,6 @@ public class FormItemView extends javax.swing.JFrame {
         lbPeso.setText("Peso:");
 
         lblComposicao.setText("Composição:");
-
-        cbComposicao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         lblPrecoBase.setText("Preço base:");
 
@@ -194,6 +196,10 @@ public class FormItemView extends javax.swing.JFrame {
     private void txtCorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCorActionPerformed
+
+    private void cbTiposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTiposActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbTiposActionPerformed
 
     /**
      * @param args the command line arguments
