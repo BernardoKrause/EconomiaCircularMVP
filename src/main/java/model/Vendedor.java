@@ -4,21 +4,32 @@
  */
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+import repository.ItemRepository;
+
 /**
  *
  * @author berna
  */
 public class Vendedor extends Perfil {
     
-    public Vendedor(String id) {
-       super(id);
+    private List<Item> itens;
+  
+    public Vendedor(String idVendedor) {
+        super(id);
+        this.itens=new ArrayList<>();
+    }
+    
+    public void publicarItem(Item item) {
+        if(item==null){
+            throw new IllegalArgumentException("O item que esta tentando publicar não existe!");
+        }
+        item.setVendedor(this);
+        itens.add(item);
     }
     
     /*
-    public void publicarItem(Item item) {
-        
-    }
-    
     public void responderOferta(Oferta oferta, boolean status) {
         
     }
