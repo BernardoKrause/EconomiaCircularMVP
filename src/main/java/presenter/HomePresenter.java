@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import model.Usuario;
 import service.PerfilService;
+import view.CompradorView;
 import view.HomeView;
 
 /**
@@ -27,33 +28,68 @@ public class HomePresenter {
         
         view.setVisible(false);
         
-        view.getBtnCriarPerfilComprador().addActionListener(new ActionListener() {
+        view.getMItemCriarPerfilComprador().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    perfilService.criarPerfilVendedor(usuario);
+                    if (usuario.getPerfilComprador().isEmpty()) {
+                        // ao inves de criar, vai solicitar um perfil
+                        //perfilService.criarPerfilComprador(usuario);
+                        JOptionPane.showMessageDialog(view, "Solicitação enviada ao administrador");
+                    } else {
+                        JOptionPane.showMessageDialog(view, "Você já possui um perfil Comprador");
+                    }
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(view, ex);
                 }
             }
         });
         
-        view.getBtnComprador().addActionListener(new ActionListener() {
+        view.getMItemAcessarPerfilComprador().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    JOptionPane.showMessageDialog(view, "Exibindo tela Comprador");
+                    if (!usuario.getPerfilComprador().isEmpty()) {
+                        JOptionPane.showMessageDialog(view, "Você ainda não possui um perfil Comprador");
+                    } else {
+                        CompradorView perfilCompradorView = new CompradorView();
+                        view.getDesktopPane().add(perfilCompradorView);
+                        perfilCompradorView.setVisible(true);
+                        JOptionPane.showMessageDialog(view, "Exibindo tela Comprador");   
+                    }
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(view, ex);
                 }
             }
         });
         
-        view.getBtnVendedor().addActionListener(new ActionListener() {
+        view.getMItemCriarPerfilVendedor().addActionListener(new ActionListener() {
            @Override
            public  void actionPerformed(ActionEvent e) {
                try {
-                   JOptionPane.showMessageDialog(view, "Exibindo tela Vendedor");
+                   if (usuario.getPerfilVendedor().isEmpty()) {
+                        // ao inves de criar, vai solicitar um perfil
+                        //perfilService.criarPerfilVendedor(usuario);
+                        JOptionPane.showMessageDialog(view, "Solicitação enviada ao administrador");
+                    } else {
+                        JOptionPane.showMessageDialog(view, "Você já possui um perfil Vendedor");
+                    }
+               } catch (Exception ex) {
+                   JOptionPane.showMessageDialog(view, ex);
+               }
+           }
+        });
+        
+        view.getMItemAcessarPerfilVendedor().addActionListener(new ActionListener() {
+           @Override
+           public  void actionPerformed(ActionEvent e) {
+               try {
+                   if (!usuario.getPerfilComprador().isEmpty()) {
+                        JOptionPane.showMessageDialog(view, "Você ainda não possui um perfil Vendedor");
+                    } else {
+                        // view.getDesktopPane().add(perfilCompradorView);
+                        JOptionPane.showMessageDialog(view, "Exibindo tela Vendedor"); 
+                    }
                } catch (Exception ex) {
                    JOptionPane.showMessageDialog(view, ex);
                }

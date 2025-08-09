@@ -4,7 +4,9 @@
  */
 package view;
 
-import javax.swing.JButton;
+import javax.swing.JDesktopPane;
+import javax.swing.JFrame;
+import javax.swing.JMenuItem;
 
 /**
  *
@@ -18,26 +20,32 @@ public class HomeView extends javax.swing.JFrame {
      * Creates new form HomeView
      */
     public HomeView() {
+        jDesktopPane = new JDesktopPane();
         initComponents();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setContentPane(jDesktopPane);
     }
     
-        
-    public JButton getBtnComprador() {
-        return btnAcessarPerfilComprador;
+    public JMenuItem getMItemCriarPerfilComprador() {
+        return mItemCriarPerfilComprador;
     }
     
-    public JButton getBtnVendedor() {
-        return btnAcessarPerfilVendedor;
-    }    
-    
-    public JButton getBtnCriarPerfilComprador() {
-        return btnCriarPerfilComprador;
+    public JMenuItem getMItemAcessarPerfilComprador() {
+        return mItemAcessarPerfilComprador;
     }
     
-    public JButton getBtnCriarPerfilVendedor() {
-        return btnCriarPerfilVendedor;
+    public JMenuItem getMItemCriarPerfilVendedor() {
+        return mItemCriarPerfilVendedor;
     }
-
+    
+    public JMenuItem getMItemAcessarPerfilVendedor() {
+        return mItemAcessarPerfilVendedor;
+    }
+    
+    public JDesktopPane getDesktopPane() {
+        return jDesktopPane;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,62 +55,75 @@ public class HomeView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnCriarPerfilComprador = new javax.swing.JButton();
-        btnCriarPerfilVendedor = new javax.swing.JButton();
-        btnAcessarPerfilComprador = new javax.swing.JButton();
-        btnAcessarPerfilVendedor = new javax.swing.JButton();
+        jMenu1 = new javax.swing.JMenu();
+        jDesktopPane = new javax.swing.JDesktopPane();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        menuVendedor = new javax.swing.JMenu();
+        mItemCriarPerfilVendedor = new javax.swing.JMenuItem();
+        mItemAcessarPerfilVendedor = new javax.swing.JMenuItem();
+        menuComprador = new javax.swing.JMenu();
+        mItemCriarPerfilComprador = new javax.swing.JMenuItem();
+        mItemAcessarPerfilComprador = new javax.swing.JMenuItem();
+
+        jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Home");
 
-        btnCriarPerfilComprador.setText("Criar Perfil Comprador");
+        javax.swing.GroupLayout jDesktopPaneLayout = new javax.swing.GroupLayout(jDesktopPane);
+        jDesktopPane.setLayout(jDesktopPaneLayout);
+        jDesktopPaneLayout.setHorizontalGroup(
+            jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 410, Short.MAX_VALUE)
+        );
+        jDesktopPaneLayout.setVerticalGroup(
+            jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 174, Short.MAX_VALUE)
+        );
 
-        btnCriarPerfilVendedor.setText("Criar Perfil Vendedor");
-        btnCriarPerfilVendedor.addActionListener(new java.awt.event.ActionListener() {
+        menuVendedor.setText("Vendedor");
+
+        mItemCriarPerfilVendedor.setText("Criar Perfil");
+        menuVendedor.add(mItemCriarPerfilVendedor);
+
+        mItemAcessarPerfilVendedor.setText("Acessar");
+        menuVendedor.add(mItemAcessarPerfilVendedor);
+
+        jMenuBar1.add(menuVendedor);
+
+        menuComprador.setText("Comprador");
+
+        mItemCriarPerfilComprador.setText("Criar Perfil");
+        menuComprador.add(mItemCriarPerfilComprador);
+
+        mItemAcessarPerfilComprador.setText("Acessar");
+        mItemAcessarPerfilComprador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCriarPerfilVendedorActionPerformed(evt);
+                mItemAcessarPerfilCompradorActionPerformed(evt);
             }
         });
+        menuComprador.add(mItemAcessarPerfilComprador);
 
-        btnAcessarPerfilComprador.setText("Acessar Perfil Comprador");
+        jMenuBar1.add(menuComprador);
 
-        btnAcessarPerfilVendedor.setText("Acessar Perfil Vendedor");
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCriarPerfilComprador, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAcessarPerfilComprador, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCriarPerfilVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAcessarPerfilVendedor))
-                .addContainerGap(24, Short.MAX_VALUE))
+            .addComponent(jDesktopPane)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCriarPerfilComprador)
-                    .addComponent(btnCriarPerfilVendedor))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAcessarPerfilComprador)
-                    .addComponent(btnAcessarPerfilVendedor))
-                .addGap(24, 24, 24))
+            .addComponent(jDesktopPane)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCriarPerfilVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarPerfilVendedorActionPerformed
+    private void mItemAcessarPerfilCompradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemAcessarPerfilCompradorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnCriarPerfilVendedorActionPerformed
+    }//GEN-LAST:event_mItemAcessarPerfilCompradorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,9 +151,14 @@ public class HomeView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAcessarPerfilComprador;
-    private javax.swing.JButton btnAcessarPerfilVendedor;
-    private javax.swing.JButton btnCriarPerfilComprador;
-    private javax.swing.JButton btnCriarPerfilVendedor;
+    private javax.swing.JDesktopPane jDesktopPane;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem mItemAcessarPerfilComprador;
+    private javax.swing.JMenuItem mItemAcessarPerfilVendedor;
+    private javax.swing.JMenuItem mItemCriarPerfilComprador;
+    private javax.swing.JMenuItem mItemCriarPerfilVendedor;
+    private javax.swing.JMenu menuComprador;
+    private javax.swing.JMenu menuVendedor;
     // End of variables declaration//GEN-END:variables
 }
