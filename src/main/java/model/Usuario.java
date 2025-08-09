@@ -7,12 +7,14 @@ package model;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
  * @author berna
  */
 public class Usuario {
+    private String id;
     private String nome;
     private String email;
     private String telefone;
@@ -82,12 +84,36 @@ public class Usuario {
         this.autenticado = false;                
     } 
     
+    public String getId() {
+        return this.id;
+    }
+    
     public String getEmail() {
         return this.email;
     }
     
     public String getSenha() {
         return this.senha;
+    }
+    
+    public Optional<Perfil> getPerfilVendedor() {
+        for (Perfil perfil : perfis) {
+            if (perfil.getId().startsWith("V")) {
+                return Optional.of(perfil);    
+            }
+        }
+        
+        return Optional.empty();
+    }
+    
+       public Optional<Perfil> getPerfilComprador() {
+        for (Perfil perfil : perfis) {
+            if (perfil.getId().startsWith("C")) {
+                return Optional.of(perfil);    
+            }
+        }
+        
+        return Optional.empty();
     }
     
     public void setAdmin(boolean admin) {

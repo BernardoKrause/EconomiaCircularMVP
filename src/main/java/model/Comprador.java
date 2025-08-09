@@ -11,7 +11,7 @@ package model;
 public class Comprador extends Perfil {
     
     public Comprador (String id) {
-        this.id = id;
+        super(id);
     }
     
     /*

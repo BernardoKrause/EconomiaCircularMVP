@@ -15,8 +15,9 @@ import repository.ItemRepository;
 public class Vendedor extends Perfil {
     
     private List<Item> itens;
+  
     public Vendedor(String idVendedor) {
-        this.id = idVendedor;
+        super(id);
         this.itens=new ArrayList<>();
     }
     
