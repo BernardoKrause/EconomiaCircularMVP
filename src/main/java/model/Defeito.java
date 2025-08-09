@@ -31,4 +31,13 @@ public class Defeito {
     public void setValorDesconto(Double valorDesconto) {
         this.valorDesconto = valorDesconto;
     }
+
+    @Override
+    public String toString() {
+        return "Defeito{" +
+                "descricao='" + descricao + '\'' +
+                ", percentualDesconto=" + percentualDesconto +
+                ", valorDesconto=" + valorDesconto +
+                '}';
+    }
 }

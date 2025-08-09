@@ -8,22 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SistemaDefeitosService {
-    private static List<IRegraDefeitoStrategy> regrasDefeito;
-    private static SistemaDefeitosService sistemaDefeitosService;
+    private List<IRegraDefeitoStrategy> regrasDefeito;
+    private SistemaDefeitosService sistemaDefeitosService;
 
-    private SistemaDefeitosService() {
+    public SistemaDefeitosService() {
         regrasDefeito = new ArrayList<IRegraDefeitoStrategy>();
         regrasDefeito.add(new RegraDefeitosPercentual());
     }
 
-    public SistemaDefeitosService getInstance() {
-        if(sistemaDefeitosService == null) {
-            sistemaDefeitosService = new SistemaDefeitosService();
-        }
-        return sistemaDefeitosService;
-    }
-
-    public static void AplicarDefeitos(Item item, List<String> defeitos) {
+    public void AplicarDefeitos(Item item, List<String> defeitos) {
         for(IRegraDefeitoStrategy regra : regrasDefeito){
             regra.AplicarDefeitos(item, defeitos);
         }
