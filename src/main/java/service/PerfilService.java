@@ -4,21 +4,35 @@
  */
 package service;
 
+import model.Comprador;
+import model.Perfil;
 import model.Usuario;
 import model.Vendedor;
+import repository.PerfilRepository;
+import repository.UsuarioRepository;
 
 /**
  *
  * @author berna
  */
 public class PerfilService {
-        
+    private UsuarioRepository usuarioRepository; 
+    private PerfilRepository perfilRepository;
+    
     public void criarPerfilVendedor(Usuario usuario) {
+        Perfil perfil = new Vendedor("V-"+usuario.getId());
+        usuario.addPerfil(perfil);
         
-        usuario.addPerfil(new Vendedor(""));
+        perfilRepository.salvarPerfil(perfil);
+        usuarioRepository.salvarUsuario(usuario);
+
     }
     
     public void criarPerfilComprador(Usuario usuario) {
+        Perfil perfil = new Comprador("C-"+usuario.getId());
+        usuario.addPerfil(perfil);
         
+        perfilRepository.salvarPerfil(perfil);
+        usuarioRepository.salvarUsuario(usuario);
     }
 }

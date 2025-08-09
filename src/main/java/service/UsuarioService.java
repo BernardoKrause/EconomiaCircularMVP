@@ -4,7 +4,9 @@
  */
 package service;
 
+import model.Comprador;
 import model.Usuario;
+import model.Vendedor;
 import repository.UsuarioRepository;
 
 /**
@@ -28,5 +30,11 @@ public class UsuarioService {
         }
         
         usuarioRepository.salvarUsuario(novoUsuario);
+    }
+    
+    public void criarPerfilVendedor(Usuario usuario) {
+        usuario.addPerfil(new Vendedor("V-"+usuario.getId()));
+        usuarioRepository.salvarUsuario(usuario);
+
     }
 }
