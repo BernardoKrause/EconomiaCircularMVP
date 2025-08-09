@@ -91,16 +91,17 @@ public class ItemPresenter {
                 model.addElement(check);
             }
 
-            JList<JCheckBox> listaTiposDefeitos = new JList<>(model);
+            JList<JCheckBox> listaTiposDefeitos = formView.getLTiposDefeito();
+            listaTiposDefeitos.setModel(model);
 
             listaTiposDefeitos.setCellRenderer(new ListCellRenderer<JCheckBox>() {
                 @Override
                 public Component getListCellRendererComponent(
-                        JList<? extends JCheckBox> list,
-                        JCheckBox value,
-                        int index,
-                        boolean isSelected,
-                        boolean cellHasFocus) {
+                    JList<? extends JCheckBox> list,
+                    JCheckBox value,
+                    int index,
+                    boolean isSelected,
+                    boolean cellHasFocus) {
 
                     value.setBackground(isSelected ? list.getSelectionBackground() : list.getBackground());
                     value.setForeground(isSelected ? list.getSelectionForeground() : list.getForeground());
@@ -149,13 +150,15 @@ public class ItemPresenter {
         Double peso = Double.valueOf(formView.getTxtPeso().getText());
         String composicao = String.valueOf(formView.getCbComposicao().getSelectedItem());
         Double precoBase = Double.valueOf(formView.getTxtPrecoBase().getText());
-        List<JCheckBox> checkBoxTiposDefeitos = formView.getLTiposDefeito().getSelectedValuesList();
         
+        DefaultListModel<JCheckBox> model = (DefaultListModel<JCheckBox>) formView.getLTiposDefeito().getModel();
         List<String> defeitos = new ArrayList<>();
-        
-        for(JCheckBox box : checkBoxTiposDefeitos){
-            if(box.isSelected()){
+
+        for (int i = 0; i < model.size(); i++) {
+            JCheckBox box = model.getElementAt(i);
+            if (box.isSelected()) {
                 defeitos.add(box.getText());
+                System.out.println(box.getText()); // debug
             }
         }
         

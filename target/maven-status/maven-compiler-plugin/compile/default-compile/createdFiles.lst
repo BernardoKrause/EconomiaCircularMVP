@@ -11,13 +11,15 @@ service\ItemService.class
 strategy\SistemaDefeitos\RegraDefeitosPercentual.class
 repository\PerfilRepository.class
 repository\TiposDefeitoRepository.class
-view\LoginView1.class
+presenter\HomePresenter$4.class
 repository\ItemRepository.class
 service\UsuarioService.class
 model\Defeito.class
 view\HomeView$1.class
+view\LoginView$1.class
 presenter\ItemPresenter.class
 view\item\FormItemView$1.class
+view\CompradorView.class
 view\item\FormItemView.class
 presenter\HomePresenter$2.class
 presenter\LoginPresenter$2.class
