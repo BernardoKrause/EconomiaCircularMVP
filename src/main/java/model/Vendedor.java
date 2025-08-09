@@ -10,8 +10,8 @@ package model;
  */
 public class Vendedor extends Perfil {
     
-    public Vendedor(String idVendedor) {
-        this.id = idVendedor;
+    public Vendedor(String id) {
+       super(id);
     }
     
     /*

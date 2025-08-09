@@ -6,9 +6,7 @@ package repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import model.Comprador;
 import model.Perfil;
-import model.Vendedor;
 
 /**
  *
@@ -20,7 +18,9 @@ public class PerfilRepository {
     
     public PerfilRepository() {
         perfis = new ArrayList<>();
-        perfis.add(new Comprador("v-001"));
-        perfis.add(new Vendedor("c-001"));
+    }
+    
+    public void salvarPerfil(Perfil perfil) {
+        perfis.add(perfil);
     }
 }
