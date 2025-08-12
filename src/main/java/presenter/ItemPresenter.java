@@ -14,6 +14,7 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JInternalFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.ListCellRenderer;
@@ -26,7 +27,7 @@ import view.item.FormItemView;
  *
  * @author caiof
  */
-public class ItemPresenter {
+public class ItemPresenter implements IPresenter{
     
     private FormItemView formView;
     private ItemService itemService;
@@ -175,5 +176,10 @@ public class ItemPresenter {
     
     public void cancelar() {
         formView.dispose();
+    }
+    
+    @Override
+    public JInternalFrame getView(){
+        return formView;
     }
 }

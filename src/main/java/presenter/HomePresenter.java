@@ -4,8 +4,10 @@
  */
 package presenter;
 
+import command.AbrirCadastroItemCommand;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import model.Usuario;
 import repository.ItemRepository;
@@ -107,14 +109,7 @@ public class HomePresenter {
                    if (!usuario.getPerfilVendedor().isEmpty()) {
                         JOptionPane.showMessageDialog(view, "Você ainda não possui um perfil Vendedor");
                     } else {
-                        ItemRepository itemRepo = new ItemRepository();
-                        TiposDefeitoRepository tiposDefeitosRepo = new TiposDefeitoRepository();
-                        SistemaDefeitosService sysDefeito = new SistemaDefeitosService();
-                        ItemService itemService = new ItemService(itemRepo, sysDefeito, tiposDefeitosRepo);
-                        ItemPresenter itemPresenter = new ItemPresenter(itemService);
-                        //view.getDesktopPane().add(perfilCompradorView);
-
-                        JOptionPane.showMessageDialog(view, "Exibindo tela Vendedor"); 
+                       new AbrirCadastroItemCommand().executar();
                     }
                } catch (Exception ex) {
                    JOptionPane.showMessageDialog(view, ex);
@@ -123,5 +118,9 @@ public class HomePresenter {
         });
         
         view.setVisible(true);
+    }
+    
+    public JDesktopPane getDesktop(){
+        return view.getDesktopPane();
     }
 }

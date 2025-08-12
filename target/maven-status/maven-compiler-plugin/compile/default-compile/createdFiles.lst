@@ -1,6 +1,8 @@
 strategy\SistemaDefeitos\IRegraDefeitoStrategy.class
+presenter\GerenciadorTelas.class
 model\Perfil.class
 presenter\ItemPresenter$4.class
+command\AbrirCadastroItemCommand.class
 presenter\ItemPresenter$2.class
 repository\UsuarioRepository.class
 service\AutenticacaoService.class
@@ -18,6 +20,7 @@ presenter\HomePresenter$5.class
 view\HomeView$1.class
 view\LoginView$1.class
 presenter\ItemPresenter.class
+presenter\IPresenter.class
 view\item\FormItemView$1.class
 view\CompradorView.class
 view\item\FormItemView.class
@@ -32,6 +35,7 @@ presenter\ItemPresenter$3.class
 presenter\HomePresenter.class
 view\LoginView.class
 presenter\ItemPresenter$1.class
+command\ICommand.class
 presenter\HomePresenter$3.class
 service\SistemaDefeitosService.class
 presenter\LoginPresenter.class
