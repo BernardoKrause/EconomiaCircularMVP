@@ -16,23 +16,27 @@ import repository.UsuarioRepository;
  * @author berna
  */
 public class PerfilService {
-    private UsuarioRepository usuarioRepository; 
     private PerfilRepository perfilRepository;
     
     public void criarPerfilVendedor(Usuario usuario) {
+        if (usuario==null){
+            throw new IllegalArgumentException("Usuario informado não pode ser nulo!");
+        }
         Perfil perfil = new Vendedor("V-"+usuario.getId());
+        
         usuario.addPerfil(perfil);
         
         perfilRepository.salvarPerfil(perfil);
-        usuarioRepository.salvarUsuario(usuario);
 
     }
     
     public void criarPerfilComprador(Usuario usuario) {
+        if (usuario==null){
+            throw new IllegalArgumentException("Usuario informado não pode ser nulo!");
+        }
         Perfil perfil = new Comprador("C-"+usuario.getId());
         usuario.addPerfil(perfil);
         
         perfilRepository.salvarPerfil(perfil);
-        usuarioRepository.salvarUsuario(usuario);
     }
 }

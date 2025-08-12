@@ -18,10 +18,13 @@ public class UsuarioRepository {
 
     public UsuarioRepository() {
         usuariosCadastrados = new ArrayList<>();
-        usuariosCadastrados.add(new Usuario("bernardo", "bk@gmail.com", "senha123"));
-        usuariosCadastrados.add(new Usuario("caio", "caiofreire@gmail.com", "321senha"));
-        
-        usuariosCadastrados.add(new Usuario("1", "1", "1"));
+        Usuario u1 = new Usuario("1", "1", "1");
+        u1.setAdmin(true);
+        u1.setId(totalUsuarios());
+        usuariosCadastrados.add(u1);
+        Usuario u2 = new Usuario("2", "2", "2");
+        u2.setId(totalUsuarios());
+        usuariosCadastrados.add(u2);
     }
     
     public Optional<Usuario> buscarPorEmail(String email) {
@@ -38,6 +41,10 @@ public class UsuarioRepository {
     }
     
     public void salvarUsuario(Usuario usuario) {
+        if(totalUsuarios()==0){
+            usuario.setAdmin(true);
+        }
+        usuario.setId(totalUsuarios());
         this.usuariosCadastrados.add(usuario);
     }
 }
