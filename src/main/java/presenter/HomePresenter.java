@@ -8,7 +8,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import model.Usuario;
+import repository.ItemRepository;
+import repository.TiposDefeitoRepository;
+import service.ItemService;
 import service.PerfilService;
+import service.SistemaDefeitosService;
 import view.CompradorView;
 import view.HomeView;
 
@@ -84,10 +88,32 @@ public class HomePresenter {
            @Override
            public  void actionPerformed(ActionEvent e) {
                try {
-                   if (!usuario.getPerfilComprador().isEmpty()) {
+                   if (!usuario.getPerfilVendedor().isEmpty()) {
                         JOptionPane.showMessageDialog(view, "Você ainda não possui um perfil Vendedor");
                     } else {
                         // view.getDesktopPane().add(perfilCompradorView);
+                        JOptionPane.showMessageDialog(view, "Exibindo tela Vendedor"); 
+                    }
+               } catch (Exception ex) {
+                   JOptionPane.showMessageDialog(view, ex);
+               }
+           }
+        });
+        
+        view.getMItemPublicarItem().addActionListener(new ActionListener() {
+           @Override
+           public  void actionPerformed(ActionEvent e) {
+               try {
+                   if (!usuario.getPerfilVendedor().isEmpty()) {
+                        JOptionPane.showMessageDialog(view, "Você ainda não possui um perfil Vendedor");
+                    } else {
+                        ItemRepository itemRepo = new ItemRepository();
+                        TiposDefeitoRepository tiposDefeitosRepo = new TiposDefeitoRepository();
+                        SistemaDefeitosService sysDefeito = new SistemaDefeitosService();
+                        ItemService itemService = new ItemService(itemRepo, sysDefeito, tiposDefeitosRepo);
+                        ItemPresenter itemPresenter = new ItemPresenter(itemService);
+                        //view.getDesktopPane().add(perfilCompradorView);
+
                         JOptionPane.showMessageDialog(view, "Exibindo tela Vendedor"); 
                     }
                } catch (Exception ex) {

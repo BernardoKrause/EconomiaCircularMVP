@@ -23,15 +23,5 @@ public class EconomiaCircularMVP {
         UsuarioRepository usuarioRepository = new UsuarioRepository();
         AutenticacaoService autenticacaoService = new AutenticacaoService(usuarioRepository);
         LoginPresenter loginPresenter = new LoginPresenter(autenticacaoService);
-        
-        
-        //test item
-       
-        ItemRepository itemRepo = new ItemRepository();
-        TiposDefeitoRepository tiposDefeitosRepo = new TiposDefeitoRepository();
-        SistemaDefeitosService sysDefeito = new SistemaDefeitosService();
-        ItemService itemService = new ItemService(itemRepo, sysDefeito, tiposDefeitosRepo);
-        
-        ItemPresenter itemPresenter = new ItemPresenter(itemService);
     }
 }
