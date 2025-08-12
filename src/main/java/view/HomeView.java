@@ -42,6 +42,10 @@ public class HomeView extends javax.swing.JFrame {
         return mItemAcessarPerfilVendedor;
     }
     
+    public JMenuItem getMItemPublicarItem(){
+        return mItemPublicarItem;
+    }
+    
     public JDesktopPane getDesktopPane() {
         return jDesktopPane;
     }
@@ -64,6 +68,8 @@ public class HomeView extends javax.swing.JFrame {
         menuComprador = new javax.swing.JMenu();
         mItemCriarPerfilComprador = new javax.swing.JMenuItem();
         mItemAcessarPerfilComprador = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        mItemPublicarItem = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -104,6 +110,13 @@ public class HomeView extends javax.swing.JFrame {
         menuComprador.add(mItemAcessarPerfilComprador);
 
         jMenuBar1.add(menuComprador);
+
+        jMenu2.setText("Item");
+
+        mItemPublicarItem.setText("Publicar Item");
+        jMenu2.add(mItemPublicarItem);
+
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -153,11 +166,13 @@ public class HomeView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem mItemAcessarPerfilComprador;
     private javax.swing.JMenuItem mItemAcessarPerfilVendedor;
     private javax.swing.JMenuItem mItemCriarPerfilComprador;
     private javax.swing.JMenuItem mItemCriarPerfilVendedor;
+    private javax.swing.JMenuItem mItemPublicarItem;
     private javax.swing.JMenu menuComprador;
     private javax.swing.JMenu menuVendedor;
     // End of variables declaration//GEN-END:variables

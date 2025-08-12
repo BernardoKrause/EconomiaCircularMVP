@@ -6,7 +6,6 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-import repository.ItemRepository;
 
 /**
  *
@@ -17,7 +16,7 @@ public class Vendedor extends Perfil {
     private List<Item> itens;
   
     public Vendedor(String idVendedor) {
-        super(id);
+        super(idVendedor);
         this.itens=new ArrayList<>();
     }
     

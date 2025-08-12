@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package view.item;
 
@@ -16,10 +16,10 @@ import javax.swing.JTextField;
  *
  * @author caiof
  */
-public class FormItemView extends javax.swing.JFrame {
+public class FormItemView extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form ItemView
+     * Creates new form NewJInternalFrame
      */
     public FormItemView() {
         initComponents();
@@ -34,14 +34,6 @@ public class FormItemView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblTipo = new javax.swing.JLabel();
-        cbTipos = new javax.swing.JComboBox<>();
-        lblSubcategoria = new javax.swing.JLabel();
-        txtSubcategoria = new javax.swing.JTextField();
-        lblTamanho = new javax.swing.JLabel();
-        sTamanho = new javax.swing.JSpinner();
-        lblCor = new javax.swing.JLabel();
-        txtCor = new javax.swing.JTextField();
         lbPeso = new javax.swing.JLabel();
         txtPeso = new javax.swing.JTextField();
         lblComposicao = new javax.swing.JLabel();
@@ -51,31 +43,19 @@ public class FormItemView extends javax.swing.JFrame {
         lblDefeitos = new javax.swing.JLabel();
         spDefeitos = new javax.swing.JScrollPane();
         lTiposDefeito = new javax.swing.JList<>();
+        lblTipo = new javax.swing.JLabel();
+        cbTipos = new javax.swing.JComboBox<>();
+        lblSubcategoria = new javax.swing.JLabel();
+        txtSubcategoria = new javax.swing.JTextField();
+        lblTamanho = new javax.swing.JLabel();
+        sTamanho = new javax.swing.JSpinner();
+        lblCor = new javax.swing.JLabel();
         btnPublicar = new javax.swing.JButton();
+        txtCor = new javax.swing.JTextField();
         btnCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setClosable(true);
         setTitle("Cadastro de Item");
-
-        lblTipo.setText("Tipo:");
-
-        cbTipos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbTiposActionPerformed(evt);
-            }
-        });
-
-        lblSubcategoria.setText("Sub-Categoria:");
-
-        lblTamanho.setText("Tamanho:");
-
-        lblCor.setText("Cor:");
-
-        txtCor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCorActionPerformed(evt);
-            }
-        });
 
         lbPeso.setText("Peso:");
 
@@ -94,7 +74,27 @@ public class FormItemView extends javax.swing.JFrame {
 
         spDefeitos.setViewportView(lTiposDefeito);
 
+        lblTipo.setText("Tipo:");
+
+        cbTipos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTiposActionPerformed(evt);
+            }
+        });
+
+        lblSubcategoria.setText("Sub-Categoria:");
+
+        lblTamanho.setText("Tamanho:");
+
+        lblCor.setText("Cor:");
+
         btnPublicar.setText("Publicar");
+
+        txtCor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCorActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
 
@@ -103,7 +103,7 @@ public class FormItemView extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
@@ -125,7 +125,7 @@ public class FormItemView extends javax.swing.JFrame {
                             .addGap(39, 39, 39)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtPeso)
-                                .addComponent(sTamanho))))
+                                .addComponent(sTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblComposicao, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -142,12 +142,12 @@ public class FormItemView extends javax.swing.JFrame {
                             .addComponent(btnPublicar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbTipos))
@@ -180,10 +180,10 @@ public class FormItemView extends javax.swing.JFrame {
                     .addComponent(lblDefeitos, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(spDefeitos, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnPublicar)
                     .addComponent(btnCancelar))
-                .addGap(31, 31, 31))
+                .addGap(27, 27, 27))
         );
 
         pack();
@@ -193,51 +193,14 @@ public class FormItemView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPrecoBaseActionPerformed
 
-    private void txtCorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCorActionPerformed
-
     private void cbTiposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTiposActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbTiposActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormItemView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormItemView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormItemView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormItemView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+    private void txtCorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCorActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FormItemView().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -260,7 +223,7 @@ public class FormItemView extends javax.swing.JFrame {
     private javax.swing.JTextField txtPrecoBase;
     private javax.swing.JTextField txtSubcategoria;
     // End of variables declaration//GEN-END:variables
-
+   
     public JComboBox getCbTipos(){
         return cbTipos;
     }

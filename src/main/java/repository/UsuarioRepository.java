@@ -20,6 +20,8 @@ public class UsuarioRepository {
         usuariosCadastrados = new ArrayList<>();
         usuariosCadastrados.add(new Usuario("bernardo", "bk@gmail.com", "senha123"));
         usuariosCadastrados.add(new Usuario("caio", "caiofreire@gmail.com", "321senha"));
+        
+        usuariosCadastrados.add(new Usuario("1", "1", "1"));
     }
     
     public Optional<Usuario> buscarPorEmail(String email) {
