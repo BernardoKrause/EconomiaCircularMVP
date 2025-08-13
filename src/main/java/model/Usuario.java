@@ -97,6 +97,9 @@ public class Usuario {
     }
     
     public Optional<Perfil> getPerfilVendedor() {
+        if (perfis==null){
+            return Optional.empty();
+        }
         for (Perfil perfil : perfis) {
             if (perfil.getId().startsWith("V")) {
                 return Optional.of(perfil);    
@@ -107,6 +110,9 @@ public class Usuario {
     }
     
        public Optional<Perfil> getPerfilComprador() {
+        if (perfis==null){
+            return Optional.empty();
+        }
         for (Perfil perfil : perfis) {
             if (perfil.getId().startsWith("C")) {
                 return Optional.of(perfil);    
@@ -114,6 +120,10 @@ public class Usuario {
         }
         
         return Optional.empty();
+    }
+       
+    public void setId(Integer id){
+        this.id=String.valueOf(id);
     }
     
     public void setAdmin(boolean admin) {
