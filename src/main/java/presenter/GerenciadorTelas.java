@@ -14,9 +14,10 @@ import model.Usuario;
  * @author caiof
  */
 public class GerenciadorTelas {
-    public static GerenciadorTelas instancia;
+    private static GerenciadorTelas instancia;
     private HomePresenter home;
     private Map<String, IPresenter> telasAbertas;
+    private Usuario usuarioAutenticado;
     
     private GerenciadorTelas(){
         telasAbertas = new HashMap<>();
@@ -31,10 +32,26 @@ public class GerenciadorTelas {
     
     public void inicializar(HomePresenter home){
         this.home=home;
+        usuarioAutenticado=null;
+    }
+    
+    public Usuario getUsuarioAutenticado(){
+        return usuarioAutenticado;
+    }
+    
+    public void logar(Usuario usuario){
+        if(usuario==null){
+            throw new IllegalArgumentException("Usuario não foi encontrado!");
+        }
+        usuarioAutenticado = usuario;
     }
     
     public JDesktopPane getDesktop(){
         return home.getDesktop();
+    }
+
+    public void deslogar() {
+        this.usuarioAutenticado=null;
     }
     
 }

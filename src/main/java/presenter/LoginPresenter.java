@@ -6,16 +6,17 @@ package presenter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import model.Usuario;
 import service.AutenticacaoService;
-import view.LoginView;
+import view.usuario.LoginView;
 
 /**
  *
  * @author berna
  */
-public class LoginPresenter {
+public class LoginPresenter implements IPresenter {
     
     private LoginView view;
     private AutenticacaoService autenticacaoService;
@@ -62,8 +63,7 @@ public class LoginPresenter {
         
         if (usuario.isAutenticado()) {
             try {
-                HomePresenter homePresenter = new HomePresenter(usuario);
-                GerenciadorTelas.getInstancia().inicializar(homePresenter);
+                GerenciadorTelas.getInstancia().logar(usuario);
                 view.dispose();
             } catch (Exception ex) {
                 throw new RuntimeException(ex.getMessage());
@@ -73,5 +73,10 @@ public class LoginPresenter {
     
     public void cancelar() {
         view.dispose();
+    }
+
+    @Override
+    public JInternalFrame getView() {
+        return view;
     }
 }

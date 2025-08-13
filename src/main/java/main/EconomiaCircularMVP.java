@@ -4,14 +4,8 @@
 
 package main;
 
-import presenter.ItemPresenter;
-import presenter.LoginPresenter;
-import repository.ItemRepository;
-import repository.TiposDefeitoRepository;
-import repository.UsuarioRepository;
-import service.AutenticacaoService;
-import service.ItemService;
-import service.SistemaDefeitosService;
+import presenter.GerenciadorTelas;
+import presenter.HomePresenter;
 
 /**
  *
@@ -20,8 +14,7 @@ import service.SistemaDefeitosService;
 public class EconomiaCircularMVP {
 
     public static void main(String[] args) {
-        UsuarioRepository usuarioRepository = new UsuarioRepository();
-        AutenticacaoService autenticacaoService = new AutenticacaoService(usuarioRepository);
-        LoginPresenter loginPresenter = new LoginPresenter(autenticacaoService);
+        HomePresenter homePresenter = new HomePresenter();
+        GerenciadorTelas.getInstancia().inicializar(homePresenter);
     }
 }

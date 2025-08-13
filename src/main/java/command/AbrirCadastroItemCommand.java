@@ -23,6 +23,7 @@ public class AbrirCadastroItemCommand implements ICommand{
         desktop = GerenciadorTelas.getInstancia().getDesktop();
     }
    
+    @Override
     public void executar(){
         ItemRepository itemRepo = new ItemRepository();
         TiposDefeitoRepository tiposDefeitosRepo = new TiposDefeitoRepository();

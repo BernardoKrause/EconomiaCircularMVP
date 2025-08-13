@@ -31,10 +31,4 @@ public class UsuarioService {
         
         usuarioRepository.salvarUsuario(novoUsuario);
     }
-    
-    public void criarPerfilVendedor(Usuario usuario) {
-        usuario.addPerfil(new Vendedor("V-"+usuario.getId()));
-        usuarioRepository.salvarUsuario(usuario);
-
-    }
 }
