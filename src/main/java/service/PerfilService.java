@@ -9,7 +9,6 @@ import model.Perfil;
 import model.Usuario;
 import model.Vendedor;
 import repository.PerfilRepository;
-import repository.UsuarioRepository;
 
 /**
  *
@@ -17,6 +16,10 @@ import repository.UsuarioRepository;
  */
 public class PerfilService {
     private PerfilRepository perfilRepository;
+    
+    public PerfilService(PerfilRepository perfilRepository){
+        this.perfilRepository=perfilRepository;
+    }
     
     public void criarPerfilVendedor(Usuario usuario) {
         if (usuario==null){

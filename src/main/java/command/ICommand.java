@@ -8,6 +8,6 @@ package command;
  *
  * @author caiof
  */
-public interface ICommand {
+public interface ICommand {    
     void executar();
 }

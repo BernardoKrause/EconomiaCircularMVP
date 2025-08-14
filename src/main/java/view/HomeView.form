@@ -13,6 +13,31 @@
     </Container>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
+        <Menu class="javax.swing.JMenu" name="menuUsuario">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Usuario"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="menuItemEntrar">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Entrar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemEntrarActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menuItemCadastrar">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cadastrar"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menuItemSair">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Sair"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
         <Menu class="javax.swing.JMenu" name="menuVendedor">
           <Properties>
             <Property name="text" type="java.lang.String" value="Vendedor"/>
@@ -50,7 +75,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu2">
+        <Menu class="javax.swing.JMenu" name="menuItem">
           <Properties>
             <Property name="text" type="java.lang.String" value="Item"/>
           </Properties>
@@ -108,7 +133,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="174" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="175" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>

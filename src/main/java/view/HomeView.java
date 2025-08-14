@@ -6,6 +6,7 @@ package view;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 /**
@@ -26,30 +27,6 @@ public class HomeView extends javax.swing.JFrame {
         setContentPane(jDesktopPane);
     }
     
-    public JMenuItem getMItemCriarPerfilComprador() {
-        return mItemCriarPerfilComprador;
-    }
-    
-    public JMenuItem getMItemAcessarPerfilComprador() {
-        return mItemAcessarPerfilComprador;
-    }
-    
-    public JMenuItem getMItemCriarPerfilVendedor() {
-        return mItemCriarPerfilVendedor;
-    }
-    
-    public JMenuItem getMItemAcessarPerfilVendedor() {
-        return mItemAcessarPerfilVendedor;
-    }
-    
-    public JMenuItem getMItemPublicarItem(){
-        return mItemPublicarItem;
-    }
-    
-    public JDesktopPane getDesktopPane() {
-        return jDesktopPane;
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,13 +39,17 @@ public class HomeView extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jDesktopPane = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
+        menuUsuario = new javax.swing.JMenu();
+        menuItemEntrar = new javax.swing.JMenuItem();
+        menuItemCadastrar = new javax.swing.JMenuItem();
+        menuItemSair = new javax.swing.JMenuItem();
         menuVendedor = new javax.swing.JMenu();
         mItemCriarPerfilVendedor = new javax.swing.JMenuItem();
         mItemAcessarPerfilVendedor = new javax.swing.JMenuItem();
         menuComprador = new javax.swing.JMenu();
         mItemCriarPerfilComprador = new javax.swing.JMenuItem();
         mItemAcessarPerfilComprador = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        menuItem = new javax.swing.JMenu();
         mItemPublicarItem = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
@@ -83,8 +64,26 @@ public class HomeView extends javax.swing.JFrame {
         );
         jDesktopPaneLayout.setVerticalGroup(
             jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 174, Short.MAX_VALUE)
+            .addGap(0, 175, Short.MAX_VALUE)
         );
+
+        menuUsuario.setText("Usuario");
+
+        menuItemEntrar.setText("Entrar");
+        menuItemEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemEntrarActionPerformed(evt);
+            }
+        });
+        menuUsuario.add(menuItemEntrar);
+
+        menuItemCadastrar.setText("Cadastrar");
+        menuUsuario.add(menuItemCadastrar);
+
+        menuItemSair.setText("Sair");
+        menuUsuario.add(menuItemSair);
+
+        jMenuBar1.add(menuUsuario);
 
         menuVendedor.setText("Vendedor");
 
@@ -111,12 +110,12 @@ public class HomeView extends javax.swing.JFrame {
 
         jMenuBar1.add(menuComprador);
 
-        jMenu2.setText("Item");
+        menuItem.setText("Item");
 
         mItemPublicarItem.setText("Publicar Item");
-        jMenu2.add(mItemPublicarItem);
+        menuItem.add(mItemPublicarItem);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(menuItem);
 
         setJMenuBar(jMenuBar1);
 
@@ -137,6 +136,10 @@ public class HomeView extends javax.swing.JFrame {
     private void mItemAcessarPerfilCompradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemAcessarPerfilCompradorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mItemAcessarPerfilCompradorActionPerformed
+
+    private void menuItemEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemEntrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuItemEntrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -166,7 +169,6 @@ public class HomeView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem mItemAcessarPerfilComprador;
     private javax.swing.JMenuItem mItemAcessarPerfilVendedor;
@@ -174,6 +176,65 @@ public class HomeView extends javax.swing.JFrame {
     private javax.swing.JMenuItem mItemCriarPerfilVendedor;
     private javax.swing.JMenuItem mItemPublicarItem;
     private javax.swing.JMenu menuComprador;
+    private javax.swing.JMenu menuItem;
+    private javax.swing.JMenuItem menuItemCadastrar;
+    private javax.swing.JMenuItem menuItemEntrar;
+    private javax.swing.JMenuItem menuItemSair;
+    private javax.swing.JMenu menuUsuario;
     private javax.swing.JMenu menuVendedor;
     // End of variables declaration//GEN-END:variables
+
+    public JDesktopPane getDesktopPane() {
+        return jDesktopPane;
+    }
+    
+    public JMenu getMenuUsuario(){
+        return menuUsuario;
+    }
+    
+        public JMenuItem getMItemEntrarUsuario(){
+            return menuItemEntrar;
+        }
+
+        public JMenuItem getMItemCadastrarUsuario(){
+            return menuItemCadastrar;
+        }
+
+        public JMenuItem getMItemSairUsuario(){
+            return menuItemSair;
+        }
+    
+        
+    public JMenu getMenuVendedor(){
+        return menuVendedor;
+    }
+    
+        public JMenuItem getMItemCriarPerfilVendedor() {
+            return mItemCriarPerfilVendedor;
+        }
+
+        public JMenuItem getMItemAcessarPerfilVendedor() {
+            return mItemAcessarPerfilVendedor;
+        }
+    
+        
+    public JMenu getMenuComprador(){
+        return menuComprador;
+    }
+     
+        public JMenuItem getMItemCriarPerfilComprador() {
+            return mItemCriarPerfilComprador;
+        }
+
+        public JMenuItem getMItemAcessarPerfilComprador() {
+            return mItemAcessarPerfilComprador;
+        }
+    
+    public JMenu getMenuItem(){
+        return menuItem;
+    }
+    
+        public JMenuItem getMItemPublicarItem(){
+            return mItemPublicarItem;
+        }
 }

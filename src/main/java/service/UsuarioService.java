@@ -4,6 +4,7 @@
  */
 package service;
 
+import java.util.Optional;
 import model.Comprador;
 import model.Usuario;
 import model.Vendedor;
@@ -32,9 +33,16 @@ public class UsuarioService {
         usuarioRepository.salvarUsuario(novoUsuario);
     }
     
-    public void criarPerfilVendedor(Usuario usuario) {
-        usuario.addPerfil(new Vendedor("V-"+usuario.getId()));
-        usuarioRepository.salvarUsuario(usuario);
-
+    public void autenticarUsuario (Usuario usuario) {
+        Optional<Usuario> optUsuario = usuarioRepository.buscarPorEmail(usuario.getEmail());
+        if (optUsuario.isPresent()) {
+            Usuario usuarioEncontrado = optUsuario.get();
+            if (usuarioEncontrado.getSenha().equalsIgnoreCase(usuario.getSenha())) {
+                usuario.copy(usuarioEncontrado);
+                usuario.setAutenticado(true);
+            } else {
+                throw new RuntimeException("Email e senha não correspondem à um usuário.");
+            }
+        }
     }
 }

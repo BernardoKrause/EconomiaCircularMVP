@@ -10,29 +10,29 @@ import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import model.Usuario;
 import service.UsuarioService;
-import view.usuario.LoginView;
+import view.usuario.SignupView;
 
 /**
  *
- * @author berna
+ * @author caiof
  */
-public class LoginPresenter implements IPresenter {
+public class SignupPresenter implements IPresenter{
+
+    private SignupView view;
+    private UsuarioService service;
     
-    private LoginView view;
-    private UsuarioService usuarioService;
-    
-    public LoginPresenter(UsuarioService usuarioService) {
-        this.usuarioService = usuarioService;
-        
-        view = new LoginView();
+    public SignupPresenter(UsuarioService service){
+        this.service=service;
+        view = new SignupView();
         
         view.setVisible(false);
-        view.getBtnAcessar().addActionListener(new ActionListener() {
+    
+        view.getBtnCadastrar().addActionListener(new ActionListener(){
             @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    autenticar();
-                } catch (Exception ex) {
+            public void actionPerformed(ActionEvent e){
+                try{
+                    cadastrar();
+                }catch(Exception ex){
                     JOptionPane.showMessageDialog(view, ex);
                 }
             }
@@ -49,34 +49,30 @@ public class LoginPresenter implements IPresenter {
            }
         });
         
-        view.getTxtEmail().setText("");
-        view.getTxtSenha().setText("");
         view.setVisible(true);
     }
     
-    public void autenticar() {
+    @Override
+    public JInternalFrame getView() {
+        return view;
+    }
+    
+    private void cadastrar(){
+        String nome = view.getTxtNome().getText();
         String email = view.getTxtEmail().getText();
+        String telefone = view.getTxtTelefone().getText();
         String senha = view.getTxtSenha().getText();
-        Usuario usuario = new Usuario(email, senha);
         
-        usuarioService.autenticarUsuario(usuario);
-        
-        if (usuario.isAutenticado()) {
-            try {
-                GerenciadorTelas.getInstancia().getPresenter().entrarUsuario(usuario);
-                view.dispose();
-            } catch (Exception ex) {
-                throw new RuntimeException(ex.getMessage());
-            }
+        try {
+            service.cadastrarUsuario(nome, email, telefone, senha);
+            JOptionPane.showMessageDialog(view, "Usuario cadastrado com sucesso!");
+            view.dispose();
+        } catch (Exception ex) {
+            throw new RuntimeException(ex.getMessage());
         }
     }
     
     public void cancelar() {
         view.dispose();
-    }
-
-    @Override
-    public JInternalFrame getView() {
-        return view;
     }
 }
