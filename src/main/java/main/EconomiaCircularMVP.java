@@ -5,9 +5,7 @@
 package main;
 
 import java.sql.SQLException;
-import presenter.LoginPresenter;
-import repository.UsuarioRepository;
-import service.AutenticacaoService;
+
 /**
  *
  * @author caiof
@@ -15,8 +13,6 @@ import service.AutenticacaoService;
 public class EconomiaCircularMVP {
 
     public static void main(String[] args) throws SQLException {
-        UsuarioRepository usuarioRepository = new UsuarioRepository();
-        AutenticacaoService autenticacaoService = new AutenticacaoService(usuarioRepository);
-        LoginPresenter loginPresenter = new LoginPresenter(autenticacaoService);
+
     }
 }

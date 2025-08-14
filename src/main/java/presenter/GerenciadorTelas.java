@@ -14,7 +14,7 @@ import model.Usuario;
  * @author caiof
  */
 public class GerenciadorTelas {
-    public static GerenciadorTelas instancia;
+    private static GerenciadorTelas instancia;
     private HomePresenter home;
     private Map<String, IPresenter> telasAbertas;
     
@@ -37,4 +37,7 @@ public class GerenciadorTelas {
         return home.getDesktop();
     }
     
+    public HomePresenter getPresenter(){
+        return home;
+    }
 }

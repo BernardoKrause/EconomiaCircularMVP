@@ -4,6 +4,8 @@
  */
 package service;
 
+import java.util.Optional;
+import model.Usuario;
 import repository.UsuarioRepository;
 
 /**
@@ -21,4 +23,17 @@ public class UsuarioService {
         boolean isAdmin = usuarioRepository.totalUsuarios() == 0 ? true : false;
         usuarioRepository.adicionaUsuario(nome, email, telefone, senha, isAdmin);
     }
+    
+    public void autenticarUsuario (Usuario usuario) {
+        Optional<Usuario> optUsuario = usuarioRepository.buscaPorEmail(usuario.getEmail());
+        if (optUsuario.isPresent()) {
+            Usuario usuarioEncontrado = optUsuario.get();
+            if (usuarioEncontrado.getSenha().equalsIgnoreCase(usuario.getSenha())) {
+                usuario.setAutenticado(true);
+            } else {
+                throw new RuntimeException("Email e senha não correspondem à um usuário.");
+            }
+        }
+    }
+
 }
