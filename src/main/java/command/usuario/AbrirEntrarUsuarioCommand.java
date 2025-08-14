@@ -11,6 +11,7 @@ import javax.swing.*;
 import presenter.GerenciadorTelas;
 import service.UsuarioService;
 import command.ICommand;
+import java.sql.SQLException;
 
 /**
  *
@@ -25,10 +26,14 @@ public class AbrirEntrarUsuarioCommand implements ICommand {
 
     @Override
     public void executar() {
-        UsuarioRepository usuarioRepository = UsuarioRepository.getInstancia();
-        UsuarioService usuarioService = new UsuarioService(usuarioRepository);
-        LoginPresenter loginPresenter = new LoginPresenter(usuarioService);
-        desktop.add(loginPresenter.getView());
+        try {
+            UsuarioRepository usuarioRepository = new UsuarioRepository();
+            UsuarioService usuarioService = new UsuarioService(usuarioRepository);
+            LoginPresenter loginPresenter = new LoginPresenter(usuarioService);
+            desktop.add(loginPresenter.getView());
+        } catch (SQLException ex) {
+            System.getLogger(AbrirEntrarUsuarioCommand.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
         
     }
 }

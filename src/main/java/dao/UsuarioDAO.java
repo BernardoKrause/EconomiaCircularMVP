@@ -1,7 +1,9 @@
 package dao;
 
 
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 import model.Usuario;
 
 /*
@@ -14,9 +16,10 @@ import model.Usuario;
  * @author berna
  */
 public interface UsuarioDAO {
-    void criar(Usuario usuario);
-    Usuario buscaPorId(Integer id);
-    List<Usuario> buscaTodos();
-    void atualizar(Usuario usuario);
-    void deletar(Integer id);
+    public void criar(Usuario usuario) throws SQLException;
+    public Usuario buscaPorId(Integer id);
+    public List<Usuario> buscaTodos();
+    public void atualizar(Usuario usuario);
+    public void deletar(Integer id);
+    public Optional<Usuario> buscaPorEmail(String email) throws SQLException;
 }

@@ -4,6 +4,7 @@
  */
 package service;
 
+import java.sql.SQLException;
 import java.util.Optional;
 import model.Usuario;
 import repository.UsuarioRepository;
@@ -19,20 +20,19 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
     
-    public void cadastrarUsuario(String nome, String email, String telefone, String senha) {
+    public void cadastrarUsuario(String nome, String email, String telefone, String senha) throws SQLException {
         boolean isAdmin = usuarioRepository.totalUsuarios() == 0 ? true : false;
         usuarioRepository.adicionaUsuario(nome, email, telefone, senha, isAdmin);
     }
     
-    public void autenticarUsuario (Usuario usuario) {
-        Optional<Usuario> optUsuario = usuarioRepository.buscaPorEmail(usuario.getEmail());
+    public void autenticarUsuario (Usuario usuario) throws SQLException {
+        Optional<Usuario> optUsuario = usuarioRepository.getUsuarioPorEmail(usuario.getEmail());
         if (optUsuario.isPresent()) {
-            Usuario usuarioEncontrado = optUsuario.get();
-            if (usuarioEncontrado.getSenha().equalsIgnoreCase(usuario.getSenha())) {
-                usuario.setAutenticado(true);
-            } else {
-                throw new RuntimeException("Email e senha não correspondem à um usuário.");
-            }
+            if (optUsuario.get().getSenha() == usuario.getSenha()) {
+            usuario.setAutenticado(true);
+        }
+        } else {
+            throw new RuntimeException("Email e senha não correspondem à um usuário.");
         }
     }
 
