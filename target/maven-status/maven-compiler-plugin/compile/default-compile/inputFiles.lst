@@ -1,5 +1,12 @@
 C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\command\AbrirCadastroItemCommand.java
 C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\command\ICommand.java
+C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\command\perfil\CriarPerfilCompradorCommand.java
+C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\command\perfil\CriarPerfilVendedorCommand.java
+C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\command\perfil\PerfilCommand.java
+C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\command\usuario\AbrirCadastroUsuarioCommand.java
+C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\command\usuario\AbrirEntrarUsuarioCommand.java
+C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\command\usuario\SairUsuarioCommand.java
+C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\command\usuario\UsuarioCommand.java
 C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\dao\UsuarioDAO.java
 C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\dao\UsuarioDAOSQLite.java
 C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\main\EconomiaCircularMVP.java
@@ -14,6 +21,7 @@ C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\prese
 C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\presenter\IPresenter.java
 C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\presenter\ItemPresenter.java
 C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\presenter\LoginPresenter.java
+C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\presenter\SignupPresenter.java
 C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\repository\ItemRepository.java
 C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\repository\PerfilRepository.java
 C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\repository\TiposDefeitoRepository.java
@@ -23,10 +31,14 @@ C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\servi
 C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\service\PerfilService.java
 C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\service\SistemaDefeitosService.java
 C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\service\UsuarioService.java
+C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\state\home\AutenticadoState.java
+C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\state\home\HomePresenterState.java
+C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\state\home\NaoAutenticadoState.java
 C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\strategy\SistemaDefeitos\IRegraDefeitoStrategy.java
 C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\strategy\SistemaDefeitos\RegraDefeitosPercentual.java
 C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\util\DatabaseConnection.java
 C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\view\CompradorView.java
 C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\view\HomeView.java
 C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\view\item\FormItemView.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\view\LoginView.java
+C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\view\usuario\LoginView.java
+C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\view\usuario\SignupView.java

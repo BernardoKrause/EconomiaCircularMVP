@@ -7,7 +7,6 @@ package repository;
 import dao.UsuarioDAOSQLite;
 import dao.UsuarioDAO;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import model.Usuario;
@@ -23,7 +22,7 @@ public class UsuarioRepository {
        this.usuarioDAO = new UsuarioDAOSQLite();
     }
 
-    public void adicionaUsuario(String nome, String email, String telefone, String senha, boolean isAdmin) {
+    public void adicionaUsuario(String nome, String email, String telefone, String senha, boolean isAdmin) throws SQLException {
         usuarioDAO.criar(new Usuario(nome, email, telefone, senha, isAdmin));
     }
 
@@ -47,7 +46,8 @@ public class UsuarioRepository {
         return getTodosUsuarios().size();
     }
 
-    public Optional<Usuario> buscaPorEmail(String email) {
-        return null;
+    public Optional<Usuario> getUsuarioPorEmail(String email) throws SQLException {
+        return usuarioDAO.buscaPorEmail(email);
     }
+    
 }

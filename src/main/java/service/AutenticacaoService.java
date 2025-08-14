@@ -20,15 +20,15 @@ public class AutenticacaoService {
         this.usuarioRepository = usuarioRepository;
     }
     
-    public void autenticar (Usuario usuario) {
-        Optional<Usuario> optUsuario = usuarioRepository.buscaPorEmail(usuario.getEmail());
-        if (optUsuario.isPresent()) {
-            Usuario usuarioEncontrado = optUsuario.get();
-            if (usuarioEncontrado.getSenha().equalsIgnoreCase(usuario.getSenha())) {
-                usuario.setAutenticado(true);
-            } else {
-                throw new RuntimeException("Email e senha não correspondem à um usuário.");
-            }
-        }
-    }
+    //public void autenticar (Usuario usuario) {
+    //    Optional<Usuario> optUsuario = usuarioRepository.getUsuarioPorEmail(usuario.getEmail());
+    //    if (optUsuario.isPresent()) {
+    //        Usuario usuarioEncontrado = optUsuario.get();
+//            if (usuarioEncontrado.getSenha().equalsIgnoreCase(usuario.getSenha())) {
+//                usuario.setAutenticado(true);
+//            } else {
+//                throw new RuntimeException("Email e senha não correspondem à um usuário.");
+//            }
+//        }
+//    }
 }

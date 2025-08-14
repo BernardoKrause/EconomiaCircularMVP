@@ -6,6 +6,7 @@ package presenter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import model.Usuario;
@@ -54,7 +55,7 @@ public class LoginPresenter implements IPresenter {
         view.setVisible(true);
     }
     
-    public void autenticar() {
+    public void autenticar() throws SQLException {
         String email = view.getTxtEmail().getText();
         String senha = view.getTxtSenha().getText();
         Usuario usuario = new Usuario(email, senha);
