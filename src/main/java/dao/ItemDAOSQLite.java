@@ -1,3 +1,5 @@
+package dao;
+
 
 import dao.ItemDAO;
 import dao.UsuarioDAOSQLite;
@@ -104,6 +106,39 @@ public class ItemDAOSQLite implements ItemDAO {
             }
             return itens;
         }
+    }
+    
+    @Override
+    public Optional<Item> buscaPorIdC(Integer idC) throws SQLException {
+        String sql = "SELECT * FROM itens WHERE idC = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, idC);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    Item item = new Item(
+                        rs.getString("idC"),
+                        rs.getString("tipo"),
+                        rs.getString("subcategoria"),
+                        rs.getString("tamanho"),
+                        rs.getString("cor"),
+                        rs.getDouble("peso"),
+                        rs.getString("composicao"),
+                        rs.getDouble("precoBase"),
+                        rs.getDouble("precoFinal"),
+                        rs.getInt("gpwEvitado"),
+                        rs.getDouble("mciItem"),
+                        rs.getInt("numeroCiclo")
+                    );
+                    
+                    return Optional.of(item);
+                }
+            }
+
+        }
+        return Optional.empty();
     }
 
     @Override

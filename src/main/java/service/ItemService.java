@@ -4,9 +4,9 @@
  */
 package service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import model.Item;
 import model.Vendedor;
 import repository.ItemRepository;
@@ -21,18 +21,28 @@ public class ItemService {
     private TiposDefeitoRepository tiposDefeitoRepository;
     private SistemaDefeitosService sistemaDefeitos;
     
-    public ItemService(ItemRepository itemRepo, SistemaDefeitosService sistema, TiposDefeitoRepository tiposDefeitosRepo){
-        this.itemRepository = itemRepo;
+    public ItemService(SistemaDefeitosService sistema, TiposDefeitoRepository tiposDefeitosRepo) throws SQLException {
+        try {
+            this.itemRepository = new ItemRepository();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw ex;
+        }
+        
         this.sistemaDefeitos = sistema;
         this.tiposDefeitoRepository = tiposDefeitosRepo;
     }
     
-    public void criar(Item item, List<String> defeitos, Vendedor vendedor){
-        sistemaDefeitos.AplicarDefeitos(item, defeitos);
-        vendedor.publicarItem(item);
-        item.gerarIdC(itemRepository.getQuantidadeItens());
-        itemRepository.salvarItem(item);
-        System.out.print(item);
+    public void criar(Item item, List<String> defeitos, Vendedor vendedor) throws SQLException {
+        try {
+            sistemaDefeitos.AplicarDefeitos(item, defeitos);
+            vendedor.publicarItem(item);
+            item.gerarIdC(itemRepository.getQuantidadeItens());
+            itemRepository.salvarItem(item);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw ex;
+        }
     }
     
     public List<String> getListaTiposItem(){
