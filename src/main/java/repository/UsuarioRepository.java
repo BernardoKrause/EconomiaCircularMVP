@@ -15,8 +15,9 @@ import model.Usuario;
  */
 public class UsuarioRepository {
     private List<Usuario> usuariosCadastrados;
+    private static UsuarioRepository instancia;
 
-    public UsuarioRepository() {
+    private UsuarioRepository() {
         usuariosCadastrados = new ArrayList<>();
         Usuario u1 = new Usuario("1", "1", "1");
         u1.setAdmin(true);
@@ -25,6 +26,13 @@ public class UsuarioRepository {
         Usuario u2 = new Usuario("2", "2", "2");
         u2.setId(totalUsuarios());
         usuariosCadastrados.add(u2);
+    }
+    
+    public static UsuarioRepository getInstancia(){
+        if(instancia == null){
+            instancia = new UsuarioRepository();
+        }
+        return instancia;
     }
     
     public Optional<Usuario> buscarPorEmail(String email) {

@@ -34,11 +34,11 @@ public class Usuario {
             throw new IllegalArgumentException("Senha precisa ser informada.");
         }
         
-        this.perfis = new ArrayList<>();
         this.email = email;
         this.senha = senha;
         this.admin = false;
-        this.autenticado = false;                
+        this.autenticado = false;
+        this.dataCriacaoDaConta = LocalDateTime.now();                
     } 
     
     public Usuario(String nome, String email, String senha) {     
@@ -59,7 +59,8 @@ public class Usuario {
         this.email = email;
         this.senha = senha;
         this.admin = false;
-        this.autenticado = false;                
+        this.autenticado = false;
+        this.dataCriacaoDaConta = LocalDateTime.now();                
     } 
     
     public Usuario(String nome, String email, String telefone, String senha) {    
@@ -81,11 +82,20 @@ public class Usuario {
         this.telefone = telefone;
         this.senha = senha;
         this.admin = false;
-        this.autenticado = false;                
+        this.autenticado = false;
+        this.dataCriacaoDaConta = LocalDateTime.now();
     } 
     
     public String getId() {
         return this.id;
+    }
+    
+    public String getNome(){
+        return this.nome;
+    }
+    
+    public String getTelefone(){
+        return this.telefone;
     }
     
     public String getEmail() {
@@ -94,6 +104,14 @@ public class Usuario {
     
     public String getSenha() {
         return this.senha;
+    }
+    
+    public LocalDateTime getDataCriacao(){
+        return this.dataCriacaoDaConta;
+    }
+    
+    public List<Perfil> getPerfis(){
+        return this.perfis;
     }
     
     public Optional<Perfil> getPerfilVendedor() {
@@ -144,5 +162,16 @@ public class Usuario {
     
     public boolean isAdmin() {
         return this.admin;
+    }
+    
+    public void copy(Usuario usuario){
+        this.id = usuario.getId();
+        this.nome = usuario.getNome();
+        this.telefone = usuario.getTelefone();
+        this.email=usuario.getEmail();
+        this.admin = usuario.isAdmin();
+        this.autenticado=usuario.isAutenticado();
+        this.perfis=usuario.getPerfis();
+        this.dataCriacaoDaConta=usuario.getDataCriacao();
     }
 }
