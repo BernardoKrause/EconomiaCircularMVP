@@ -41,6 +41,7 @@ view\HomeView$3.class
 presenter\ItemPresenter$4.class
 state\home\AutenticadoState$2.class
 repository\UsuarioRepository.class
+service\AutenticacaoService.class
 model\Comprador.class
 model\Usuario.class
 service\ItemService.class
@@ -50,14 +51,17 @@ repository\PerfilRepository.class
 command\usuario\SairUsuarioCommand.class
 state\home\AutenticadoState$5.class
 presenter\SignupPresenter.class
+dao\UsuarioDAO.class
 command\item\AbrirCadastroItemCommand.class
 presenter\LoginPresenter$2.class
 state\home\VendedorState.class
 presenter\LoginPresenter$1.class
 presenter\SignupPresenter$1.class
 model\Vendedor.class
+util\DatabaseConnection.class
 state\home\AutenticadoState$3.class
 state\home\NaoAutenticadoState$1.class
+dao\UsuarioDAOSQLite.class
 presenter\HomePresenter.class
 presenter\ItemPresenter$1.class
 command\ICommand.class

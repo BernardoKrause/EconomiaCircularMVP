@@ -4,6 +4,7 @@
  */
 package command.usuario;
 
+import java.sql.SQLException;
 import repository.UsuarioRepository;
 import presenter.SignupPresenter;
 import service.UsuarioService;
@@ -20,9 +21,13 @@ public class AbrirCadastroUsuarioCommand extends UsuarioCommand {
     
     @Override
     public void executar() {
-        UsuarioRepository usuarioRepository = UsuarioRepository.getInstancia();
-        UsuarioService usuarioService = new UsuarioService(usuarioRepository);
-        SignupPresenter signupPresenter = new SignupPresenter(usuarioService);
-        desktop.add(signupPresenter.getView());    
+        try {
+            UsuarioRepository usuarioRepository = new UsuarioRepository();
+            UsuarioService usuarioService = new UsuarioService(usuarioRepository);
+            SignupPresenter signupPresenter = new SignupPresenter(usuarioService);    
+            desktop.add(signupPresenter.getView());
+        } catch (SQLException ex) {
+            System.getLogger(AbrirCadastroUsuarioCommand.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }
 }
