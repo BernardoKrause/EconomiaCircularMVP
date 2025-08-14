@@ -5,6 +5,7 @@
 package command.item;
 
 import command.ICommand;
+import java.sql.SQLException;
 import javax.swing.JDesktopPane;
 import model.Perfil;
 import repository.PerfilRepository;
@@ -24,6 +25,10 @@ public abstract class ItemCommand implements ICommand{
         this.service = new PerfilService(new PerfilRepository());
     }
 
+    /**
+     *
+     * @throws SQLException
+     */
     @Override
-    public abstract void executar();
+    public abstract void executar() throws SQLException;
 }

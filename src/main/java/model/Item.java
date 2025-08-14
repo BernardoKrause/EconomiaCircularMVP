@@ -93,6 +93,21 @@ public class Item {
         this.defeitos = defeitos;
     }
 
+    public Item(String idC, String tipo, String subcategoria, String tamanho, String cor, Double peso, String composicao, Double precoBase, Double precoFinal, Integer gpwEvitado, Double mciItem, Integer numeroCiclo) {
+        this.idC = idC;
+        this.tipo = tipo;
+        this.subcategoria = subcategoria;
+        this.tamanho = tamanho;
+        this.cor = cor;
+        this.peso = peso;
+        this.composicao = composicao;
+        this.precoBase = precoBase;
+        this.precoFinal = precoFinal;
+        this.GPWEvitado = gpwEvitado;
+        this.MCIItem = mciItem;
+        this.numeroCiclo = numeroCiclo;
+    }
+    
     public String getIdC() {
         return idC;
     }

@@ -62,7 +62,7 @@ public class UsuarioDAOSQLite implements UsuarioDAO {
     }
 
     @Override
-    public Usuario buscaPorId(Integer id) {
+    public Optional<Usuario> buscaPorId(Integer id) throws SQLException {
         String sql = "SELECT * FROM usuarios WHERE idUsuario = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -75,27 +75,26 @@ public class UsuarioDAOSQLite implements UsuarioDAO {
                     String ts = rs.getString("criado_em");
                     LocalDateTime dt = (ts != null) ? LocalDateTime.parse(ts, formatter) : null;
 
-                    boolean admin = rs.getInt("eAdmin") == 1; // ← coluna correta
-                    return new Usuario(
+                    boolean admin = rs.getInt("eAdmin") == 1; 
+                    Usuario usuario = new Usuario(
                         rs.getString("idUsuario"),
                         rs.getString("nome"),
                         rs.getString("email"),
                         rs.getString("telefone"),
                         admin,
-                        dt
+                        dt 
                     );
+                    
+                    return Optional.of(usuario);
                 }
             }
 
-        } catch (SQLException ex) {
-            System.getLogger(UsuarioDAOSQLite.class.getName())
-                  .log(System.Logger.Level.ERROR, (String) null, ex);
         }
-        return null;
+        return Optional.empty();
     }
 
     @Override
-    public List<Usuario> buscaTodos() {
+    public List<Usuario> buscaTodos() throws SQLException {
         List<Usuario> usuarios = new ArrayList<>();
         String sql = "SELECT * FROM usuarios";
         try (Connection conn = DatabaseConnection.getConnection();
@@ -119,15 +118,12 @@ public class UsuarioDAOSQLite implements UsuarioDAO {
                 ));
             }
 
-        } catch (SQLException ex) {
-            System.getLogger(UsuarioDAOSQLite.class.getName())
-                  .log(System.Logger.Level.ERROR, (String) null, ex);
         }
         return usuarios;
     }
 
     @Override
-    public void atualizar(Usuario usuario) {
+    public void atualizar(Usuario usuario) throws SQLException {
         String sql = "UPDATE usuarios SET nome = ?, email = ?, telefone = ?, senha = ? "
                    + "WHERE idUsuario = ?";
         try (Connection conn = DatabaseConnection.getConnection();
@@ -140,14 +136,11 @@ public class UsuarioDAOSQLite implements UsuarioDAO {
             pstmt.setInt(5, Integer.parseInt(usuario.getId()));
             pstmt.executeUpdate();
 
-        } catch (SQLException ex) {
-            System.getLogger(UsuarioDAOSQLite.class.getName())
-                  .log(System.Logger.Level.ERROR, (String) null, ex);
-        }
+        } 
     }
 
     @Override
-    public void deletar(Integer id) {
+    public void deletar(Integer id) throws SQLException {
         String sql = "DELETE FROM usuarios WHERE idUsuario = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -171,10 +164,18 @@ public class UsuarioDAOSQLite implements UsuarioDAO {
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-
+                    String ts = rs.getString("criado_em");
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                    LocalDateTime dt = (ts != null) ? LocalDateTime.parse(ts, formatter) : null;
+                    boolean admin = rs.getInt("eAdmin") == 1;
                     Usuario usuario = new Usuario(
+                        rs.getString("idUsuario"),
+                        rs.getString("nome"),
                         rs.getString("email"),
-                        rs.getString("senha")
+                        rs.getString("senha"),
+                        rs.getString("telefone"),
+                        dt, 
+                        admin
                     );
                     
                     return Optional.of(usuario);

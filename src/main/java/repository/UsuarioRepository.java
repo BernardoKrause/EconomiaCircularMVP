@@ -19,30 +19,35 @@ public class UsuarioRepository {
     private final UsuarioDAO usuarioDAO;
 
     public UsuarioRepository() throws SQLException {
-       this.usuarioDAO = new UsuarioDAOSQLite();
+       try {
+           this.usuarioDAO = new UsuarioDAOSQLite();
+       } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw ex;
+        }
     }
 
     public void adicionaUsuario(String nome, String email, String telefone, String senha, boolean isAdmin) throws SQLException {
         usuarioDAO.criar(new Usuario(nome, email, telefone, senha, isAdmin));
     }
 
-    public Usuario getUsuario(String id) {
+    public Optional<Usuario> getUsuario(String id) throws SQLException {
         return usuarioDAO.buscaPorId(Integer.parseInt(id));
     }
 
-    public List<Usuario> getTodosUsuarios() {
+    public List<Usuario> getTodosUsuarios() throws SQLException {
         return usuarioDAO.buscaTodos();
     }
 
-    public void atualizaUsuario(String id, String nome, String email, String telefone, String senha) {
+    public void atualizaUsuario(String id, String nome, String email, String telefone, String senha) throws SQLException {
         usuarioDAO.atualizar(new Usuario(id, nome, email, telefone, senha));
     }
     
-    public void deletaUsuario(String id) {
+    public void deletaUsuario(String id) throws SQLException {
         usuarioDAO.deletar(Integer.parseInt(id));
     }
     
-    public int totalUsuarios() {
+    public int totalUsuarios() throws SQLException {
         return getTodosUsuarios().size();
     }
 
