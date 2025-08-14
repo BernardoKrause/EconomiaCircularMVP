@@ -6,11 +6,10 @@ package state.home;
 
 import command.item.AbrirCadastroItemCommand;
 import command.perfil.CriarPerfilCompradorCommand;
-import command.perfil.CriarPerfilVendedorCommand;
-import command.usuario.SairUsuarioCommand;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import model.Perfil;
 import model.Usuario;
 import presenter.HomePresenter;
 
@@ -18,23 +17,21 @@ import presenter.HomePresenter;
  *
  * @author caiof
  */
-public class AutenticadoState extends HomePresenterState{
+public class VendedorState extends HomePresenterState{
     private Usuario usuario;
     
-    public AutenticadoState(HomePresenter presenter, Usuario usuario) {
+    public VendedorState(HomePresenter presenter, Usuario usuario) {
         super(presenter);
-        
+    
         this.usuario=usuario;
         
         view.getMenuUsuario().setText(usuario.getNome());
         view.getMenuVendedor().setVisible(true);
         view.getMenuComprador().setVisible(true);
-        view.getMenuItem().setVisible(false);
+        view.getMenuItem().setVisible(true);
         view.getMItemEntrarUsuario().setVisible(false);
         view.getMItemCadastrarUsuario().setVisible(false);
         view.getMItemSairUsuario().setVisible(true);
-        view.getMItemVerPerfilVendedor().setVisible(false);
-        view.getMItemVerPerfilComprador().setVisible(false);
         
         if (usuario.getPerfilComprador().isEmpty()) {
             view.getMItemAcessarPerfilComprador().setVisible(false);
@@ -66,68 +63,22 @@ public class AutenticadoState extends HomePresenterState{
             });
         }
         
-        if (usuario.getPerfilVendedor().isEmpty()) {
-            view.getMItemAcessarPerfilVendedor().setVisible(false);
-            view.getMItemCriarPerfilVendedor().setVisible(true);
-
-            view.getMItemCriarPerfilVendedor().addActionListener(new ActionListener() {
-               @Override
-               public  void actionPerformed(ActionEvent e) {
-                    try {
-                        new CriarPerfilVendedorCommand(usuario).executar();
-                        view.getMItemAcessarPerfilVendedor().setVisible(true);  
-                        JOptionPane.showMessageDialog(view, "Solicitação enviada ao administrador");
-                   } catch (Exception ex) {
-                       JOptionPane.showMessageDialog(view, ex);
-                   }
-               }
-            });
-        } 
-        else{
-            view.getMItemAcessarPerfilVendedor().setVisible(true);
-            view.getMItemAcessarPerfilVendedor().addActionListener(new ActionListener() {
-               @Override
-               public  void actionPerformed(ActionEvent e) {
-                    try {
-                        // AbrirTelaVendedorCommand().executar(); 
-                    } catch (Exception ex) {
-                       JOptionPane.showMessageDialog(view, ex);
-                   }
-               }
-            });
-        }
+        view.getMItemAcessarPerfilVendedor().setVisible(false);
+        view.getMItemCriarPerfilVendedor().setVisible(false);
+        view.getMItemVerPerfilVendedor().setVisible(true);
         
-        view.getMItemSairUsuario().addActionListener(new ActionListener() {
+        view.getMItemPublicarItem().addActionListener(new ActionListener() {
            @Override
            public  void actionPerformed(ActionEvent e) {
                try {
-                    new SairUsuarioCommand().executar();
+                    Perfil perfil = usuario.getPerfilVendedor().get();
+                    new AbrirCadastroItemCommand(perfil).executar();
                } catch (Exception ex) {
                    JOptionPane.showMessageDialog(view, ex);
                }
            }
         });
         
-        view.setVisible(true);
     }
     
-    public void sairUsuario(){
-        presenter.sairUsuario();
-    }
-    
-    public void criarPerfilVendedor(){
-        throw new RuntimeException("Não é possivel salvar estando nesse estado!");
-    }
-    
-    public void acessarPerfilVendedor(){
-        throw new RuntimeException("Não é possivel salvar estando nesse estado!");
-    }
-    
-    public void criarPerfilComprador(){
-        throw new RuntimeException("Não é possivel salvar estando nesse estado!");
-    }
-    
-    public void acessarPerfilComprador(){
-        throw new RuntimeException("Não é possivel salvar estando nesse estado!");
-    }
 }

@@ -5,9 +5,7 @@
 package service;
 
 import java.util.Optional;
-import model.Comprador;
 import model.Usuario;
-import model.Vendedor;
 import repository.UsuarioRepository;
 
 /**
@@ -30,7 +28,7 @@ public class UsuarioService {
             novoUsuario.setAdmin(true);
         }
         
-        usuarioRepository.salvarUsuario(novoUsuario);
+        usuarioRepository.adicionaUsuario(novoUsuario);
     }
     
     public void autenticarUsuario (Usuario usuario) {

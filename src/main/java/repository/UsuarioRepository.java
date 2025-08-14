@@ -48,7 +48,7 @@ public class UsuarioRepository {
         return this.usuariosCadastrados.size();
     }
     
-    public void salvarUsuario(Usuario usuario) {
+    public void adicionaUsuario(Usuario usuario) {
         if(totalUsuarios()==0){
             usuario.setAdmin(true);
         }

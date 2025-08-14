@@ -2,25 +2,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package command;
+package command.item;
 
+import command.ICommand;
 import command.usuario.UsuarioCommand;
 import javax.swing.JDesktopPane;
-import presenter.GerenciadorTelas;
+import model.Perfil;
 import presenter.ItemPresenter;
 import repository.ItemRepository;
+import repository.PerfilRepository;
 import repository.TiposDefeitoRepository;
 import service.ItemService;
+import service.PerfilService;
 import service.SistemaDefeitosService;
 
 /**
  *
  * @author caiof
  */
-public class AbrirCadastroItemCommand extends UsuarioCommand{
-    
-    public AbrirCadastroItemCommand(){
-        super();
+public class AbrirCadastroItemCommand extends ItemCommand{
+    public AbrirCadastroItemCommand(Perfil perfil){
+        super(perfil);
     }
 
     @Override

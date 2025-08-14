@@ -1,5 +1,6 @@
-C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\AbrirCadastroItemCommand.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\ICommand.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\item\AbrirCadastroItemCommand.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\item\ItemCommand.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\perfil\CriarPerfilCompradorCommand.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\perfil\CriarPerfilVendedorCommand.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\perfil\PerfilCommand.java
@@ -31,6 +32,7 @@ C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\m
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\state\home\AutenticadoState.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\state\home\HomePresenterState.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\state\home\NaoAutenticadoState.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\state\home\VendedorState.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\strategy\SistemaDefeitos\IRegraDefeitoStrategy.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\strategy\SistemaDefeitos\RegraDefeitosPercentual.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\view\CompradorView.java
