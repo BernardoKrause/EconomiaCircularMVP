@@ -27,6 +27,7 @@ public class PerfilService {
         }
         Perfil perfil = new Vendedor("V-"+usuario.getId());
         usuario.addPerfil(perfil);
+        perfil.setUsuario(usuario);
         
         perfilRepository.salvarPerfil(perfil);
 

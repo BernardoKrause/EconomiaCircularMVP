@@ -20,15 +20,17 @@ import presenter.HomePresenter;
  * @author caiof
  */
 public class VendedorState extends HomePresenterState{
+    private Vendedor vendedor;
     private Usuario usuario;
     
     public VendedorState(HomePresenter presenter, Vendedor vendedor) {
         super(presenter);
     
-        this.usuario=usuario;
+        this.vendedor=vendedor;
+        this.usuario=vendedor.getUsuario();
         
         setVisibles();
-            
+        
         view.getMItemCriarPerfilComprador().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -67,6 +69,7 @@ public class VendedorState extends HomePresenterState{
     
     @Override
     public void setVisibles(){
+        
         view.getMenuUsuario().setText(usuario.getNome());
         view.getMenuVendedor().setVisible(true);
         view.getMenuComprador().setVisible(true);

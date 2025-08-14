@@ -5,7 +5,6 @@
 package command.perfil;
 
 import model.Usuario;
-import service.PerfilService;
 
 /**
  *

@@ -33,5 +33,9 @@ public abstract class Perfil {
         return this.usuario;
     }
     
+    public void setUsuario(Usuario usuario){
+        this.usuario=usuario;
+    }
+    
     // falta o get reputacao
 }

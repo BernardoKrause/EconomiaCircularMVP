@@ -94,7 +94,6 @@ public class AutenticadoState extends HomePresenterState{
     
     @Override
     public void criarPerfilVendedor(){
-        System.out.print("1"+usuario.getPerfis().isEmpty());
         new CriarPerfilVendedorCommand(usuario).executar();
         view.getMItemAcessarPerfilVendedor().setVisible(true); 
         view.getMItemCriarPerfilVendedor().setVisible(false); 
