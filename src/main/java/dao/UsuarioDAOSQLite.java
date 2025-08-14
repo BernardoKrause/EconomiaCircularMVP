@@ -62,7 +62,7 @@ public class UsuarioDAOSQLite implements UsuarioDAO {
     }
 
     @Override
-    public Usuario buscaPorId(Integer id) throws SQLException {
+    public Optional<Usuario> buscaPorId(Integer id) throws SQLException {
         String sql = "SELECT * FROM usuarios WHERE idUsuario = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -75,20 +75,22 @@ public class UsuarioDAOSQLite implements UsuarioDAO {
                     String ts = rs.getString("criado_em");
                     LocalDateTime dt = (ts != null) ? LocalDateTime.parse(ts, formatter) : null;
 
-                    boolean admin = rs.getInt("eAdmin") == 1; // ← coluna correta
-                    return new Usuario(
+                    boolean admin = rs.getInt("eAdmin") == 1; 
+                    Usuario usuario = new Usuario(
                         rs.getString("idUsuario"),
                         rs.getString("nome"),
                         rs.getString("email"),
                         rs.getString("telefone"),
                         admin,
-                        dt
+                        dt 
                     );
+                    
+                    return Optional.of(usuario);
                 }
             }
 
         }
-        return null;
+        return Optional.empty();
     }
 
     @Override

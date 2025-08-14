@@ -4,16 +4,11 @@
  */
 package command.item;
 
-import command.ICommand;
-import command.usuario.UsuarioCommand;
-import javax.swing.JDesktopPane;
+import java.sql.SQLException;
 import model.Perfil;
 import presenter.ItemPresenter;
-import repository.ItemRepository;
-import repository.PerfilRepository;
 import repository.TiposDefeitoRepository;
 import service.ItemService;
-import service.PerfilService;
 import service.SistemaDefeitosService;
 
 /**
@@ -25,13 +20,17 @@ public class AbrirCadastroItemCommand extends ItemCommand{
         super(perfil);
     }
 
+    /**
+     *
+     * @throws SQLException
+     */
     @Override
-    public void executar() {
-        ItemRepository itemRepo = new ItemRepository();
+    public void executar() throws SQLException {
         TiposDefeitoRepository tiposDefeitosRepo = new TiposDefeitoRepository();
         SistemaDefeitosService sysDefeito = new SistemaDefeitosService();
-        ItemService itemService = new ItemService(itemRepo, sysDefeito, tiposDefeitosRepo);
+        ItemService itemService = new ItemService(sysDefeito, tiposDefeitosRepo);
         ItemPresenter itemPresenter = new ItemPresenter(itemService);
-        desktop.add(itemPresenter.getView());    }
+        desktop.add(itemPresenter.getView());    
+    }
     
 }
