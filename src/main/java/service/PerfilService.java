@@ -26,7 +26,6 @@ public class PerfilService {
             throw new IllegalArgumentException("Usuario informado não pode ser nulo!");
         }
         Perfil perfil = new Vendedor("V-"+usuario.getId());
-        
         usuario.addPerfil(perfil);
         
         perfilRepository.salvarPerfil(perfil);

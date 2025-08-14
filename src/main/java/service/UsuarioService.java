@@ -42,7 +42,6 @@ public class UsuarioService {
         if (optUsuario.isPresent()) {
             if (optUsuario.get().getSenha().equals(usuario.getSenha())) {
                 usuario.copy(optUsuario.get());
-                System.out.println(optUsuario.get().getNome());
                 usuario.setAutenticado(true);
             }
         } else {

@@ -1,4 +1,5 @@
 view\usuario\SignupView.class
+dao\ItemDAO.class
 state\home\HomePresenterState.class
 presenter\GerenciadorTelas.class
 model\Perfil.class
@@ -71,3 +72,4 @@ view\HomeView$2.class
 view\item\FormItemView$2.class
 state\home\NaoAutenticadoState.class
 command\item\ItemCommand.class
+dao\ItemDAOSQLite.class

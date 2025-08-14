@@ -16,6 +16,8 @@ import service.PerfilService;
 public class CriarPerfilVendedorCommand extends PerfilCommand{
     public CriarPerfilVendedorCommand(Usuario usuario){
         super(usuario);
+        
+        System.out.print(usuario.getPerfis().isEmpty());
     }
 
     @Override
