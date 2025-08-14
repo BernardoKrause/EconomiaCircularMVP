@@ -4,16 +4,15 @@
  */
 package state.home;
 
-import command.AbrirCadastroItemCommand;
+import command.item.AbrirCadastroItemCommand;
+import command.perfil.CriarPerfilCompradorCommand;
 import command.perfil.CriarPerfilVendedorCommand;
 import command.usuario.SairUsuarioCommand;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import model.Usuario;
-import presenter.GerenciadorTelas;
 import presenter.HomePresenter;
-import service.PerfilService;
 
 /**
  *
@@ -21,97 +20,64 @@ import service.PerfilService;
  */
 public class AutenticadoState extends HomePresenterState{
     private Usuario usuario;
-    private PerfilService perfilService;
     
     public AutenticadoState(HomePresenter presenter, Usuario usuario) {
         super(presenter);
         
         this.usuario=usuario;
         
-        view.getMenuUsuario().setText(usuario.getNome());
-        view.getMenuVendedor().setVisible(true);
-        view.getMenuComprador().setVisible(true);
-        view.getMItemEntrarUsuario().setVisible(false);
-        view.getMItemCadastrarUsuario().setVisible(false);
-        view.getMItemSairUsuario().setVisible(true);
-        
-        if (usuario.getPerfilComprador().isEmpty()) {
-            view.getMItemAcessarPerfilComprador().setVisible(false);
-            view.getMItemCriarPerfilComprador().addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    try {
-                        perfilService.criarPerfilComprador(usuario);
-                        view.getMItemAcessarPerfilComprador().setVisible(true);
-                        JOptionPane.showMessageDialog(view, "Solicitação enviada ao administrador");
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(view, ex);
-                    }
+        setVisibles();
+            
+        view.getMItemCriarPerfilComprador().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    criarPerfilComprador();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(view, ex);
                 }
-            });
-        }else{
-            view.getMItemAcessarPerfilComprador().setVisible(true);
-            view.getMItemAcessarPerfilComprador().addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    try {
-//                        new AbrirTelaCompradorCommand().executar();  
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(view, ex);
-                    }
+            }
+        });
+        
+        view.getMItemAcessarPerfilComprador().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    acessarPerfilComprador();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(view, ex);
                 }
-            });
-        }
-        if (usuario.getPerfilVendedor().isEmpty()) {
-            view.getMItemAcessarPerfilVendedor().setVisible(false);
-
-            view.getMItemCriarPerfilVendedor().addActionListener(new ActionListener() {
-               @Override
-               public  void actionPerformed(ActionEvent e) {
-                    try {
-                        new CriarPerfilVendedorCommand(usuario).executar();
-                        view.getMItemAcessarPerfilVendedor().setVisible(true);  
-                        JOptionPane.showMessageDialog(view, "Solicitação enviada ao administrador");
-                   } catch (Exception ex) {
-                       JOptionPane.showMessageDialog(view, ex);
-                   }
-               }
-            });
-        } else{
-            view.getMItemAcessarPerfilVendedor().setVisible(true);
-            view.getMItemAcessarPerfilVendedor().addActionListener(new ActionListener() {
-               @Override
-               public  void actionPerformed(ActionEvent e) {
-                    try {
-                        // AbrirTelaVendedorCommand().executar(); 
-                    } catch (Exception ex) {
-                       JOptionPane.showMessageDialog(view, ex);
-                   }
-               }
-            });
-        }
+            }
+        });
         
-        
-        view.getMItemPublicarItem().addActionListener(new ActionListener() {
+        view.getMItemCriarPerfilVendedor().addActionListener(new ActionListener() {
            @Override
            public  void actionPerformed(ActionEvent e) {
-               try {
-                   if (!usuario.getPerfilVendedor().isEmpty()) {
-                        JOptionPane.showMessageDialog(view, "Você ainda não possui um perfil Vendedor");
-                    } else {
-                       new AbrirCadastroItemCommand().executar();
-                    }
-               } catch (Exception ex) {
-                   JOptionPane.showMessageDialog(view, ex);
-               }
-           }
+                try {
+                    criarPerfilVendedor();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(view, ex);
+                }
+            }
         });
+         
+        view.getMItemAcessarPerfilVendedor().addActionListener(new ActionListener() {
+            @Override
+            public  void actionPerformed(ActionEvent e) {
+                try {
+                    acessarPerfilVendedor(); 
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(view, ex);
+                }
+            }
+        });
+        
         
         view.getMItemSairUsuario().addActionListener(new ActionListener() {
            @Override
            public  void actionPerformed(ActionEvent e) {
                try {
-                    new SairUsuarioCommand().executar();
+                    sairUsuario();
                } catch (Exception ex) {
                    JOptionPane.showMessageDialog(view, ex);
                }
@@ -121,23 +87,65 @@ public class AutenticadoState extends HomePresenterState{
         view.setVisible(true);
     }
     
+    @Override
     public void sairUsuario(){
-        presenter.sairUsuario();
+        new SairUsuarioCommand().executar();
     }
     
+    @Override
     public void criarPerfilVendedor(){
-        throw new RuntimeException("Não é possivel salvar estando nesse estado!");
+        new CriarPerfilVendedorCommand(usuario).executar();
+        view.getMItemAcessarPerfilVendedor().setVisible(true); 
+        view.getMItemCriarPerfilVendedor().setVisible(false); 
+        JOptionPane.showMessageDialog(view, "Solicitação enviada ao administrador");
     }
     
+    @Override
     public void acessarPerfilVendedor(){
         throw new RuntimeException("Não é possivel salvar estando nesse estado!");
     }
     
+    @Override
     public void criarPerfilComprador(){
+        new CriarPerfilCompradorCommand(usuario).executar();
+        view.getMItemAcessarPerfilComprador().setVisible(true); 
+        view.getMItemCriarPerfilVendedor().setVisible(false); 
+        JOptionPane.showMessageDialog(view, "Solicitação enviada ao administrador");
+    }
+    
+    @Override
+    public void acessarPerfilComprador(){
         throw new RuntimeException("Não é possivel salvar estando nesse estado!");
     }
     
-    public void acessarPerfilComprador(){
-        throw new RuntimeException("Não é possivel salvar estando nesse estado!");
+    @Override
+    public void setVisibles(){
+        view.getMenuUsuario().setText(usuario.getNome());
+        view.getMenuVendedor().setVisible(true);
+        view.getMenuComprador().setVisible(true);
+        view.getMenuItem().setVisible(false);
+        view.getMItemEntrarUsuario().setVisible(false);
+        view.getMItemCadastrarUsuario().setVisible(false);
+        view.getMItemSairUsuario().setVisible(true);
+        view.getMItemVerPerfilVendedor().setVisible(false);
+        view.getMItemVerPerfilComprador().setVisible(false);
+        
+        if (usuario.getPerfilComprador().isEmpty()) {
+            view.getMItemAcessarPerfilComprador().setVisible(false);
+            view.getMItemCriarPerfilComprador().setVisible(true);
+        }
+        else{
+            view.getMItemAcessarPerfilComprador().setVisible(true);
+            view.getMItemCriarPerfilComprador().setVisible(false);
+        }
+        
+        if (usuario.getPerfilVendedor().isEmpty()) {
+            view.getMItemAcessarPerfilVendedor().setVisible(false);
+            view.getMItemCriarPerfilVendedor().setVisible(true);
+        }
+        else{
+            view.getMItemAcessarPerfilVendedor().setVisible(true);
+            view.getMItemCriarPerfilVendedor().setVisible(false);
+        }
     }
 }

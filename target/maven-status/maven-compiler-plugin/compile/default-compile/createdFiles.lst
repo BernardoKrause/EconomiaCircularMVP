@@ -5,6 +5,7 @@ presenter\GerenciadorTelas.class
 model\Perfil.class
 presenter\ItemPresenter$2.class
 state\home\AutenticadoState$4.class
+state\home\VendedorState$1.class
 command\perfil\CriarPerfilCompradorCommand.class
 repository\TiposDefeitoRepository.class
 repository\ItemRepository.class
@@ -29,14 +30,16 @@ service\SistemaDefeitosService.class
 presenter\LoginPresenter.class
 service\PerfilService.class
 model\Item.class
+state\home\VendedorState$2.class
 view\HomeView.class
 state\home\AutenticadoState$1.class
+state\home\VendedorState$3.class
 state\home\NaoAutenticadoState$2.class
 strategy\SistemaDefeitos\IRegraDefeitoStrategy.class
 command\usuario\AbrirCadastroUsuarioCommand.class
+view\HomeView$3.class
 presenter\ItemPresenter$4.class
 state\home\AutenticadoState$2.class
-command\AbrirCadastroItemCommand.class
 repository\UsuarioRepository.class
 service\AutenticacaoService.class
 model\Comprador.class
@@ -49,7 +52,9 @@ command\usuario\SairUsuarioCommand.class
 state\home\AutenticadoState$5.class
 presenter\SignupPresenter.class
 dao\UsuarioDAO.class
+command\item\AbrirCadastroItemCommand.class
 presenter\LoginPresenter$2.class
+state\home\VendedorState.class
 presenter\LoginPresenter$1.class
 presenter\SignupPresenter$1.class
 model\Vendedor.class
@@ -60,8 +65,8 @@ dao\UsuarioDAOSQLite.class
 presenter\HomePresenter.class
 presenter\ItemPresenter$1.class
 command\ICommand.class
-state\home\AutenticadoState$6.class
 command\usuario\UsuarioCommand.class
 view\HomeView$2.class
 view\item\FormItemView$2.class
 state\home\NaoAutenticadoState.class
+command\item\ItemCommand.class

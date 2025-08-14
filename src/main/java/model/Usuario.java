@@ -35,6 +35,10 @@ public class Usuario {
         
         this.email = email;
         this.senha = senha;
+        this.admin = false;
+        this.autenticado = false;
+        this.perfis = new ArrayList<>();
+        this.dataCriacaoDaConta = LocalDateTime.now();      
     } 
     
     public Usuario(String nome, String email, String telefone, String senha) {    
@@ -55,6 +59,10 @@ public class Usuario {
         this.email = email;
         this.telefone = telefone;     
         this.senha = senha;
+        this.admin = false;
+        this.autenticado = false;
+        this.perfis = new ArrayList<>();
+        this.dataCriacaoDaConta = LocalDateTime.now();        
     } 
     
     public Usuario(String id, String nome, String email, String telefone, String senha) {    
@@ -84,6 +92,9 @@ public class Usuario {
         this.telefone = telefone;
         this.senha = senha;
         this.admin = isAdmin;         
+        this.autenticado = false;
+        this.perfis = new ArrayList<>();
+        this.dataCriacaoDaConta = LocalDateTime.now();
     } 
     
     public Usuario(String id, String nome, String email, String telefone, boolean isAdmin, LocalDateTime dataCriacaoDaConta) {

@@ -48,6 +48,7 @@ public class UsuarioRepository {
 
     public Optional<Usuario> getUsuarioPorEmail(String email) throws SQLException {
         return usuarioDAO.buscaPorEmail(email);
+
     }
     
 }

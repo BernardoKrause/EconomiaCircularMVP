@@ -1,44 +1,44 @@
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\command\AbrirCadastroItemCommand.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\command\ICommand.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\command\perfil\CriarPerfilCompradorCommand.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\command\perfil\CriarPerfilVendedorCommand.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\command\perfil\PerfilCommand.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\command\usuario\AbrirCadastroUsuarioCommand.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\command\usuario\AbrirEntrarUsuarioCommand.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\command\usuario\SairUsuarioCommand.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\command\usuario\UsuarioCommand.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\dao\UsuarioDAO.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\dao\UsuarioDAOSQLite.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\main\EconomiaCircularMVP.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\model\Comprador.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\model\Defeito.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\model\Item.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\model\Perfil.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\model\Usuario.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\model\Vendedor.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\presenter\GerenciadorTelas.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\presenter\HomePresenter.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\presenter\IPresenter.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\presenter\ItemPresenter.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\presenter\LoginPresenter.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\presenter\SignupPresenter.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\repository\ItemRepository.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\repository\PerfilRepository.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\repository\TiposDefeitoRepository.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\repository\UsuarioRepository.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\service\AutenticacaoService.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\service\ItemService.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\service\PerfilService.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\service\SistemaDefeitosService.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\service\UsuarioService.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\state\home\AutenticadoState.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\state\home\HomePresenterState.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\state\home\NaoAutenticadoState.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\strategy\SistemaDefeitos\IRegraDefeitoStrategy.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\strategy\SistemaDefeitos\RegraDefeitosPercentual.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\util\DatabaseConnection.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\view\CompradorView.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\view\HomeView.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\view\item\FormItemView.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\view\usuario\LoginView.java
-C:\Users\berna\OneDrive\Documents\GitHub\EconomiaCircularMVP\src\main\java\view\usuario\SignupView.java
+
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\ICommand.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\item\AbrirCadastroItemCommand.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\item\ItemCommand.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\perfil\CriarPerfilCompradorCommand.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\perfil\CriarPerfilVendedorCommand.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\perfil\PerfilCommand.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\usuario\AbrirCadastroUsuarioCommand.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\usuario\AbrirEntrarUsuarioCommand.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\usuario\SairUsuarioCommand.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\usuario\UsuarioCommand.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\main\EconomiaCircularMVP.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\model\Comprador.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\model\Defeito.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\model\Item.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\model\Perfil.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\model\Usuario.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\model\Vendedor.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\presenter\GerenciadorTelas.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\presenter\HomePresenter.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\presenter\IPresenter.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\presenter\ItemPresenter.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\presenter\LoginPresenter.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\presenter\SignupPresenter.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\repository\ItemRepository.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\repository\PerfilRepository.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\repository\TiposDefeitoRepository.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\repository\UsuarioRepository.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\service\ItemService.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\service\PerfilService.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\service\SistemaDefeitosService.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\service\UsuarioService.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\state\home\AutenticadoState.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\state\home\HomePresenterState.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\state\home\NaoAutenticadoState.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\state\home\VendedorState.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\strategy\SistemaDefeitos\IRegraDefeitoStrategy.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\strategy\SistemaDefeitos\RegraDefeitosPercentual.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\view\CompradorView.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\view\HomeView.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\view\item\FormItemView.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\view\usuario\LoginView.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\view\usuario\SignupView.java
+

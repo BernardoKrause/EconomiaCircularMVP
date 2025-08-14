@@ -52,4 +52,6 @@ public abstract class HomePresenterState {
     public void publicarItem(){
         throw new RuntimeException("Não é possivel salvar estando nesse estado!");
     }
+    
+    public abstract void setVisibles();
 }
