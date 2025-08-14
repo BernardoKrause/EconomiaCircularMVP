@@ -22,11 +22,23 @@ public class UsuarioService {
     
     public void cadastrarUsuario(String nome, String email, String telefone, String senha) throws SQLException {
         boolean isAdmin = usuarioRepository.totalUsuarios() == 0 ? true : false;
-        usuarioRepository.adicionaUsuario(nome, email, telefone, senha, isAdmin);
+        try {
+            usuarioRepository.adicionaUsuario(nome, email, telefone, senha, isAdmin);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw ex;
+        }
     }
     
     public void autenticarUsuario (Usuario usuario) throws SQLException {
-        Optional<Usuario> optUsuario = usuarioRepository.getUsuarioPorEmail(usuario.getEmail());
+        Optional<Usuario> optUsuario;
+        try {
+            optUsuario = usuarioRepository.getUsuarioPorEmail(usuario.getEmail());
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw ex;
+        }
+        
         if (optUsuario.isPresent()) {
             if (optUsuario.get().getSenha() == usuario.getSenha()) {
             usuario.setAutenticado(true);

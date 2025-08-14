@@ -14,11 +14,11 @@ import repository.UsuarioRepository;
  */
 public class AutenticacaoService {
     
-    private UsuarioRepository usuarioRepository;
+    //private UsuarioRepository usuarioRepository;
     
-    public AutenticacaoService(UsuarioRepository usuarioRepository) {
-        this.usuarioRepository = usuarioRepository;
-    }
+    //public AutenticacaoService(UsuarioRepository usuarioRepository) {
+    //    this.usuarioRepository = usuarioRepository;
+    //}
     
     //public void autenticar (Usuario usuario) {
     //    Optional<Usuario> optUsuario = usuarioRepository.getUsuarioPorEmail(usuario.getEmail());

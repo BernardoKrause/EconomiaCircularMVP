@@ -26,23 +26,23 @@ public class UsuarioRepository {
         usuarioDAO.criar(new Usuario(nome, email, telefone, senha, isAdmin));
     }
 
-    public Usuario getUsuario(String id) {
+    public Usuario getUsuario(String id) throws SQLException {
         return usuarioDAO.buscaPorId(Integer.parseInt(id));
     }
 
-    public List<Usuario> getTodosUsuarios() {
+    public List<Usuario> getTodosUsuarios() throws SQLException {
         return usuarioDAO.buscaTodos();
     }
 
-    public void atualizaUsuario(String id, String nome, String email, String telefone, String senha) {
+    public void atualizaUsuario(String id, String nome, String email, String telefone, String senha) throws SQLException {
         usuarioDAO.atualizar(new Usuario(id, nome, email, telefone, senha));
     }
     
-    public void deletaUsuario(String id) {
+    public void deletaUsuario(String id) throws SQLException {
         usuarioDAO.deletar(Integer.parseInt(id));
     }
     
-    public int totalUsuarios() {
+    public int totalUsuarios() throws SQLException {
         return getTodosUsuarios().size();
     }
 
