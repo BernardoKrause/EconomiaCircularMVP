@@ -9,7 +9,6 @@ import model.Perfil;
 import model.Usuario;
 import model.Vendedor;
 import repository.PerfilRepository;
-import repository.UsuarioRepository;
 
 /**
  *

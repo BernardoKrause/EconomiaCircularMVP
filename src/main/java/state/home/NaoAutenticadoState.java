@@ -19,10 +19,9 @@ public class NaoAutenticadoState extends HomePresenterState{
     
     public NaoAutenticadoState(HomePresenter presenter) {
         super(presenter);
-        
-        view.setVisible(false);
-        
+                
         view.getMenuUsuario().setVisible(true);
+        view.getMenuUsuario().setText("Usuario");
         view.getMenuVendedor().setVisible(false);
         view.getMenuComprador().setVisible(false);
         view.getMenuItem().setVisible(false);

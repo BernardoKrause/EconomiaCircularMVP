@@ -6,6 +6,7 @@ package state.home;
 
 import command.AbrirCadastroItemCommand;
 import command.perfil.CriarPerfilVendedorCommand;
+import command.usuario.SairUsuarioCommand;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -27,6 +28,7 @@ public class AutenticadoState extends HomePresenterState{
         
         this.usuario=usuario;
         
+        view.getMenuUsuario().setText(usuario.getNome());
         view.getMenuVendedor().setVisible(true);
         view.getMenuComprador().setVisible(true);
         view.getMItemEntrarUsuario().setVisible(false);
@@ -99,6 +101,17 @@ public class AutenticadoState extends HomePresenterState{
                     } else {
                        new AbrirCadastroItemCommand().executar();
                     }
+               } catch (Exception ex) {
+                   JOptionPane.showMessageDialog(view, ex);
+               }
+           }
+        });
+        
+        view.getMItemSairUsuario().addActionListener(new ActionListener() {
+           @Override
+           public  void actionPerformed(ActionEvent e) {
+               try {
+                    new SairUsuarioCommand().executar();
                } catch (Exception ex) {
                    JOptionPane.showMessageDialog(view, ex);
                }

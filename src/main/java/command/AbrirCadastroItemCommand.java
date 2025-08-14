@@ -4,6 +4,7 @@
  */
 package command;
 
+import command.usuario.UsuarioCommand;
 import javax.swing.JDesktopPane;
 import presenter.GerenciadorTelas;
 import presenter.ItemPresenter;
@@ -16,21 +17,19 @@ import service.SistemaDefeitosService;
  *
  * @author caiof
  */
-public class AbrirCadastroItemCommand implements ICommand{
-    private JDesktopPane desktop;
+public class AbrirCadastroItemCommand extends UsuarioCommand{
     
     public AbrirCadastroItemCommand(){
-        desktop = GerenciadorTelas.getInstancia().getDesktop();
+        super();
     }
-   
+
     @Override
-    public void executar(){
+    public void executar() {
         ItemRepository itemRepo = new ItemRepository();
         TiposDefeitoRepository tiposDefeitosRepo = new TiposDefeitoRepository();
         SistemaDefeitosService sysDefeito = new SistemaDefeitosService();
         ItemService itemService = new ItemService(itemRepo, sysDefeito, tiposDefeitosRepo);
         ItemPresenter itemPresenter = new ItemPresenter(itemService);
-        desktop.add(itemPresenter.getView());
-    }
+        desktop.add(itemPresenter.getView());    }
     
 }

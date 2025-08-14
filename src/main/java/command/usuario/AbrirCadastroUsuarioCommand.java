@@ -4,28 +4,25 @@
  */
 package command.usuario;
 
-import command.ICommand;
 import repository.UsuarioRepository;
-
-import javax.swing.*;
-import presenter.GerenciadorTelas;
+import presenter.SignupPresenter;
+import service.UsuarioService;
 
 /**
  *
  * @author caiof
  */
-public class AbrirCadastroUsuarioCommand implements ICommand {
-    private JDesktopPane desktop;
-
-    public AbrirCadastroUsuarioCommand() {
-        this.desktop = GerenciadorTelas.getInstancia().getDesktop();
+public class AbrirCadastroUsuarioCommand extends UsuarioCommand {
+    
+    public AbrirCadastroUsuarioCommand(){
+        super();
     }
-
+    
     @Override
     public void executar() {
-        UsuarioRepository usuarioRepository = new UsuarioRepository();
-        //SignupPresenter signupPresenter = new SignupPresenter(usuarioRepository);
-
-       // desktop.add(signupPresenter.getView());
+        UsuarioRepository usuarioRepository = UsuarioRepository.getInstancia();
+        UsuarioService usuarioService = new UsuarioService(usuarioRepository);
+        SignupPresenter signupPresenter = new SignupPresenter(usuarioService);
+        desktop.add(signupPresenter.getView());    
     }
 }

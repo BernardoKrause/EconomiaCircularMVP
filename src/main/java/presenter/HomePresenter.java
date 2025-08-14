@@ -6,6 +6,7 @@ package presenter;
 
 import javax.swing.JDesktopPane;
 import model.Usuario;
+import repository.UsuarioRepository;
 import service.PerfilService;
 import state.home.AutenticadoState;
 import state.home.HomePresenterState;
@@ -43,6 +44,7 @@ public class HomePresenter {
     
     public void sairUsuario(){
         estado = new NaoAutenticadoState(this);
+        usuario=null;
     }
     
 }

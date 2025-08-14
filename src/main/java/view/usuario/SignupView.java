@@ -12,12 +12,12 @@ import javax.swing.JTextField;
  *
  * @author caiof
  */
-public class SingupView extends javax.swing.JInternalFrame {
+public class SignupView extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form SingupView
      */
-    public SingupView() {
+    public SignupView() {
         initComponents();
     }
 
@@ -56,8 +56,6 @@ public class SingupView extends javax.swing.JInternalFrame {
                 txtNomeActionPerformed(evt);
             }
         });
-
-        txtSenha.setText("jPasswordField1");
 
         btnCadastrar.setText("Cadastrar");
 

@@ -112,9 +112,6 @@
     <Component class="javax.swing.JTextField" name="txtTelefone">
     </Component>
     <Component class="javax.swing.JPasswordField" name="txtSenha">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jPasswordField1"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnCadastrar">
       <Properties>

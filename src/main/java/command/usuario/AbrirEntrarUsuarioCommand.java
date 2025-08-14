@@ -4,13 +4,13 @@
  */
 package command.usuario;
 
-import command.ICommand;
 import presenter.LoginPresenter;
 import repository.UsuarioRepository;
-import service.AutenticacaoService;
 
 import javax.swing.*;
 import presenter.GerenciadorTelas;
+import service.UsuarioService;
+import command.ICommand;
 
 /**
  *
@@ -25,9 +25,9 @@ public class AbrirEntrarUsuarioCommand implements ICommand {
 
     @Override
     public void executar() {
-        UsuarioRepository usuarioRepository = new UsuarioRepository();
-        AutenticacaoService autenticacaoService = new AutenticacaoService(usuarioRepository);
-        LoginPresenter loginPresenter = new LoginPresenter(autenticacaoService);
+        UsuarioRepository usuarioRepository = UsuarioRepository.getInstancia();
+        UsuarioService usuarioService = new UsuarioService(usuarioRepository);
+        LoginPresenter loginPresenter = new LoginPresenter(usuarioService);
         desktop.add(loginPresenter.getView());
         
     }

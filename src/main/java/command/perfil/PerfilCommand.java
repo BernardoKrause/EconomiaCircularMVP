@@ -4,10 +4,10 @@
  */
 package command.perfil;
 
-import command.ICommand;
 import model.Usuario;
 import repository.PerfilRepository;
 import service.PerfilService;
+import command.ICommand;
 
 /**
  *
@@ -18,10 +18,10 @@ public abstract class PerfilCommand implements ICommand{
     protected Usuario usuario;
     
     public PerfilCommand(Usuario usuario){
+        super();
         this.usuario=usuario;
     }
     
-    @Override
     public void executar() {
         PerfilRepository repo = new PerfilRepository();
         PerfilService service = new PerfilService(repo);
