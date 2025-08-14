@@ -4,8 +4,8 @@
  */
 package state.home;
 
-import command.usuario.AbrirCadastroUsuarioCommand;
-import command.usuario.AbrirEntrarUsuarioCommand;
+import command.usuario.AbrirSignupUsuarioCommand;
+import command.usuario.AbrirLoginUsuarioCommand;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -51,13 +51,13 @@ public class NaoAutenticadoState extends HomePresenterState{
 
     @Override
     public void entrarUsuario() {
-        new AbrirEntrarUsuarioCommand().executar();
+        new AbrirLoginUsuarioCommand().executar();
     }
 
 
     @Override
     public void cadastrarUsuario(){
-        new AbrirCadastroUsuarioCommand().executar();
+        new AbrirSignupUsuarioCommand().executar();
     }
     
     @Override

@@ -28,9 +28,11 @@ public class UsuarioService {
     public void autenticarUsuario (Usuario usuario) throws SQLException {
         Optional<Usuario> optUsuario = usuarioRepository.getUsuarioPorEmail(usuario.getEmail());
         if (optUsuario.isPresent()) {
-            if (optUsuario.get().getSenha() == usuario.getSenha()) {
-            usuario.setAutenticado(true);
-        }
+            if (optUsuario.get().getSenha().equals(usuario.getSenha())) {
+                usuario.copy(optUsuario.get());
+                System.out.println(optUsuario.get().getNome());
+                usuario.setAutenticado(true);
+            }
         } else {
             throw new RuntimeException("Email e senha não correspondem à um usuário.");
         }

@@ -13,9 +13,9 @@ import service.UsuarioService;
  *
  * @author caiof
  */
-public class AbrirCadastroUsuarioCommand extends UsuarioCommand {
+public class AbrirSignupUsuarioCommand extends UsuarioCommand {
     
-    public AbrirCadastroUsuarioCommand(){
+    public AbrirSignupUsuarioCommand(){
         super();
     }
     
@@ -27,7 +27,7 @@ public class AbrirCadastroUsuarioCommand extends UsuarioCommand {
             SignupPresenter signupPresenter = new SignupPresenter(usuarioService);    
             desktop.add(signupPresenter.getView());
         } catch (SQLException ex) {
-            System.getLogger(AbrirCadastroUsuarioCommand.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            System.getLogger(AbrirSignupUsuarioCommand.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }
 }
