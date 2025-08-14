@@ -17,9 +17,9 @@ import model.Usuario;
  */
 public interface UsuarioDAO {
     public void criar(Usuario usuario) throws SQLException;
-    public Usuario buscaPorId(Integer id);
-    public List<Usuario> buscaTodos();
-    public void atualizar(Usuario usuario);
-    public void deletar(Integer id);
+    public Optional<Usuario> buscaPorId(Integer id) throws SQLException;
+    public List<Usuario> buscaTodos() throws SQLException;
+    public void atualizar(Usuario usuario) throws SQLException;
+    public void deletar(Integer id) throws SQLException;
     public Optional<Usuario> buscaPorEmail(String email) throws SQLException;
 }

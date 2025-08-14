@@ -4,10 +4,12 @@
  */
 package command;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author caiof
  */
 public interface ICommand {    
-    void executar();
+    void executar() throws SQLException;
 }

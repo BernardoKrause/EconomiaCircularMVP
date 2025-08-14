@@ -66,6 +66,7 @@ public class Usuario {
         this.dataCriacaoDaConta = LocalDateTime.now();        
     } 
     
+    
     public Usuario(String id, String nome, String email, String telefone, String senha) {    
         
         if (nome == null) {
@@ -97,7 +98,7 @@ public class Usuario {
         this.perfis = new ArrayList<>();
         this.dataCriacaoDaConta = LocalDateTime.now();
     } 
-    
+
     public Usuario(String id, String nome, String email, String telefone, boolean isAdmin, LocalDateTime dataCriacaoDaConta) {
         this.id = id;
         this.nome = nome;
@@ -105,6 +106,16 @@ public class Usuario {
         this.telefone = telefone;
         this.admin = isAdmin;
         this.dataCriacaoDaConta = dataCriacaoDaConta;
+    }
+    
+    public Usuario(String id, String nome, String email, String senha, String telefone, LocalDateTime dataCraicaoDaConta, boolean isAdmin) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.telefone = telefone;
+        this.dataCriacaoDaConta = dataCriacaoDaConta;
+        this.admin = isAdmin;
     }
     
     public String getId() {
