@@ -25,47 +25,29 @@ public class VendedorState extends HomePresenterState{
     
         this.usuario=usuario;
         
-        view.getMenuUsuario().setText(usuario.getNome());
-        view.getMenuVendedor().setVisible(true);
-        view.getMenuComprador().setVisible(true);
-        view.getMenuItem().setVisible(true);
-        view.getMItemEntrarUsuario().setVisible(false);
-        view.getMItemCadastrarUsuario().setVisible(false);
-        view.getMItemSairUsuario().setVisible(true);
-        
-        if (usuario.getPerfilComprador().isEmpty()) {
-            view.getMItemAcessarPerfilComprador().setVisible(false);
-            view.getMItemCriarPerfilComprador().setVisible(true);
-            view.getMItemCriarPerfilComprador().addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    try {
-                        new CriarPerfilCompradorCommand(usuario).executar();
-                        view.getMItemAcessarPerfilComprador().setVisible(true);
-                        JOptionPane.showMessageDialog(view, "Solicitação enviada ao administrador");
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(view, ex);
-                    }
+        setVisibles();
+            
+        view.getMItemCriarPerfilComprador().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    criarPerfilComprador();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(view, ex);
                 }
-            });
-        }
-        else{
-            view.getMItemAcessarPerfilComprador().setVisible(true);
-            view.getMItemAcessarPerfilComprador().addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    try {
-//                        new AbrirTelaCompradorCommand().executar();  
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(view, ex);
-                    }
-                }
-            });
-        }
+            }
+        });
         
-        view.getMItemAcessarPerfilVendedor().setVisible(false);
-        view.getMItemCriarPerfilVendedor().setVisible(false);
-        view.getMItemVerPerfilVendedor().setVisible(true);
+        view.getMItemAcessarPerfilComprador().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    acessarPerfilComprador();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(view, ex);
+                }
+            }
+        });
         
         view.getMItemPublicarItem().addActionListener(new ActionListener() {
            @Override
@@ -79,6 +61,28 @@ public class VendedorState extends HomePresenterState{
            }
         });
         
+    }
+    
+    @Override
+    public void setVisibles(){
+        view.getMenuUsuario().setText(usuario.getNome());
+        view.getMenuVendedor().setVisible(true);
+        view.getMenuComprador().setVisible(true);
+        view.getMenuItem().setVisible(true);
+        view.getMItemEntrarUsuario().setVisible(false);
+        view.getMItemCadastrarUsuario().setVisible(false);
+        view.getMItemSairUsuario().setVisible(true);
+        view.getMItemAcessarPerfilVendedor().setVisible(false);
+        view.getMItemCriarPerfilVendedor().setVisible(false);
+        view.getMItemVerPerfilVendedor().setVisible(true);
+        if (usuario.getPerfilComprador().isEmpty()) {
+            view.getMItemAcessarPerfilComprador().setVisible(false);
+            view.getMItemCriarPerfilComprador().setVisible(true);
+        }
+        else{
+            view.getMItemAcessarPerfilComprador().setVisible(true);
+            view.getMItemCriarPerfilComprador().setVisible(false);
+        }
     }
     
 }

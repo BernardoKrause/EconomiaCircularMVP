@@ -2,9 +2,7 @@ package command.perfil;
 
 
 import model.Usuario;
-import repository.PerfilRepository;
 import service.PerfilService;
-import command.ICommand;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license

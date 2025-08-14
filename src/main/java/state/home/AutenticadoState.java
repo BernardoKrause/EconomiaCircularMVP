@@ -26,6 +26,100 @@ public class AutenticadoState extends HomePresenterState{
         
         this.usuario=usuario;
         
+        setVisibles();
+            
+        view.getMItemCriarPerfilComprador().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    criarPerfilComprador();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(view, ex);
+                }
+            }
+        });
+        
+        view.getMItemAcessarPerfilComprador().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    acessarPerfilComprador();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(view, ex);
+                }
+            }
+        });
+        
+        view.getMItemCriarPerfilVendedor().addActionListener(new ActionListener() {
+           @Override
+           public  void actionPerformed(ActionEvent e) {
+                try {
+                    criarPerfilVendedor();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(view, ex);
+                }
+            }
+        });
+         
+        view.getMItemAcessarPerfilVendedor().addActionListener(new ActionListener() {
+            @Override
+            public  void actionPerformed(ActionEvent e) {
+                try {
+                    acessarPerfilVendedor(); 
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(view, ex);
+                }
+            }
+        });
+        
+        
+        view.getMItemSairUsuario().addActionListener(new ActionListener() {
+           @Override
+           public  void actionPerformed(ActionEvent e) {
+               try {
+                    sairUsuario();
+               } catch (Exception ex) {
+                   JOptionPane.showMessageDialog(view, ex);
+               }
+           }
+        });
+        
+        view.setVisible(true);
+    }
+    
+    @Override
+    public void sairUsuario(){
+        new SairUsuarioCommand().executar();
+    }
+    
+    @Override
+    public void criarPerfilVendedor(){
+        new CriarPerfilVendedorCommand(usuario).executar();
+        view.getMItemAcessarPerfilVendedor().setVisible(true); 
+        view.getMItemCriarPerfilVendedor().setVisible(false); 
+        JOptionPane.showMessageDialog(view, "Solicitação enviada ao administrador");
+    }
+    
+    @Override
+    public void acessarPerfilVendedor(){
+        throw new RuntimeException("Não é possivel salvar estando nesse estado!");
+    }
+    
+    @Override
+    public void criarPerfilComprador(){
+        new CriarPerfilCompradorCommand(usuario).executar();
+        view.getMItemAcessarPerfilComprador().setVisible(true); 
+        view.getMItemCriarPerfilVendedor().setVisible(false); 
+        JOptionPane.showMessageDialog(view, "Solicitação enviada ao administrador");
+    }
+    
+    @Override
+    public void acessarPerfilComprador(){
+        throw new RuntimeException("Não é possivel salvar estando nesse estado!");
+    }
+    
+    @Override
+    public void setVisibles(){
         view.getMenuUsuario().setText(usuario.getNome());
         view.getMenuVendedor().setVisible(true);
         view.getMenuComprador().setVisible(true);
@@ -39,95 +133,19 @@ public class AutenticadoState extends HomePresenterState{
         if (usuario.getPerfilComprador().isEmpty()) {
             view.getMItemAcessarPerfilComprador().setVisible(false);
             view.getMItemCriarPerfilComprador().setVisible(true);
-            view.getMItemCriarPerfilComprador().addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    try {
-                        new CriarPerfilCompradorCommand(usuario).executar();
-                        view.getMItemAcessarPerfilComprador().setVisible(true);
-                        JOptionPane.showMessageDialog(view, "Solicitação enviada ao administrador");
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(view, ex);
-                    }
-                }
-            });
         }
         else{
             view.getMItemAcessarPerfilComprador().setVisible(true);
-            view.getMItemAcessarPerfilComprador().addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    try {
-//                        new AbrirTelaCompradorCommand().executar();  
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(view, ex);
-                    }
-                }
-            });
+            view.getMItemCriarPerfilComprador().setVisible(false);
         }
         
         if (usuario.getPerfilVendedor().isEmpty()) {
             view.getMItemAcessarPerfilVendedor().setVisible(false);
             view.getMItemCriarPerfilVendedor().setVisible(true);
-
-            view.getMItemCriarPerfilVendedor().addActionListener(new ActionListener() {
-               @Override
-               public  void actionPerformed(ActionEvent e) {
-                    try {
-                        new CriarPerfilVendedorCommand(usuario).executar();
-                        view.getMItemAcessarPerfilVendedor().setVisible(true);  
-                        JOptionPane.showMessageDialog(view, "Solicitação enviada ao administrador");
-                   } catch (Exception ex) {
-                       JOptionPane.showMessageDialog(view, ex);
-                   }
-               }
-            });
-        } 
+        }
         else{
             view.getMItemAcessarPerfilVendedor().setVisible(true);
-            view.getMItemAcessarPerfilVendedor().addActionListener(new ActionListener() {
-               @Override
-               public  void actionPerformed(ActionEvent e) {
-                    try {
-                        // AbrirTelaVendedorCommand().executar(); 
-                    } catch (Exception ex) {
-                       JOptionPane.showMessageDialog(view, ex);
-                   }
-               }
-            });
+            view.getMItemCriarPerfilVendedor().setVisible(false);
         }
-        
-        view.getMItemSairUsuario().addActionListener(new ActionListener() {
-           @Override
-           public  void actionPerformed(ActionEvent e) {
-               try {
-                    new SairUsuarioCommand().executar();
-               } catch (Exception ex) {
-                   JOptionPane.showMessageDialog(view, ex);
-               }
-           }
-        });
-        
-        view.setVisible(true);
-    }
-    
-    public void sairUsuario(){
-        presenter.sairUsuario();
-    }
-    
-    public void criarPerfilVendedor(){
-        throw new RuntimeException("Não é possivel salvar estando nesse estado!");
-    }
-    
-    public void acessarPerfilVendedor(){
-        throw new RuntimeException("Não é possivel salvar estando nesse estado!");
-    }
-    
-    public void criarPerfilComprador(){
-        throw new RuntimeException("Não é possivel salvar estando nesse estado!");
-    }
-    
-    public void acessarPerfilComprador(){
-        throw new RuntimeException("Não é possivel salvar estando nesse estado!");
     }
 }

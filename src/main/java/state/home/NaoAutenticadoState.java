@@ -20,14 +20,7 @@ public class NaoAutenticadoState extends HomePresenterState{
     public NaoAutenticadoState(HomePresenter presenter) {
         super(presenter);
                 
-        view.getMenuUsuario().setVisible(true);
-        view.getMenuUsuario().setText("Usuario");
-        view.getMenuVendedor().setVisible(false);
-        view.getMenuComprador().setVisible(false);
-        view.getMenuItem().setVisible(false);
-        view.getMItemEntrarUsuario().setVisible(true);
-        view.getMItemCadastrarUsuario().setVisible(true);
-        view.getMItemSairUsuario().setVisible(false);
+        setVisibles();
         
         view.getMItemEntrarUsuario().addActionListener(
             new ActionListener(){
@@ -65,5 +58,17 @@ public class NaoAutenticadoState extends HomePresenterState{
     @Override
     public void cadastrarUsuario(){
         new AbrirCadastroUsuarioCommand().executar();
+    }
+    
+    @Override
+    public void setVisibles(){
+        view.getMenuUsuario().setVisible(true);
+        view.getMenuUsuario().setText("Usuario");
+        view.getMenuVendedor().setVisible(false);
+        view.getMenuComprador().setVisible(false);
+        view.getMenuItem().setVisible(false);
+        view.getMItemEntrarUsuario().setVisible(true);
+        view.getMItemCadastrarUsuario().setVisible(true);
+        view.getMItemSairUsuario().setVisible(false);
     }
 }
