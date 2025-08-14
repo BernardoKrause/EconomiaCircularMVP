@@ -34,11 +34,8 @@ public class Usuario {
             throw new IllegalArgumentException("Senha precisa ser informada.");
         }
         
-        this.perfis = new ArrayList<>();
         this.email = email;
-        this.senha = senha;
-        this.admin = false;
-        this.autenticado = false;                
+        this.senha = senha;            
     } 
     
     public Usuario(String nome, String email, String senha) {     
@@ -57,9 +54,7 @@ public class Usuario {
         
         this.nome = nome;
         this.email = email;
-        this.senha = senha;
-        this.admin = false;
-        this.autenticado = false;                
+        this.senha = senha;          
     } 
     
     public Usuario(String nome, String email, String telefone, String senha) {    
@@ -78,18 +73,75 @@ public class Usuario {
         
         this.nome = nome;
         this.email = email;
+        this.telefone = telefone;     
+        this.senha = senha;
+    } 
+    
+    public Usuario(String id, String nome, String email, String telefone, String senha) {    
+        
+        if (nome == null) {
+            throw new IllegalArgumentException("Nome precisa ser informado.");
+        }
+        
+        if (email == null) {
+            throw new IllegalArgumentException("Email precisa ser informado.");
+        }
+        
+        if (senha == null) {
+            throw new IllegalArgumentException("Senha precisa ser informada.");
+        }
+        
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone; 
+        this.senha = senha;
+    } 
+    
+    public Usuario(String nome, String email, String telefone, String senha, boolean isAdmin) {    
+        this.nome = nome;
+        this.email = email;
         this.telefone = telefone;
         this.senha = senha;
-        this.admin = false;
-        this.autenticado = false;                
+        this.admin = isAdmin;         
+    } 
+    
+    public Usuario(String id, String nome, String email, String telefone, boolean isAdmin, LocalDateTime criado_em) {    
+        
+        if (nome == null) {
+            throw new IllegalArgumentException("Nome precisa ser informado.");
+        }
+        
+        if (email == null) {
+            throw new IllegalArgumentException("Email precisa ser informado.");
+        }
+        
+        if (senha == null) {
+            throw new IllegalArgumentException("Senha precisa ser informada.");
+        }
+        
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone;
+        this.admin = isAdmin;
+        this.dataCriacaoDaConta = criado_em;
     } 
     
     public String getId() {
         return this.id;
     }
     
+    public String getNome() {
+        return this.nome;
+    }
+    
     public String getEmail() {
         return this.email;
+    }
+    
+    public String getTelefone() {
+        return this.telefone;
     }
     
     public String getSenha() {

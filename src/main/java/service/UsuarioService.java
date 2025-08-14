@@ -4,9 +4,6 @@
  */
 package service;
 
-import model.Comprador;
-import model.Usuario;
-import model.Vendedor;
 import repository.UsuarioRepository;
 
 /**
@@ -21,20 +18,7 @@ public class UsuarioService {
     }
     
     public void cadastrarUsuario(String nome, String email, String telefone, String senha) {
-        long totalUsuarios = usuarioRepository.totalUsuarios();
-        
-        Usuario novoUsuario = new Usuario(nome, email, telefone, senha);
-        
-        if (totalUsuarios == 0){
-            novoUsuario.setAdmin(true);
-        }
-        
-        usuarioRepository.salvarUsuario(novoUsuario);
-    }
-    
-    public void criarPerfilVendedor(Usuario usuario) {
-        usuario.addPerfil(new Vendedor("V-"+usuario.getId()));
-        usuarioRepository.salvarUsuario(usuario);
-
+        boolean isAdmin = usuarioRepository.totalUsuarios() == 0 ? true : false;
+        usuarioRepository.adicionaUsuario(nome, email, telefone, senha, isAdmin);
     }
 }

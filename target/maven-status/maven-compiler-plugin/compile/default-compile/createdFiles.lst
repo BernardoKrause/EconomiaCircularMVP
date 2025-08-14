@@ -19,6 +19,7 @@ model\Defeito.class
 presenter\HomePresenter$5.class
 view\HomeView$1.class
 view\LoginView$1.class
+dao\UsuarioDAO.class
 presenter\ItemPresenter.class
 presenter\IPresenter.class
 view\item\FormItemView$1.class
@@ -31,7 +32,9 @@ view\item\FormItemView$3.class
 presenter\LoginPresenter$1.class
 main\EconomiaCircularMVP.class
 model\Vendedor.class
+util\DatabaseConnection.class
 presenter\ItemPresenter$3.class
+dao\UsuarioDAOSQLite.class
 presenter\HomePresenter.class
 view\LoginView.class
 presenter\ItemPresenter$1.class

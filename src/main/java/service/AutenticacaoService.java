@@ -21,7 +21,7 @@ public class AutenticacaoService {
     }
     
     public void autenticar (Usuario usuario) {
-        Optional<Usuario> optUsuario = usuarioRepository.buscarPorEmail(usuario.getEmail());
+        Optional<Usuario> optUsuario = usuarioRepository.buscaPorEmail(usuario.getEmail());
         if (optUsuario.isPresent()) {
             Usuario usuarioEncontrado = optUsuario.get();
             if (usuarioEncontrado.getSenha().equalsIgnoreCase(usuario.getSenha())) {

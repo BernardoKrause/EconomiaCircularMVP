@@ -24,7 +24,6 @@ public class PerfilService {
         usuario.addPerfil(perfil);
         
         perfilRepository.salvarPerfil(perfil);
-        usuarioRepository.salvarUsuario(usuario);
 
     }
     
@@ -33,6 +32,5 @@ public class PerfilService {
         usuario.addPerfil(perfil);
         
         perfilRepository.salvarPerfil(perfil);
-        usuarioRepository.salvarUsuario(usuario);
     }
 }

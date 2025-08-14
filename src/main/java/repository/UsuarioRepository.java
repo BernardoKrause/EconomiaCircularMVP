@@ -4,6 +4,9 @@
  */
 package repository;
 
+import dao.UsuarioDAOSQLite;
+import dao.UsuarioDAO;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -14,30 +17,37 @@ import model.Usuario;
  * @author berna
  */
 public class UsuarioRepository {
-    private List<Usuario> usuariosCadastrados;
-
-    public UsuarioRepository() {
-        usuariosCadastrados = new ArrayList<>();
-        usuariosCadastrados.add(new Usuario("bernardo", "bk@gmail.com", "senha123"));
-        usuariosCadastrados.add(new Usuario("caio", "caiofreire@gmail.com", "321senha"));
-        
-        usuariosCadastrados.add(new Usuario("1", "1", "1"));
+    private final UsuarioDAO usuarioDAO;
+    
+    public UsuarioRepository() throws SQLException {
+       this.usuarioDAO = new UsuarioDAOSQLite();
     }
     
-    public Optional<Usuario> buscarPorEmail(String email) {
-        for (Usuario usuariosCadastrado : usuariosCadastrados) {
-            if (usuariosCadastrado.getEmail().equalsIgnoreCase(email)) {
-                return Optional.of(usuariosCadastrado);
-            }
-        }
-        throw new RuntimeException("Usuario com este e-mail não encontrado");
+    public void adicionaUsuario(String nome, String email, String telefone, String senha, boolean isAdmin) {
+        usuarioDAO.criar(new Usuario(nome, email, telefone, senha, isAdmin));
+    }
+    
+    public Usuario getUsuario(String id) {
+        return usuarioDAO.buscaPorId(Integer.parseInt(id));
+    }
+    
+    public List<Usuario> getTodosUsuarios() {
+        return usuarioDAO.buscaTodos();
+    }
+    
+    public void atualizaUsuario(String id, String nome, String email, String telefone, String senha) {
+        usuarioDAO.atualizar(new Usuario(id, nome, email, telefone, senha));
+    }
+    
+    public void deletaUsuario(String id) {
+        usuarioDAO.deletar(Integer.parseInt(id));
     }
     
     public int totalUsuarios() {
-        return this.usuariosCadastrados.size();
+        return getTodosUsuarios().size();
     }
     
-    public void salvarUsuario(Usuario usuario) {
-        this.usuariosCadastrados.add(usuario);
+    public Optional<Usuario> buscaPorEmail(String email) {
+        return null;
     }
 }
