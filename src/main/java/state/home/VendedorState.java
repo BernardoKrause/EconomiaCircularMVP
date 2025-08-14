@@ -6,11 +6,13 @@ package state.home;
 
 import command.item.AbrirCadastroItemCommand;
 import command.perfil.CriarPerfilCompradorCommand;
+import command.usuario.SairUsuarioCommand;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import model.Perfil;
 import model.Usuario;
+import model.Vendedor;
 import presenter.HomePresenter;
 
 /**
@@ -20,7 +22,7 @@ import presenter.HomePresenter;
 public class VendedorState extends HomePresenterState{
     private Usuario usuario;
     
-    public VendedorState(HomePresenter presenter, Usuario usuario) {
+    public VendedorState(HomePresenter presenter, Vendedor vendedor) {
         super(presenter);
     
         this.usuario=usuario;
@@ -83,6 +85,24 @@ public class VendedorState extends HomePresenterState{
             view.getMItemAcessarPerfilComprador().setVisible(true);
             view.getMItemCriarPerfilComprador().setVisible(false);
         }
+    }
+    
+    @Override
+    public void sairUsuario(){
+        new SairUsuarioCommand().executar();
+    }
+    
+    @Override
+    public void criarPerfilComprador(){
+        new CriarPerfilCompradorCommand(usuario).executar();
+        view.getMItemAcessarPerfilComprador().setVisible(true); 
+        view.getMItemCriarPerfilVendedor().setVisible(false); 
+        JOptionPane.showMessageDialog(view, "Solicitação enviada ao administrador");
+    }
+    
+    @Override
+    public void acessarPerfilComprador(){
+        throw new RuntimeException("Não é possivel salvar estando nesse estado!");
     }
     
 }

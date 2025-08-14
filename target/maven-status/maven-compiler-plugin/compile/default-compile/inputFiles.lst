@@ -1,6 +1,7 @@
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\ICommand.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\item\AbrirCadastroItemCommand.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\item\ItemCommand.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\perfil\AcessarPerfilVendedorCommand.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\perfil\CriarPerfilCompradorCommand.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\perfil\CriarPerfilVendedorCommand.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\perfil\PerfilCommand.java

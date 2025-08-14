@@ -30,6 +30,7 @@ service\SistemaDefeitosService.class
 presenter\LoginPresenter.class
 service\PerfilService.class
 model\Item.class
+command\perfil\AcessarPerfilVendedorCommand.class
 state\home\VendedorState$2.class
 view\HomeView.class
 state\home\AutenticadoState$1.class

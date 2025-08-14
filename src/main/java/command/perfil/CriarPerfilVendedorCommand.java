@@ -17,10 +17,9 @@ public class CriarPerfilVendedorCommand extends PerfilCommand{
     public CriarPerfilVendedorCommand(Usuario usuario){
         super(usuario);
     }
-    
+
     @Override
-    public void criar(PerfilService service) {
-        service.criarPerfilVendedor(usuario);
+    public void executar() {
+        service.criarPerfilVendedor(usuario);    
     }
-    
 }
