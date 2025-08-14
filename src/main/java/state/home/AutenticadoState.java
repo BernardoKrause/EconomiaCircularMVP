@@ -5,9 +5,11 @@
 package state.home;
 
 import command.AbrirCadastroItemCommand;
+import command.perfil.CriarPerfilVendedorCommand;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import model.Usuario;
 import presenter.GerenciadorTelas;
 import presenter.HomePresenter;
 import service.PerfilService;
@@ -17,21 +19,28 @@ import service.PerfilService;
  * @author caiof
  */
 public class AutenticadoState extends HomePresenterState{
+    private Usuario usuario;
+    private PerfilService perfilService;
     
-    public AutenticadoState(HomePresenter presenter) {
+    public AutenticadoState(HomePresenter presenter, Usuario usuario) {
         super(presenter);
         
-        PerfilService perfilService = new PerfilService();
+        this.usuario=usuario;
         
-        view.setVisible(false);
+        view.getMenuVendedor().setVisible(true);
+        view.getMenuComprador().setVisible(true);
+        view.getMItemEntrarUsuario().setVisible(false);
+        view.getMItemCadastrarUsuario().setVisible(false);
+        view.getMItemSairUsuario().setVisible(true);
         
-        System.out.print(usuario.getId());
         if (usuario.getPerfilComprador().isEmpty()) {
+            view.getMItemAcessarPerfilComprador().setVisible(false);
             view.getMItemCriarPerfilComprador().addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     try {
                         perfilService.criarPerfilComprador(usuario);
+                        view.getMItemAcessarPerfilComprador().setVisible(true);
                         JOptionPane.showMessageDialog(view, "Solicitação enviada ao administrador");
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(view, ex);
@@ -39,6 +48,7 @@ public class AutenticadoState extends HomePresenterState{
                 }
             });
         }else{
+            view.getMItemAcessarPerfilComprador().setVisible(true);
             view.getMItemAcessarPerfilComprador().addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -51,11 +61,14 @@ public class AutenticadoState extends HomePresenterState{
             });
         }
         if (usuario.getPerfilVendedor().isEmpty()) {
+            view.getMItemAcessarPerfilVendedor().setVisible(false);
+
             view.getMItemCriarPerfilVendedor().addActionListener(new ActionListener() {
                @Override
                public  void actionPerformed(ActionEvent e) {
-                   try {
-                        perfilService.criarPerfilVendedor(usuario);
+                    try {
+                        new CriarPerfilVendedorCommand(usuario).executar();
+                        view.getMItemAcessarPerfilVendedor().setVisible(true);  
                         JOptionPane.showMessageDialog(view, "Solicitação enviada ao administrador");
                    } catch (Exception ex) {
                        JOptionPane.showMessageDialog(view, ex);
@@ -63,6 +76,7 @@ public class AutenticadoState extends HomePresenterState{
                }
             });
         } else{
+            view.getMItemAcessarPerfilVendedor().setVisible(true);
             view.getMItemAcessarPerfilVendedor().addActionListener(new ActionListener() {
                @Override
                public  void actionPerformed(ActionEvent e) {
@@ -95,7 +109,6 @@ public class AutenticadoState extends HomePresenterState{
     }
     
     public void sairUsuario(){
-        GerenciadorTelas.getInstancia().deslogar();
         presenter.sairUsuario();
     }
     

@@ -1,3 +1,4 @@
+command\usuario\AbrirEntrarUsuarioCommand.class
 state\home\HomePresenterState.class
 presenter\GerenciadorTelas.class
 model\Perfil.class
@@ -28,6 +29,7 @@ state\home\AutenticadoState$1.class
 state\home\NaoAutenticadoState$2.class
 strategy\SistemaDefeitos\IRegraDefeitoStrategy.class
 view\usuario\SingupView$1.class
+command\usuario\AbrirCadastroUsuarioCommand.class
 presenter\ItemPresenter$4.class
 state\home\AutenticadoState$2.class
 command\AbrirCadastroItemCommand.class
@@ -46,7 +48,6 @@ model\Vendedor.class
 state\home\AutenticadoState$3.class
 state\home\NaoAutenticadoState$1.class
 presenter\HomePresenter.class
-command\home\AbrirEntrarUsuarioCommand.class
 presenter\ItemPresenter$1.class
 command\ICommand.class
 view\HomeView$2.class

@@ -4,11 +4,11 @@
  */
 package state.home;
 
-import command.home.AbrirEntrarUsuarioCommand;
+import command.usuario.AbrirCadastroUsuarioCommand;
+import command.usuario.AbrirEntrarUsuarioCommand;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import presenter.GerenciadorTelas;
 import presenter.HomePresenter;
 
 /**
@@ -26,6 +26,9 @@ public class NaoAutenticadoState extends HomePresenterState{
         view.getMenuVendedor().setVisible(false);
         view.getMenuComprador().setVisible(false);
         view.getMenuItem().setVisible(false);
+        view.getMItemEntrarUsuario().setVisible(true);
+        view.getMItemCadastrarUsuario().setVisible(true);
+        view.getMItemSairUsuario().setVisible(false);
         
         view.getMItemEntrarUsuario().addActionListener(
             new ActionListener(){
@@ -53,15 +56,15 @@ public class NaoAutenticadoState extends HomePresenterState{
         
         view.setVisible(true);
     }
-    
+
     @Override
-    public void entrarUsuario(){
+    public void entrarUsuario() {
         new AbrirEntrarUsuarioCommand().executar();
-        presenter.entrarUsuario(GerenciadorTelas.getInstancia().getUsuarioAutenticado());
     }
-    
+
+
     @Override
     public void cadastrarUsuario(){
-        throw new RuntimeException("Não é possivel salvar estando nesse estado!");
+        new AbrirCadastroUsuarioCommand().executar();
     }
 }

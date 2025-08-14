@@ -38,7 +38,7 @@ public class HomePresenter {
     
     public void entrarUsuario(Usuario usuario){
         this.usuario = usuario;
-        estado = new AutenticadoState(this); 
+        estado = new AutenticadoState(this, usuario); 
     }
     
     public void sairUsuario(){

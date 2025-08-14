@@ -6,6 +6,7 @@ package presenter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.function.Consumer;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import model.Usuario;
@@ -63,7 +64,7 @@ public class LoginPresenter implements IPresenter {
         
         if (usuario.isAutenticado()) {
             try {
-                GerenciadorTelas.getInstancia().logar(usuario);
+                GerenciadorTelas.getInstancia().getPresenter().entrarUsuario(usuario);
                 view.dispose();
             } catch (Exception ex) {
                 throw new RuntimeException(ex.getMessage());

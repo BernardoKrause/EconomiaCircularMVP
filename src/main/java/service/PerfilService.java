@@ -18,6 +18,10 @@ import repository.UsuarioRepository;
 public class PerfilService {
     private PerfilRepository perfilRepository;
     
+    public PerfilService(PerfilRepository perfilRepository){
+        this.perfilRepository=perfilRepository;
+    }
+    
     public void criarPerfilVendedor(Usuario usuario) {
         if (usuario==null){
             throw new IllegalArgumentException("Usuario informado não pode ser nulo!");

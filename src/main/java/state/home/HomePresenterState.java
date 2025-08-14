@@ -15,12 +15,10 @@ import view.HomeView;
 public abstract class HomePresenterState {
     protected HomePresenter presenter;
     protected HomeView view;
-    protected Usuario usuario;
     
     public HomePresenterState(HomePresenter presenter){
         this.presenter=presenter;
         view = presenter.getView();
-        usuario=null;
     }
     
     public void entrarUsuario(){
@@ -53,13 +51,5 @@ public abstract class HomePresenterState {
     
     public void publicarItem(){
         throw new RuntimeException("Não é possivel salvar estando nesse estado!");
-    }
-    
-    public Usuario getUsuario(){
-        return usuario;
-    }
-    
-    public void setUsuario(Usuario usuario){
-        this.usuario=usuario;
     }
 }
