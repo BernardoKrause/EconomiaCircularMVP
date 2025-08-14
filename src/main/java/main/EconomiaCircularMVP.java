@@ -4,8 +4,7 @@
 
 package main;
 
-import presenter.GerenciadorTelas;
-import presenter.HomePresenter;
+import java.sql.SQLException;
 
 /**
  *
@@ -13,8 +12,7 @@ import presenter.HomePresenter;
  */
 public class EconomiaCircularMVP {
 
-    public static void main(String[] args) {
-        HomePresenter homePresenter = new HomePresenter();
-        GerenciadorTelas.getInstancia().inicializar(homePresenter);
+    public static void main(String[] args) throws SQLException {
+
     }
 }

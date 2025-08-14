@@ -12,19 +12,15 @@ import repository.UsuarioRepository;
  *
  * @author berna
  */
-public class UsuarioService {
+public class AutenticacaoService {
+    
     private UsuarioRepository usuarioRepository;
     
-    public UsuarioService(UsuarioRepository usuarioRepository) {
+    public AutenticacaoService(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
     
-    public void cadastrarUsuario(String nome, String email, String telefone, String senha) {
-        boolean isAdmin = usuarioRepository.totalUsuarios() == 0 ? true : false;
-        usuarioRepository.adicionaUsuario(nome, email, telefone, senha, isAdmin);
-    }
-    
-    public void autenticarUsuario (Usuario usuario) {
+    public void autenticar (Usuario usuario) {
         Optional<Usuario> optUsuario = usuarioRepository.buscaPorEmail(usuario.getEmail());
         if (optUsuario.isPresent()) {
             Usuario usuarioEncontrado = optUsuario.get();
@@ -35,5 +31,4 @@ public class UsuarioService {
             }
         }
     }
-
 }

@@ -5,7 +5,6 @@
 package model;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,31 +35,6 @@ public class Usuario {
         
         this.email = email;
         this.senha = senha;
-        this.admin = false;
-        this.autenticado = false;
-        this.dataCriacaoDaConta = LocalDateTime.now();                
-    } 
-    
-    public Usuario(String nome, String email, String senha) {     
-        
-        if (nome == null) {
-            throw new IllegalArgumentException("Nome precisa ser informado.");
-        }
-        
-        if (email == null) {
-            throw new IllegalArgumentException("Email precisa ser informado.");
-        }
-        
-        if (senha == null) {
-            throw new IllegalArgumentException("Senha precisa ser informada.");
-        }
-        
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-        this.admin = false;
-        this.autenticado = false;
-        this.dataCriacaoDaConta = LocalDateTime.now();                
     } 
     
     public Usuario(String nome, String email, String telefone, String senha) {    
@@ -79,12 +53,47 @@ public class Usuario {
         
         this.nome = nome;
         this.email = email;
+        this.telefone = telefone;     
+        this.senha = senha;
+    } 
+    
+    public Usuario(String id, String nome, String email, String telefone, String senha) {    
+        
+        if (nome == null) {
+            throw new IllegalArgumentException("Nome precisa ser informado.");
+        }
+        
+        if (email == null) {
+            throw new IllegalArgumentException("Email precisa ser informado.");
+        }
+        
+        if (senha == null) {
+            throw new IllegalArgumentException("Senha precisa ser informada.");
+        }
+        
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone; 
+        this.senha = senha;
+    } 
+    
+    public Usuario(String nome, String email, String telefone, String senha, boolean isAdmin) {    
+        this.nome = nome;
+        this.email = email;
         this.telefone = telefone;
         this.senha = senha;
-        this.admin = false;
-        this.autenticado = false;
-        this.dataCriacaoDaConta = LocalDateTime.now();
+        this.admin = isAdmin;         
     } 
+    
+    public Usuario(String id, String nome, String email, String telefone, boolean isAdmin, LocalDateTime dataCriacaoDaConta) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone;
+        this.admin = isAdmin;
+        this.dataCriacaoDaConta = dataCriacaoDaConta;
+    }
     
     public String getId() {
         return this.id;
@@ -101,7 +110,7 @@ public class Usuario {
     public String getEmail() {
         return this.email;
     }
-    
+
     public String getSenha() {
         return this.senha;
     }
