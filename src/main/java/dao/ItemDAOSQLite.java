@@ -63,7 +63,7 @@ public class ItemDAOSQLite implements ItemDAO {
     public void criar(Item item) throws SQLException {
         String sql = "INSERT INTO itens "
                     + "(idC, tipo, subcategoria, tamanho, cor, peso, composicao, precoBase, precoFinal, gpwEvitado, mciItem, numeroCiclo, idPerfilVendedor) "
-                    + "VALUES (?, ?, ?, ?, ?)";
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
