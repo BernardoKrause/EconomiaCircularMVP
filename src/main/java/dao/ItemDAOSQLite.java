@@ -1,16 +1,13 @@
+package dao;
 
-import dao.ItemDAO;
-import dao.UsuarioDAOSQLite;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import model.Item;
 import model.Vendedor;
 import util.DatabaseConnection;
@@ -52,7 +49,6 @@ public class ItemDAOSQLite implements ItemDAO {
 
             stmt.execute(ddl);
         } catch (SQLException ex) {
-            ex.printStackTrace();
             throw ex;
         }
     }

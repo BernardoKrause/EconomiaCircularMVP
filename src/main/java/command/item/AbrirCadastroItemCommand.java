@@ -10,7 +10,7 @@ import javax.swing.JDesktopPane;
 import model.Perfil;
 import presenter.ItemPresenter;
 import repository.ItemRepository;
-import repository.PerfilRepository;
+import repository.PerfilVendedorRepository;
 import repository.TiposDefeitoRepository;
 import service.ItemService;
 import service.PerfilService;

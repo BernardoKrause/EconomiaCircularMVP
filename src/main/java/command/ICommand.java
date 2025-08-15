@@ -9,5 +9,5 @@ package command;
  * @author caiof
  */
 public interface ICommand {    
-    void executar();
+    void executar() throws SQLException;
 }
