@@ -4,6 +4,7 @@
  */
 package service;
 
+import java.sql.SQLException;
 import model.Comprador;
 import model.Perfil;
 import model.Usuario;
@@ -17,29 +18,31 @@ import repository.PerfilVendedorRepository;
 public class PerfilService {
     private PerfilVendedorRepository perfilRepository;
     
-    public PerfilService(PerfilVendedorRepository perfilRepository){
-        this.perfilRepository=perfilRepository;
+    public PerfilService(PerfilVendedorRepository perfilVendedorRepository){
+        this.perfilRepository=perfilVendedorRepository;
     }
     
-    public void criarPerfilVendedor(Usuario usuario) {
-        if (usuario==null){
-            throw new IllegalArgumentException("Usuario informado não pode ser nulo!");
-        }
-        Perfil perfil = new Vendedor("V-"+usuario.getId());
-        usuario.addPerfil(perfil);
-        perfil.setUsuario(usuario);
+    public void criarPerfilVendedor(Usuario usuario) throws SQLException {
+       if (usuario == null) throw new IllegalArgumentException("Usuario informado não pode ser nulo!");
         
-        perfilRepository.salvarPerfil(perfil);
+        try {
+            Vendedor perfil = new Vendedor("V-"+usuario.getId());
+            usuario.addPerfil(perfil);
+            perfil.setUsuario(usuario);
+            perfilRepository.salvarPerfil(perfil);   
+        } catch (SQLException ex) {
+            throw ex;
+        }
 
     }
     
     public void criarPerfilComprador(Usuario usuario) {
-        if (usuario==null){
-            throw new IllegalArgumentException("Usuario informado não pode ser nulo!");
-        }
-        Perfil perfil = new Comprador("C-"+usuario.getId());
-        usuario.addPerfil(perfil);
+        //if (usuario==null){
+        //    throw new IllegalArgumentException("Usuario informado não pode ser nulo!");
+        //}
+        //perfil = new Comprador("C-"+usuario.getId());
+        //usuario.addPerfil(perfil);
         
-        perfilRepository.salvarPerfil(perfil);
+        //perfilRepository.salvarPerfil(perfil);
     }
 }

@@ -22,7 +22,6 @@ public class UsuarioRepository {
        try {
            this.usuarioDAO = new UsuarioDAOSQLite();
        } catch (SQLException ex) {
-            ex.printStackTrace();
             throw ex;
         }
     }
