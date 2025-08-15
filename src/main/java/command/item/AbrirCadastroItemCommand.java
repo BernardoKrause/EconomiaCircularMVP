@@ -7,6 +7,8 @@ package command.item;
 import java.sql.SQLException;
 import model.Perfil;
 import presenter.ItemPresenter;
+import repository.ItemRepository;
+import repository.PerfilVendedorRepository;
 import repository.TiposDefeitoRepository;
 import service.ItemService;
 import service.SistemaDefeitosService;

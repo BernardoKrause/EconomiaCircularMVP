@@ -12,12 +12,17 @@ import java.util.List;
  * @author berna
  */
 public class Vendedor extends Perfil {
-    
     private List<Item> itens;
   
     public Vendedor(String idVendedor) {
         super(idVendedor);
         this.itens=new ArrayList<>();
+    }
+    
+    // implementar (trocar String por Reputacao)
+    public Integer getReputacao() {
+        //return this.reputacao;
+        return null;
     }
     
     public void publicarItem(Item item) {

@@ -8,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -54,7 +56,6 @@ public class ItemDAOSQLite implements ItemDAO {
 
             stmt.execute(ddl);
         } catch (SQLException ex) {
-            ex.printStackTrace();
             throw ex;
         }
     }
