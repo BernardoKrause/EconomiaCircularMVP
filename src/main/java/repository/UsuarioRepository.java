@@ -19,14 +19,19 @@ public class UsuarioRepository {
     private final UsuarioDAO usuarioDAO;
 
     public UsuarioRepository() throws SQLException {
-       this.usuarioDAO = new UsuarioDAOSQLite();
+       try {
+           this.usuarioDAO = new UsuarioDAOSQLite();
+       } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw ex;
+        }
     }
 
     public void adicionaUsuario(String nome, String email, String telefone, String senha, boolean isAdmin) throws SQLException {
         usuarioDAO.criar(new Usuario(nome, email, telefone, senha, isAdmin));
     }
 
-    public Usuario getUsuario(String id) throws SQLException {
+    public Optional<Usuario> getUsuario(String id) throws SQLException {
         return usuarioDAO.buscaPorId(Integer.parseInt(id));
     }
 

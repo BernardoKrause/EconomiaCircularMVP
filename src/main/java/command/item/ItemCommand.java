@@ -25,6 +25,10 @@ public abstract class ItemCommand implements ICommand{
         this.service = new PerfilService(new PerfilVendedorRepository());
     }
 
+    /**
+     *
+     * @throws SQLException
+     */
     @Override
-    public abstract void executar();
+    public abstract void executar() throws SQLException;
 }

@@ -4,6 +4,8 @@
  */
 package command;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author caiof
