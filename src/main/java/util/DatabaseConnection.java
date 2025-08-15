@@ -98,6 +98,8 @@ public class DatabaseConnection {
             """
             CREATE TABLE IF NOT EXISTS perfil_solicitacoes (
                 idSolicitacaoPerfil INTEGER PRIMARY KEY AUTOINCREMENT,
+                status TEXT NOT NULL DEFAULT 'W',
+                CHECK (status IN ('A', 'D', 'W')),
                 idUsuario INTEGER,
                 FOREIGN KEY (idUsuario) REFERENCES usuarios(idUsuario)
             );
