@@ -7,6 +7,7 @@ package repository;
 import dao.PerfilVendedorDAO;
 import dao.PerfilVendedorDAOSQLite;
 import java.sql.SQLException;
+import java.util.List;
 import model.Vendedor;
 
 /**
@@ -20,7 +21,16 @@ public class PerfilVendedorRepository {
        this.perfilVendedorDAO = new PerfilVendedorDAOSQLite();
     }
     
-    public void salvarPerfil(Vendedor vendedor) throws SQLException {
+    public void adicionaPerfil(Vendedor vendedor) throws SQLException {
         perfilVendedorDAO.criar(vendedor);
     }
+    
+    public List<Vendedor> getTodosVendedores() throws SQLException {
+        return perfilVendedorDAO.buscaTodos();
+    }
+    
+    public void deletaPerfil(String sistemId) throws SQLException {
+        perfilVendedorDAO.deletar(sistemId);
+    }
+    
 }

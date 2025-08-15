@@ -29,7 +29,7 @@ public class PerfilService {
             Vendedor perfil = new Vendedor("V-"+usuario.getId());
             usuario.addPerfil(perfil);
             perfil.setUsuario(usuario);
-            perfilRepository.salvarPerfil(perfil);   
+            perfilRepository.adicionaPerfil(perfil);   
         } catch (SQLException ex) {
             throw ex;
         }
