@@ -40,9 +40,10 @@ public class UsuarioService {
         }
         
         if (optUsuario.isPresent()) {
-            if (optUsuario.get().getSenha() == usuario.getSenha()) {
-            usuario.setAutenticado(true);
-        }
+            if (optUsuario.get().getSenha().equals(usuario.getSenha())) {
+                usuario.copy(optUsuario.get());
+                usuario.setAutenticado(true);
+            }
         } else {
             throw new RuntimeException("Email e senha não correspondem à um usuário.");
         }

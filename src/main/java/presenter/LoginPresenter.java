@@ -67,7 +67,7 @@ public class LoginPresenter implements IPresenter {
                 GerenciadorTelas.getInstancia().getPresenter().entrarUsuario(usuario);
                 view.dispose();
             } catch (Exception ex) {
-                throw new RuntimeException(ex.getMessage());
+                JOptionPane.showMessageDialog(view, ex);
             }
         }
     }

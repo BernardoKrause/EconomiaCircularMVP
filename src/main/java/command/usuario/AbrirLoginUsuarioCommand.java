@@ -17,10 +17,10 @@ import java.sql.SQLException;
  *
  * @author caiof
  */
-public class AbrirEntrarUsuarioCommand implements ICommand {
+public class AbrirLoginUsuarioCommand implements ICommand {
     private JDesktopPane desktop;
 
-    public AbrirEntrarUsuarioCommand() {
+    public AbrirLoginUsuarioCommand() {
         this.desktop = GerenciadorTelas.getInstancia().getDesktop();
     }
 
@@ -32,7 +32,7 @@ public class AbrirEntrarUsuarioCommand implements ICommand {
             LoginPresenter loginPresenter = new LoginPresenter(usuarioService);
             desktop.add(loginPresenter.getView());
         } catch (SQLException ex) {
-            System.getLogger(AbrirEntrarUsuarioCommand.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            System.getLogger(AbrirLoginUsuarioCommand.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
         
     }

@@ -6,6 +6,7 @@ package presenter;
 
 import javax.swing.JDesktopPane;
 import model.Usuario;
+import model.Vendedor;
 import service.PerfilService;
 import state.home.AutenticadoState;
 import state.home.HomePresenterState;
@@ -47,7 +48,7 @@ public class HomePresenter {
         usuario=null;
     }
     
-    public void acessarVendedor(Usuario usuario){
-        estado = new VendedorState(this,usuario);
+    public void acessarVendedor(Vendedor vendedor){
+        estado = new VendedorState(this,vendedor);
     }
 }

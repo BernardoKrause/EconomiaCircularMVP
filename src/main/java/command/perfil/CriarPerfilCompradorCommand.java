@@ -5,7 +5,6 @@
 package command.perfil;
 
 import model.Usuario;
-import service.PerfilService;
 
 /**
  *
@@ -17,7 +16,7 @@ public class CriarPerfilCompradorCommand extends PerfilCommand{
     }
     
     @Override
-    public void criar(PerfilService service) {
+    public void executar() {
         service.criarPerfilComprador(usuario);
     }
     

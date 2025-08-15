@@ -1,5 +1,5 @@
-command\usuario\AbrirEntrarUsuarioCommand.class
 view\usuario\SignupView.class
+dao\ItemDAO.class
 state\home\HomePresenterState.class
 presenter\GerenciadorTelas.class
 model\Perfil.class
@@ -21,6 +21,7 @@ view\item\FormItemView.class
 view\item\FormItemView$3.class
 view\usuario\LoginView$1.class
 state\home\AutenticadoState.class
+command\usuario\AbrirSignupUsuarioCommand.class
 main\EconomiaCircularMVP.class
 command\perfil\PerfilCommand.class
 presenter\ItemPresenter$3.class
@@ -30,13 +31,13 @@ service\SistemaDefeitosService.class
 presenter\LoginPresenter.class
 service\PerfilService.class
 model\Item.class
+command\perfil\AcessarPerfilVendedorCommand.class
 state\home\VendedorState$2.class
 view\HomeView.class
 state\home\AutenticadoState$1.class
 state\home\VendedorState$3.class
 state\home\NaoAutenticadoState$2.class
 strategy\SistemaDefeitos\IRegraDefeitoStrategy.class
-command\usuario\AbrirCadastroUsuarioCommand.class
 view\HomeView$3.class
 presenter\ItemPresenter$4.class
 state\home\AutenticadoState$2.class
@@ -49,10 +50,11 @@ strategy\SistemaDefeitos\RegraDefeitosPercentual.class
 presenter\SignupPresenter$2.class
 repository\PerfilRepository.class
 command\usuario\SairUsuarioCommand.class
+command\usuario\AbrirLoginUsuarioCommand.class
 state\home\AutenticadoState$5.class
 presenter\SignupPresenter.class
-dao\UsuarioDAO.class
 command\item\AbrirCadastroItemCommand.class
+dao\UsuarioDAO.class
 presenter\LoginPresenter$2.class
 state\home\VendedorState.class
 presenter\LoginPresenter$1.class
@@ -70,3 +72,4 @@ view\HomeView$2.class
 view\item\FormItemView$2.class
 state\home\NaoAutenticadoState.class
 command\item\ItemCommand.class
+dao\ItemDAOSQLite.class

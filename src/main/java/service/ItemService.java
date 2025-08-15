@@ -38,6 +38,7 @@ public class ItemService {
             sistemaDefeitos.AplicarDefeitos(item, defeitos);
             vendedor.publicarItem(item);
             item.gerarIdC(itemRepository.getQuantidadeItens());
+            System.out.print(item.toString());
             itemRepository.salvarItem(item);
         } catch (SQLException ex) {
             ex.printStackTrace();

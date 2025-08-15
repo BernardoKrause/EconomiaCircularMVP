@@ -17,17 +17,16 @@ import java.sql.SQLException;
 public abstract class PerfilCommand implements ICommand{
     
     protected Usuario usuario;
+    protected PerfilRepository repo = new PerfilRepository();
+    protected PerfilService service = new PerfilService(repo);
     
     public PerfilCommand(Usuario usuario){
         super();
         this.usuario=usuario;
+        this.repo = new PerfilRepository();
+        this.service = new PerfilService(repo);
     }
     
-    public void executar() throws SQLException {
-        PerfilVendedorRepository repo = new PerfilVendedorRepository();
-        PerfilService service = new PerfilService(repo);
-        criar(service);
-    }
-    
-    abstract void criar(PerfilService service);
+    public abstract void executar();
+
 }

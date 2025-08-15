@@ -4,7 +4,7 @@
  */
 package state.home;
 
-import command.item.AbrirCadastroItemCommand;
+import command.perfil.AcessarPerfilVendedorCommand;
 import command.perfil.CriarPerfilCompradorCommand;
 import command.perfil.CriarPerfilVendedorCommand;
 import command.usuario.SairUsuarioCommand;
@@ -102,7 +102,7 @@ public class AutenticadoState extends HomePresenterState{
     
     @Override
     public void acessarPerfilVendedor(){
-        throw new RuntimeException("Não é possivel salvar estando nesse estado!");
+        new AcessarPerfilVendedorCommand(usuario).executar();
     }
     
     @Override
@@ -115,7 +115,7 @@ public class AutenticadoState extends HomePresenterState{
     
     @Override
     public void acessarPerfilComprador(){
-        throw new RuntimeException("Não é possivel salvar estando nesse estado!");
+        //new AcessarPerfilCompradorCommand(usuario).executar();
     }
     
     @Override
