@@ -8,16 +8,16 @@ import model.Comprador;
 import model.Perfil;
 import model.Usuario;
 import model.Vendedor;
-import repository.PerfilRepository;
+import repository.PerfilVendedorRepository;
 
 /**
  *
  * @author berna
  */
 public class PerfilService {
-    private PerfilRepository perfilRepository;
+    private PerfilVendedorRepository perfilRepository;
     
-    public PerfilService(PerfilRepository perfilRepository){
+    public PerfilService(PerfilVendedorRepository perfilRepository){
         this.perfilRepository=perfilRepository;
     }
     

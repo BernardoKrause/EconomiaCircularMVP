@@ -5,9 +5,10 @@
 package command.perfil;
 
 import model.Usuario;
-import repository.PerfilRepository;
+import repository.PerfilVendedorRepository;
 import service.PerfilService;
 import command.ICommand;
+import java.sql.SQLException;
 
 /**
  *
@@ -27,4 +28,5 @@ public abstract class PerfilCommand implements ICommand{
     }
     
     public abstract void executar();
+
 }

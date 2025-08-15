@@ -1,6 +1,5 @@
 package dao;
 
-import dao.UsuarioDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,34 +15,6 @@ import util.DatabaseConnection;
 
 public class UsuarioDAOSQLite implements UsuarioDAO {
 
-    public UsuarioDAOSQLite() throws SQLException {
-        try (Connection conn = DatabaseConnection.getConnection();
-             Statement stmt = conn.createStatement()) {
-
-            stmt.execute("PRAGMA foreign_keys = ON");
-
-            String ddl = ""
-                + "CREATE TABLE IF NOT EXISTS usuarios ("
-                + "  idUsuario INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + "  nome TEXT NOT NULL, "
-                + "  email TEXT NOT NULL UNIQUE, "
-                + "  telefone TEXT NOT NULL, "
-                + "  senha TEXT NOT NULL, "
-                + "  eAdmin INTEGER NOT NULL CHECK (eAdmin IN (0,1)), "
-                + "  idPerfilComprador INTEGER, "
-                + "  idPerfilVendedor INTEGER, "
-                + "  criado_em TEXT DEFAULT CURRENT_TIMESTAMP, "
-                + "  FOREIGN KEY(idPerfilComprador) REFERENCES compradores(idComprador), "
-                + "  FOREIGN KEY(idPerfilVendedor) REFERENCES vendedores(idVendedor)"
-                + ");";
-
-            stmt.execute(ddl);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            throw ex;
-        }
-    }
-
     @Override
     public void criar(Usuario usuario) throws SQLException {
         String sql = "INSERT INTO usuarios (nome, email, telefone, senha, eAdmin) "
@@ -57,7 +28,6 @@ public class UsuarioDAOSQLite implements UsuarioDAO {
             pstmt.setString(4, usuario.getSenha());
             pstmt.setInt(5, usuario.isAdmin() ? 1 : 0);
             pstmt.executeUpdate();
-
         }
     }
 
@@ -76,6 +46,7 @@ public class UsuarioDAOSQLite implements UsuarioDAO {
                     LocalDateTime dt = (ts != null) ? LocalDateTime.parse(ts, formatter) : null;
 
                     boolean admin = rs.getInt("eAdmin") == 1; 
+
                     Usuario usuario = new Usuario(
                         rs.getString("idUsuario"),
                         rs.getString("nome"),
@@ -148,12 +119,16 @@ public class UsuarioDAOSQLite implements UsuarioDAO {
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
 
-        } catch (SQLException ex) {
-            System.getLogger(UsuarioDAOSQLite.class.getName())
-                  .log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }
 
+    /**
+     *
+     * @param email
+     * @return
+     * @throws SQLException
+     */
+    @Override
     public Optional<Usuario> buscaPorEmail(String email) throws SQLException {
         String sql = "SELECT * FROM usuarios WHERE email = ?";
         
