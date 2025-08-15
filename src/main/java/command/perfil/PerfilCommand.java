@@ -27,6 +27,6 @@ public abstract class PerfilCommand implements ICommand{
         this.service = new PerfilService(perfilVendedorRepository);
     }
     
-    public abstract void executar();
+    public abstract void executar() throws SQLException;
 
 }

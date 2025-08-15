@@ -4,6 +4,7 @@
  */
 package command.perfil;
 
+import java.sql.SQLException;
 import model.Usuario;
 import model.Vendedor;
 import presenter.GerenciadorTelas;
@@ -16,7 +17,7 @@ import presenter.HomePresenter;
 public class AcessarPerfilVendedorCommand extends PerfilCommand{
     private HomePresenter presenter;
 
-    public AcessarPerfilVendedorCommand(Usuario usuario){
+    public AcessarPerfilVendedorCommand(Usuario usuario) throws SQLException {
         super(usuario);
         this.presenter = GerenciadorTelas.getInstancia().getPresenter();
     }

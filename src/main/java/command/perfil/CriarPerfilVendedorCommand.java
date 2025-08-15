@@ -1,8 +1,8 @@
 package command.perfil;
 
 
+import java.sql.SQLException;
 import model.Usuario;
-import service.PerfilService;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -14,14 +14,14 @@ import service.PerfilService;
  * @author caiof
  */
 public class CriarPerfilVendedorCommand extends PerfilCommand{
-    public CriarPerfilVendedorCommand(Usuario usuario){
+    public CriarPerfilVendedorCommand(Usuario usuario)  throws SQLException {
         super(usuario);
         
         System.out.print(usuario.getPerfis().isEmpty());
     }
 
     @Override
-    public void executar() {
+    public void executar() throws SQLException {
         service.criarPerfilVendedor(usuario);    
     }
 }

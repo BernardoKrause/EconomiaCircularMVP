@@ -4,6 +4,7 @@
  */
 package command.perfil;
 
+import java.sql.SQLException;
 import model.Usuario;
 
 /**
@@ -11,7 +12,7 @@ import model.Usuario;
  * @author caiof
  */
 public class CriarPerfilCompradorCommand extends PerfilCommand{
-    public CriarPerfilCompradorCommand(Usuario usuario){
+    public CriarPerfilCompradorCommand(Usuario usuario) throws SQLException {
         super(usuario);
     }
     

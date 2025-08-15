@@ -9,6 +9,7 @@ import command.perfil.CriarPerfilCompradorCommand;
 import command.usuario.SairUsuarioCommand;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import model.Perfil;
 import model.Usuario;
@@ -96,7 +97,7 @@ public class VendedorState extends HomePresenterState{
     }
     
     @Override
-    public void criarPerfilComprador(){
+    public void criarPerfilComprador() throws SQLException {
         new CriarPerfilCompradorCommand(usuario).executar();
         view.getMItemAcessarPerfilComprador().setVisible(true); 
         view.getMItemCriarPerfilVendedor().setVisible(false); 
