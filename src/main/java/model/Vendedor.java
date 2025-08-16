@@ -24,6 +24,11 @@ public class Vendedor extends Perfil {
         this.itens = null;
     }
     
+    public Vendedor(Integer id, String sistemId, Reputacao reputacao) {
+        super(id, sistemId, reputacao);
+        this.itens = null;
+    }
+    
     public void publicarItem(Item item) {
         if(item==null){
             throw new IllegalArgumentException("O item que esta tentando publicar não existe!");

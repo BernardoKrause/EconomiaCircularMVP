@@ -10,7 +10,7 @@ package model;
  */
 public abstract class Perfil {
     protected Integer id;
-    protected String idC;
+    protected String sistemId;
     protected Double beneficioClimatico;
     protected Usuario usuario;
     protected Reputacao reputacao;
@@ -19,18 +19,18 @@ public abstract class Perfil {
         this.id = id;
     }
     
-    public Perfil(String idC) {
-        this.idC = idC;
+    public Perfil(String sistemId) {
+        this.sistemId = sistemId;
     }
     
-    public Perfil(Integer id, String idC) {
+    public Perfil(Integer id, String sistemId) {
         this.id = id;
-        this.idC = idC;
+        this.sistemId = sistemId;
     }
     
-    public Perfil(Integer id, String idC, Reputacao reputacao) {
+    public Perfil(Integer id, String sistemId, Reputacao reputacao) {
         this.id = id;
-        this.idC = idC;
+        this.sistemId = sistemId;
         this.reputacao = reputacao;
     }
     
@@ -38,8 +38,8 @@ public abstract class Perfil {
         return this.id;
     }
     
-    public String getIdC() {
-        return this.idC;
+    public String getSistemId() {
+        return this.sistemId;
     }
     
     public Double getBeneficioClimatico() {

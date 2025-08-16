@@ -8,6 +8,7 @@ import dao.PerfilVendedorDAO;
 import dao.PerfilVendedorDAOSQLite;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 import model.Vendedor;
 
 /**
@@ -23,6 +24,10 @@ public class PerfilVendedorRepository {
     
     public void adicionaPerfil(Vendedor vendedor) throws SQLException {
         perfilVendedorDAO.criar(vendedor);
+    }
+    
+    public Optional<Vendedor> getPorIdUsuario(Integer id) throws SQLException {
+        return perfilVendedorDAO.buscaPorIdUsuario(id);
     }
     
     public List<Vendedor> getTodosVendedores() throws SQLException {

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import model.Comprador;
 import model.Reputacao;
 import util.DatabaseConnection;
@@ -36,38 +37,75 @@ public class PerfilCompradorDAOSQLite implements PerfilCompradorDAO {
     }
 
     @Override
-public List<Comprador> buscaTodos() throws SQLException {
-    List<Comprador> compradores = new ArrayList<>();
-    String sql = """
-        SELECT c.*, 
-               r.estrelas AS reputacao_estrelas,
-               r.beneficioClimatico AS reputacao_beneficio,
-               r.nivel AS reputacao_nivel
-        FROM compradores c
-        LEFT JOIN reputacoes r ON c.idReputacao = r.idReputacao
-        """;
-    
-    try (Connection conn = DatabaseConnection.getConnection();
-         Statement stmt = conn.createStatement();
-         ResultSet rs = stmt.executeQuery(sql)) {
+    public Optional<Comprador> buscaPorIdUsuario (Integer id) throws SQLException {
+        String sql = """
+                SELECT c.*, 
+                    r.estrelas AS reputacao_estrelas,
+                    r.beneficioClimatico AS reputacao_beneficio,
+                    r.nivel AS reputacao_nivel
+                    FROM compradores c
+                    LEFT JOIN reputacoes r ON c.idReputacao = r.idReputacao 
+                    LEFT JOIN usuarios u ON u.idPerfilComprador = c.idPerfilComprador
+                    WHERE u.idUsuario = ?""";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-        while (rs.next()) {
-            Reputacao reputacao = new Reputacao(
-                rs.getDouble("reputacao_estrelas"),
-                rs.getDouble("reputacao_beneficio"),
-                rs.getString("reputacao_nivel")
-            );
-            reputacao.setIdReputacao(rs.getInt("idReputacao"));
-            
-            compradores.add(new Comprador(
-                rs.getInt("idPerfilComprador"),
-                rs.getString("sistemId"),
-                reputacao
-            ));
+            pstmt.setInt(1, id);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {                   
+                    Reputacao reputacao = new Reputacao(
+                        rs.getDouble("reputacao_estrelas"),
+                        rs.getDouble("reputacao_beneficio"),
+                        rs.getString("reputacao_nivel")
+                    );
+                    reputacao.setIdReputacao(rs.getInt("idReputacao"));
+                    
+                    return Optional.of(new Comprador(
+                        rs.getInt("idPerfilComprador"),
+                        rs.getString("sistemId"),
+                        reputacao
+                    ));
+                }
+            }
+
         }
+        return Optional.empty();
     }
-    return compradores;
-}
+    
+    @Override
+    public List<Comprador> buscaTodos() throws SQLException {
+        List<Comprador> compradores = new ArrayList<>();
+        String sql = """
+            SELECT c.*, 
+                   r.estrelas AS reputacao_estrelas,
+                   r.beneficioClimatico AS reputacao_beneficio,
+                   r.nivel AS reputacao_nivel
+            FROM compradores c
+            LEFT JOIN reputacoes r ON c.idReputacao = r.idReputacao
+            """;
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Reputacao reputacao = new Reputacao(
+                    rs.getDouble("reputacao_estrelas"),
+                    rs.getDouble("reputacao_beneficio"),
+                    rs.getString("reputacao_nivel")
+                );
+                reputacao.setIdReputacao(rs.getInt("idReputacao"));
+
+                compradores.add(new Comprador(
+                    rs.getInt("idPerfilComprador"),
+                    rs.getString("sistemId"),
+                    reputacao
+                ));
+            }
+        }
+        return compradores;
+    }
 
     @Override
     public void deletar(Integer id) throws SQLException {

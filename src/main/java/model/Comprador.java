@@ -14,16 +14,16 @@ public class Comprador extends Perfil {
         super(id);
     }
     
-    public Comprador (String idC) {
-        super(idC);
+    public Comprador (String sistemId) {
+        super(sistemId);
     }
     
-    public Comprador(Integer id, String idC) {
-        super(id, idC);
+    public Comprador(Integer id, String sistemId) {
+        super(id, sistemId);
     }
     
-    public Comprador(Integer id, String idC, Reputacao reputacao) {
-        super(id, idC, reputacao);
+    public Comprador(Integer id, String sistemId, Reputacao reputacao) {
+        super(id, sistemId, reputacao);
     }
     /*
     public void enviarOferta (Item item, Double valor) {
