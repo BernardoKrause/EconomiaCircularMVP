@@ -18,7 +18,7 @@ public interface IItemRepository {
     
     public Optional<List<Item>> BuscarPorVendedor(Vendedor vendedor);
     
-    public Optional<Item> BuscarPorIdC(String idC) throws SQLException;
+    public Optional<Item> BuscarPorId(Integer id) throws SQLException;
     
     public Integer getQuantidadeItens() throws SQLException ;
     
