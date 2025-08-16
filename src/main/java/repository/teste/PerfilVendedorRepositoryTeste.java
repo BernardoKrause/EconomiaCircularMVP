@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import model.Reputacao;
 import model.Vendedor;
@@ -21,11 +23,23 @@ import repository.IPerfilVendedorRepository;
  */
 public class PerfilVendedorRepositoryTeste implements IPerfilVendedorRepository{
     private List<Vendedor> VendedoresCriados;
+    private static PerfilVendedorRepositoryTeste instancia;
 
-    public PerfilVendedorRepositoryTeste() throws SQLException {
+    private PerfilVendedorRepositoryTeste() throws SQLException {
        this.VendedoresCriados = new ArrayList<>();
     }
-    
+
+    public static PerfilVendedorRepositoryTeste getInstancia(){
+        if (instancia == null) {
+            try {
+                instancia = new PerfilVendedorRepositoryTeste();
+            } catch (SQLException ex) {
+                Logger.getLogger(PerfilVendedorRepositoryTeste.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return instancia;
+    }
+
     @Override
     public void adicionaPerfil(Vendedor vendedor) throws SQLException {
         VendedoresCriados.add(vendedor);

@@ -7,11 +7,13 @@ package factory.repository;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import repository.ICondutaRepository;
 import repository.IDefeitosTipoRepository;
 import repository.IDenunciaRepository;
 import repository.IItemRepository;
 import repository.IPerfilSolicitacaoRepository;
 import repository.IPerfilVendedorRepository;
+import repository.IReputacaoRepository;
 import repository.IUsuarioRepository;
 import repository.sqlite.DenunciaRepositorySqLite;
 import repository.sqlite.ItemRepositorySqLite;
@@ -74,6 +76,16 @@ public class RepositoryFactorySqLite implements IRepositoryFactory{
     public IDefeitosTipoRepository criarDefeitosTipoRepository() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 //        return new DefeitosTipoRepositorySqLite();
+    }
+
+    @Override
+    public IReputacaoRepository criarReputacaoRepository() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public ICondutaRepository criarCondutarRepository() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

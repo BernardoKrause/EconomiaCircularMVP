@@ -25,7 +25,7 @@ public class ReputacaoRepositoryTeste implements IReputacaoRepository{
         reputacoes=new ArrayList<>();
     }
     
-    public ReputacaoRepositoryTeste getInstancia(){
+    public static ReputacaoRepositoryTeste getInstancia(){
         if(instancia==null){
             instancia= new ReputacaoRepositoryTeste();
         }

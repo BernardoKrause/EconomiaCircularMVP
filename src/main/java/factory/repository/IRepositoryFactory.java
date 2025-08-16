@@ -4,11 +4,13 @@
  */
 package factory.repository;
 
+import repository.ICondutaRepository;
 import repository.IDefeitosTipoRepository;
 import repository.IDenunciaRepository;
 import repository.IItemRepository;
 import repository.IPerfilSolicitacaoRepository;
 import repository.IPerfilVendedorRepository;
+import repository.IReputacaoRepository;
 import repository.IUsuarioRepository;
 
 /**
@@ -22,4 +24,6 @@ public interface IRepositoryFactory {
     IItemRepository criarItemRepository();
     IDenunciaRepository criarDenunciaRepository();
     IDefeitosTipoRepository criarDefeitosTipoRepository();
+    IReputacaoRepository criarReputacaoRepository();
+    ICondutaRepository criarCondutarRepository();
 }
