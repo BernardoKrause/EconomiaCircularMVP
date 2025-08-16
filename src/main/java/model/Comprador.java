@@ -10,10 +10,6 @@ package model;
  */
 public class Comprador extends Perfil {
     
-    public Comprador (Integer id) {
-        super(id);
-    }
-    
     public Comprador (String idC) {
         super(idC);
     }

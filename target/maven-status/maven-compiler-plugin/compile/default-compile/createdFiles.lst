@@ -48,8 +48,8 @@ model\Usuario.class
 service\ItemService.class
 strategy\SistemaDefeitos\RegraDefeitosPercentual.class
 presenter\SignupPresenter$2.class
-repository\PerfilRepository.class
 command\usuario\SairUsuarioCommand.class
+repository\DenunciaRepository.class
 command\usuario\AbrirLoginUsuarioCommand.class
 state\home\AutenticadoState$5.class
 presenter\SignupPresenter.class
