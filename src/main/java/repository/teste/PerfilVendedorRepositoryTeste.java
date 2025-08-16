@@ -9,6 +9,9 @@ import dao.PerfilVendedorDAOSQLite;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import model.Reputacao;
 import model.Vendedor;
 import repository.IPerfilVendedorRepository;
 
@@ -37,6 +40,16 @@ public class PerfilVendedorRepositoryTeste implements IPerfilVendedorRepository{
     public void deletaPerfil(Integer id) throws SQLException {
         //nao tem
     }
-    
+
+    @Override
+    public Optional<Reputacao> getReputacaoVendedor(Vendedor vendedor) throws SQLException {
+        for(Vendedor v : VendedoresCriados){
+            if(v.getId().equals(vendedor.getId())){
+                return Optional.of(v.getReputacao());
+            }
+        }
+        return Optional.empty();
+    }
+
 }
 
