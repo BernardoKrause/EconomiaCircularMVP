@@ -19,21 +19,16 @@ import model.Vendedor;
 public class ItemRepository {
     private ItemDAOSQLite itemDAO;
     
-    public ItemRepository()throws SQLException {
-        try {
-            this.itemDAO = new ItemDAOSQLite();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            throw ex;
-        }
+    public ItemRepository() {
+        this.itemDAO = new ItemDAOSQLite();
     }
     
     public Optional<List<Item>> BuscarPorVendedor(Vendedor vendedor){
         return null;
     }
     
-    public Optional<Item> BuscarPorIdC(String idC) throws SQLException{
-        return itemDAO.buscaPorIdC(Integer.valueOf(idC));
+    public Optional<Item> BuscarPorIdC(Integer id) throws SQLException{
+        return itemDAO.buscaPorId(id);
     }
     
     public Integer getQuantidadeItens() throws SQLException {

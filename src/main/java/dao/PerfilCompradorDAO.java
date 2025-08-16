@@ -16,5 +16,5 @@ import model.Comprador;
 public interface PerfilCompradorDAO {
     public void criar(Comprador comprador) throws SQLException;
     public List<Comprador> buscaTodos() throws SQLException;
-    public void deletar(String id) throws SQLException;
+    public void deletar(Integer id) throws SQLException;
 }

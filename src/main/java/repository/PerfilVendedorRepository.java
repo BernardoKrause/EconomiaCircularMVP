@@ -29,8 +29,8 @@ public class PerfilVendedorRepository {
         return perfilVendedorDAO.buscaTodos();
     }
     
-    public void deletaPerfil(String sistemId) throws SQLException {
-        perfilVendedorDAO.deletar(sistemId);
+    public void deletaPerfil(Integer id) throws SQLException {
+        perfilVendedorDAO.deletar(id);
     }
     
 }

@@ -96,15 +96,6 @@ public class DatabaseConnection {
             );
             """,
             """
-            CREATE TABLE IF NOT EXISTS perfil_solicitacoes (
-                idSolicitacaoPerfil INTEGER PRIMARY KEY AUTOINCREMENT,
-                status TEXT NOT NULL DEFAULT 'W',
-                CHECK (status IN ('A', 'D', 'W')),
-                idUsuario INTEGER,
-                FOREIGN KEY (idUsuario) REFERENCES usuarios(idUsuario)
-            );
-            """,
-            """
             CREATE TABLE IF NOT EXISTS itens (
                 idItem INTEGER PRIMARY KEY AUTOINCREMENT,
                 idC TEXT NOT NULL UNIQUE,
@@ -215,6 +206,14 @@ public class DatabaseConnection {
                 PRIMARY KEY (idDenuncia, idDefeito),
                 FOREIGN KEY (idDenuncia) REFERENCES denuncias(idDenuncia),
                 FOREIGN KEY (idDefeito) REFERENCES defeitos(idDefeito)
+            );
+            """,
+            """
+            CREATE TABLE IF NOT EXISTS perfil_solicitacoes (
+                idSolicitacaoPerfil INTEGER PRIMARY KEY AUTOINCREMENT,
+                status TEXT NOT NULL DEFAULT 'W' CHECK (status IN ('A', 'D', 'W')),
+                idUsuario INTEGER,
+                FOREIGN KEY (idUsuario) REFERENCES usuarios(idUsuario)
             );
             """
         };
