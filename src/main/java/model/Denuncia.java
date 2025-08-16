@@ -9,11 +9,21 @@ package model;
  * @author berna
  */
 public class Denuncia {
+    private Integer id;
     private String idC;
     private String descricao;
     private String status;
     private Comprador comprador;
     private Vendedor vendedor;
+    
+    public Denuncia (Integer id, String idC, String descricao, String status, Comprador comprador, Vendedor vendedor) {
+        this.id = id;
+        this.idC = idC;
+        this.descricao = descricao;
+        this.status = status;
+        this.comprador = comprador;
+        this.vendedor = vendedor;
+    }
     
     public Denuncia (String idC, String descricao, String status, Comprador comprador, Vendedor vendedor) {
         this.idC = idC;
@@ -21,6 +31,10 @@ public class Denuncia {
         this.status = status;
         this.comprador = comprador;
         this.vendedor = vendedor;
+    }
+    
+    public Integer getId() {
+        return this.id;
     }
     
     public String getIdC() {

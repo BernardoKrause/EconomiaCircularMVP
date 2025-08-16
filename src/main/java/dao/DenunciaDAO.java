@@ -16,7 +16,7 @@ import java.util.Optional;
 public interface DenunciaDAO {
     public void criar(Denuncia denuncia) throws SQLException;
     public List<Denuncia> buscaTodos() throws SQLException;
-    public Optional<Denuncia> buscaPorIdC(Integer idC) throws SQLException;
+    public Optional<Denuncia> buscaPorId(Integer id) throws SQLException;
     public void atualizar(Denuncia denuncia) throws SQLException;
     public void deletar(Integer idDenuncia) throws SQLException;
 }
