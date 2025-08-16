@@ -9,7 +9,7 @@ import factory.repository.SeletorRepositoryFactory;
 import java.sql.SQLException;
 import javax.swing.JDesktopPane;
 import model.Perfil;
-import presenter.GerenciadorTelas
+import presenter.GerenciadorTelas;
 import service.PerfilService;
 
 /**

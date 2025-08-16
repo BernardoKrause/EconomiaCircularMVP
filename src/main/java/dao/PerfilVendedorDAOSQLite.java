@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import model.Reputacao;
 import model.Vendedor;
-import util.DatabaseConnection;
+import util.factory.connection.DatabaseConnectionFactory;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -27,7 +27,7 @@ public class PerfilVendedorDAOSQLite implements PerfilVendedorDAO {
     public void criar(Vendedor vendedor) throws SQLException {
         String sql = "INSERT INTO vendedores (idPerfilVendedor, idReputacao) "
                    + "VALUES (?, ?)";
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, vendedor.getId());
@@ -47,7 +47,7 @@ public class PerfilVendedorDAOSQLite implements PerfilVendedorDAO {
                     LEFT JOIN reputacoes r ON c.idReputacao = r.idReputacao 
                     LEFT JOIN usuarios u ON u.idPerfilVendedor = c.idPerfilVendedor
                     WHERE u.idUsuario = ?""";
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, id);
@@ -85,7 +85,7 @@ public class PerfilVendedorDAOSQLite implements PerfilVendedorDAO {
             LEFT JOIN reputacoes r ON c.idReputacao = r.idReputacao
             """;
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -110,7 +110,7 @@ public class PerfilVendedorDAOSQLite implements PerfilVendedorDAO {
     @Override
     public void deletar(Integer id) throws SQLException {
         String sql = "DELETE FROM vendedores WHERE idPerfilVendedor = ?";
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, id);

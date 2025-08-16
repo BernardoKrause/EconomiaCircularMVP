@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import model.Usuario;
-import util.DatabaseConnection;
+import util.factory.connection.DatabaseConnectionFactory;
 
 public class UsuarioDAOSQLite implements UsuarioDAO {
 
@@ -19,7 +19,7 @@ public class UsuarioDAOSQLite implements UsuarioDAO {
     public void criar(Usuario usuario) throws SQLException {
         String sql = "INSERT INTO usuarios (nome, email, telefone, senha, eAdmin) "
                    + "VALUES (?, ?, ?, ?, ?)";
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, usuario.getNome());
@@ -34,7 +34,7 @@ public class UsuarioDAOSQLite implements UsuarioDAO {
     @Override
     public Optional<Usuario> buscaPorId(Integer id) throws SQLException {
         String sql = "SELECT * FROM usuarios WHERE idUsuario = ?";
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, id);
@@ -68,7 +68,7 @@ public class UsuarioDAOSQLite implements UsuarioDAO {
     public List<Usuario> buscaTodos() throws SQLException {
         List<Usuario> usuarios = new ArrayList<>();
         String sql = "SELECT * FROM usuarios";
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -97,7 +97,7 @@ public class UsuarioDAOSQLite implements UsuarioDAO {
     public void atualizar(Usuario usuario) throws SQLException {
         String sql = "UPDATE usuarios SET nome = ?, email = ?, telefone = ?, senha = ? "
                    + "WHERE idUsuario = ?";
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, usuario.getNome());
@@ -113,7 +113,7 @@ public class UsuarioDAOSQLite implements UsuarioDAO {
     @Override
     public void deletar(Integer id) throws SQLException {
         String sql = "DELETE FROM usuarios WHERE idUsuario = ?";
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, id);
@@ -132,7 +132,7 @@ public class UsuarioDAOSQLite implements UsuarioDAO {
     public Optional<Usuario> buscaPorEmail(String email) throws SQLException {
         String sql = "SELECT * FROM usuarios WHERE email = ?";
         
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, email);

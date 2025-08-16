@@ -5,7 +5,7 @@
 package repository.database;
 
 import dao.DenunciaDAO;
-import factory.dao.DAOFactory;
+import factory.dao.IDAOFactory;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +21,7 @@ import repository.IDenunciaRepository;
 public class DenunciaRepository implements IDenunciaRepository{
     private final DenunciaDAO denunciaDAO;
 
-    public DenunciaRepository(DAOFactory daoFactory) throws SQLException {
+    public DenunciaRepository(IDAOFactory daoFactory) throws SQLException {
         this.denunciaDAO = daoFactory.getDenunciaDAO();
     }
 
