@@ -4,6 +4,7 @@
  */
 package repository.sqlite;
 
+import model.Reputacao;
 import repository.IReputacaoRepository;
 
 /**
@@ -11,5 +12,11 @@ import repository.IReputacaoRepository;
  * @author caiof
  */
 public class ReputacaoRepositorySqLite implements IReputacaoRepository{
+    public void adicionarReputacao(Reputacao reputacao) {
+        
+    }
     
+    public void salvarReputacao(Reputacao reputacao) {
+        
+    }
 }
