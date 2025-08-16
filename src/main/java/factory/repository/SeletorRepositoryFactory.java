@@ -23,8 +23,8 @@ public class SeletorRepositoryFactory {
 //            Class<?> nomeClasse = Class.forName(DotEnvAdapter.getEnv(tipoBanco));
 //            var construtor = nomeClasse.getConstructor();
 //            return (IRepositoryFactory) construtor.newInstance();
-            if(tipoBanco.equalsIgnoreCase("sqlite")){
-                return new RepositoryFactorySqLite();
+            if(tipoBanco.equalsIgnoreCase("SQLite") || tipoBanco.equalsIgnoreCase("H2")){
+                return new RepositoryFactoryBD(tipoBanco);
             }else if(tipoBanco.equalsIgnoreCase("teste")){
                 return new RepositoryFactoryTeste();
             }

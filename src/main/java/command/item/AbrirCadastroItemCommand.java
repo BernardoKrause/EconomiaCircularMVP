@@ -7,7 +7,7 @@ package command.item;
 import java.sql.SQLException;
 import model.Perfil;
 import presenter.ItemPresenter;
-import repository.sqlite.PerfilVendedorRepositorySqLite;
+import repository.database.PerfilVendedorRepository;
 import repository.teste.DefeitosTipoRepositoryTeste;
 import service.ItemService;
 import service.SistemaDefeitosService;

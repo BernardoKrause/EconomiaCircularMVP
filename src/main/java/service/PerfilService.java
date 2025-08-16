@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import model.Usuario;
 import model.Vendedor;
 import repository.IPerfilVendedorRepository;
-import repository.sqlite.PerfilVendedorRepositorySqLite;
+import repository.database.PerfilVendedorRepository;
 
 /**
  *

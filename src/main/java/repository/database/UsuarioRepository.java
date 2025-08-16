@@ -2,10 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package repository.sqlite;
+package repository.database;
 
 import dao.UsuarioDAOSQLite;
 import dao.UsuarioDAO;
+import factory.dao.DAOFactory;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -16,11 +17,11 @@ import repository.IUsuarioRepository;
  *
  * @author berna
  */
-public class UsuarioRepositorySqLite implements IUsuarioRepository {
+public class UsuarioRepository implements IUsuarioRepository {
     private final UsuarioDAO usuarioDAO;
 
-    public UsuarioRepositorySqLite() throws SQLException {
-        this.usuarioDAO = new UsuarioDAOSQLite();
+    public UsuarioRepository(DAOFactory daoFactory) throws SQLException {
+        this.usuarioDAO = daoFactory.getUsuarioDAO();
     }
 
     @Override
