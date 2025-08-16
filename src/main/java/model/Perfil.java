@@ -28,6 +28,12 @@ public abstract class Perfil {
         this.idC = idC;
     }
     
+    public Perfil(Integer id, String idC, Reputacao reputacao) {
+        this.id = id;
+        this.idC = idC;
+        this.reputacao = reputacao;
+    }
+    
     public Integer getId() {
         return this.id;
     }

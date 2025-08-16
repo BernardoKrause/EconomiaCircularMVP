@@ -15,6 +15,14 @@ public class Denuncia {
     private Comprador comprador;
     private Vendedor vendedor;
     
+    public Denuncia (String idC, String descricao, String status, Comprador comprador, Vendedor vendedor) {
+        this.idC = idC;
+        this.descricao = descricao;
+        this.status = status;
+        this.comprador = comprador;
+        this.vendedor = vendedor;
+    }
+    
     public String getIdC() {
         return this.idC;
     }

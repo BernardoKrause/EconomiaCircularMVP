@@ -10,13 +10,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import model.Item;
-import model.Vendedor;
 import util.DatabaseConnection;
 
 /*
@@ -65,13 +60,19 @@ public class ItemDAOSQLite implements ItemDAO {
 
             while (rs.next()) {
                 itens.add(new Item(
+                    rs.getInt("idItem"),
+                    rs.getString("idC"),
                     rs.getString("tipo"),
                     rs.getString("subcategoria"),
                     rs.getString("tamanho"),
                     rs.getString("cor"),
                     rs.getDouble("peso"),
                     rs.getString("composicao"),
-                    rs.getDouble("precoBase")
+                    rs.getDouble("precoBase"),
+                    rs.getDouble("precoFinal"),
+                    rs.getInt("gpwEvitado"),
+                    rs.getDouble("mciItem"),
+                    rs.getInt("numeroCiclo")
                 ));
             }
             return itens;
@@ -79,16 +80,17 @@ public class ItemDAOSQLite implements ItemDAO {
     }
     
     @Override
-    public Optional<Item> buscaPorIdC(Integer idC) throws SQLException {
+    public Optional<Item> buscaPorId(Integer id) throws SQLException {
         String sql = "SELECT * FROM itens WHERE idC = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setInt(1, idC);
+            pstmt.setInt(1, id);
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     Item item = new Item(
+                        rs.getInt("idItem"),
                         rs.getString("idC"),
                         rs.getString("tipo"),
                         rs.getString("subcategoria"),

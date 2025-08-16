@@ -21,6 +21,10 @@ public class Comprador extends Perfil {
     public Comprador(Integer id, String idC) {
         super(id, idC);
     }
+    
+    public Comprador(Integer id, String idC, Reputacao reputacao) {
+        super(id, idC, reputacao);
+    }
     /*
     public void enviarOferta (Item item, Double valor) {
         

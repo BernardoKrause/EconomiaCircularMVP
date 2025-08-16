@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.Comprador;
+import model.Reputacao;
 import util.DatabaseConnection;
 
 /*
@@ -35,23 +36,38 @@ public class PerfilCompradorDAOSQLite implements PerfilCompradorDAO {
     }
 
     @Override
-    public List<Comprador> buscaTodos() throws SQLException {
-        List<Comprador> compradores = new ArrayList<>();
-        String sql = "SELECT * FROM compradores";
-        try (Connection conn = DatabaseConnection.getConnection();
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql)) {
+public List<Comprador> buscaTodos() throws SQLException {
+    List<Comprador> compradores = new ArrayList<>();
+    String sql = """
+        SELECT c.*, 
+               r.estrelas AS reputacao_estrelas,
+               r.beneficioClimatico AS reputacao_beneficio,
+               r.nivel AS reputacao_nivel
+        FROM compradores c
+        LEFT JOIN reputacoes r ON c.idReputacao = r.idReputacao
+        """;
+    
+    try (Connection conn = DatabaseConnection.getConnection();
+         Statement stmt = conn.createStatement();
+         ResultSet rs = stmt.executeQuery(sql)) {
 
-            while (rs.next()) {
-                compradores.add(new Comprador(
-                    rs.getInt("idPerfilComprador"),
-                    rs.getString("sistemId")
-                ));
-            }
-
+        while (rs.next()) {
+            Reputacao reputacao = new Reputacao(
+                rs.getDouble("reputacao_estrelas"),
+                rs.getDouble("reputacao_beneficio"),
+                rs.getString("reputacao_nivel")
+            );
+            reputacao.setIdReputacao(rs.getInt("idReputacao"));
+            
+            compradores.add(new Comprador(
+                rs.getInt("idPerfilComprador"),
+                rs.getString("sistemId"),
+                reputacao
+            ));
         }
-        return compradores;
     }
+    return compradores;
+}
 
     @Override
     public void deletar(Integer id) throws SQLException {
