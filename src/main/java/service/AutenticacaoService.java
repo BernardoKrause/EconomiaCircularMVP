@@ -6,7 +6,7 @@ package service;
 
 import java.util.Optional;
 import model.Usuario;
-import repository.sqlite.UsuarioRepositorySqLite;
+import repository.database.UsuarioRepository;
 
 /**
  *

@@ -46,6 +46,11 @@ public class PerfilVendedorRepositoryTeste implements IPerfilVendedorRepository{
     }
     
     @Override
+    public Optional<Vendedor> getPorIdUsuario(Integer id) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    @Override
     public List<Vendedor> getTodosVendedores() throws SQLException {
         return VendedoresCriados;
     }
@@ -55,15 +60,6 @@ public class PerfilVendedorRepositoryTeste implements IPerfilVendedorRepository{
         //nao tem
     }
 
-    @Override
-    public Optional<Reputacao> getReputacaoVendedor(Vendedor vendedor) throws SQLException {
-        for(Vendedor v : VendedoresCriados){
-            if(v.getId().equals(vendedor.getId())){
-                return Optional.of(v.getReputacao());
-            }
-        }
-        return Optional.empty();
-    }
 
 }
 

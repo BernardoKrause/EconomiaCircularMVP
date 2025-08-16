@@ -41,19 +41,19 @@ public class DenunciaDAOSQLite implements DenunciaDAO {
 
     @Override
     public List<Denuncia> buscaTodos() throws SQLException {
-    List<Denuncia> denuncias = new ArrayList<>();
-    String sql = """
-        SELECT d.*, 
-               c.sistemId AS comprador_sistemId,
-               v.sistemId AS vendedor_sistemId
-        FROM denuncias d
-        LEFT JOIN compradores c ON d.idPerfilComprador = c.idPerfilComprador
-        LEFT JOIN vendedores v ON d.idPerfilVendedor = v.idPerfilVendedor
-        """;
-    
-    try (Connection conn = DatabaseConnection.getConnection();
-         Statement stmt = conn.createStatement();
-         ResultSet rs = stmt.executeQuery(sql)) {
+        List<Denuncia> denuncias = new ArrayList<>();
+        String sql = """
+            SELECT d.*, 
+                   c.sistemId AS comprador_sistemId,
+                   v.sistemId AS vendedor_sistemId
+            FROM denuncias d
+            LEFT JOIN compradores c ON d.idPerfilComprador = c.idPerfilComprador
+            LEFT JOIN vendedores v ON d.idPerfilVendedor = v.idPerfilVendedor
+            """;
+
+        try (Connection conn = DatabaseConnection.getConnection();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)) {
         
             while (rs.next()) {
                 Comprador comprador = new Comprador(

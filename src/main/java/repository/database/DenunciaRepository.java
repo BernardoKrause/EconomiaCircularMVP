@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package repository.sqlite;
+package repository.database;
 
 import dao.DenunciaDAO;
-import dao.DenunciaDAOSQLite;
+import factory.dao.DAOFactory;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -18,11 +18,11 @@ import repository.IDenunciaRepository;
  *
  * @author berna
  */
-public class DenunciaRepositorySqLite implements IDenunciaRepository{
+public class DenunciaRepository implements IDenunciaRepository{
     private final DenunciaDAO denunciaDAO;
 
-    public DenunciaRepositorySqLite() throws SQLException {
-        this.denunciaDAO = new DenunciaDAOSQLite();
+    public DenunciaRepository(DAOFactory daoFactory) throws SQLException {
+        this.denunciaDAO = daoFactory.getDenunciaDAO();
     }
 
      @Override

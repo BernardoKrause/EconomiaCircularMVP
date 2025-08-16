@@ -44,9 +44,9 @@ public class ItemRepositoryTeste implements IItemRepository{
     }
     
     @Override
-    public Optional<Item> BuscarPorIdC(String id) throws SQLException{
+    public Optional<Item> BuscarPorId(Integer id) throws SQLException{
         for(Item item : itensPublicados){
-            if(item.getIdC().equalsIgnoreCase(id)){
+            if(item.getId() == id){
                 return Optional.of(item);
             }
         }

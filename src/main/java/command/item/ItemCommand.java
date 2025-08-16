@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import javax.swing.JDesktopPane;
 import model.Perfil;
 import presenter.GerenciadorTelas;
-import repository.sqlite.PerfilVendedorRepositorySqLite;
+import repository.database.PerfilVendedorRepository;
 import service.PerfilService;
 
 /**
@@ -23,7 +23,7 @@ public abstract class ItemCommand implements ICommand{
     
     public ItemCommand(Perfil perfil) throws SQLException {
         this.perfil=perfil;
-        this.service = new PerfilService(new PerfilVendedorRepositorySqLite());
+        this.service = new PerfilService(new PerfilVendedorRepository());
         this.desktop = GerenciadorTelas.getInstancia().getDesktop();
     }
 

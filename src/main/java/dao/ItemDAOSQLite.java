@@ -81,7 +81,7 @@ public class ItemDAOSQLite implements ItemDAO {
     
     @Override
     public Optional<Item> buscaPorId(Integer id) throws SQLException {
-        String sql = "SELECT * FROM itens WHERE idC = ?";
+        String sql = "SELECT * FROM itens WHERE idItem = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 

@@ -10,7 +10,7 @@ import java.util.Optional;
 
 /**
  *
- * @author caiof
+ * @author berna
  */
 public interface IDefeitosTipoRepository {
     public Optional<List<String>> BuscarPorTipo(String tipoItem) throws SQLException;

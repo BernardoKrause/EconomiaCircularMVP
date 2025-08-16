@@ -4,19 +4,15 @@
  */
 package repository;
 
-import java.util.List;
-import java.util.Optional;
-
-import model.Conduta;
 import model.Reputacao;
-import model.Vendedor;
+import org.sqlite.SQLiteException;
 
 /**
  *
  * @author caiof
  */
 public interface IReputacaoRepository {
-    public void adicionarReputacao(Reputacao reputacao);
+    public void adicionarReputacao(Reputacao reputacao) throws SQLiteException;
     
-    public void salvarReputacao(Reputacao reputacao);
+    public void salvarReputacao(Reputacao reputacao) throws SQLiteException;
 }

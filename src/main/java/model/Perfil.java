@@ -15,6 +15,10 @@ public abstract class Perfil {
     protected Usuario usuario;
     protected Reputacao reputacao;
 
+    public Perfil(Integer id) {
+        this.id = id;
+    }
+    
     public Perfil(String sistemId) {
         this.sistemId = sistemId;
     }

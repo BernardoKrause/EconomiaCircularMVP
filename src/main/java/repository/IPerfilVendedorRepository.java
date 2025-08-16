@@ -7,8 +7,6 @@ package repository;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
-
-import model.Reputacao;
 import model.Vendedor;
 
 /**
@@ -18,9 +16,9 @@ import model.Vendedor;
 public interface IPerfilVendedorRepository {
     public void adicionaPerfil(Vendedor vendedor) throws SQLException ;
     
+    public Optional<Vendedor> getPorIdUsuario(Integer id) throws SQLException;
+    
     public List<Vendedor> getTodosVendedores() throws SQLException ;
     
     public void deletaPerfil(Integer id) throws SQLException ;
-
-    public Optional<Reputacao> getReputacaoVendedor(Vendedor vendedor) throws SQLException ;
 }

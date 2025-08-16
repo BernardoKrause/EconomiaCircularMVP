@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package repository.sqlite;
+package repository.database;
 
-import dao.ItemDAOSQLite;
+import dao.ItemDAO;
+import factory.dao.DAOFactory;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -16,11 +17,11 @@ import repository.IItemRepository;
  *
  * @author caiof
  */
-public class ItemRepositorySqLite implements IItemRepository{
-    private ItemDAOSQLite itemDAO;
+public class ItemRepository implements IItemRepository{
+    private ItemDAO itemDAO;
 
-    public ItemRepositorySqLite() {
-        this.itemDAO = new ItemDAOSQLite();
+    public ItemRepository(DAOFactory daoFactory) throws SQLException {
+        this.itemDAO = daoFactory.getItemDAO();
     }
 
     @Override
@@ -29,8 +30,8 @@ public class ItemRepositorySqLite implements IItemRepository{
     }
 
     @Override
-    public Optional<Item> BuscarPorIdC(String id) throws SQLException{
-        return itemDAO.buscaPorId(Integer.valueOf(id));
+    public Optional<Item> BuscarPorId(Integer id) throws SQLException{
+        return itemDAO.buscaPorId(id);
     }
 
     @Override

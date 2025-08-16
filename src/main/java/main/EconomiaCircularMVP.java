@@ -12,7 +12,7 @@ import java.util.Optional;
 import model.Usuario;
 import presenter.GerenciadorTelas;
 import presenter.HomePresenter;
-import repository.sqlite.UsuarioRepositorySqLite;
+import repository.database.UsuarioRepository;
 
 /**
  *

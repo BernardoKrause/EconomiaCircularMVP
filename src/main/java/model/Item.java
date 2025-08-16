@@ -109,6 +109,10 @@ public class Item {
         this.numeroCiclo = numeroCiclo;
     }
     
+    public Integer getId() {
+        return id;
+    }
+    
     public String getIdC() {
         return idC;
     }

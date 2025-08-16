@@ -2,10 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package repository.sqlite;
+package repository.database;
 
 import dao.PerfilSolicitacaoDAO;
 import dao.PerfilSolicitacaoDAOSQLite;
+import factory.dao.DAOFactory;
 import java.sql.SQLException;
 import java.util.List;
 import model.SolicitacaoPerfil;
@@ -15,11 +16,11 @@ import repository.IPerfilSolicitacaoRepository;
  *
  * @author berna
  */
-public class PerfilSolicitacaoRepositorySqLite implements IPerfilSolicitacaoRepository{
+public class PerfilSolicitacaoRepository implements IPerfilSolicitacaoRepository{
     private final PerfilSolicitacaoDAO perfilSolicitacaoDAO;
 
-    public PerfilSolicitacaoRepositorySqLite() throws SQLException {
-        this.perfilSolicitacaoDAO = new PerfilSolicitacaoDAOSQLite();
+    public PerfilSolicitacaoRepository(DAOFactory daoFactory) throws SQLException {
+        this.perfilSolicitacaoDAO = daoFactory.getPerfilSolicitacaoDAO();
     }
 
     @Override
