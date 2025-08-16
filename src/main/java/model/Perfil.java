@@ -9,17 +9,31 @@ package model;
  * @author berna
  */
 public abstract class Perfil {
-    protected String id;
+    protected Integer id;
+    protected String idC;
     protected Double beneficioClimatico;
     protected Usuario usuario;
     protected Reputacao reputacao;
     
-    public Perfil(String id) {
+    public Perfil(Integer id) {
         this.id = id;
     }
     
-    public String getId() {
+    public Perfil(String idC) {
+        this.idC = idC;
+    }
+    
+    public Perfil(Integer id, String idC) {
+        this.id = id;
+        this.idC = idC;
+    }
+    
+    public Integer getId() {
         return this.id;
+    }
+    
+    public String getIdC() {
+        return this.idC;
     }
     
     public Double getBeneficioClimatico() {

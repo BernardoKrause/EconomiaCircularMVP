@@ -21,5 +21,4 @@ public interface ItemDAO {
     public Optional<Item> buscaPorIdC(Integer idC) throws SQLException;
     public void atualizar(Item item) throws SQLException;
     public void deletar(Integer idC) throws SQLException;
-    public Integer getIdVendedor(Vendedor vendedor) throws SQLException;
 }

@@ -29,37 +29,6 @@ import util.DatabaseConnection;
  * @author berna
  */
 public class ItemDAOSQLite implements ItemDAO {
-    public ItemDAOSQLite() throws SQLException {
-        try (Connection conn = DatabaseConnection.getConnection();
-             Statement stmt = conn.createStatement()) {
-
-            stmt.execute("PRAGMA foreign_keys = ON");
-
-            String ddl = ""
-                + "CREATE TABLE IF NOT EXISTS itens ("
-                + "  idItem INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + "  idC TEXT NOT NULL, "
-                + "  tipo TEXT NOT NULL UNIQUE, "
-                + "  subcategoria TEXT NOT NULL, "
-                + "  tamanho TEXT NOT NULL, "
-                + "  cor TEXT NOT NULL, "
-                + "  peso DOUBLE NOT NULL, "
-                + "  composicao TEXT NOT NULL, "
-                + "  precoBase DOUBLE NOT NULL, "
-                + "  precoFinal DOUBLE NOT NULL, "
-                + "  gpwEvitado INTEGER NOT NULL, "
-                + "  mciItem DOUBLE NOT NULL, "
-                + "  numeroCiclo INTEGER NOT NULL, "
-                + "  idPerfilVendedor INTEGER, "
-                + "  FOREIGN KEY(idPerfilVendedor) REFERENCES vendedores(idVendedor)"
-                + ");";
-
-            stmt.execute(ddl);
-        } catch (SQLException ex) {
-            throw ex;
-        }
-    }
-
     @Override
     public void criar(Item item) throws SQLException {
         String sql = "INSERT INTO itens "
@@ -80,7 +49,7 @@ public class ItemDAOSQLite implements ItemDAO {
             pstmt.setInt(10, item.getGPWEvitado());
             pstmt.setDouble(11, item.getMCIItem());
             pstmt.setInt(12, item.getNumeroCiclo());
-            pstmt.setInt(13, getIdVendedor(item.getVendedor()));
+            pstmt.setInt(13, item.getVendedor().getId());
             pstmt.executeUpdate();
 
         }
@@ -178,23 +147,5 @@ public class ItemDAOSQLite implements ItemDAO {
             System.getLogger(UsuarioDAOSQLite.class.getName())
                   .log(System.Logger.Level.ERROR, (String) null, ex);
         }
-    }
-    
-    @Override
-    public Integer getIdVendedor(Vendedor vendedor) throws SQLException {
-        String sql = "SELECT * FROM vendedores WHERE sistemId = ?";
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setInt(1, Integer.parseInt(vendedor.getId()));
-
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt("idPerfilVendedor");
-                }
-            }
-
-        }
-        return null;
     }
 }

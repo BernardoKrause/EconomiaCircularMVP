@@ -19,13 +19,8 @@ import model.Vendedor;
 public class ItemRepository {
     private ItemDAOSQLite itemDAO;
     
-    public ItemRepository()throws SQLException {
-        try {
-            this.itemDAO = new ItemDAOSQLite();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            throw ex;
-        }
+    public ItemRepository() {
+        this.itemDAO = new ItemDAOSQLite();
     }
     
     public Optional<List<Item>> BuscarPorVendedor(Vendedor vendedor){

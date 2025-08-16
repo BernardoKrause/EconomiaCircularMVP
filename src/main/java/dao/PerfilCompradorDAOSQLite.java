@@ -23,12 +23,12 @@ public class PerfilCompradorDAOSQLite implements PerfilCompradorDAO {
     
     @Override
     public void criar(Comprador comprador) throws SQLException {
-        String sql = "INSERT INTO vendedores (sistemId, idReputacao) "
+        String sql = "INSERT INTO compradores (idPerfilComprador, idReputacao) "
                    + "VALUES (?, ?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, comprador.getId());
+            pstmt.setInt(1, comprador.getId());
             pstmt.setInt(2, comprador.getReputacao().getId());
             pstmt.executeUpdate();
         }
@@ -44,6 +44,7 @@ public class PerfilCompradorDAOSQLite implements PerfilCompradorDAO {
 
             while (rs.next()) {
                 compradores.add(new Comprador(
+                    rs.getInt("idPerfilComprador"),
                     rs.getString("sistemId")
                 ));
             }
@@ -53,12 +54,12 @@ public class PerfilCompradorDAOSQLite implements PerfilCompradorDAO {
     }
 
     @Override
-    public void deletar(String sistemId) throws SQLException {
-        String sql = "DELETE FROM compradores WHERE sistemId = ?";
+    public void deletar(Integer id) throws SQLException {
+        String sql = "DELETE FROM compradores WHERE idPerfilComprador = ?";
         try (Connection conn = DatabaseConnection.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, sistemId);
+            pstmt.setInt(1, id);
             pstmt.executeUpdate();
         }
     }
