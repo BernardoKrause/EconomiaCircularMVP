@@ -14,18 +14,17 @@ import repository.UsuarioRepository;
  * @author berna
  */
 public class UsuarioService {
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
     
     public UsuarioService(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
     
     public void cadastrarUsuario(String nome, String email, String telefone, String senha) throws SQLException {
-        boolean isAdmin = usuarioRepository.totalUsuarios() == 0 ? true : false;
+        boolean isAdmin = usuarioRepository.totalUsuarios() == 0;
         try {
             usuarioRepository.adicionaUsuario(nome, email, telefone, senha, isAdmin);
         } catch (SQLException ex) {
-            ex.printStackTrace();
             throw ex;
         }
     }
@@ -35,7 +34,6 @@ public class UsuarioService {
         try {
             optUsuario = usuarioRepository.getUsuarioPorEmail(usuario.getEmail());
         } catch (SQLException ex) {
-            ex.printStackTrace();
             throw ex;
         }
         

@@ -13,7 +13,6 @@ public class Comprador extends Perfil {
     public Comprador (String id) {
         super(id);
     }
-    
     /*
     public void enviarOferta (Item item, Double valor) {
         

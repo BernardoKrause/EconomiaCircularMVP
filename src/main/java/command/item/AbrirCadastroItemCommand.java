@@ -7,7 +7,6 @@ package command.item;
 import java.sql.SQLException;
 import model.Perfil;
 import presenter.ItemPresenter;
-import repository.ItemRepository;
 import repository.PerfilVendedorRepository;
 import repository.TiposDefeitoRepository;
 import service.ItemService;
@@ -18,7 +17,7 @@ import service.SistemaDefeitosService;
  * @author caiof
  */
 public class AbrirCadastroItemCommand extends ItemCommand{
-    public AbrirCadastroItemCommand(Perfil perfil){
+    public AbrirCadastroItemCommand(Perfil perfil)throws SQLException {
         super(perfil);
     }
 

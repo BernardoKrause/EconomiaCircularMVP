@@ -19,12 +19,7 @@ public class UsuarioRepository {
     private final UsuarioDAO usuarioDAO;
 
     public UsuarioRepository() throws SQLException {
-       try {
-           this.usuarioDAO = new UsuarioDAOSQLite();
-       } catch (SQLException ex) {
-            ex.printStackTrace();
-            throw ex;
-        }
+        this.usuarioDAO = new UsuarioDAOSQLite();
     }
 
     public void adicionaUsuario(String nome, String email, String telefone, String senha, boolean isAdmin) throws SQLException {
@@ -32,7 +27,7 @@ public class UsuarioRepository {
     }
 
     public Optional<Usuario> getUsuario(String id) throws SQLException {
-        return usuarioDAO.buscaPorId(Integer.parseInt(id));
+        return usuarioDAO.buscaPorId(Integer.valueOf(id));
     }
 
     public List<Usuario> getTodosUsuarios() throws SQLException {
@@ -44,7 +39,7 @@ public class UsuarioRepository {
     }
     
     public void deletaUsuario(String id) throws SQLException {
-        usuarioDAO.deletar(Integer.parseInt(id));
+        usuarioDAO.deletar(Integer.valueOf(id));
     }
     
     public int totalUsuarios() throws SQLException {

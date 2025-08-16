@@ -12,6 +12,7 @@ public abstract class Perfil {
     protected String id;
     protected Double beneficioClimatico;
     protected Usuario usuario;
+    protected Reputacao reputacao;
     
     public Perfil(String id) {
         this.id = id;
@@ -23,6 +24,10 @@ public abstract class Perfil {
     
     public Double getBeneficioClimatico() {
         return this.beneficioClimatico;
+    }
+    
+    public Reputacao getReputacao() {
+        return this.reputacao;
     }
     
     public void setBeneficioClimatico(Double beneficioClimatico) {
@@ -37,5 +42,4 @@ public abstract class Perfil {
         this.usuario=usuario;
     }
     
-    // falta o get reputacao
 }

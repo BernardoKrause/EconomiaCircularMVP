@@ -4,6 +4,7 @@
  */
 package state.home;
 
+import java.sql.SQLException;
 import model.Usuario;
 import presenter.HomePresenter;
 import view.HomeView;
@@ -33,23 +34,23 @@ public abstract class HomePresenterState {
         throw new RuntimeException("Não é possivel salvar estando nesse estado!");
     }
     
-    public void criarPerfilVendedor(){
+    public void criarPerfilVendedor() throws SQLException {
         throw new RuntimeException("Não é possivel salvar estando nesse estado!");
     }
     
-    public void acessarPerfilVendedor(){
+    public void acessarPerfilVendedor() throws SQLException {
         throw new RuntimeException("Não é possivel salvar estando nesse estado!");
     }
     
-    public void criarPerfilComprador(){
+    public void criarPerfilComprador() throws SQLException {
         throw new RuntimeException("Não é possivel salvar estando nesse estado!");
     }
     
-    public void acessarPerfilComprador(){
+    public void acessarPerfilComprador() throws SQLException {
         throw new RuntimeException("Não é possivel salvar estando nesse estado!");
     }
     
-    public void publicarItem(){
+    public void publicarItem() throws SQLException {
         throw new RuntimeException("Não é possivel salvar estando nesse estado!");
     }
     

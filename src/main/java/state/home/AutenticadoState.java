@@ -10,6 +10,7 @@ import command.perfil.CriarPerfilVendedorCommand;
 import command.usuario.SairUsuarioCommand;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import model.Usuario;
 import presenter.HomePresenter;
@@ -93,7 +94,7 @@ public class AutenticadoState extends HomePresenterState{
     }
     
     @Override
-    public void criarPerfilVendedor(){
+    public void criarPerfilVendedor() throws SQLException {
         new CriarPerfilVendedorCommand(usuario).executar();
         view.getMItemAcessarPerfilVendedor().setVisible(true); 
         view.getMItemCriarPerfilVendedor().setVisible(false); 
@@ -101,12 +102,12 @@ public class AutenticadoState extends HomePresenterState{
     }
     
     @Override
-    public void acessarPerfilVendedor(){
+    public void acessarPerfilVendedor() throws SQLException {
         new AcessarPerfilVendedorCommand(usuario).executar();
     }
     
     @Override
-    public void criarPerfilComprador(){
+    public void criarPerfilComprador() throws SQLException {
         new CriarPerfilCompradorCommand(usuario).executar();
         view.getMItemAcessarPerfilComprador().setVisible(true); 
         view.getMItemCriarPerfilVendedor().setVisible(false); 

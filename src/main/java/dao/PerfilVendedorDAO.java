@@ -14,8 +14,7 @@ import model.Vendedor;
  * @author berna
  */
 public interface PerfilVendedorDAO {
-    public void criar(Vendedor item) throws SQLException;
+    public void criar(Vendedor vendedor) throws SQLException;
     public List<Vendedor> buscaTodos() throws SQLException;
-    public void atualizar(Vendedor vendedor) throws SQLException;
     public void deletar(String id) throws SQLException;
 }
