@@ -18,26 +18,26 @@ import repository.IItemRepository;
  */
 public class ItemRepositorySqLite implements IItemRepository{
     private ItemDAOSQLite itemDAO;
-    
+
     public ItemRepositorySqLite() {
         this.itemDAO = new ItemDAOSQLite();
     }
-    
+
     @Override
     public Optional<List<Item>> BuscarPorVendedor(Vendedor vendedor){
         return null;
     }
-    
+
     @Override
     public Optional<Item> BuscarPorIdC(String id) throws SQLException{
-        return itemDAO.buscaPorId(id);
+        return itemDAO.buscaPorId(Integer.valueOf(id));
     }
-    
+
     @Override
     public Integer getQuantidadeItens() throws SQLException {
         return itemDAO.buscaTodos().size();
     }
-    
+
     @Override
     public void salvarItem(Item item) throws SQLException{
         itemDAO.criar(item);

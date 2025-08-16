@@ -17,16 +17,24 @@ import repository.IUsuarioRepository;
  */
 public class UsuarioRepositoryTeste implements IUsuarioRepository{
     private List<Usuario> usuariosCadastrados;
+    private static UsuarioRepositoryTeste instancia;
     
-    public UsuarioRepositoryTeste(){
+    private UsuarioRepositoryTeste(){
         usuariosCadastrados=new ArrayList<>();
+    }
+    
+    public static UsuarioRepositoryTeste getintancia(){
+        if(instancia==null){        
+            instancia = new UsuarioRepositoryTeste();
+        }     
+        return instancia;
     }
 
     @Override
     public void adicionaUsuario(String nome, String email, String telefone, String senha, boolean isAdmin) throws SQLException {
         Usuario u = new Usuario(nome, email, telefone, senha);
         u.setAdmin(isAdmin);
-        usuariosCadastrados.add(new Usuario(nome, email, telefone, senha));
+        usuariosCadastrados.add(u);
     }
 
     @Override
@@ -62,7 +70,7 @@ public class UsuarioRepositoryTeste implements IUsuarioRepository{
     @Override
     public Optional<Usuario> getUsuarioPorEmail(String email) throws SQLException {
         for(Usuario u : usuariosCadastrados){
-            if(u.getEmail().equalsIgnoreCase(email)){
+            if(email.equals(u.getEmail())){
                 return Optional.of(u);
             }
         }

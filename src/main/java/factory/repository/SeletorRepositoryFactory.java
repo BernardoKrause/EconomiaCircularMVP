@@ -20,11 +20,17 @@ public class SeletorRepositoryFactory {
         String tipoBanco = DotEnvAdapter.getEnv("REPOSITORY");
 
         try {
-            Class<?> nomeClasse = Class.forName(DotEnvAdapter.getEnv(tipoBanco));
-            var construtor = nomeClasse.getConstructor();
-            return (IRepositoryFactory) construtor.newInstance();
+//            Class<?> nomeClasse = Class.forName(DotEnvAdapter.getEnv(tipoBanco));
+//            var construtor = nomeClasse.getConstructor();
+//            return (IRepositoryFactory) construtor.newInstance();
+            if(tipoBanco.equalsIgnoreCase("sqlite")){
+                return new RepositoryFactorySqLite();
+            }else if(tipoBanco.equalsIgnoreCase("teste")){
+                return new RepositoryFactoryTeste();
+            }
         } catch (Exception e) {
             throw new RuntimeException("Erro na reflexão de fábrica da repository, tipo de banco: " + tipoBanco + " " + e.getMessage());
         }
+        return null;
     }
 }

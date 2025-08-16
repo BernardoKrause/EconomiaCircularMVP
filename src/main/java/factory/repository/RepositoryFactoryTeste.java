@@ -27,7 +27,7 @@ public class RepositoryFactoryTeste implements IRepositoryFactory{
 
     @Override
     public IUsuarioRepository criarUsuarioRepository() {
-        return new UsuarioRepositoryTeste();
+        return UsuarioRepositoryTeste.getintancia();
     }
 
     @Override
