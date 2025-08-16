@@ -4,19 +4,21 @@
  */
 package factory.repository;
 
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import repository.ICondutaRepository;
 import repository.IDefeitosTipoRepository;
 import repository.IDenunciaRepository;
 import repository.IItemRepository;
 import repository.IPerfilSolicitacaoRepository;
 import repository.IPerfilVendedorRepository;
+import repository.IReputacaoRepository;
 import repository.IUsuarioRepository;
+import repository.teste.CondutaRepositoryTeste;
+import repository.teste.DefeitosTipoRepositoryTeste;
 import repository.teste.DenunciaRepositoryTeste;
 import repository.teste.ItemRepositoryTeste;
 import repository.teste.PerfilSolicitacaoRepositoryTeste;
 import repository.teste.PerfilVendedorRepositoryTeste;
+import repository.teste.ReputacaoRepositoryTeste;
 import repository.teste.UsuarioRepositoryTeste;
 
 /**
@@ -32,44 +34,37 @@ public class RepositoryFactoryTeste implements IRepositoryFactory{
 
     @Override
     public IPerfilVendedorRepository criarPerfilVendedorRepository() {
-        try {
-            return new PerfilVendedorRepositoryTeste();
-        } catch (SQLException ex) {
-            Logger.getLogger(RepositoryFactoryTeste.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+        return PerfilVendedorRepositoryTeste.getInstancia();
     }
 
     @Override
     public IPerfilSolicitacaoRepository criarPerfilSolicitacaoRepository() {
-        try {
-            return new PerfilSolicitacaoRepositoryTeste();
-        } catch (SQLException ex) {
-            Logger.getLogger(RepositoryFactoryTeste.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+        return PerfilSolicitacaoRepositoryTeste.getInstancia();
     }
 
     @Override
     public IItemRepository criarItemRepository() {
-        return new ItemRepositoryTeste();
+        return ItemRepositoryTeste.getInstancia();
     }
 
     @Override
     public IDenunciaRepository criarDenunciaRepository() {
-        try {
-            return new DenunciaRepositoryTeste();
-        } catch (SQLException ex) {
-            Logger.getLogger(RepositoryFactoryTeste.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+        return DenunciaRepositoryTeste.getInstancia();
     }
 
     @Override
     public IDefeitosTipoRepository criarDefeitosTipoRepository() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//        return new DefeitosTipoRepositoryTeste();
+        return DefeitosTipoRepositoryTeste.getInstancia();
     }
-    
+
+    @Override
+    public IReputacaoRepository criarReputacaoRepository() {
+        return ReputacaoRepositoryTeste.getInstancia();
+    }
+
+    @Override
+    public ICondutaRepository criarCondutarRepository() {
+        return CondutaRepositoryTeste.getInstancia();
+    }
 }
 

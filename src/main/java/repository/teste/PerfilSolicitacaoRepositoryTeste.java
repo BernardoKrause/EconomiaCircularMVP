@@ -7,6 +7,8 @@ package repository.teste;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.SolicitacaoPerfil;
 import repository.IPerfilSolicitacaoRepository;
 
@@ -16,9 +18,21 @@ import repository.IPerfilSolicitacaoRepository;
  */
 public class PerfilSolicitacaoRepositoryTeste implements IPerfilSolicitacaoRepository{
     private List<SolicitacaoPerfil> solicitacoes;
+    private static PerfilSolicitacaoRepositoryTeste instancia;
 
-    public PerfilSolicitacaoRepositoryTeste() throws SQLException {
+    private PerfilSolicitacaoRepositoryTeste() throws SQLException {
         solicitacoes=new ArrayList<>();
+    }
+    
+    public static PerfilSolicitacaoRepositoryTeste getInstancia() {
+        if(instancia == null){
+            try {
+                instancia = new PerfilSolicitacaoRepositoryTeste();
+            } catch (SQLException ex) {
+                Logger.getLogger(PerfilSolicitacaoRepositoryTeste.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return instancia;
     }
 
     @Override

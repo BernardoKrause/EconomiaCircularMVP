@@ -19,9 +19,17 @@ import repository.IItemRepository;
  */
 public class ItemRepositoryTeste implements IItemRepository{
     private List<Item> itensPublicados;
+    private static ItemRepositoryTeste instancia;
     
-    public ItemRepositoryTeste() {
+    private ItemRepositoryTeste() {
         itensPublicados=new ArrayList<>();
+    }
+    
+    public static ItemRepositoryTeste getInstancia(){
+        if(instancia==null){
+            instancia = new ItemRepositoryTeste();
+        }
+        return instancia;
     }
     
     @Override

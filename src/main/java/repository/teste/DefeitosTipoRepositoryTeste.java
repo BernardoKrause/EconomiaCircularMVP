@@ -7,8 +7,9 @@ import repository.IDefeitosTipoRepository;
 
 public class DefeitosTipoRepositoryTeste implements IDefeitosTipoRepository{
     private Map<String,Map<String,Double>> tiposDefeito;
+    private static DefeitosTipoRepositoryTeste instancia;
 
-    public DefeitosTipoRepositoryTeste() {
+    private DefeitosTipoRepositoryTeste() {
         Map<String,Double> tiposDefeitoVestuario = new HashMap<>();
             tiposDefeitoVestuario.put("rasgo estruturante",0.3);
             tiposDefeitoVestuario.put("Ausência de botão principal",0.15);
@@ -41,6 +42,13 @@ public class DefeitosTipoRepositoryTeste implements IDefeitosTipoRepository{
         tiposDefeito.put("bijuterias e acessorios",tiposDefeitoBijuteria);
     }
 
+    public static DefeitosTipoRepositoryTeste getInstancia(){
+        if(instancia==null){
+            instancia = new DefeitosTipoRepositoryTeste();
+        }
+        return instancia;
+    }
+    
     @Override
     public Optional<List<String>> BuscarPorTipo(String tipoItem) throws SQLException {
         if(!tiposDefeito.containsKey(tipoItem)){

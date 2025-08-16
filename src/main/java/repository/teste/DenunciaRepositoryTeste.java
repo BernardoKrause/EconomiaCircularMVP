@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Comprador;
 import model.Denuncia;
 import model.Vendedor;
@@ -20,10 +22,22 @@ import repository.IDenunciaRepository;
  * @author caiof
  */
 public class DenunciaRepositoryTeste implements IDenunciaRepository{
-     private List<Denuncia> denunciasPublicadas;
+    private List<Denuncia> denunciasPublicadas;
+    private static DenunciaRepositoryTeste instancia;
 
-    public DenunciaRepositoryTeste() throws SQLException {
+    private DenunciaRepositoryTeste() throws SQLException {
         denunciasPublicadas=new ArrayList<>();
+    }
+    
+    public static DenunciaRepositoryTeste getInstancia(){
+        if(instancia==null){
+            try {
+                instancia = new DenunciaRepositoryTeste();
+            } catch (SQLException ex) {
+                Logger.getLogger(DenunciaRepositoryTeste.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return instancia;
     }
 
      @Override

@@ -24,7 +24,7 @@ public class CondutaRepositoryTeste implements ICondutaRepository{
         condutasReputacaoCadastradas = new ArrayList<Conduta>();
     }
 
-    public CondutaRepositoryTeste getInstancia(){
+    public static CondutaRepositoryTeste getInstancia(){
         if(instancia == null){
             instancia = new CondutaRepositoryTeste();
         }
