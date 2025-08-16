@@ -2,40 +2,50 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package repository;
+package repository.sqlite;
 
 import dao.ItemDAOSQLite;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import model.Item;
 import model.Vendedor;
+import repository.IItemRepository;
 
 /**
  *
  * @author caiof
  */
-public class ItemRepository {
+public class ItemRepositorySqLite implements IItemRepository{
     private ItemDAOSQLite itemDAO;
     
-    public ItemRepository() {
+    public ItemRepositorySqLite() {
         this.itemDAO = new ItemDAOSQLite();
     }
     
+    @Override
     public Optional<List<Item>> BuscarPorVendedor(Vendedor vendedor){
         return null;
     }
     
-    public Optional<Item> BuscarPorIdC(Integer id) throws SQLException{
+    @Override
+    public Optional<Item> BuscarPorIdC(String id) throws SQLException{
         return itemDAO.buscaPorId(id);
     }
     
+    @Override
     public Integer getQuantidadeItens() throws SQLException {
         return itemDAO.buscaTodos().size();
     }
     
+    @Override
     public void salvarItem(Item item) throws SQLException{
         itemDAO.criar(item);
+    }
+
+    @Override
+    public Optional<List<String>> getTiposItem() {
+        //a fazer
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
