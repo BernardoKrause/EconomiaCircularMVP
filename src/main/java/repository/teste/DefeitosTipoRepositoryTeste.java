@@ -9,7 +9,7 @@ public class DefeitosTipoRepositoryTeste implements IDefeitosTipoRepository{
     private Map<String,Map<String,Double>> tiposDefeito;
     private static DefeitosTipoRepositoryTeste instancia;
 
-    private DefeitosTipoRepositoryTeste() {
+    public DefeitosTipoRepositoryTeste() {
         Map<String,Double> tiposDefeitoVestuario = new HashMap<>();
             tiposDefeitoVestuario.put("rasgo estruturante",0.3);
             tiposDefeitoVestuario.put("Ausência de botão principal",0.15);

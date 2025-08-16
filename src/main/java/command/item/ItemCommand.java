@@ -5,11 +5,11 @@
 package command.item;
 
 import command.ICommand;
+import factory.repository.SeletorRepositoryFactory;
 import java.sql.SQLException;
 import javax.swing.JDesktopPane;
 import model.Perfil;
-import presenter.GerenciadorTelas;
-import repository.database.PerfilVendedorRepository;
+import presenter.GerenciadorTelas
 import service.PerfilService;
 
 /**
@@ -23,7 +23,7 @@ public abstract class ItemCommand implements ICommand{
     
     public ItemCommand(Perfil perfil) throws SQLException {
         this.perfil=perfil;
-        this.service = new PerfilService(new PerfilVendedorRepository());
+        this.service = new PerfilService(SeletorRepositoryFactory.obterInstancia().criarPerfilVendedorRepository());
         this.desktop = GerenciadorTelas.getInstancia().getDesktop();
     }
 
