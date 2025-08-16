@@ -1,11 +1,14 @@
-package repository;
+package repository.teste;
 
+import java.sql.SQLException;
 import java.util.*;
+import model.Item;
+import repository.IDefeitosTipoRepository;
 
-public class TiposDefeitoRepository {
+public class DefeitosTipoRepositoryTeste implements IDefeitosTipoRepository{
     private Map<String,Map<String,Double>> tiposDefeito;
 
-    public TiposDefeitoRepository() {
+    public DefeitosTipoRepositoryTeste() {
         Map<String,Double> tiposDefeitoVestuario = new HashMap<>();
             tiposDefeitoVestuario.put("rasgo estruturante",0.3);
             tiposDefeitoVestuario.put("Ausência de botão principal",0.15);
@@ -37,16 +40,9 @@ public class TiposDefeitoRepository {
         tiposDefeito.put("bolsas e mochilas",tiposDefeitoBolsa);
         tiposDefeito.put("bijuterias e acessorios",tiposDefeitoBijuteria);
     }
-    
-    public Optional<List<String>> getTipos() {
-        List<String> listaTipos = new ArrayList<>();
-        tiposDefeito.keySet().forEach(key -> {
-            listaTipos.add(key);
-        });
-        return Optional.of(listaTipos);
-    }
 
-    public Optional<List<String>> getDefeitosTipo(String tipoItem) {
+    @Override
+    public Optional<List<String>> BuscarPorTipo(String tipoItem) throws SQLException {
         if(!tiposDefeito.containsKey(tipoItem)){
             return Optional.empty();
         }
@@ -57,20 +53,27 @@ public class TiposDefeitoRepository {
         return Optional.of(listaDefeitos);
     }
 
-    public Double getValor(String tipoItem,String defeito) {
-        if(!tiposDefeito.containsKey(tipoItem)){
-            throw new IllegalArgumentException("O tipo informado não existe!");
+    @Override
+    public Double getPercentualPorDefeito(String defeito) throws SQLException {
+        String tipoItem;
+        for(String tipo:tiposDefeito.keySet()){
+            tipoItem=tipo;
+        
+            if(tiposDefeito.get(tipoItem).containsKey(defeito)){
+                return tiposDefeito.get(tipoItem).get(defeito);
+            }
         }
-        if(!tiposDefeito.get(tipoItem).containsKey(defeito)){
-            throw new IllegalArgumentException("O defeito informado não existe!");
-        }
-        return tiposDefeito.get(tipoItem).get(defeito);
+        throw new IllegalArgumentException("O defeito informado não existe!");
     }
 
-    public Map<String,Double> getMapTipoDefeitos(String tipoItem){
-        if(!tiposDefeito.containsKey(tipoItem)){
-            throw new IllegalArgumentException("O tipo informado não existe!");
-        }
-        return tiposDefeito.get(tipoItem);
+    @Override
+    public Optional<List<String>> getTiposItem() {
+        List<String> tiposDefeito = new ArrayList<>();
+        tiposDefeito.add("vestuario");
+        tiposDefeito.add("calcado");
+        tiposDefeito.add("bolsas e mochilas");
+        tiposDefeito.add("bijuterias e acessorios");
+        
+        return Optional.of(tiposDefeito);
     }
 }

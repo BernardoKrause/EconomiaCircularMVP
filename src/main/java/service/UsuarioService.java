@@ -7,16 +7,16 @@ package service;
 import java.sql.SQLException;
 import java.util.Optional;
 import model.Usuario;
-import repository.UsuarioRepository;
+import repository.IUsuarioRepository;
 
 /**
  *
  * @author berna
  */
 public class UsuarioService {
-    private final UsuarioRepository usuarioRepository;
+    private final IUsuarioRepository usuarioRepository;
     
-    public UsuarioService(UsuarioRepository usuarioRepository) {
+    public UsuarioService(IUsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
     

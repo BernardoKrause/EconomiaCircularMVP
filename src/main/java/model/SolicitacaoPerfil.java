@@ -29,6 +29,10 @@ public class SolicitacaoPerfil {
     public SolicitacaoPerfil(String status) {
         this.status = status;
     }
+
+    public SolicitacaoPerfil(String a, Integer idUsuario) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     public Integer getId() {
         return this.id;
@@ -40,5 +44,9 @@ public class SolicitacaoPerfil {
     
     public Integer getIdUsuario() {
         return this.idUsuario;
+    }
+    
+    public void setStatus(String status){
+        this.status=status;
     }
 }
