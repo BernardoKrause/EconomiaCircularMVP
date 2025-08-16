@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import model.Item;
-import util.DatabaseConnection;
+import util.factory.connection.DatabaseConnectionFactory;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -29,7 +29,7 @@ public class ItemDAOSQLite implements ItemDAO {
         String sql = "INSERT INTO itens "
                     + "(idC, tipo, subcategoria, tamanho, cor, peso, composicao, precoBase, precoFinal, gpwEvitado, mciItem, numeroCiclo, idPerfilVendedor) "
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, item.getIdC());
@@ -54,7 +54,7 @@ public class ItemDAOSQLite implements ItemDAO {
     public List<Item> buscaTodos() throws SQLException {
         List<Item> itens = new ArrayList<>();
         String sql = "SELECT * FROM itens";
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -82,7 +82,7 @@ public class ItemDAOSQLite implements ItemDAO {
     @Override
     public Optional<Item> buscaPorId(Integer id) throws SQLException {
         String sql = "SELECT * FROM itens WHERE idItem = ?";
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, id);
@@ -117,7 +117,7 @@ public class ItemDAOSQLite implements ItemDAO {
     public void atualizar(Item item) throws SQLException {
         String sql = "UPDATE itens SET tipo = ?, subcategoria = ?, tamanho = ?, cor = ?, peso = ?, composicao = ?, precoBase = ? , precoFinal = ? , gpwEvitado = ? , mciItem = ?, numeroCiclo = ?"
                    + "WHERE idC = ?";
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(2, item.getTipo());
@@ -139,7 +139,7 @@ public class ItemDAOSQLite implements ItemDAO {
     @Override
     public void deletar(Integer idC) throws SQLException {
         String sql = "DELETE FROM itens WHERE idC = ?";
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, idC);

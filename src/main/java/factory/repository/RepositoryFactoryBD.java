@@ -4,7 +4,7 @@
  */
 package factory.repository;
 
-import factory.dao.DAOFactory;
+import factory.dao.IDAOFactory;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,10 +29,10 @@ import repository.database.UsuarioRepository;
  */
 public class RepositoryFactoryBD implements IRepositoryFactory{
 
-    private DAOFactory daoFactory;
+    private IDAOFactory daoFactory;
     
     public RepositoryFactoryBD(String sgbd) {
-        daoFactory = DAOFactory.getDAOFactory(sgbd);
+        daoFactory = IDAOFactory.getDAOFactory(sgbd);
     }
     
     @Override

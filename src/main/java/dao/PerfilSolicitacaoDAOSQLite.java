@@ -12,7 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.SolicitacaoPerfil;
-import util.DatabaseConnection;
+import util.factory.connection.DatabaseConnectionFactory;
 
 /**
  *
@@ -24,7 +24,7 @@ public class PerfilSolicitacaoDAOSQLite implements PerfilSolicitacaoDAO {
     public void criar(SolicitacaoPerfil solicitacaoPerfil) throws SQLException {
         String sql = "INSERT INTO perfil_solicitacoes (idUsuario)"
                    + "VALUES (?)";
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, solicitacaoPerfil.getIdUsuario());
@@ -36,7 +36,7 @@ public class PerfilSolicitacaoDAOSQLite implements PerfilSolicitacaoDAO {
     public List<SolicitacaoPerfil> buscaTodos() throws SQLException {
         List<SolicitacaoPerfil> perfilSolicitacoes = new ArrayList<>();
         String sql = "SELECT * FROM perfil_solicitacoes";
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -57,7 +57,7 @@ public class PerfilSolicitacaoDAOSQLite implements PerfilSolicitacaoDAO {
     public List<SolicitacaoPerfil> buscaEmAguardo() throws SQLException {
         List<SolicitacaoPerfil> perfilSolicitacoes = new ArrayList<>();
         String sql = "SELECT * FROM perfil_solicitacoes WHERE status = 'W'";
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -78,7 +78,7 @@ public class PerfilSolicitacaoDAOSQLite implements PerfilSolicitacaoDAO {
     public void atualizar(SolicitacaoPerfil solicitacaoPerfil) throws SQLException {
         String sql = "UPDATE perfil_solicitacoes SET status = ?"
                    + "WHERE idSolicitacaoPerfil = ?";
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, solicitacaoPerfil.getStatus());
@@ -91,7 +91,7 @@ public class PerfilSolicitacaoDAOSQLite implements PerfilSolicitacaoDAO {
     @Override
     public void deletar(Integer id) throws SQLException {
         String sql = "DELETE FROM perfil_solicitacoes WHERE idSolicitacaoPerfil = ?";
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, id);

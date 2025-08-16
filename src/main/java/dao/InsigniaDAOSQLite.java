@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import model.Insignia;
-import util.DatabaseConnection;
+import util.factory.connection.DatabaseConnectionFactory;
 
 /**
  *
@@ -25,7 +25,7 @@ public class InsigniaDAOSQLite implements InsigniaDAO {
     public void criar(Insignia insignia) throws SQLException {
         String sql = "INSERT INTO insignias (nome, estrelaBonus)"
                    + "VALUES (?, ?)";
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, insignia.getNome());
@@ -41,7 +41,7 @@ public class InsigniaDAOSQLite implements InsigniaDAO {
             SELECT * FROM insignias
             """;
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql)) {
         

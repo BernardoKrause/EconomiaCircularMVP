@@ -16,7 +16,7 @@ import dao.UsuarioDAO;
  *
  * @author berna
  */
-public abstract class DAOFactory {
+public abstract class IDAOFactory {
     public abstract DenunciaDAO getDenunciaDAO();
     public abstract InsigniaDAO getInsigniaDAO();
     public abstract ItemDAO getItemDAO();
@@ -25,7 +25,7 @@ public abstract class DAOFactory {
     public abstract PerfilVendedorDAO getPerfilVendedorDAO();
     public abstract UsuarioDAO getUsuarioDAO();
     
-    public static DAOFactory getDAOFactory(String sgbd) {
+    public static IDAOFactory getDAOFactory(String sgbd) {
         if (sgbd.equalsIgnoreCase("SQLite")) {
             return new SQLiteDAOFactory();
         } else if (sgbd.equalsIgnoreCase("H2")) {

@@ -23,7 +23,7 @@ import dao.UsuarioDAOSQLite;
  *
  * @author berna
  */
-public class SQLiteDAOFactory extends DAOFactory {
+public class SQLiteDAOFactory extends IDAOFactory {
 
     @Override
     public ItemDAO getItemDAO() {

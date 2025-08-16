@@ -4,7 +4,7 @@
  */
 package repository.database;
 
-import factory.dao.DAOFactory;
+import factory.dao.IDAOFactory;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -16,9 +16,9 @@ import repository.IDefeitosTipoRepository;
  */
 public class DefeitosTipoRepository implements IDefeitosTipoRepository {
 
-    private DAOFactory daoFactory;
+    private IDAOFactory daoFactory;
     
-    public DefeitosTipoRepository(DAOFactory daoFactory) throws SQLException {
+    public DefeitosTipoRepository(IDAOFactory daoFactory) throws SQLException {
         this.daoFactory = daoFactory;
     }
 

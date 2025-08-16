@@ -16,7 +16,7 @@ import dao.UsuarioDAO;
  *
  * @author berna
  */
-public class H2DAOFactory extends DAOFactory {
+public class H2DAOFactory extends IDAOFactory {
  
     @Override
     public ItemDAO getItemDAO() {

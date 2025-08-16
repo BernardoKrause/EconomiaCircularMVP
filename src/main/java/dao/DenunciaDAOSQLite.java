@@ -15,7 +15,7 @@ import java.util.Optional;
 import model.Comprador;
 import model.Denuncia;
 import model.Vendedor;
-import util.DatabaseConnection;
+import util.factory.connection.DatabaseConnectionFactory;
 
 /**
  *
@@ -27,7 +27,7 @@ public class DenunciaDAOSQLite implements DenunciaDAO {
     public void criar(Denuncia denuncia) throws SQLException {
         String sql = "INSERT INTO denuncias (idC, descricao, status, idPerfilComprador, idPerfilVendedor)"
                    + "VALUES (?, ?, ?, ?, ?)";
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, denuncia.getIdC());
@@ -51,7 +51,7 @@ public class DenunciaDAOSQLite implements DenunciaDAO {
             LEFT JOIN vendedores v ON d.idPerfilVendedor = v.idPerfilVendedor
             """;
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql)) {
         
@@ -91,7 +91,7 @@ public class DenunciaDAOSQLite implements DenunciaDAO {
             WHERE d.idDenuncia = ?
             """;
         
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, id);
@@ -128,7 +128,7 @@ public class DenunciaDAOSQLite implements DenunciaDAO {
     public void atualizar(Denuncia denuncia) throws SQLException {
         String sql = "UPDATE denuncias SET idC = ?, descricao = ?, status = ?, idPerfilComprador = ?, idPerfilVendedor = ? "
                    + "WHERE idDenuncia = ?";
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, denuncia.getIdC());
@@ -145,7 +145,7 @@ public class DenunciaDAOSQLite implements DenunciaDAO {
     @Override
     public void deletar(Integer id) throws SQLException {
        String sql = "DELETE FROM denuncias WHERE idDenuncia = ?";
-       try (Connection conn = DatabaseConnection.getConnection();
+       try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
            PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
            pstmt.setInt(1, id);
