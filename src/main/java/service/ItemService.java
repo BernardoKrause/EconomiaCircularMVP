@@ -21,13 +21,8 @@ public class ItemService {
     private TiposDefeitoRepository tiposDefeitoRepository;
     private SistemaDefeitosService sistemaDefeitos;
     
-    public ItemService(SistemaDefeitosService sistema, TiposDefeitoRepository tiposDefeitosRepo) throws SQLException {
-        try {
+    public ItemService(SistemaDefeitosService sistema, TiposDefeitoRepository tiposDefeitosRepo) {
             this.itemRepository = new ItemRepository();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            throw ex;
-        }
         
         this.sistemaDefeitos = sistema;
         this.tiposDefeitoRepository = tiposDefeitosRepo;

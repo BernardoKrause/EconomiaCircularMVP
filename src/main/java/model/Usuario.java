@@ -152,7 +152,7 @@ public class Usuario {
             return Optional.empty();
         }
         for (Perfil perfil : perfis) {
-            if (perfil.getId().startsWith("V")) {
+            if (perfil.getIdC().startsWith("V")) {
                 return Optional.of(perfil);    
             }
         }
@@ -165,7 +165,7 @@ public class Usuario {
             return Optional.empty();
         }
         for (Perfil perfil : perfis) {
-            if (perfil.getId().startsWith("C")) {
+            if (perfil.getIdC().startsWith("C")) {
                 return Optional.of(perfil);    
             }
         }

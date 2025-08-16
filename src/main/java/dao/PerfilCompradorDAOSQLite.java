@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.Comprador;
+import model.Reputacao;
 import util.DatabaseConnection;
 
 /*
@@ -23,42 +24,58 @@ public class PerfilCompradorDAOSQLite implements PerfilCompradorDAO {
     
     @Override
     public void criar(Comprador comprador) throws SQLException {
-        String sql = "INSERT INTO vendedores (sistemId, idReputacao) "
+        String sql = "INSERT INTO compradores (idPerfilComprador, idReputacao) "
                    + "VALUES (?, ?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, comprador.getId());
+            pstmt.setInt(1, comprador.getId());
             pstmt.setInt(2, comprador.getReputacao().getId());
             pstmt.executeUpdate();
         }
     }
 
     @Override
-    public List<Comprador> buscaTodos() throws SQLException {
-        List<Comprador> compradores = new ArrayList<>();
-        String sql = "SELECT * FROM compradores";
-        try (Connection conn = DatabaseConnection.getConnection();
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql)) {
+public List<Comprador> buscaTodos() throws SQLException {
+    List<Comprador> compradores = new ArrayList<>();
+    String sql = """
+        SELECT c.*, 
+               r.estrelas AS reputacao_estrelas,
+               r.beneficioClimatico AS reputacao_beneficio,
+               r.nivel AS reputacao_nivel
+        FROM compradores c
+        LEFT JOIN reputacoes r ON c.idReputacao = r.idReputacao
+        """;
+    
+    try (Connection conn = DatabaseConnection.getConnection();
+         Statement stmt = conn.createStatement();
+         ResultSet rs = stmt.executeQuery(sql)) {
 
-            while (rs.next()) {
-                compradores.add(new Comprador(
-                    rs.getString("sistemId")
-                ));
-            }
-
+        while (rs.next()) {
+            Reputacao reputacao = new Reputacao(
+                rs.getDouble("reputacao_estrelas"),
+                rs.getDouble("reputacao_beneficio"),
+                rs.getString("reputacao_nivel")
+            );
+            reputacao.setIdReputacao(rs.getInt("idReputacao"));
+            
+            compradores.add(new Comprador(
+                rs.getInt("idPerfilComprador"),
+                rs.getString("sistemId"),
+                reputacao
+            ));
         }
-        return compradores;
     }
+    return compradores;
+}
 
     @Override
-    public void deletar(String sistemId) throws SQLException {
-        String sql = "DELETE FROM compradores WHERE sistemId = ?";
+    public void deletar(Integer id) throws SQLException {
+        String sql = "DELETE FROM compradores WHERE idPerfilComprador = ?";
         try (Connection conn = DatabaseConnection.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, sistemId);
+            pstmt.setInt(1, id);
             pstmt.executeUpdate();
         }
     }

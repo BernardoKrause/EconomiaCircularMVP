@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Item {
+    private Integer id;
     private String idC;
     private String tipo;
     private String subcategoria;
@@ -93,7 +94,7 @@ public class Item {
         this.defeitos = defeitos;
     }
 
-    public Item(String idC, String tipo, String subcategoria, String tamanho, String cor, Double peso, String composicao, Double precoBase, Double precoFinal, Integer gpwEvitado, Double mciItem, Integer numeroCiclo) {
+    public Item(Integer id, String idC, String tipo, String subcategoria, String tamanho, String cor, Double peso, String composicao, Double precoBase, Double precoFinal, Integer gpwEvitado, Double mciItem, Integer numeroCiclo) {
         this.idC = idC;
         this.tipo = tipo;
         this.subcategoria = subcategoria;

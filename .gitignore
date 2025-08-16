@@ -1,5 +1,6 @@
 *.class
 *.lst
+*.db
 
 /bin/
 /build/
