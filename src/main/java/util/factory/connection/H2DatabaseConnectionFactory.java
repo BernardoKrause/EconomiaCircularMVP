@@ -57,8 +57,7 @@ public class H2DatabaseConnectionFactory implements DatabaseConnectionFactory {
             CREATE TABLE IF NOT EXISTS defeitos (
                 idDefeito INTEGER PRIMARY KEY AUTO_INCREMENT,
                 descricao TEXT,
-                percentualDesconto DOUBLE,
-                valorDesconto DOUBLE
+                percentualDesconto DOUBLE
             );
             """,
             """
@@ -201,6 +200,7 @@ public class H2DatabaseConnectionFactory implements DatabaseConnectionFactory {
             CREATE TABLE IF NOT EXISTS item_defeitos (
                 idItem INTEGER,
                 idDefeito INTEGER,
+                valorDesconto DOUBLE,
                 PRIMARY KEY (idItem, idDefeito),
                 FOREIGN KEY (idItem) REFERENCES itens(idItem),
                 FOREIGN KEY (idDefeito) REFERENCES defeitos(idDefeito)

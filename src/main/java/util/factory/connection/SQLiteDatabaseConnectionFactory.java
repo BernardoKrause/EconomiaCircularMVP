@@ -59,8 +59,7 @@ private static final String URL = "jdbc:sqlite:" + System.getProperty("user.dir"
             CREATE TABLE IF NOT EXISTS defeitos (
                 idDefeito INTEGER PRIMARY KEY AUTOINCREMENT,
                 descricao TEXT,
-                percentualDesconto REAL,
-                valorDesconto REAL
+                percentualDesconto REAL
             );
             """,
             """
@@ -203,6 +202,7 @@ private static final String URL = "jdbc:sqlite:" + System.getProperty("user.dir"
             CREATE TABLE IF NOT EXISTS item_defeitos (
                 idItem INTEGER,
                 idDefeito INTEGER,
+                valorDesconto REAL,
                 PRIMARY KEY (idItem, idDefeito),
                 FOREIGN KEY (idItem) REFERENCES itens(idItem),
                 FOREIGN KEY (idDefeito) REFERENCES defeitos(idDefeito)
