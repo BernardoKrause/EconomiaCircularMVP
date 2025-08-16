@@ -19,8 +19,8 @@ public class Vendedor extends Perfil {
         this.itens=new ArrayList<>();
     }
     
-    public Vendedor(Integer id, String idC) {
-        super(id, idC);
+    public Vendedor(Integer id, String sistemId) {
+        super(id, sistemId);
         this.itens = null;
     }
     
