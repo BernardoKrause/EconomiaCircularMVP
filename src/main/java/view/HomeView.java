@@ -46,9 +46,11 @@ public class HomeView extends javax.swing.JFrame {
         menuVendedor = new javax.swing.JMenu();
         mItemCriarPerfilVendedor = new javax.swing.JMenuItem();
         mItemAcessarPerfilVendedor = new javax.swing.JMenuItem();
+        mItemVerPerfilVendedor = new javax.swing.JMenuItem();
         menuComprador = new javax.swing.JMenu();
         mItemCriarPerfilComprador = new javax.swing.JMenuItem();
         mItemAcessarPerfilComprador = new javax.swing.JMenuItem();
+        mItemVerPerfilComprador = new javax.swing.JMenuItem();
         menuItem = new javax.swing.JMenu();
         mItemPublicarItem = new javax.swing.JMenuItem();
 
@@ -93,6 +95,14 @@ public class HomeView extends javax.swing.JFrame {
         mItemAcessarPerfilVendedor.setText("Acessar");
         menuVendedor.add(mItemAcessarPerfilVendedor);
 
+        mItemVerPerfilVendedor.setText("Ver Perfil");
+        mItemVerPerfilVendedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mItemVerPerfilVendedorActionPerformed(evt);
+            }
+        });
+        menuVendedor.add(mItemVerPerfilVendedor);
+
         jMenuBar1.add(menuVendedor);
 
         menuComprador.setText("Comprador");
@@ -107,6 +117,9 @@ public class HomeView extends javax.swing.JFrame {
             }
         });
         menuComprador.add(mItemAcessarPerfilComprador);
+
+        mItemVerPerfilComprador.setText("Ver Perfil");
+        menuComprador.add(mItemVerPerfilComprador);
 
         jMenuBar1.add(menuComprador);
 
@@ -140,6 +153,10 @@ public class HomeView extends javax.swing.JFrame {
     private void menuItemEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemEntrarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menuItemEntrarActionPerformed
+
+    private void mItemVerPerfilVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemVerPerfilVendedorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mItemVerPerfilVendedorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,6 +192,8 @@ public class HomeView extends javax.swing.JFrame {
     private javax.swing.JMenuItem mItemCriarPerfilComprador;
     private javax.swing.JMenuItem mItemCriarPerfilVendedor;
     private javax.swing.JMenuItem mItemPublicarItem;
+    private javax.swing.JMenuItem mItemVerPerfilComprador;
+    private javax.swing.JMenuItem mItemVerPerfilVendedor;
     private javax.swing.JMenu menuComprador;
     private javax.swing.JMenu menuItem;
     private javax.swing.JMenuItem menuItemCadastrar;
@@ -216,6 +235,10 @@ public class HomeView extends javax.swing.JFrame {
         public JMenuItem getMItemAcessarPerfilVendedor() {
             return mItemAcessarPerfilVendedor;
         }
+        
+        public JMenuItem getMItemVerPerfilVendedor(){
+            return mItemVerPerfilVendedor;
+        }
     
         
     public JMenu getMenuComprador(){
@@ -228,6 +251,10 @@ public class HomeView extends javax.swing.JFrame {
 
         public JMenuItem getMItemAcessarPerfilComprador() {
             return mItemAcessarPerfilComprador;
+        }
+        
+        public JMenuItem getMItemVerPerfilComprador(){
+            return mItemVerPerfilComprador;
         }
     
     public JMenu getMenuItem(){

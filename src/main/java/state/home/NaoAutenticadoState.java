@@ -4,8 +4,8 @@
  */
 package state.home;
 
-import command.usuario.AbrirCadastroUsuarioCommand;
-import command.usuario.AbrirEntrarUsuarioCommand;
+import command.usuario.AbrirSignupUsuarioCommand;
+import command.usuario.AbrirLoginUsuarioCommand;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -20,14 +20,7 @@ public class NaoAutenticadoState extends HomePresenterState{
     public NaoAutenticadoState(HomePresenter presenter) {
         super(presenter);
                 
-        view.getMenuUsuario().setVisible(true);
-        view.getMenuUsuario().setText("Usuario");
-        view.getMenuVendedor().setVisible(false);
-        view.getMenuComprador().setVisible(false);
-        view.getMenuItem().setVisible(false);
-        view.getMItemEntrarUsuario().setVisible(true);
-        view.getMItemCadastrarUsuario().setVisible(true);
-        view.getMItemSairUsuario().setVisible(false);
+        setVisibles();
         
         view.getMItemEntrarUsuario().addActionListener(
             new ActionListener(){
@@ -58,12 +51,24 @@ public class NaoAutenticadoState extends HomePresenterState{
 
     @Override
     public void entrarUsuario() {
-        new AbrirEntrarUsuarioCommand().executar();
+        new AbrirLoginUsuarioCommand().executar();
     }
 
 
     @Override
     public void cadastrarUsuario(){
-        new AbrirCadastroUsuarioCommand().executar();
+        new AbrirSignupUsuarioCommand().executar();
+    }
+    
+    @Override
+    public void setVisibles(){
+        view.getMenuUsuario().setVisible(true);
+        view.getMenuUsuario().setText("Usuario");
+        view.getMenuVendedor().setVisible(false);
+        view.getMenuComprador().setVisible(false);
+        view.getMenuItem().setVisible(false);
+        view.getMItemEntrarUsuario().setVisible(true);
+        view.getMItemCadastrarUsuario().setVisible(true);
+        view.getMItemSairUsuario().setVisible(false);
     }
 }

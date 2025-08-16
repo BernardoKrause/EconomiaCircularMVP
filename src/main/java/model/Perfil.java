@@ -11,6 +11,8 @@ package model;
 public abstract class Perfil {
     protected String id;
     protected Double beneficioClimatico;
+    protected Usuario usuario;
+    protected Reputacao reputacao;
     
     public Perfil(String id) {
         this.id = id;
@@ -24,9 +26,20 @@ public abstract class Perfil {
         return this.beneficioClimatico;
     }
     
+    public Reputacao getReputacao() {
+        return this.reputacao;
+    }
+    
     public void setBeneficioClimatico(Double beneficioClimatico) {
         this.beneficioClimatico = beneficioClimatico;
     }
     
-    // falta o get reputacao
+    public Usuario getUsuario(){
+        return this.usuario;
+    }
+    
+    public void setUsuario(Usuario usuario){
+        this.usuario=usuario;
+    }
+    
 }

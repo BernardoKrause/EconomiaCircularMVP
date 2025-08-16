@@ -11,24 +11,29 @@ import javax.swing.*;
 import presenter.GerenciadorTelas;
 import service.UsuarioService;
 import command.ICommand;
+import java.sql.SQLException;
 
 /**
  *
  * @author caiof
  */
-public class AbrirEntrarUsuarioCommand implements ICommand {
+public class AbrirLoginUsuarioCommand implements ICommand {
     private JDesktopPane desktop;
 
-    public AbrirEntrarUsuarioCommand() {
+    public AbrirLoginUsuarioCommand() {
         this.desktop = GerenciadorTelas.getInstancia().getDesktop();
     }
 
     @Override
     public void executar() {
-        UsuarioRepository usuarioRepository = UsuarioRepository.getInstancia();
-        UsuarioService usuarioService = new UsuarioService(usuarioRepository);
-        LoginPresenter loginPresenter = new LoginPresenter(usuarioService);
-        desktop.add(loginPresenter.getView());
+        try {
+            UsuarioRepository usuarioRepository = new UsuarioRepository();
+            UsuarioService usuarioService = new UsuarioService(usuarioRepository);
+            LoginPresenter loginPresenter = new LoginPresenter(usuarioService);
+            desktop.add(loginPresenter.getView());
+        } catch (SQLException ex) {
+            System.getLogger(AbrirLoginUsuarioCommand.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
         
     }
 }

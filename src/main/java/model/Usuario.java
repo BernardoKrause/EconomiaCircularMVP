@@ -38,29 +38,8 @@ public class Usuario {
         this.senha = senha;
         this.admin = false;
         this.autenticado = false;
-        this.dataCriacaoDaConta = LocalDateTime.now();                
-    } 
-    
-    public Usuario(String nome, String email, String senha) {     
-        
-        if (nome == null) {
-            throw new IllegalArgumentException("Nome precisa ser informado.");
-        }
-        
-        if (email == null) {
-            throw new IllegalArgumentException("Email precisa ser informado.");
-        }
-        
-        if (senha == null) {
-            throw new IllegalArgumentException("Senha precisa ser informada.");
-        }
-        
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-        this.admin = false;
-        this.autenticado = false;
-        this.dataCriacaoDaConta = LocalDateTime.now();                
+        this.perfis = new ArrayList<>();
+        this.dataCriacaoDaConta = LocalDateTime.now();      
     } 
     
     public Usuario(String nome, String email, String telefone, String senha) {    
@@ -79,12 +58,66 @@ public class Usuario {
         
         this.nome = nome;
         this.email = email;
-        this.telefone = telefone;
+        this.telefone = telefone;     
         this.senha = senha;
         this.admin = false;
         this.autenticado = false;
-        this.dataCriacaoDaConta = LocalDateTime.now();
+        this.perfis = new ArrayList<>();
+        this.dataCriacaoDaConta = LocalDateTime.now();        
     } 
+    
+    
+    public Usuario(String id, String nome, String email, String telefone, String senha) {    
+        
+        if (nome == null) {
+            throw new IllegalArgumentException("Nome precisa ser informado.");
+        }
+        
+        if (email == null) {
+            throw new IllegalArgumentException("Email precisa ser informado.");
+        }
+        
+        if (senha == null) {
+            throw new IllegalArgumentException("Senha precisa ser informada.");
+        }
+        
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone; 
+        this.senha = senha;
+        this.autenticado = false;
+        this.perfis = new ArrayList<>();
+    } 
+    
+    public Usuario(String nome, String email, String telefone, String senha, boolean isAdmin) {    
+        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone;
+        this.senha = senha;
+        this.admin = isAdmin;         
+        this.autenticado = false;
+        this.perfis = new ArrayList<>();
+    } 
+
+    public Usuario(String id, String nome, String email, String telefone, boolean isAdmin, LocalDateTime dataCriacaoDaConta) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone;
+        this.admin = isAdmin;
+        this.dataCriacaoDaConta = dataCriacaoDaConta;
+    }
+    
+    public Usuario(String id, String nome, String email, String senha, String telefone, LocalDateTime dataCraicaoDaConta, boolean isAdmin) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.telefone = telefone;
+        this.dataCriacaoDaConta = dataCriacaoDaConta;
+        this.admin = isAdmin;
+    }
     
     public String getId() {
         return this.id;
@@ -101,7 +134,7 @@ public class Usuario {
     public String getEmail() {
         return this.email;
     }
-    
+
     public String getSenha() {
         return this.senha;
     }
@@ -171,7 +204,11 @@ public class Usuario {
         this.email=usuario.getEmail();
         this.admin = usuario.isAdmin();
         this.autenticado=usuario.isAutenticado();
-        this.perfis=usuario.getPerfis();
+        if (usuario.getPerfis()!=null){
+            this.perfis=usuario.getPerfis();
+        }else{
+            this.perfis=new ArrayList<>();
+        }
         this.dataCriacaoDaConta=usuario.getDataCriacao();
     }
 }
