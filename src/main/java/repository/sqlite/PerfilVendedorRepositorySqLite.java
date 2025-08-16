@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package repository;
+package repository.sqlite;
 
 import dao.PerfilVendedorDAO;
 import dao.PerfilVendedorDAOSQLite;
@@ -10,18 +10,20 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import model.Vendedor;
+import repository.IPerfilVendedorRepository;
 
 /**
  *
  * @author berna
  */
-public class PerfilVendedorRepository {
+public class PerfilVendedorRepositorySqLite implements IPerfilVendedorRepository{
     private final PerfilVendedorDAO perfilVendedorDAO;
 
-    public PerfilVendedorRepository() throws SQLException {
+    public PerfilVendedorRepositorySqLite() throws SQLException {
        this.perfilVendedorDAO = new PerfilVendedorDAOSQLite();
     }
     
+    @Override
     public void adicionaPerfil(Vendedor vendedor) throws SQLException {
         perfilVendedorDAO.criar(vendedor);
     }
@@ -34,6 +36,7 @@ public class PerfilVendedorRepository {
         return perfilVendedorDAO.buscaTodos();
     }
     
+    @Override
     public void deletaPerfil(Integer id) throws SQLException {
         perfilVendedorDAO.deletar(id);
     }

@@ -7,8 +7,8 @@ package command.item;
 import java.sql.SQLException;
 import model.Perfil;
 import presenter.ItemPresenter;
-import repository.PerfilVendedorRepository;
-import repository.TiposDefeitoRepository;
+import repository.sqlite.PerfilVendedorRepositorySqLite;
+import repository.teste.DefeitosTipoRepositoryTeste;
 import service.ItemService;
 import service.SistemaDefeitosService;
 
@@ -27,7 +27,7 @@ public class AbrirCadastroItemCommand extends ItemCommand{
      */
     @Override
     public void executar() throws SQLException {
-        TiposDefeitoRepository tiposDefeitosRepo = new TiposDefeitoRepository();
+        DefeitosTipoRepositoryTeste tiposDefeitosRepo = new DefeitosTipoRepositoryTeste();
         SistemaDefeitosService sysDefeito = new SistemaDefeitosService();
         ItemService itemService = new ItemService(sysDefeito, tiposDefeitosRepo);
         ItemPresenter itemPresenter = new ItemPresenter(itemService);
