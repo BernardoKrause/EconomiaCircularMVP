@@ -5,8 +5,6 @@
 package service;
 
 import java.sql.SQLException;
-import model.Comprador;
-import model.Perfil;
 import model.Usuario;
 import model.Vendedor;
 import repository.PerfilVendedorRepository;

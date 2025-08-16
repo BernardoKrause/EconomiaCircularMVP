@@ -16,8 +16,6 @@ import model.Usuario;
 public class CriarPerfilVendedorCommand extends PerfilCommand{
     public CriarPerfilVendedorCommand(Usuario usuario)  throws SQLException {
         super(usuario);
-        
-        System.out.print(usuario.getPerfis().isEmpty());
     }
 
     @Override
