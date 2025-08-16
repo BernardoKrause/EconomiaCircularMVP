@@ -4,13 +4,13 @@
  */
 package service;
 
+import factory.repository.SeletorRepositoryFactory;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Item;
 import model.Vendedor;
 import repository.IItemRepository;
-import repository.sqlite.ItemRepositorySqLite;
 import repository.teste.DefeitosTipoRepositoryTeste;
 
 /**
@@ -23,7 +23,7 @@ public class ItemService {
     private SistemaDefeitosService sistemaDefeitos;
     
     public ItemService(SistemaDefeitosService sistema, DefeitosTipoRepositoryTeste tiposDefeitosRepo) {
-            this.itemRepository = new ItemRepositorySqLite();
+            this.itemRepository = SeletorRepositoryFactory.obterInstancia().criarItemRepository();
         
         this.sistemaDefeitos = sistema;
         this.tiposDefeitoRepository = tiposDefeitosRepo;

@@ -4,9 +4,11 @@
  */
 package command.usuario;
 
+import factory.repository.SeletorRepositoryFactory;
 import java.sql.SQLException;
 import repository.sqlite.UsuarioRepositorySqLite;
 import presenter.SignupPresenter;
+import repository.IUsuarioRepository;
 import service.UsuarioService;
 
 /**
@@ -21,13 +23,9 @@ public class AbrirSignupUsuarioCommand extends UsuarioCommand {
     
     @Override
     public void executar() {
-        try {
-            UsuarioRepositorySqLite usuarioRepository = new UsuarioRepositorySqLite();
-            UsuarioService usuarioService = new UsuarioService(usuarioRepository);
-            SignupPresenter signupPresenter = new SignupPresenter(usuarioService);    
-            desktop.add(signupPresenter.getView());
-        } catch (SQLException ex) {
-            System.getLogger(AbrirSignupUsuarioCommand.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        }
+        IUsuarioRepository usuarioRepository = SeletorRepositoryFactory.obterInstancia().criarUsuarioRepository();
+        UsuarioService usuarioService = new UsuarioService(usuarioRepository);
+        SignupPresenter signupPresenter = new SignupPresenter(usuarioService);    
+        desktop.add(signupPresenter.getView());
     }
 }

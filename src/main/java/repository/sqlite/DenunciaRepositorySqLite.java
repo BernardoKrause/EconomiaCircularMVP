@@ -19,7 +19,7 @@ import repository.IDenunciaRepository;
  * @author berna
  */
 public class DenunciaRepositorySqLite implements IDenunciaRepository{
-     private final DenunciaDAO denunciaDAO;
+    private final DenunciaDAO denunciaDAO;
 
     public DenunciaRepositorySqLite() throws SQLException {
         this.denunciaDAO = new DenunciaDAOSQLite();

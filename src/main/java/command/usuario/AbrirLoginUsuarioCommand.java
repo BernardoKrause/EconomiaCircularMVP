@@ -5,13 +5,14 @@
 package command.usuario;
 
 import presenter.LoginPresenter;
-import repository.sqlite.UsuarioRepositorySqLite;
 
 import javax.swing.*;
 import presenter.GerenciadorTelas;
 import service.UsuarioService;
 import command.ICommand;
+import factory.repository.SeletorRepositoryFactory;
 import java.sql.SQLException;
+import repository.IUsuarioRepository;
 
 /**
  *
@@ -26,14 +27,9 @@ public class AbrirLoginUsuarioCommand implements ICommand {
 
     @Override
     public void executar() {
-        try {
-            UsuarioRepositorySqLite usuarioRepository = new UsuarioRepositorySqLite();
-            UsuarioService usuarioService = new UsuarioService(usuarioRepository);
-            LoginPresenter loginPresenter = new LoginPresenter(usuarioService);
-            desktop.add(loginPresenter.getView());
-        } catch (SQLException ex) {
-            System.getLogger(AbrirLoginUsuarioCommand.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        }
-        
+        IUsuarioRepository usuarioRepository = SeletorRepositoryFactory.obterInstancia().criarUsuarioRepository();
+        UsuarioService usuarioService = new UsuarioService(usuarioRepository);
+        LoginPresenter loginPresenter = new LoginPresenter(usuarioService);
+        desktop.add(loginPresenter.getView());
     }
 }
