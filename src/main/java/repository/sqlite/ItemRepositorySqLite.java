@@ -29,7 +29,7 @@ public class ItemRepositorySqLite implements IItemRepository{
     }
     
     @Override
-    public Optional<Item> BuscarPorIdC(Integer id) throws SQLException{
+    public Optional<Item> BuscarPorIdC(String id) throws SQLException{
         return itemDAO.buscaPorId(id);
     }
     
