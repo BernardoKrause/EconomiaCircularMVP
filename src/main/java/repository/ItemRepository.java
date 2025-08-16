@@ -4,6 +4,8 @@
  */
 package repository;
 
+import dao.ItemDAOSQLite;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -15,44 +17,25 @@ import model.Vendedor;
  * @author caiof
  */
 public class ItemRepository {
-    private List<Item> itensPublicados;
+    private ItemDAOSQLite itemDAO;
     
-    public ItemRepository(){
-        this.itensPublicados=new ArrayList<>();
+    public ItemRepository() {
+        this.itemDAO = new ItemDAOSQLite();
     }
     
     public Optional<List<Item>> BuscarPorVendedor(Vendedor vendedor){
-        if(vendedor == null){
-            throw new RuntimeException("Vendedor não encontrado!");
-        }
-        else{
-            List<Item> itensAchados = new ArrayList<>();
-            for(Item item : itensPublicados){
-                if (item.getVendedor() == vendedor){
-                    itensAchados.add(item);
-                }
-            }
-            if(itensAchados.isEmpty()){
-                throw new RuntimeException("Esse Vendedor não publicou nenhum item!");
-            }
-            return Optional.of(itensAchados);
-        }
+        return null;
     }
     
-    public Optional<Item> BuscarPorIdC(String idC){
-        for(Item item : itensPublicados){
-            if(item.getIdC() == idC){
-                return Optional.of(item);
-            }
-        }
-        throw new RuntimeException("Item com esse ID-C não foi encontrado!");
+    public Optional<Item> BuscarPorIdC(Integer id) throws SQLException{
+        return itemDAO.buscaPorId(id);
     }
     
-    public Integer getQuantidadeItens(){
-        return itensPublicados.size();
+    public Integer getQuantidadeItens() throws SQLException {
+        return itemDAO.buscaTodos().size();
     }
     
-    public void salvarItem(Item item){
-        this.itensPublicados.add(item);
+    public void salvarItem(Item item) throws SQLException{
+        itemDAO.criar(item);
     }
 }

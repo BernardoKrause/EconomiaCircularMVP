@@ -9,24 +9,53 @@ package model;
  * @author berna
  */
 public abstract class Perfil {
-    protected String id;
+    protected Integer id;
+    protected String sistemId;
     protected Double beneficioClimatico;
-    
-    public Perfil(String id) {
-        this.id = id;
+    protected Usuario usuario;
+    protected Reputacao reputacao;
+
+    public Perfil(String sistemId) {
+        this.sistemId = sistemId;
     }
     
-    public String getId() {
+    public Perfil(Integer id, String sistemId) {
+        this.id = id;
+        this.sistemId = sistemId;
+    }
+    
+    public Perfil(Integer id, String sistemId, Reputacao reputacao) {
+        this.id = id;
+        this.sistemId = sistemId;
+        this.reputacao = reputacao;
+    }
+    
+    public Integer getId() {
         return this.id;
+    }
+    
+    public String getSistemId() {
+        return this.sistemId;
     }
     
     public Double getBeneficioClimatico() {
         return this.beneficioClimatico;
     }
     
+    public Reputacao getReputacao() {
+        return this.reputacao;
+    }
+    
     public void setBeneficioClimatico(Double beneficioClimatico) {
         this.beneficioClimatico = beneficioClimatico;
     }
     
-    // falta o get reputacao
+    public Usuario getUsuario(){
+        return this.usuario;
+    }
+    
+    public void setUsuario(Usuario usuario){
+        this.usuario=usuario;
+    }
+    
 }

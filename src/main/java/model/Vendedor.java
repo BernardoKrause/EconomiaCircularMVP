@@ -12,12 +12,16 @@ import java.util.List;
  * @author berna
  */
 public class Vendedor extends Perfil {
-    
-    private List<Item> itens;
+    private final List<Item> itens;
   
     public Vendedor(String idVendedor) {
         super(idVendedor);
         this.itens=new ArrayList<>();
+    }
+    
+    public Vendedor(Integer id, String sistemId) {
+        super(id, sistemId);
+        this.itens = null;
     }
     
     public void publicarItem(Item item) {

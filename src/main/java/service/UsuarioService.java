@@ -4,10 +4,9 @@
  */
 package service;
 
+import java.sql.SQLException;
 import java.util.Optional;
-import model.Comprador;
 import model.Usuario;
-import model.Vendedor;
 import repository.UsuarioRepository;
 
 /**
@@ -15,34 +14,37 @@ import repository.UsuarioRepository;
  * @author berna
  */
 public class UsuarioService {
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
     
     public UsuarioService(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
     
-    public void cadastrarUsuario(String nome, String email, String telefone, String senha) {
-        long totalUsuarios = usuarioRepository.totalUsuarios();
-        
-        Usuario novoUsuario = new Usuario(nome, email, telefone, senha);
-        
-        if (totalUsuarios == 0){
-            novoUsuario.setAdmin(true);
+    public void cadastrarUsuario(String nome, String email, String telefone, String senha) throws SQLException {
+        boolean isAdmin = usuarioRepository.totalUsuarios() == 0;
+        try {
+            usuarioRepository.adicionaUsuario(nome, email, telefone, senha, isAdmin);
+        } catch (SQLException ex) {
+            throw ex;
         }
-        
-        usuarioRepository.salvarUsuario(novoUsuario);
     }
     
-    public void autenticarUsuario (Usuario usuario) {
-        Optional<Usuario> optUsuario = usuarioRepository.buscarPorEmail(usuario.getEmail());
+    public void autenticarUsuario (Usuario usuario) throws SQLException {
+        Optional<Usuario> optUsuario;
+        try {
+            optUsuario = usuarioRepository.getUsuarioPorEmail(usuario.getEmail());
+        } catch (SQLException ex) {
+            throw ex;
+        }
+        
         if (optUsuario.isPresent()) {
-            Usuario usuarioEncontrado = optUsuario.get();
-            if (usuarioEncontrado.getSenha().equalsIgnoreCase(usuario.getSenha())) {
-                usuario.copy(usuarioEncontrado);
+            if (optUsuario.get().getSenha().equals(usuario.getSenha())) {
+                usuario.copy(optUsuario.get());
                 usuario.setAutenticado(true);
-            } else {
-                throw new RuntimeException("Email e senha não correspondem à um usuário.");
             }
+        } else {
+            throw new RuntimeException("Email e senha não correspondem à um usuário.");
         }
     }
+
 }

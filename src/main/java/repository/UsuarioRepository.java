@@ -4,7 +4,9 @@
  */
 package repository;
 
-import java.util.ArrayList;
+import dao.UsuarioDAOSQLite;
+import dao.UsuarioDAO;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import model.Usuario;
@@ -14,45 +16,39 @@ import model.Usuario;
  * @author berna
  */
 public class UsuarioRepository {
-    private List<Usuario> usuariosCadastrados;
-    private static UsuarioRepository instancia;
+    private final UsuarioDAO usuarioDAO;
 
-    private UsuarioRepository() {
-        usuariosCadastrados = new ArrayList<>();
-        Usuario u1 = new Usuario("1", "1", "1");
-        u1.setAdmin(true);
-        u1.setId(totalUsuarios());
-        usuariosCadastrados.add(u1);
-        Usuario u2 = new Usuario("2", "2", "2");
-        u2.setId(totalUsuarios());
-        usuariosCadastrados.add(u2);
+    public UsuarioRepository() throws SQLException {
+        this.usuarioDAO = new UsuarioDAOSQLite();
+    }
+
+    public void adicionaUsuario(String nome, String email, String telefone, String senha, boolean isAdmin) throws SQLException {
+        usuarioDAO.criar(new Usuario(nome, email, telefone, senha, isAdmin));
+    }
+
+    public Optional<Usuario> getUsuario(String id) throws SQLException {
+        return usuarioDAO.buscaPorId(Integer.valueOf(id));
+    }
+
+    public List<Usuario> getTodosUsuarios() throws SQLException {
+        return usuarioDAO.buscaTodos();
+    }
+
+    public void atualizaUsuario(String id, String nome, String email, String telefone, String senha) throws SQLException {
+        usuarioDAO.atualizar(new Usuario(id, nome, email, telefone, senha));
     }
     
-    public static UsuarioRepository getInstancia(){
-        if(instancia == null){
-            instancia = new UsuarioRepository();
-        }
-        return instancia;
+    public void deletaUsuario(String id) throws SQLException {
+        usuarioDAO.deletar(Integer.valueOf(id));
     }
     
-    public Optional<Usuario> buscarPorEmail(String email) {
-        for (Usuario usuariosCadastrado : usuariosCadastrados) {
-            if (usuariosCadastrado.getEmail().equalsIgnoreCase(email)) {
-                return Optional.of(usuariosCadastrado);
-            }
-        }
-        throw new RuntimeException("Usuario com este e-mail não encontrado");
+    public int totalUsuarios() throws SQLException {
+        return getTodosUsuarios().size();
+    }
+
+    public Optional<Usuario> getUsuarioPorEmail(String email) throws SQLException {
+        return usuarioDAO.buscaPorEmail(email);
+
     }
     
-    public int totalUsuarios() {
-        return this.usuariosCadastrados.size();
-    }
-    
-    public void salvarUsuario(Usuario usuario) {
-        if(totalUsuarios()==0){
-            usuario.setAdmin(true);
-        }
-        usuario.setId(totalUsuarios());
-        this.usuariosCadastrados.add(usuario);
-    }
 }

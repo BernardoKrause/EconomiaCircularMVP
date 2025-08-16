@@ -2,13 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package command;
+package command.item;
 
-import command.usuario.UsuarioCommand;
-import javax.swing.JDesktopPane;
-import presenter.GerenciadorTelas;
+import java.sql.SQLException;
+import model.Perfil;
 import presenter.ItemPresenter;
-import repository.ItemRepository;
+import repository.PerfilVendedorRepository;
 import repository.TiposDefeitoRepository;
 import service.ItemService;
 import service.SistemaDefeitosService;
@@ -17,19 +16,22 @@ import service.SistemaDefeitosService;
  *
  * @author caiof
  */
-public class AbrirCadastroItemCommand extends UsuarioCommand{
-    
-    public AbrirCadastroItemCommand(){
-        super();
+public class AbrirCadastroItemCommand extends ItemCommand{
+    public AbrirCadastroItemCommand(Perfil perfil)throws SQLException {
+        super(perfil);
     }
 
+    /**
+     *
+     * @throws SQLException
+     */
     @Override
-    public void executar() {
-        ItemRepository itemRepo = new ItemRepository();
+    public void executar() throws SQLException {
         TiposDefeitoRepository tiposDefeitosRepo = new TiposDefeitoRepository();
         SistemaDefeitosService sysDefeito = new SistemaDefeitosService();
-        ItemService itemService = new ItemService(itemRepo, sysDefeito, tiposDefeitosRepo);
+        ItemService itemService = new ItemService(sysDefeito, tiposDefeitosRepo);
         ItemPresenter itemPresenter = new ItemPresenter(itemService);
-        desktop.add(itemPresenter.getView());    }
+        desktop.add(itemPresenter.getView());    
+    }
     
 }

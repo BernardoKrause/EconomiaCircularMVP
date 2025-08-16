@@ -6,11 +6,12 @@ package presenter;
 
 import javax.swing.JDesktopPane;
 import model.Usuario;
-import repository.UsuarioRepository;
+import model.Vendedor;
 import service.PerfilService;
 import state.home.AutenticadoState;
 import state.home.HomePresenterState;
 import state.home.NaoAutenticadoState;
+import state.home.VendedorState;
 import view.HomeView;
 
 /**
@@ -47,4 +48,7 @@ public class HomePresenter {
         usuario=null;
     }
     
+    public void acessarVendedor(Vendedor vendedor){
+        estado = new VendedorState(this,vendedor);
+    }
 }

@@ -1,0 +1,162 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import model.Usuario;
+import util.DatabaseConnection;
+
+public class UsuarioDAOSQLite implements UsuarioDAO {
+
+    @Override
+    public void criar(Usuario usuario) throws SQLException {
+        String sql = "INSERT INTO usuarios (nome, email, telefone, senha, eAdmin) "
+                   + "VALUES (?, ?, ?, ?, ?)";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, usuario.getNome());
+            pstmt.setString(2, usuario.getEmail());
+            pstmt.setString(3, usuario.getTelefone());
+            pstmt.setString(4, usuario.getSenha());
+            pstmt.setInt(5, usuario.isAdmin() ? 1 : 0);
+            pstmt.executeUpdate();
+        }
+    }
+
+    @Override
+    public Optional<Usuario> buscaPorId(Integer id) throws SQLException {
+        String sql = "SELECT * FROM usuarios WHERE idUsuario = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, id);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                    String ts = rs.getString("criado_em");
+                    LocalDateTime dt = (ts != null) ? LocalDateTime.parse(ts, formatter) : null;
+
+                    boolean admin = rs.getInt("eAdmin") == 1; 
+
+                    Usuario usuario = new Usuario(
+                        rs.getString("idUsuario"),
+                        rs.getString("nome"),
+                        rs.getString("email"),
+                        rs.getString("telefone"),
+                        admin,
+                        dt 
+                    );
+                    
+                    return Optional.of(usuario);
+                }
+            }
+
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Usuario> buscaTodos() throws SQLException {
+        List<Usuario> usuarios = new ArrayList<>();
+        String sql = "SELECT * FROM usuarios";
+        try (Connection conn = DatabaseConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+            while (rs.next()) {
+                String ts = rs.getString("criado_em");
+                LocalDateTime dt = (ts != null) ? LocalDateTime.parse(ts, formatter) : null;
+                boolean admin = rs.getInt("eAdmin") == 1;
+
+                usuarios.add(new Usuario(
+                    rs.getString("idUsuario"),
+                    rs.getString("nome"),
+                    rs.getString("email"),
+                    rs.getString("telefone"),
+                    admin,
+                    dt
+                ));
+            }
+
+        }
+        return usuarios;
+    }
+
+    @Override
+    public void atualizar(Usuario usuario) throws SQLException {
+        String sql = "UPDATE usuarios SET nome = ?, email = ?, telefone = ?, senha = ? "
+                   + "WHERE idUsuario = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, usuario.getNome());
+            pstmt.setString(2, usuario.getEmail());
+            pstmt.setString(3, usuario.getTelefone());
+            pstmt.setString(4, usuario.getSenha());
+            pstmt.setInt(5, Integer.parseInt(usuario.getId()));
+            pstmt.executeUpdate();
+
+        } 
+    }
+
+    @Override
+    public void deletar(Integer id) throws SQLException {
+        String sql = "DELETE FROM usuarios WHERE idUsuario = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+
+        }
+    }
+
+    /**
+     *
+     * @param email
+     * @return
+     * @throws SQLException
+     */
+    @Override
+    public Optional<Usuario> buscaPorEmail(String email) throws SQLException {
+        String sql = "SELECT * FROM usuarios WHERE email = ?";
+        
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, email);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    String ts = rs.getString("criado_em");
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                    LocalDateTime dt = (ts != null) ? LocalDateTime.parse(ts, formatter) : null;
+                    boolean admin = rs.getInt("eAdmin") == 1;
+                    Usuario usuario = new Usuario(
+                        rs.getString("idUsuario"),
+                        rs.getString("nome"),
+                        rs.getString("email"),
+                        rs.getString("senha"),
+                        rs.getString("telefone"),
+                        dt, 
+                        admin
+                    );
+                    
+                    return Optional.of(usuario);
+                }
+            }
+        }
+        return Optional.empty();
+    }
+}

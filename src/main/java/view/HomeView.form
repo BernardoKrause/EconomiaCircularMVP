@@ -53,6 +53,14 @@
                 <Property name="text" type="java.lang.String" value="Acessar"/>
               </Properties>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mItemVerPerfilVendedor">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ver Perfil"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mItemVerPerfilVendedorActionPerformed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuComprador">
@@ -72,6 +80,11 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mItemAcessarPerfilCompradorActionPerformed"/>
               </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mItemVerPerfilComprador">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ver Perfil"/>
+              </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>

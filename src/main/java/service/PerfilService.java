@@ -4,42 +4,43 @@
  */
 package service;
 
-import model.Comprador;
-import model.Perfil;
+import java.sql.SQLException;
 import model.Usuario;
 import model.Vendedor;
-import repository.PerfilRepository;
+import repository.PerfilVendedorRepository;
 
 /**
  *
  * @author berna
  */
 public class PerfilService {
-    private PerfilRepository perfilRepository;
+    private PerfilVendedorRepository perfilRepository;
     
-    public PerfilService(PerfilRepository perfilRepository){
-        this.perfilRepository=perfilRepository;
+    public PerfilService(PerfilVendedorRepository perfilVendedorRepository){
+        this.perfilRepository=perfilVendedorRepository;
     }
     
-    public void criarPerfilVendedor(Usuario usuario) {
-        if (usuario==null){
-            throw new IllegalArgumentException("Usuario informado não pode ser nulo!");
+    public void criarPerfilVendedor(Usuario usuario) throws SQLException {
+       if (usuario == null) throw new IllegalArgumentException("Usuario informado não pode ser nulo!");
+        
+        try {
+            Vendedor perfil = new Vendedor("V-"+usuario.getId());
+            usuario.addPerfil(perfil);
+            perfil.setUsuario(usuario);
+            perfilRepository.adicionaPerfil(perfil);   
+        } catch (SQLException ex) {
+            throw ex;
         }
-        Perfil perfil = new Vendedor("V-"+usuario.getId());
-        
-        usuario.addPerfil(perfil);
-        
-        perfilRepository.salvarPerfil(perfil);
 
     }
     
     public void criarPerfilComprador(Usuario usuario) {
-        if (usuario==null){
-            throw new IllegalArgumentException("Usuario informado não pode ser nulo!");
-        }
-        Perfil perfil = new Comprador("C-"+usuario.getId());
-        usuario.addPerfil(perfil);
+        //if (usuario==null){
+        //    throw new IllegalArgumentException("Usuario informado não pode ser nulo!");
+        //}
+        //perfil = new Comprador("C-"+usuario.getId());
+        //usuario.addPerfil(perfil);
         
-        perfilRepository.salvarPerfil(perfil);
+        //perfilRepository.salvarPerfil(perfil);
     }
 }
