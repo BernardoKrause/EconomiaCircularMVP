@@ -8,6 +8,7 @@ import dao.PerfilVendedorDAO;
 import dao.PerfilVendedorDAOSQLite;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 import model.Vendedor;
 import repository.IPerfilVendedorRepository;
 
@@ -27,7 +28,10 @@ public class PerfilVendedorRepositorySqLite implements IPerfilVendedorRepository
         perfilVendedorDAO.criar(vendedor);
     }
     
-    @Override
+    public Optional<Vendedor> getPorIdUsuario(Integer id) throws SQLException {
+        return perfilVendedorDAO.buscaPorIdUsuario(id);
+    }
+    
     public List<Vendedor> getTodosVendedores() throws SQLException {
         return perfilVendedorDAO.buscaTodos();
     }

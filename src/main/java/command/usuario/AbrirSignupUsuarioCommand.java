@@ -5,8 +5,6 @@
 package command.usuario;
 
 import factory.repository.SeletorRepositoryFactory;
-import java.sql.SQLException;
-import repository.sqlite.UsuarioRepositorySqLite;
 import presenter.SignupPresenter;
 import repository.IUsuarioRepository;
 import service.UsuarioService;
