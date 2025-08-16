@@ -9,20 +9,21 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Item;
 import model.Vendedor;
-import repository.ItemRepository;
-import repository.TiposDefeitoRepository;
+import repository.IItemRepository;
+import repository.sqlite.ItemRepositorySqLite;
+import repository.teste.DefeitosTipoRepositoryTeste;
 
 /**
  *
  * @author caiof
  */
 public class ItemService {
-    private ItemRepository itemRepository;
-    private TiposDefeitoRepository tiposDefeitoRepository;
+    private IItemRepository itemRepository;
+    private DefeitosTipoRepositoryTeste tiposDefeitoRepository;
     private SistemaDefeitosService sistemaDefeitos;
     
-    public ItemService(SistemaDefeitosService sistema, TiposDefeitoRepository tiposDefeitosRepo) {
-            this.itemRepository = new ItemRepository();
+    public ItemService(SistemaDefeitosService sistema, DefeitosTipoRepositoryTeste tiposDefeitosRepo) {
+            this.itemRepository = new ItemRepositorySqLite();
         
         this.sistemaDefeitos = sistema;
         this.tiposDefeitoRepository = tiposDefeitosRepo;
@@ -41,18 +42,18 @@ public class ItemService {
         }
     }
     
-    public List<String> getListaTiposItem(){
-        if(tiposDefeitoRepository.getTipos().isEmpty()){
+    public List<String> getListaTiposItem() throws SQLException{
+        if(itemRepository.getTiposItem().isEmpty()){
             throw new IllegalArgumentException("Lista de Tipos está vazia!");
         }
-        return tiposDefeitoRepository.getTipos().get();
+        return itemRepository.getTiposItem().get();
     }
     
-    public List<String> getListaDefeitosExistentes(String tipo){
-        if(tiposDefeitoRepository.getDefeitosTipo(tipo).isEmpty()){
+    public List<String> getListaDefeitosExistentes(String tipo) throws SQLException{
+        if(tiposDefeitoRepository.BuscarPorTipo(tipo).isEmpty()){
             throw new IllegalArgumentException("Lista de Defeitos está vazia!");
         }   
-        return tiposDefeitoRepository.getDefeitosTipo(tipo).get();
+        return tiposDefeitoRepository.BuscarPorTipo(tipo).get();
     }
     
     public List<String> getListaMateriaisComposicao(){

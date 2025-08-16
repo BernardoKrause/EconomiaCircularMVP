@@ -2,43 +2,47 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package repository;
+package repository.sqlite;
 
 import dao.PerfilSolicitacaoDAO;
 import dao.PerfilSolicitacaoDAOSQLite;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 import model.SolicitacaoPerfil;
-import model.Usuario;
+import repository.IPerfilSolicitacaoRepository;
 
 /**
  *
  * @author berna
  */
-public class PerfilSolicitacaoRepository {
+public class PerfilSolicitacaoRepositorySqLite implements IPerfilSolicitacaoRepository{
     private final PerfilSolicitacaoDAO perfilSolicitacaoDAO;
 
-    public PerfilSolicitacaoRepository() throws SQLException {
+    public PerfilSolicitacaoRepositorySqLite() throws SQLException {
         this.perfilSolicitacaoDAO = new PerfilSolicitacaoDAOSQLite();
     }
 
+    @Override
     public void adicionaSolicitacao(Integer idUsuario) throws SQLException {
         perfilSolicitacaoDAO.criar(new SolicitacaoPerfil(idUsuario));
     }
 
+    @Override
     public List<SolicitacaoPerfil> getTodasSolicitacoes() throws SQLException {
         return perfilSolicitacaoDAO.buscaTodos();
     }
     
+    @Override
     public List<SolicitacaoPerfil> getTodasSolicitacoesEmAguardo() throws SQLException {
         return perfilSolicitacaoDAO.buscaEmAguardo();
     }
 
-    public void atualizaSolicitacao(String status) throws SQLException {
+    @Override
+    public void atualizaSolicitacao(SolicitacaoPerfil solicitacaoAnalisada,String status) throws SQLException {
         perfilSolicitacaoDAO.atualizar(new SolicitacaoPerfil(status));
     }
     
+    @Override
     public void deletaSolicitacao(Integer id) throws SQLException {
         perfilSolicitacaoDAO.deletar(id);
     }

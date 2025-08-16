@@ -7,16 +7,16 @@ package service;
 import java.sql.SQLException;
 import model.Usuario;
 import model.Vendedor;
-import repository.PerfilVendedorRepository;
+import repository.sqlite.PerfilVendedorRepositorySqLite;
 
 /**
  *
  * @author berna
  */
 public class PerfilService {
-    private PerfilVendedorRepository perfilRepository;
+    private PerfilVendedorRepositorySqLite perfilRepository;
     
-    public PerfilService(PerfilVendedorRepository perfilVendedorRepository){
+    public PerfilService(PerfilVendedorRepositorySqLite perfilVendedorRepository){
         this.perfilRepository=perfilVendedorRepository;
     }
     

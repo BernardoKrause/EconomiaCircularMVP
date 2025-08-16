@@ -5,7 +5,7 @@
 package command.perfil;
 
 import model.Usuario;
-import repository.PerfilVendedorRepository;
+import repository.sqlite.PerfilVendedorRepositorySqLite;
 import service.PerfilService;
 import command.ICommand;
 import java.sql.SQLException;
@@ -17,13 +17,13 @@ import java.sql.SQLException;
 public abstract class PerfilCommand implements ICommand{
     
     protected Usuario usuario;
-    protected PerfilVendedorRepository perfilVendedorRepository ;
+    protected PerfilVendedorRepositorySqLite perfilVendedorRepository ;
     protected PerfilService service;
     
     public PerfilCommand(Usuario usuario) throws SQLException {
         super();
         this.usuario=usuario;
-        this.perfilVendedorRepository = new PerfilVendedorRepository();
+        this.perfilVendedorRepository = new PerfilVendedorRepositorySqLite();
         this.service = new PerfilService(perfilVendedorRepository);
     }
     

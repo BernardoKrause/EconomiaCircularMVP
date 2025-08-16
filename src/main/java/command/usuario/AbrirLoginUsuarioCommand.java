@@ -5,7 +5,7 @@
 package command.usuario;
 
 import presenter.LoginPresenter;
-import repository.UsuarioRepository;
+import repository.sqlite.UsuarioRepositorySqLite;
 
 import javax.swing.*;
 import presenter.GerenciadorTelas;
@@ -27,7 +27,7 @@ public class AbrirLoginUsuarioCommand implements ICommand {
     @Override
     public void executar() {
         try {
-            UsuarioRepository usuarioRepository = new UsuarioRepository();
+            UsuarioRepositorySqLite usuarioRepository = new UsuarioRepositorySqLite();
             UsuarioService usuarioService = new UsuarioService(usuarioRepository);
             LoginPresenter loginPresenter = new LoginPresenter(usuarioService);
             desktop.add(loginPresenter.getView());

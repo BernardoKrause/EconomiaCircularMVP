@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -33,12 +34,12 @@ public class ItemPresenter implements IPresenter{
     private ItemService itemService;
     private Vendedor vendedor;
 
-    public ItemPresenter(ItemService itemService){
+    public ItemPresenter(ItemService itemService) throws SQLException{
         this.itemService=itemService;
         createItem();
     }
     
-    public void createItem(){
+    public void createItem() throws SQLException{
         formView = new FormItemView();
         formView.setVisible(false);
         

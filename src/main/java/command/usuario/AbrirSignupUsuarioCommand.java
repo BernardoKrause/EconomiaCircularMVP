@@ -5,7 +5,7 @@
 package command.usuario;
 
 import java.sql.SQLException;
-import repository.UsuarioRepository;
+import repository.sqlite.UsuarioRepositorySqLite;
 import presenter.SignupPresenter;
 import service.UsuarioService;
 
@@ -22,7 +22,7 @@ public class AbrirSignupUsuarioCommand extends UsuarioCommand {
     @Override
     public void executar() {
         try {
-            UsuarioRepository usuarioRepository = new UsuarioRepository();
+            UsuarioRepositorySqLite usuarioRepository = new UsuarioRepositorySqLite();
             UsuarioService usuarioService = new UsuarioService(usuarioRepository);
             SignupPresenter signupPresenter = new SignupPresenter(usuarioService);    
             desktop.add(signupPresenter.getView());
