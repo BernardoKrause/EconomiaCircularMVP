@@ -4,15 +4,17 @@
  */
 package factory.repository;
 
-import factory.dao.DAOFactory;
+import factory.dao.IDAOFactory;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import repository.ICondutaRepository;
 import repository.IDefeitosTipoRepository;
 import repository.IDenunciaRepository;
 import repository.IItemRepository;
 import repository.IPerfilSolicitacaoRepository;
 import repository.IPerfilVendedorRepository;
+import repository.IReputacaoRepository;
 import repository.IUsuarioRepository;
 import repository.database.DefeitosTipoRepository;
 import repository.database.DenunciaRepository;
@@ -27,10 +29,10 @@ import repository.database.UsuarioRepository;
  */
 public class RepositoryFactoryBD implements IRepositoryFactory{
 
-    private DAOFactory daoFactory;
+    private IDAOFactory daoFactory;
     
     public RepositoryFactoryBD(String sgbd) {
-        daoFactory = DAOFactory.getDAOFactory(sgbd);
+        daoFactory = IDAOFactory.getDAOFactory(sgbd);
     }
     
     @Override
@@ -91,6 +93,16 @@ public class RepositoryFactoryBD implements IRepositoryFactory{
             Logger.getLogger(RepositoryFactoryBD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    @Override
+    public IReputacaoRepository criarReputacaoRepository() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public ICondutaRepository criarCondutarRepository() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

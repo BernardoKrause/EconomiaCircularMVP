@@ -1,12 +1,21 @@
-package util;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package util.factory.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import static java.sql.DriverManager.getConnection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DatabaseConnection {
-    private static final String URL = "jdbc:sqlite:" + System.getProperty("user.dir") + "/database.db";
+/**
+ *
+ * @author berna
+ */
+public class SQLiteDatabaseConnectionFactory implements DatabaseConnectionFactory {
+private static final String URL = "jdbc:sqlite:" + System.getProperty("user.dir") + "/database.db";
 
     static {
         setupDatabase();

@@ -5,7 +5,7 @@
 package repository.database;
 
 import dao.ItemDAO;
-import factory.dao.DAOFactory;
+import factory.dao.IDAOFactory;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +20,7 @@ import repository.IItemRepository;
 public class ItemRepository implements IItemRepository{
     private ItemDAO itemDAO;
 
-    public ItemRepository(DAOFactory daoFactory) throws SQLException {
+    public ItemRepository(IDAOFactory daoFactory) throws SQLException {
         this.itemDAO = daoFactory.getItemDAO();
     }
 

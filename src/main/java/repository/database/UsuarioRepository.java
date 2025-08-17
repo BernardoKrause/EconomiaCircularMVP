@@ -6,7 +6,7 @@ package repository.database;
 
 import dao.UsuarioDAOSQLite;
 import dao.UsuarioDAO;
-import factory.dao.DAOFactory;
+import factory.dao.IDAOFactory;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +20,7 @@ import repository.IUsuarioRepository;
 public class UsuarioRepository implements IUsuarioRepository {
     private final UsuarioDAO usuarioDAO;
 
-    public UsuarioRepository(DAOFactory daoFactory) throws SQLException {
+    public UsuarioRepository(IDAOFactory daoFactory) throws SQLException {
         this.usuarioDAO = daoFactory.getUsuarioDAO();
     }
 

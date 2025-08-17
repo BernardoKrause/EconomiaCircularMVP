@@ -6,7 +6,7 @@ package repository.database;
 
 import dao.PerfilVendedorDAO;
 import dao.PerfilVendedorDAOSQLite;
-import factory.dao.DAOFactory;
+import factory.dao.IDAOFactory;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +20,7 @@ import repository.IPerfilVendedorRepository;
 public class PerfilVendedorRepository implements IPerfilVendedorRepository{
     private final PerfilVendedorDAO perfilVendedorDAO;
 
-    public PerfilVendedorRepository(DAOFactory daoFactory) throws SQLException {
+    public PerfilVendedorRepository(IDAOFactory daoFactory) throws SQLException {
        this.perfilVendedorDAO = daoFactory.getPerfilVendedorDAO();
     }
     
