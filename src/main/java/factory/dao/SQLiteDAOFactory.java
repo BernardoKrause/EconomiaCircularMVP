@@ -6,14 +6,12 @@ package factory.dao;
 
 import dao.DenunciaDAOSQLite;
 import dao.ICondutaDAO;
-import dao.InsigniaDAOSQLite;
 import dao.ItemDAOSQLite;
 import dao.PerfilCompradorDAOSQLite;
 import dao.PerfilSolicitacaoDAOSQLite;
 import dao.PerfilVendedorDAOSQLite;
 import dao.UsuarioDAOSQLite;
 import dao.IDenunciaDAO;
-import dao.IInsigniaDAO;
 import dao.IItemDAO;
 import dao.IPerfilCompradorDAO;
 import dao.IPerfilSolicitacaoDAO;
@@ -39,11 +37,6 @@ public class SQLiteDAOFactory extends IDAOFactory {
     @Override
     public IDenunciaDAO getDenunciaDAO() {
         return new DenunciaDAOSQLite();
-    }
-
-    @Override
-    public IInsigniaDAO getInsigniaDAO() {
-        return new InsigniaDAOSQLite();
     }
 
     @Override

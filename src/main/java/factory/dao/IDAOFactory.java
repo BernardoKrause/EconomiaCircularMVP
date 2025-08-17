@@ -6,7 +6,6 @@ package factory.dao;
 
 import dao.ICondutaDAO;
 import dao.IDenunciaDAO;
-import dao.IInsigniaDAO;
 import dao.IItemDAO;
 import dao.IPerfilCompradorDAO;
 import dao.IPerfilSolicitacaoDAO;
@@ -20,7 +19,6 @@ import dao.IUsuarioDAO;
 public abstract class IDAOFactory {
     public abstract ICondutaDAO getCondutaDAO();
     public abstract IDenunciaDAO getDenunciaDAO();
-    public abstract IInsigniaDAO getInsigniaDAO();
     public abstract IItemDAO getItemDAO();
     public abstract IPerfilCompradorDAO getPerfilCompradorDAO();
     public abstract IPerfilSolicitacaoDAO getPerfilSolicitacaoDAO();

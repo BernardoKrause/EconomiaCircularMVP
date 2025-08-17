@@ -6,7 +6,6 @@ package factory.dao;
 
 import dao.ICondutaDAO;
 import dao.IDenunciaDAO;
-import dao.IInsigniaDAO;
 import dao.IItemDAO;
 import dao.IPerfilCompradorDAO;
 import dao.IPerfilSolicitacaoDAO;
@@ -31,11 +30,6 @@ public class H2DAOFactory extends IDAOFactory {
 
     @Override
     public IDenunciaDAO getDenunciaDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public IInsigniaDAO getInsigniaDAO() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
