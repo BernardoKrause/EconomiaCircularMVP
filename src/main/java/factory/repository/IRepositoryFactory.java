@@ -9,9 +9,9 @@ import repository.IDefeitosTipoRepository;
 import repository.IDenunciaRepository;
 import repository.IItemRepository;
 import repository.IPerfilSolicitacaoRepository;
-import repository.IPerfilVendedorRepository;
 import repository.IReputacaoRepository;
 import repository.IUsuarioRepository;
+import repository.IPerfilRepository;
 
 /**
  *
@@ -19,7 +19,7 @@ import repository.IUsuarioRepository;
  */
 public interface IRepositoryFactory {
     IUsuarioRepository criarUsuarioRepository();
-    IPerfilVendedorRepository criarPerfilVendedorRepository();
+    IPerfilRepository criarPerfilVendedorRepository();
     IPerfilSolicitacaoRepository criarPerfilSolicitacaoRepository();
     IItemRepository criarItemRepository();
     IDenunciaRepository criarDenunciaRepository();

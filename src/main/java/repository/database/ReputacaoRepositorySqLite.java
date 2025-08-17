@@ -4,7 +4,10 @@
  */
 package repository.database;
 
+import java.util.Optional;
+import model.Perfil;
 import model.Reputacao;
+import org.sqlite.SQLiteException;
 import repository.IReputacaoRepository;
 
 /**
@@ -12,11 +15,15 @@ import repository.IReputacaoRepository;
  * @author caiof
  */
 public class ReputacaoRepositorySqLite implements IReputacaoRepository{
-    public void adicionarReputacao(Reputacao reputacao) {
-        
+
+    @Override
+    public void salvarReputacao(Reputacao reputacao) throws SQLiteException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    public void salvarReputacao(Reputacao reputacao) {
-        
+
+    @Override
+    public Optional<Reputacao> getReputacao(Perfil perfil) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
 }

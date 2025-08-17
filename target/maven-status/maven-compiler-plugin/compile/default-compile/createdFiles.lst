@@ -1,3 +1,4 @@
+presenter\VendedorPresenter.class
 dao\ItemDAO.class
 model\Reputacao.class
 state\home\HomePresenterState.class
@@ -68,6 +69,7 @@ repository\database\UsuarioRepository.class
 command\item\ItemCommand.class
 view\usuario\SignupView.class
 repository\database\PerfilVendedorRepository.class
+repository\IPerfilRepository.class
 presenter\GerenciadorTelas.class
 model\Perfil.class
 state\home\VendedorState$1.class
@@ -100,7 +102,6 @@ dao\PerfilCompradorDAO.class
 view\HomeView$3.class
 dao\DenunciaDAO.class
 repository\database\PerfilSolicitacaoRepository.class
-repository\IPerfilVendedorRepository.class
 model\Comprador.class
 service\ItemService.class
 dao\PerfilVendedorDAO.class
@@ -110,14 +111,18 @@ factory\repository\SeletorRepositoryFactory.class
 command\usuario\AbrirLoginUsuarioCommand.class
 repository\IItemRepository.class
 state\home\AutenticadoState$5.class
+presenter\PerfilPresenter.class
 presenter\SignupPresenter.class
 dao\UsuarioDAO.class
 presenter\LoginPresenter$2.class
+command\perfil\AbrirVerPerfilVendedorCommand.class
 dao\PerfilCompradorDAOSQLite.class
 presenter\LoginPresenter$1.class
+state\home\VendedorState$4.class
 repository\PerfilCompradorRepository.class
 presenter\SignupPresenter$1.class
 model\Vendedor.class
+service\PerfilVendedorService.class
 util\factory\connection\DatabaseConnectionFactory.class
 presenter\ItemPresenter$1.class
 view\HomeView$2.class

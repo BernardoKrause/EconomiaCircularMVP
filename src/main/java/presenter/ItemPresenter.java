@@ -30,7 +30,7 @@ import view.item.FormItemView;
  */
 public class ItemPresenter implements IPresenter{
     
-    private FormItemView formView;
+    private JInternalFrame view;
     private ItemService itemService;
     private Vendedor vendedor;
 
@@ -40,9 +40,8 @@ public class ItemPresenter implements IPresenter{
     }
     
     public void createItem() throws SQLException{
-        formView = new FormItemView();
+        FormItemView formView = new FormItemView();
         formView.setVisible(false);
-        
         formView.getBtnPublicar().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 try{
@@ -136,12 +135,14 @@ public class ItemPresenter implements IPresenter{
         }
     });
 
-    comboBoxTipo.setSelectedIndex(0);
+        comboBoxTipo.setSelectedIndex(0);
 
-    formView.setVisible(true);
+        formView.setVisible(true);
+        this.view=formView;
     }
 
     public void publicar(){
+        FormItemView formView = (FormItemView)view;
         String tipo = String.valueOf(formView.getCbTipos().getSelectedItem());
         String subcategoria = formView.getTxtSubcategoria().getText();
         String tamanho = String.valueOf(formView.getSTamanho().getComponentCount());
@@ -174,11 +175,11 @@ public class ItemPresenter implements IPresenter{
     }
     
     public void cancelar() {
-        formView.dispose();
+        view.dispose();
     }
     
     @Override
     public JInternalFrame getView(){
-        return formView;
+        return view;
     }
 }
