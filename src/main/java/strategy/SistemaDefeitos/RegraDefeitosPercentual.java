@@ -1,5 +1,6 @@
 package strategy.SistemaDefeitos;
 
+import factory.repository.SeletorRepositoryFactory;
 import java.sql.SQLException;
 import model.Defeito;
 import model.Item;
@@ -14,18 +15,18 @@ public class RegraDefeitosPercentual implements IRegraDefeitoStrategy{
     private IDefeitosTipoRepository tiposDefeitoRepository;
 
     public RegraDefeitosPercentual(){
-        this.tiposDefeitoRepository = new DefeitosTipoRepositoryTeste();
+        this.tiposDefeitoRepository = SeletorRepositoryFactory.obterInstancia().criarDefeitosTipoRepository();
     }
 
     @Override
     public void AplicarDefeitos(Item item, List<String> defeitosAplicados) {
-        for(String tipoDefeito : defeitosAplicados){
+        for(String defeitoAnalizado : defeitosAplicados){
             try {
-                if(!seAplica(tipoDefeito)){
+                if(!seAplica(item.getTipo(),defeitoAnalizado)){
                     throw new RuntimeException("Defeito passado não encontrado!");
                 }
-                Double percentual = tiposDefeitoRepository.getPercentualPorDefeito(tipoDefeito);
-                Defeito defeito = new Defeito(tipoDefeito,(int) (percentual*100));
+                Double percentual = tiposDefeitoRepository.getPercentualPorDefeito(defeitoAnalizado);
+                Defeito defeito = new Defeito(defeitoAnalizado,(int) (percentual*100));
                 defeito.setValorDesconto(item.getPrecoBase()*percentual);
                 item.addDefeito(defeito);
             } catch (SQLException ex) {
@@ -34,9 +35,12 @@ public class RegraDefeitosPercentual implements IRegraDefeitoStrategy{
         }
     }
 
-    private boolean seAplica(String defeito) throws SQLException {
-        for(String defeitoExistente : tiposDefeitoRepository.getTiposItem().get()){
-            return(defeitoExistente.equalsIgnoreCase(defeito));
+    private boolean seAplica(String tipo, String defeito) throws SQLException {
+        List<String> defeitosExistentes = tiposDefeitoRepository.BuscarPorTipo(tipo).get();
+        for(String d : defeitosExistentes){
+            if(d.equalsIgnoreCase(defeito)){
+                return true;
+            }
         }
         return false;
     }

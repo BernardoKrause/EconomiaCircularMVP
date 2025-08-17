@@ -8,16 +8,18 @@ import dao.PerfilVendedorDAO;
 import dao.PerfilVendedorDAOSQLite;
 import factory.dao.IDAOFactory;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import model.Perfil;
 import model.Vendedor;
-import repository.IPerfilVendedorRepository;
+import repository.IPerfilRepository;
 
 /**
  *
  * @author berna
  */
-public class PerfilVendedorRepository implements IPerfilVendedorRepository{
+public class PerfilVendedorRepository implements IPerfilRepository{
     private final PerfilVendedorDAO perfilVendedorDAO;
 
     public PerfilVendedorRepository(IDAOFactory daoFactory) throws SQLException {
@@ -25,16 +27,23 @@ public class PerfilVendedorRepository implements IPerfilVendedorRepository{
     }
     
     @Override
-    public void adicionaPerfil(Vendedor vendedor) throws SQLException {
-        perfilVendedorDAO.criar(vendedor);
+    public void salvarPerfil(Perfil perfil) throws SQLException {
+        perfilVendedorDAO.criar((Vendedor)perfil);
     }
     
-    public Optional<Vendedor> getPorIdUsuario(Integer id) throws SQLException {
-        return perfilVendedorDAO.buscaPorIdUsuario(id);
+    @Override
+    public Optional<Perfil> getPorIdUsuario(Integer id) throws SQLException {
+        Perfil perfilAchado = perfilVendedorDAO.buscaPorIdUsuario(id).get();
+        return Optional.of(perfilAchado);
     }
     
-    public List<Vendedor> getTodosVendedores() throws SQLException {
-        return perfilVendedorDAO.buscaTodos();
+    @Override
+    public Optional<List<Perfil>> getTodosPerfils() throws SQLException {
+        List<Perfil> perfilsAchados = new ArrayList<>();
+        for (Perfil v:perfilVendedorDAO.buscaTodos()){
+            perfilsAchados.add(v);
+        }
+        return Optional.of(perfilsAchados);
     }
     
     @Override

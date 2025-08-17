@@ -62,4 +62,8 @@ public abstract class Perfil {
         this.usuario=usuario;
     }
     
+    public void setReputacao(Reputacao reputacao){
+        this.reputacao=reputacao;
+    }
+    
 }

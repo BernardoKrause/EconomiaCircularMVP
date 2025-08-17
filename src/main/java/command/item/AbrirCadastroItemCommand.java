@@ -6,8 +6,8 @@ package command.item;
 
 import java.sql.SQLException;
 import model.Perfil;
+import model.Vendedor;
 import presenter.ItemPresenter;
-import repository.database.PerfilVendedorRepository;
 import repository.teste.DefeitosTipoRepositoryTeste;
 import service.ItemService;
 import service.SistemaDefeitosService;
@@ -30,7 +30,8 @@ public class AbrirCadastroItemCommand extends ItemCommand{
         DefeitosTipoRepositoryTeste tiposDefeitosRepo = new DefeitosTipoRepositoryTeste();
         SistemaDefeitosService sysDefeito = new SistemaDefeitosService();
         ItemService itemService = new ItemService(sysDefeito, tiposDefeitosRepo);
-        ItemPresenter itemPresenter = new ItemPresenter(itemService);
+        ItemPresenter itemPresenter = new ItemPresenter(itemService, (Vendedor)(perfil));
+        itemPresenter.createItem();
         desktop.add(itemPresenter.getView());    
     }
     

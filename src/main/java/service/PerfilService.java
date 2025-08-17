@@ -7,41 +7,22 @@ package service;
 import java.sql.SQLException;
 import model.Usuario;
 import model.Vendedor;
-import repository.IPerfilVendedorRepository;
+import repository.ICondutaRepository;
+import repository.IReputacaoRepository;
 import repository.database.PerfilVendedorRepository;
+import repository.IPerfilRepository;
 
 /**
  *
  * @author berna
  */
-public class PerfilService {
-    private IPerfilVendedorRepository perfilRepository;
+public abstract class PerfilService {
+    protected IReputacaoRepository reputacaoRepository;
     
-    public PerfilService(IPerfilVendedorRepository perfilVendedorRepository){
-        this.perfilRepository=perfilVendedorRepository;
+    public PerfilService(IReputacaoRepository reputacaoRepository){
+        this.reputacaoRepository=reputacaoRepository;
     }
     
-    public void criarPerfilVendedor(Usuario usuario) throws SQLException {
-       if (usuario == null) throw new IllegalArgumentException("Usuario informado não pode ser nulo!");
-        
-        try {
-            Vendedor perfil = new Vendedor("V-"+usuario.getId());
-            usuario.addPerfil(perfil);
-            perfil.setUsuario(usuario);
-            perfilRepository.adicionaPerfil(perfil);   
-        } catch (SQLException ex) {
-            throw ex;
-        }
-
-    }
+    public abstract void criar(Usuario usuario) throws SQLException;    
     
-    public void criarPerfilComprador(Usuario usuario) {
-        //if (usuario==null){
-        //    throw new IllegalArgumentException("Usuario informado não pode ser nulo!");
-        //}
-        //perfil = new Comprador("C-"+usuario.getId());
-        //usuario.addPerfil(perfil);
-        
-        //perfilRepository.salvarPerfil(perfil);
-    }
 }

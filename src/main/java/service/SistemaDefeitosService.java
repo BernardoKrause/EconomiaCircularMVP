@@ -9,7 +9,6 @@ import java.util.List;
 
 public class SistemaDefeitosService {
     private List<IRegraDefeitoStrategy> regrasDefeito;
-    private SistemaDefeitosService sistemaDefeitosService;
 
     public SistemaDefeitosService() {
         regrasDefeito = new ArrayList<IRegraDefeitoStrategy>();

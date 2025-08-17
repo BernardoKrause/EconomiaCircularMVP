@@ -8,12 +8,14 @@ import command.perfil.AcessarPerfilVendedorCommand;
 import command.perfil.CriarPerfilCompradorCommand;
 import command.perfil.CriarPerfilVendedorCommand;
 import command.usuario.SairUsuarioCommand;
+import factory.repository.SeletorRepositoryFactory;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import model.Usuario;
 import presenter.HomePresenter;
+import repository.IPerfilRepository;
 
 /**
  *
@@ -95,7 +97,8 @@ public class AutenticadoState extends HomePresenterState{
     
     @Override
     public void criarPerfilVendedor() throws SQLException {
-        new CriarPerfilVendedorCommand(usuario).executar();
+        IPerfilRepository perfilRepository = SeletorRepositoryFactory.obterInstancia().criarPerfilVendedorRepository();
+        new CriarPerfilVendedorCommand(usuario,perfilRepository).executar();
         view.getMItemAcessarPerfilVendedor().setVisible(true); 
         view.getMItemCriarPerfilVendedor().setVisible(false); 
         JOptionPane.showMessageDialog(view, "Solicitação enviada ao administrador");
@@ -103,20 +106,23 @@ public class AutenticadoState extends HomePresenterState{
     
     @Override
     public void acessarPerfilVendedor() throws SQLException {
-        new AcessarPerfilVendedorCommand(usuario).executar();
+        IPerfilRepository perfilRepository = SeletorRepositoryFactory.obterInstancia().criarPerfilVendedorRepository();
+        new AcessarPerfilVendedorCommand(usuario,perfilRepository).executar();
     }
     
     @Override
     public void criarPerfilComprador() throws SQLException {
-        new CriarPerfilCompradorCommand(usuario).executar();
-        view.getMItemAcessarPerfilComprador().setVisible(true); 
-        view.getMItemCriarPerfilVendedor().setVisible(false); 
-        JOptionPane.showMessageDialog(view, "Solicitação enviada ao administrador");
+//        IPerfilRepository perfilRepository = SeletorRepositoryFactory.obterInstancia().criarPerfilCompradorRepository();
+//        new CriarPerfilCompradorCommand(usuario,perfilRepository).executar();
+//        view.getMItemAcessarPerfilComprador().setVisible(true); 
+//        view.getMItemCriarPerfilComprador().setVisible(false); 
+//        JOptionPane.showMessageDialog(view, "Solicitação enviada ao administrador");
     }
     
     @Override
     public void acessarPerfilComprador(){
-        //new AcessarPerfilCompradorCommand(usuario).executar();
+//        IPerfilRepository perfilRepository = SeletorRepositoryFactory.obterInstancia().criarPerfilCompradorRepository();
+//        new AcessarPerfilCompradorCommand(usuario,perfilRepository).executar();
     }
     
     @Override

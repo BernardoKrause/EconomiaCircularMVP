@@ -9,6 +9,8 @@ import model.Usuario;
 import model.Vendedor;
 import presenter.GerenciadorTelas;
 import presenter.HomePresenter;
+import repository.IPerfilRepository;
+import service.PerfilService;
 
 /**
  *
@@ -17,13 +19,13 @@ import presenter.HomePresenter;
 public class AcessarPerfilVendedorCommand extends PerfilCommand{
     private HomePresenter presenter;
 
-    public AcessarPerfilVendedorCommand(Usuario usuario) throws SQLException {
-        super(usuario);
+    public AcessarPerfilVendedorCommand(Usuario usuario, IPerfilRepository perfilRepository) throws SQLException {
+        super(usuario,perfilRepository);
         this.presenter = GerenciadorTelas.getInstancia().getPresenter();
     }
     
     @Override
-    public void executar() {
+    public void executar() throws SQLException {
         presenter.acessarVendedor((Vendedor) usuario.getPerfilVendedor().get());
     }
     

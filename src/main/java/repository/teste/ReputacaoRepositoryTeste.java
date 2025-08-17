@@ -7,10 +7,8 @@ package repository.teste;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import model.Conduta;
+import model.Perfil;
 import model.Reputacao;
-import model.Vendedor;
 import repository.IReputacaoRepository;
 
 /**
@@ -33,20 +31,18 @@ public class ReputacaoRepositoryTeste implements IReputacaoRepository{
     }
 
     @Override
-    public void adicionarReputacao(Reputacao reputacao) {
+    public void salvarReputacao(Reputacao reputacao) {
         reputacoes.add(reputacao);
     }
 
     @Override
-    public void salvarReputacao(Reputacao reputacao) {
-        try{
-            for(Reputacao re:reputacoes){
-                if(reputacao.getId().equals(re.getId())){
-                    re.copy(reputacao);
-                }
+    public Optional<Reputacao> getReputacao(Perfil perfil) {
+        for(Reputacao rep : reputacoes){
+            if(perfil.getReputacao().getId().equals(rep.getId())){
+                return Optional.of(rep);
             }
-        }catch (Exception e){
-            e.printStackTrace();
         }
+        
+        return Optional.empty();
     }
 }
