@@ -18,7 +18,7 @@ import util.factory.connection.DatabaseConnectionFactory;
  *
  * @author berna
  */
-public class PerfilSolicitacaoDAOSQLite implements PerfilSolicitacaoDAO {
+public class PerfilSolicitacaoDAOSQLite implements IPerfilSolicitacaoDAO {
 
     @Override
     public void criar(SolicitacaoPerfil solicitacaoPerfil) throws SQLException {

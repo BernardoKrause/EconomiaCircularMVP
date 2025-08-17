@@ -19,7 +19,7 @@ import util.factory.connection.DatabaseConnectionFactory;
  *
  * @author berna
  */
-public class InsigniaDAOSQLite implements InsigniaDAO {
+public class InsigniaDAOSQLite implements IInsigniaDAO {
 
     @Override
     public void criar(Insignia insignia) throws SQLException {

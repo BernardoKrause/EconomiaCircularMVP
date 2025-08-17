@@ -4,7 +4,6 @@
  */
 package repository.database;
 
-import dao.DenunciaDAO;
 import factory.dao.IDAOFactory;
 import java.sql.SQLException;
 import java.util.List;
@@ -13,13 +12,14 @@ import model.Comprador;
 import model.Denuncia;
 import model.Vendedor;
 import repository.IDenunciaRepository;
+import dao.IDenunciaDAO;
 
 /**
  *
  * @author berna
  */
 public class DenunciaRepository implements IDenunciaRepository{
-    private final DenunciaDAO denunciaDAO;
+    private final IDenunciaDAO denunciaDAO;
 
     public DenunciaRepository(IDAOFactory daoFactory) throws SQLException {
         this.denunciaDAO = daoFactory.getDenunciaDAO();

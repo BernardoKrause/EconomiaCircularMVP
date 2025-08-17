@@ -13,7 +13,7 @@ import java.util.Optional;
  *
  * @author berna
  */
-public interface DenunciaDAO {
+public interface IDenunciaDAO {
     public void criar(Denuncia denuncia) throws SQLException;
     public List<Denuncia> buscaTodos() throws SQLException;
     public Optional<Denuncia> buscaPorId(Integer id) throws SQLException;

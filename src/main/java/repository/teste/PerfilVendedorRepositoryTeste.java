@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package repository.teste;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

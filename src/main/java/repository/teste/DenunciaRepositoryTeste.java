@@ -4,7 +4,6 @@
  */
 package repository.teste;
 
-import dao.DenunciaDAO;
 import dao.DenunciaDAOSQLite;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,6 +15,7 @@ import model.Comprador;
 import model.Denuncia;
 import model.Vendedor;
 import repository.IDenunciaRepository;
+import dao.IDenunciaDAO;
 
 /**
  *

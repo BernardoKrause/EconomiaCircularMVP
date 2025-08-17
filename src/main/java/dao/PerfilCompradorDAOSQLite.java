@@ -21,7 +21,7 @@ import util.factory.connection.DatabaseConnectionFactory;
  *
  * @author berna
  */
-public class PerfilCompradorDAOSQLite implements PerfilCompradorDAO {
+public class PerfilCompradorDAOSQLite implements IPerfilCompradorDAO {
     
     @Override
     public void criar(Comprador comprador) throws SQLException {

@@ -13,7 +13,7 @@ import java.util.Optional;
 import model.Usuario;
 import util.factory.connection.DatabaseConnectionFactory;
 
-public class UsuarioDAOSQLite implements UsuarioDAO {
+public class UsuarioDAOSQLite implements IUsuarioDAO {
 
     @Override
     public void criar(Usuario usuario) throws SQLException {

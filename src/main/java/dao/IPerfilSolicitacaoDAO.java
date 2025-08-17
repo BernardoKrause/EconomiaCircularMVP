@@ -1,11 +1,12 @@
 package dao;
 
+
+import model.SolicitacaoPerfil;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
-import model.Item;
 
- /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
@@ -14,10 +15,10 @@ import model.Item;
  *
  * @author berna
  */
-public interface ItemDAO {
-    public void criar(Item item) throws SQLException;
-    public List<Item> buscaTodos() throws SQLException;
-    public Optional<Item> buscaPorId(Integer id) throws SQLException;
-    public void atualizar(Item item) throws SQLException;
+public interface IPerfilSolicitacaoDAO {
+    public void criar(SolicitacaoPerfil solicitacaoPerfil) throws SQLException;
+    public List<SolicitacaoPerfil> buscaTodos() throws SQLException;
+    public List<SolicitacaoPerfil> buscaEmAguardo() throws SQLException ;
+    public void atualizar(SolicitacaoPerfil solicitacaoPerfil) throws SQLException;
     public void deletar(Integer id) throws SQLException;
 }

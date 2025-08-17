@@ -21,7 +21,7 @@ import util.factory.connection.DatabaseConnectionFactory;
  *
  * @author berna
  */
-public class DenunciaDAOSQLite implements DenunciaDAO {
+public class DenunciaDAOSQLite implements IDenunciaDAO {
 
     @Override
     public void criar(Denuncia denuncia) throws SQLException {

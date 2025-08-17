@@ -4,20 +4,20 @@
  */
 package repository.database;
 
-import dao.PerfilSolicitacaoDAO;
 import dao.PerfilSolicitacaoDAOSQLite;
 import factory.dao.IDAOFactory;
 import java.sql.SQLException;
 import java.util.List;
 import model.SolicitacaoPerfil;
 import repository.IPerfilSolicitacaoRepository;
+import dao.IPerfilSolicitacaoDAO;
 
 /**
  *
  * @author berna
  */
 public class PerfilSolicitacaoRepository implements IPerfilSolicitacaoRepository{
-    private final PerfilSolicitacaoDAO perfilSolicitacaoDAO;
+    private final IPerfilSolicitacaoDAO perfilSolicitacaoDAO;
 
     public PerfilSolicitacaoRepository(IDAOFactory daoFactory) throws SQLException {
         this.perfilSolicitacaoDAO = daoFactory.getPerfilSolicitacaoDAO();

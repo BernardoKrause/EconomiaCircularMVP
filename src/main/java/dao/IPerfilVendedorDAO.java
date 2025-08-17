@@ -13,7 +13,7 @@ import model.Vendedor;
  *
  * @author berna
  */
-public interface PerfilVendedorDAO {
+public interface IPerfilVendedorDAO {
     public void criar(Vendedor vendedor) throws SQLException;
     public Optional<Vendedor> buscaPorIdUsuario (Integer id) throws SQLException;
     public List<Vendedor> buscaTodos() throws SQLException;

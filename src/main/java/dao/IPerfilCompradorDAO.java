@@ -1,10 +1,9 @@
 package dao;
 
-
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
-import model.Usuario;
+import model.Comprador;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -15,11 +14,9 @@ import model.Usuario;
  *
  * @author berna
  */
-public interface UsuarioDAO {
-    public void criar(Usuario usuario) throws SQLException;
-    public Optional<Usuario> buscaPorId(Integer id) throws SQLException;
-    public List<Usuario> buscaTodos() throws SQLException;
-    public void atualizar(Usuario usuario) throws SQLException;
+public interface IPerfilCompradorDAO {
+    public void criar(Comprador comprador) throws SQLException;
+    public Optional<Comprador> buscaPorIdUsuario (Integer id) throws SQLException;
+    public List<Comprador> buscaTodos() throws SQLException;
     public void deletar(Integer id) throws SQLException;
-    public Optional<Usuario> buscaPorEmail(String email) throws SQLException;
 }

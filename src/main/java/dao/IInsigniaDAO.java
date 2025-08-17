@@ -13,7 +13,7 @@ import java.util.Optional;
  *
  * @author berna
  */
-public interface InsigniaDAO {
+public interface IInsigniaDAO {
     public void criar(Insignia insignia) throws SQLException;
     public List<Insignia> buscaTodos() throws SQLException;
     public Optional<Insignia> buscaPorId(Integer id) throws SQLException;

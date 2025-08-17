@@ -4,6 +4,7 @@
  */
 package repository;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import model.Conduta;
@@ -14,9 +15,9 @@ import model.Reputacao;
  * @author caiof
  */
 public interface ICondutaRepository {
-    public void SalvarCondutaReputacao(Reputacao reputacao, Conduta conduta);
+    public void salvarConduta(Conduta conduta) throws SQLException;
     
-    public Optional<List<Conduta>> getTotalCondutas(Reputacao reputacao);
+    public Optional<List<Conduta>> getTotalCondutas(Reputacao reputacao) throws SQLException;
     
-    public Optional<List<Conduta>> getCondutasPorTipo(Reputacao reputacao, String tipo);
+    public Optional<List<Conduta>> getCondutasPorTipo(Reputacao reputacao, String tipo) throws SQLException;
 }

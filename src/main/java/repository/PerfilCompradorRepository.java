@@ -4,19 +4,19 @@
  */
 package repository;
 
-import dao.PerfilCompradorDAO;
 import dao.PerfilCompradorDAOSQLite;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import model.Comprador;
+import dao.IPerfilCompradorDAO;
 
 /**
  *
  * @author berna
  */
 public class PerfilCompradorRepository {
-    private final PerfilCompradorDAO perfilCompradorDAO;
+    private final IPerfilCompradorDAO perfilCompradorDAO;
 
     public PerfilCompradorRepository() throws SQLException {
        this.perfilCompradorDAO = new PerfilCompradorDAOSQLite();
