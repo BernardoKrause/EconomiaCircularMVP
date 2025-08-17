@@ -34,9 +34,9 @@ public class ItemPresenter implements IPresenter{
     private ItemService itemService;
     private Vendedor vendedor;
 
-    public ItemPresenter(ItemService itemService) throws SQLException{
+    public ItemPresenter(ItemService itemService, Vendedor vendedor) throws SQLException{
         this.itemService=itemService;
-        createItem();
+        this.vendedor = vendedor;
     }
     
     public void createItem() throws SQLException{
@@ -160,14 +160,12 @@ public class ItemPresenter implements IPresenter{
             JCheckBox box = model.getElementAt(i);
             if (box.isSelected()) {
                 defeitos.add(box.getText());
-                System.out.println(box.getText()); // debug
             }
         }
         
         Item item = new Item(tipo,subcategoria,tamanho,cor,peso,composicao,precoBase);
         
-        try{
-            vendedor = new Vendedor("10");
+        try{;
             itemService.criar(item, defeitos, vendedor);
             formView.dispose();
         } catch (Exception ex) {

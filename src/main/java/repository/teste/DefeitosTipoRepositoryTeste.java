@@ -76,12 +76,12 @@ public class DefeitosTipoRepositoryTeste implements IDefeitosTipoRepository{
 
     @Override
     public Optional<List<String>> getTiposItem() {
-        List<String> tiposDefeito = new ArrayList<>();
-        tiposDefeito.add("vestuario");
-        tiposDefeito.add("calcado");
-        tiposDefeito.add("bolsas e mochilas");
-        tiposDefeito.add("bijuterias e acessorios");
+        List<String> tiposItem = new ArrayList<>();
+        tiposItem.add("vestuario");
+        tiposItem.add("calcado");
+        tiposItem.add("bolsas e mochilas");
+        tiposItem.add("bijuterias e acessorios");
         
-        return Optional.of(tiposDefeito);
+        return Optional.of(tiposItem);
     }
 }

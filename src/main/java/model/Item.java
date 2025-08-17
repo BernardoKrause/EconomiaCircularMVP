@@ -169,7 +169,11 @@ public class Item {
         return vendedor;
     }
 
-    public void setPrecoFinal(Double precoFinal) {
+    public void setPrecoFinal() {
+        Double precoFinal = getPrecoBase();
+        for(Defeito defeito : defeitos){
+            precoFinal-=defeito.getValorDesconto();
+        }
         this.precoFinal = precoFinal;
     }
 
