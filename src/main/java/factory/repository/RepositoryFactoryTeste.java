@@ -9,7 +9,6 @@ import repository.IDefeitosTipoRepository;
 import repository.IDenunciaRepository;
 import repository.IItemRepository;
 import repository.IPerfilSolicitacaoRepository;
-import repository.IPerfilVendedorRepository;
 import repository.IReputacaoRepository;
 import repository.IUsuarioRepository;
 import repository.teste.CondutaRepositoryTeste;
@@ -20,6 +19,7 @@ import repository.teste.PerfilSolicitacaoRepositoryTeste;
 import repository.teste.PerfilVendedorRepositoryTeste;
 import repository.teste.ReputacaoRepositoryTeste;
 import repository.teste.UsuarioRepositoryTeste;
+import repository.IPerfilRepository;
 
 /**
  *
@@ -33,7 +33,7 @@ public class RepositoryFactoryTeste implements IRepositoryFactory{
     }
 
     @Override
-    public IPerfilVendedorRepository criarPerfilVendedorRepository() {
+    public IPerfilRepository criarPerfilVendedorRepository() {
         return PerfilVendedorRepositoryTeste.getInstancia();
     }
 

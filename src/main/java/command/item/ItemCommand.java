@@ -11,6 +11,7 @@ import javax.swing.JDesktopPane;
 import model.Perfil;
 import presenter.GerenciadorTelas;
 import service.PerfilService;
+import service.PerfilVendedorService;
 
 /**
  *
@@ -22,8 +23,8 @@ public abstract class ItemCommand implements ICommand{
     protected JDesktopPane desktop;
     
     public ItemCommand(Perfil perfil) throws SQLException {
-        this.perfil=perfil;
-        this.service = new PerfilService(SeletorRepositoryFactory.obterInstancia().criarPerfilVendedorRepository());
+        this.perfil = perfil;
+        this.service = new PerfilVendedorService(SeletorRepositoryFactory.obterInstancia().criarReputacaoRepository(), SeletorRepositoryFactory.obterInstancia().criarPerfilVendedorRepository());
         this.desktop = GerenciadorTelas.getInstancia().getDesktop();
     }
 

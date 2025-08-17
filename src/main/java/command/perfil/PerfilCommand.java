@@ -9,7 +9,9 @@ import service.PerfilService;
 import command.ICommand;
 import factory.repository.SeletorRepositoryFactory;
 import java.sql.SQLException;
-import repository.IPerfilVendedorRepository;
+import repository.IPerfilRepository;
+import repository.IReputacaoRepository;
+import service.PerfilVendedorService;
 
 /**
  *
@@ -18,14 +20,13 @@ import repository.IPerfilVendedorRepository;
 public abstract class PerfilCommand implements ICommand{
     
     protected Usuario usuario;
-    protected IPerfilVendedorRepository perfilVendedorRepository ;
     protected PerfilService service;
+    protected IReputacaoRepository reputacaoRepository;
     
-    public PerfilCommand(Usuario usuario) throws SQLException {
-        super();
+    public PerfilCommand(Usuario usuario, IPerfilRepository perfilRepository) throws SQLException {
         this.usuario=usuario;
-        this.perfilVendedorRepository = SeletorRepositoryFactory.obterInstancia().criarPerfilVendedorRepository();
-        this.service = new PerfilService(perfilVendedorRepository);
+        this.reputacaoRepository = SeletorRepositoryFactory.obterInstancia().criarReputacaoRepository();
+        this.service = new PerfilVendedorService(reputacaoRepository,perfilRepository);
     }
     
     public abstract void executar() throws SQLException;

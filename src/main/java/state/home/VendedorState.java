@@ -5,8 +5,10 @@
 package state.home;
 
 import command.item.AbrirCadastroItemCommand;
+import command.perfil.AbrirVerPerfilVendedorCommand;
 import command.perfil.CriarPerfilCompradorCommand;
 import command.usuario.SairUsuarioCommand;
+import factory.repository.SeletorRepositoryFactory;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -15,6 +17,7 @@ import model.Perfil;
 import model.Usuario;
 import model.Vendedor;
 import presenter.HomePresenter;
+import repository.IPerfilRepository;
 
 /**
  *
@@ -24,13 +27,26 @@ public class VendedorState extends HomePresenterState{
     private Vendedor vendedor;
     private Usuario usuario;
     
-    public VendedorState(HomePresenter presenter, Vendedor vendedor) {
+    public VendedorState(HomePresenter presenter, Vendedor vendedor) throws SQLException {
         super(presenter);
     
         this.vendedor=vendedor;
         this.usuario=vendedor.getUsuario();
         
         setVisibles();
+        
+        verPerfilVendedor();
+        
+        view.getMItemVerPerfilVendedor().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    verPerfilVendedor();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(view, ex);
+                }
+            }
+        });
         
         view.getMItemCriarPerfilComprador().addActionListener(new ActionListener() {
             @Override
@@ -69,8 +85,7 @@ public class VendedorState extends HomePresenterState{
     }
     
     @Override
-    public void setVisibles(){
-        
+    public void setVisibles(){        
         view.getMenuUsuario().setText(usuario.getNome());
         view.getMenuVendedor().setVisible(true);
         view.getMenuComprador().setVisible(true);
@@ -98,15 +113,22 @@ public class VendedorState extends HomePresenterState{
     
     @Override
     public void criarPerfilComprador() throws SQLException {
-        new CriarPerfilCompradorCommand(usuario).executar();
-        view.getMItemAcessarPerfilComprador().setVisible(true); 
-        view.getMItemCriarPerfilVendedor().setVisible(false); 
-        JOptionPane.showMessageDialog(view, "Solicitação enviada ao administrador");
+//        IPerfilRepository perfilRepository = SeletorRepositoryFactory.obterInstancia().criarPerfilCompradorRepository();
+//        new CriarPerfilCompradorCommand(usuario,perfilRepository).executar();
+//        view.getMItemAcessarPerfilComprador().setVisible(true); 
+//        view.getMItemCriarPerfilComprador().setVisible(false); 
+//        JOptionPane.showMessageDialog(view, "Solicitação enviada ao administrador");
     }
     
     @Override
     public void acessarPerfilComprador(){
-        throw new RuntimeException("Não é possivel salvar estando nesse estado!");
+//        IPerfilRepository perfilRepository = SeletorRepositoryFactory.obterInstancia().criarPerfilCompradorRepository();
+//        new AcessarPerfilCompradorCommand(usuario,perfilRepository).executar();
+    }
+    
+    public void verPerfilVendedor() throws SQLException{
+        IPerfilRepository perfilRepository = SeletorRepositoryFactory.obterInstancia().criarPerfilVendedorRepository();
+        new AbrirVerPerfilVendedorCommand(vendedor,perfilRepository);
     }
     
 }

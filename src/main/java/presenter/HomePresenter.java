@@ -4,6 +4,7 @@
  */
 package presenter;
 
+import java.sql.SQLException;
 import javax.swing.JDesktopPane;
 import model.Usuario;
 import model.Vendedor;
@@ -48,7 +49,7 @@ public class HomePresenter {
         usuario=null;
     }
     
-    public void acessarVendedor(Vendedor vendedor){
+    public void acessarVendedor(Vendedor vendedor) throws SQLException{
         estado = new VendedorState(this,vendedor);
     }
 }

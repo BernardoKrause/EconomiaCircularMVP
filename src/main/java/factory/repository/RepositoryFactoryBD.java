@@ -13,7 +13,7 @@ import repository.IDefeitosTipoRepository;
 import repository.IDenunciaRepository;
 import repository.IItemRepository;
 import repository.IPerfilSolicitacaoRepository;
-import repository.IPerfilVendedorRepository;
+import repository.IPerfilRepository;
 import repository.IReputacaoRepository;
 import repository.IUsuarioRepository;
 import repository.database.DefeitosTipoRepository;
@@ -46,7 +46,7 @@ public class RepositoryFactoryBD implements IRepositoryFactory{
     }
 
     @Override
-    public IPerfilVendedorRepository criarPerfilVendedorRepository() {
+    public IPerfilRepository criarPerfilVendedorRepository() {
         try {
             return new PerfilVendedorRepository(daoFactory);
         } catch (SQLException ex) {

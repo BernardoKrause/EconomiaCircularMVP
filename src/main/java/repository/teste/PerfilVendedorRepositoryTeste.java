@@ -4,29 +4,26 @@
  */
 package repository.teste;
 
-import dao.PerfilVendedorDAO;
-import dao.PerfilVendedorDAOSQLite;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import model.Reputacao;
+import model.Perfil;
 import model.Vendedor;
-import repository.IPerfilVendedorRepository;
+import repository.IPerfilRepository;
 
 /**
  *
  * @author caiof
  */
-public class PerfilVendedorRepositoryTeste implements IPerfilVendedorRepository{
-    private List<Vendedor> VendedoresCriados;
+public class PerfilVendedorRepositoryTeste implements IPerfilRepository{
+    private List<Vendedor> vendedoresCriados;
     private static PerfilVendedorRepositoryTeste instancia;
 
     private PerfilVendedorRepositoryTeste() throws SQLException {
-       this.VendedoresCriados = new ArrayList<>();
+       this.vendedoresCriados = new ArrayList<>();
     }
 
     public static PerfilVendedorRepositoryTeste getInstancia(){
@@ -41,18 +38,27 @@ public class PerfilVendedorRepositoryTeste implements IPerfilVendedorRepository{
     }
 
     @Override
-    public void adicionaPerfil(Vendedor vendedor) throws SQLException {
-        VendedoresCriados.add(vendedor);
+    public void salvarPerfil(Perfil vendedor) throws SQLException {
+        vendedoresCriados.add((Vendedor)vendedor);
     }
     
     @Override
-    public Optional<Vendedor> getPorIdUsuario(Integer id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Optional<Perfil> getPorIdUsuario(Integer id) throws SQLException {
+        for (Vendedor v:vendedoresCriados){
+            if(id.equals(v.getId())){
+                return Optional.of(v);
+            }
+        }
+        return Optional.empty();
     }
     
     @Override
-    public List<Vendedor> getTodosVendedores() throws SQLException {
-        return VendedoresCriados;
+    public Optional<List<Perfil>> getTodosPerfils() throws SQLException {
+        List<Perfil> vendedores = new ArrayList<>();
+        for(Perfil v : vendedoresCriados){
+            vendedores.add(v);
+        }
+        return Optional.of(vendedores);
     }
     
     @Override
