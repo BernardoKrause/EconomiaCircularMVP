@@ -26,6 +26,7 @@ command\usuario\AbrirSignupUsuarioCommand.class
 main\EconomiaCircularMVP.class
 dao\IUsuarioDAO.class
 view\usuario\LoginView.class
+view\item\ShowItemView.class
 presenter\PerfilPresenter$3.class
 view\usuario\SignupView$1.class
 adapter\DotEnvAdapter.class
@@ -102,6 +103,7 @@ command\perfil\AcessarPerfilVendedorCommand.class
 view\HomeView.class
 dao\IPerfilVendedorDAO.class
 state\home\VendedorState$3.class
+view\item\ShowItensView.class
 strategy\SistemaDefeitos\IRegraDefeitoStrategy.class
 view\HomeView$3.class
 repository\database\PerfilSolicitacaoRepository.class

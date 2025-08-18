@@ -33,6 +33,7 @@ public class RegraDefeitosPercentual implements IRegraDefeitoStrategy{
                 Logger.getLogger(RegraDefeitosPercentual.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        item.setPrecoFinal();
     }
 
     private boolean seAplica(String tipo, String defeito) throws SQLException {

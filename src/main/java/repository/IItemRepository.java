@@ -26,4 +26,5 @@ public interface IItemRepository {
     
     //Decisão de arquitetura de projeto
     public Optional<List<String>> getTiposItem() throws SQLException;    
+    
 }

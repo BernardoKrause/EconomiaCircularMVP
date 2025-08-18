@@ -57,9 +57,15 @@ public class ItemService {
     }
     
     public List<String> getListaMateriaisComposicao(){
-        //fazer aidna
         List<String> lista = new ArrayList<>();
-        lista.add("pano");
+
+        lista.add("Algodão");
+        lista.add("poliéster");
+        lista.add("couro");
+        lista.add("metal (ligas leves)");
+        lista.add("plástico de base fóssil");
+        lista.add("outros");
+
         return lista;
     }
 }
