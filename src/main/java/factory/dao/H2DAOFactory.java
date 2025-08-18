@@ -19,7 +19,6 @@ import dao.IUsuarioDAO;
  * @author berna
  */
 public class H2DAOFactory extends IDAOFactory {
-    
     // implementar
     @Override
     public ICondutaDAO getCondutaDAO() {

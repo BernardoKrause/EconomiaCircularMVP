@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import model.Conduta;
+import model.Reputacao;
 import util.factory.connection.DatabaseConnectionFactory;
 
 /**
@@ -22,9 +23,9 @@ import util.factory.connection.DatabaseConnectionFactory;
 public class CondutaDAOSQLite implements ICondutaDAO {
 
     @Override
-    public void criar(Conduta conduta) throws SQLException {
-        String sql = "INSERT INTO condutas (tipoConduta, descricao, tipoPerfil, valorEstrelas)"
-                   + "VALUES (?, ?, ?, ?)";
+    public void criar(Reputacao reputacao, Conduta conduta) throws SQLException {
+        String sql = "INSERT INTO condutas (tipoConduta, descricao, tipoPerfil, valorEstrelas, idReputacao)"
+                   + "VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -32,10 +33,11 @@ public class CondutaDAOSQLite implements ICondutaDAO {
             pstmt.setString(2, conduta.getDescricao());
             pstmt.setString(3, conduta.getTipoPerfil());
             pstmt.setDouble(4, conduta.getValorEstrela());
+            pstmt.setInt(5, reputacao.getId());
             pstmt.executeUpdate();
         }
     }
-
+    
     @Override
     public List<Conduta> buscaTodos() throws SQLException {
         List<Conduta> condutas = new ArrayList<>();
@@ -61,22 +63,23 @@ public class CondutaDAOSQLite implements ICondutaDAO {
     }
 
     @Override
-    public Optional<Conduta> buscaPorTipo(String tipo) throws SQLException {
+    public Optional<List<Conduta>> buscaPorTipo(Integer idReputacao, String tipo) throws SQLException {
+        List<Conduta> condutas = new ArrayList<>();
         String sql = """
             SELECT *
             FROM condutas
-            WHERE tipoConduta = ?
+            WHERE tipoConduta = ? AND idReputacao = ?
             """;
-        
+
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, tipo);
+            pstmt.setInt(2, idReputacao);
 
             try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    
-                    return Optional.of(new Conduta(
+                while (rs.next()) {
+                    condutas.add(new Conduta(
                         rs.getInt("idConduta"),
                         rs.getString("tipoConduta"),
                         rs.getString("descricao"),
@@ -84,9 +87,41 @@ public class CondutaDAOSQLite implements ICondutaDAO {
                         rs.getDouble("valorEstrelas")
                     ));
                 }
+                
+                return condutas.isEmpty() ? Optional.empty() : Optional.of(condutas);
             }
         }
-        return Optional.empty();
     }
+
+    @Override
+    public Optional<List<Conduta>> buscaPorReputacao(Reputacao reputacao) throws SQLException {
+        List<Conduta> condutas = new ArrayList<>();
+        String sql = """
+            SELECT *
+            FROM condutas
+            WHERE idReputacao = ?
+            """;
+
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, reputacao.getId());
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    condutas.add(new Conduta(
+                        rs.getInt("idConduta"),
+                        rs.getString("tipoConduta"),
+                        rs.getString("descricao"),
+                        rs.getString("tipoPerfil"),
+                        rs.getDouble("valorEstrelas")
+                    ));
+                }
+                
+                return condutas.isEmpty() ? Optional.empty() : Optional.of(condutas);
+            }
+        }
+    }
+
     
 }

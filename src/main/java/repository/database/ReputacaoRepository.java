@@ -20,23 +20,32 @@ import repository.IReputacaoRepository;
 public class ReputacaoRepository implements IReputacaoRepository{
     private final IReputacaoDAO reputacaoDAO;
     
-    public ReputacaoRepository(IDAOFactory daoFactory) throws SQLException {
-       this.reputacaoDAO = daoFactory.getReputacaoDAO();
+    public ReputacaoRepository(IDAOFactory daoFactory) {
+        reputacaoDAO = daoFactory.getReputacaoDAO();
     }
     
     @Override
     public void salvarReputacao(Reputacao reputacao) throws SQLException {
         reputacaoDAO.criar(reputacao);
     }
-
-    // implementar
+    
     @Override
     public Optional<Reputacao> getReputacao(Perfil perfil) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return reputacaoDAO.buscaPorPerfil(perfil);
     }
 
-    public List<Reputacao> getTodasReputacoes() throws SQLException {
+    @Override
+    public Optional<List<Reputacao>> getTodos() throws SQLException {
         return reputacaoDAO.buscaTodos();
     }
-    
+
+    @Override
+    public void atualizarReputacao(Reputacao reputacao) throws SQLException {
+        reputacaoDAO.atualizar(reputacao);
+    }
+
+    @Override
+    public void deletarReputacao(Integer id) throws SQLException {
+        reputacaoDAO.deletar(id);
+    }
 }

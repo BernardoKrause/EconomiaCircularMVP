@@ -40,7 +40,9 @@ public class H2DatabaseConnectionFactory implements DatabaseConnectionFactory {
                 tipoConduta VARCHAR(45),
                 descricao VARCHAR(255),
                 tipoPerfil VARCHAR(45),
-                valorEstrelas DOUBLE
+                valorEstrelas DOUBLE,
+                idReputacao INT,
+                FOREIGN KEY (idReputacao) REFERENCES reputacoes(idReputacao)
             );
             """,
             """
@@ -48,9 +50,7 @@ public class H2DatabaseConnectionFactory implements DatabaseConnectionFactory {
                 idReputacao INT PRIMARY KEY AUTO_INCREMENT,
                 estrelas DOUBLE,
                 beneficioClimatico DOUBLE,
-                nivel VARCHAR(45),
-                idConduta INT,
-                FOREIGN KEY (idConduta) REFERENCES condutas(idConduta)
+                nivel VARCHAR(45)
             );
             """,
             """

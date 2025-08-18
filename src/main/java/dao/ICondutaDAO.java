@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import model.Conduta;
+import model.Reputacao;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -16,7 +17,8 @@ import model.Conduta;
  * @author berna
  */
 public interface ICondutaDAO {
-    public void criar(Conduta conduta) throws SQLException;
+    public void criar(Reputacao reputacao, Conduta conduta) throws SQLException;
     public List<Conduta> buscaTodos() throws SQLException;
-    public Optional<Conduta> buscaPorTipo(String tipo) throws SQLException;
+    public Optional<List<Conduta>> buscaPorTipo(Integer idReputacao, String tipo) throws SQLException;
+    public Optional<List<Conduta>> buscaPorReputacao(Reputacao reputacao) throws SQLException;
 }

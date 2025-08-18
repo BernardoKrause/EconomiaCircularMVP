@@ -33,7 +33,7 @@ public class CondutaRepositoryTeste implements ICondutaRepository{
     }
 
     @Override
-    public Optional<List<Conduta>> getTotalCondutas(Reputacao reputacao) {
+    public Optional<List<Conduta>> getTodasCondutas(Reputacao reputacao) {
         List<Conduta> lista = new ArrayList<>();
         for(Conduta c:condutasReputacaoCadastradas){
             for(Conduta cRep:reputacao.getCondutas()){
@@ -59,7 +59,8 @@ public class CondutaRepositoryTeste implements ICondutaRepository{
     }
 
     @Override
-    public void salvarConduta(Conduta conduta) throws SQLException {
+    public void salvarConduta(Reputacao reputacao, Conduta conduta) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
 }
