@@ -4,20 +4,19 @@
  */
 package factory.dao;
 
-import dao.DenunciaDAO;
 import dao.DenunciaDAOSQLite;
-import dao.InsigniaDAO;
-import dao.InsigniaDAOSQLite;
-import dao.ItemDAO;
+import dao.ICondutaDAO;
 import dao.ItemDAOSQLite;
-import dao.PerfilCompradorDAO;
 import dao.PerfilCompradorDAOSQLite;
-import dao.PerfilSolicitacaoDAO;
 import dao.PerfilSolicitacaoDAOSQLite;
-import dao.PerfilVendedorDAO;
 import dao.PerfilVendedorDAOSQLite;
-import dao.UsuarioDAO;
 import dao.UsuarioDAOSQLite;
+import dao.IDenunciaDAO;
+import dao.IItemDAO;
+import dao.IPerfilCompradorDAO;
+import dao.IPerfilSolicitacaoDAO;
+import dao.IPerfilVendedorDAO;
+import dao.IUsuarioDAO;
 
 /**
  *
@@ -26,37 +25,37 @@ import dao.UsuarioDAOSQLite;
 public class SQLiteDAOFactory extends IDAOFactory {
 
     @Override
-    public ItemDAO getItemDAO() {
+    public ICondutaDAO getCondutaDAO() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    @Override
+    public IItemDAO getItemDAO() {
         return new ItemDAOSQLite();
     }
 
     @Override
-    public DenunciaDAO getDenunciaDAO() {
+    public IDenunciaDAO getDenunciaDAO() {
         return new DenunciaDAOSQLite();
     }
 
     @Override
-    public InsigniaDAO getInsigniaDAO() {
-        return new InsigniaDAOSQLite();
-    }
-
-    @Override
-    public PerfilCompradorDAO getPerfilCompradorDAO() {
+    public IPerfilCompradorDAO getPerfilCompradorDAO() {
         return new PerfilCompradorDAOSQLite();
     }
 
     @Override
-    public PerfilSolicitacaoDAO getPerfilSolicitacaoDAO() {
+    public IPerfilSolicitacaoDAO getPerfilSolicitacaoDAO() {
         return new PerfilSolicitacaoDAOSQLite();
     }
 
     @Override
-    public PerfilVendedorDAO getPerfilVendedorDAO() {
+    public IPerfilVendedorDAO getPerfilVendedorDAO() {
         return new PerfilVendedorDAOSQLite();
     }
 
     @Override
-    public UsuarioDAO getUsuarioDAO() {
+    public IUsuarioDAO getUsuarioDAO() {
         return new UsuarioDAOSQLite();
     }
     

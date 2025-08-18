@@ -22,8 +22,12 @@ public class H2DatabaseConnectionFactory implements DatabaseConnectionFactory {
     static {
         setupDatabase();
     }
-    
-    
+
+    /**
+     * 
+     * @return 
+     * @throws SQLException 
+     */
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
@@ -32,202 +36,152 @@ public class H2DatabaseConnectionFactory implements DatabaseConnectionFactory {
         String[] ddlQueries = {
             """
             CREATE TABLE IF NOT EXISTS condutas (
-                idConduta INTEGER PRIMARY KEY AUTO_INCREMENT,
-                tipoConduta TEXT,
-                descricao TEXT,
-                tipoPerfil TEXT,
+                idConduta INT PRIMARY KEY AUTO_INCREMENT,
+                tipoConduta VARCHAR(45),
+                descricao VARCHAR(255),
+                tipoPerfil VARCHAR(45),
                 valorEstrelas DOUBLE
             );
             """,
             """
-            CREATE TABLE IF NOT EXISTS insignias (
-                idInsignia INTEGER PRIMARY KEY AUTO_INCREMENT,
-                nome TEXT NOT NULL,
-                estrelaBonus DOUBLE
-            );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS medalhas (
-                idMedalha INTEGER PRIMARY KEY AUTO_INCREMENT,
-                nome TEXT NOT NULL,
-                visual TEXT
-            );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS defeitos (
-                idDefeito INTEGER PRIMARY KEY AUTO_INCREMENT,
-                descricao TEXT,
-                percentualDesconto DOUBLE,
-                valorDesconto DOUBLE
-            );
-            """,
-            """
             CREATE TABLE IF NOT EXISTS reputacoes (
-                idReputacao INTEGER PRIMARY KEY AUTO_INCREMENT,
+                idReputacao INT PRIMARY KEY AUTO_INCREMENT,
                 estrelas DOUBLE,
                 beneficioClimatico DOUBLE,
-                nivel TEXT,
-                idConduta INTEGER,
+                nivel VARCHAR(45),
+                idConduta INT,
                 FOREIGN KEY (idConduta) REFERENCES condutas(idConduta)
             );
             """,
             """
             CREATE TABLE IF NOT EXISTS compradores (
-                idPerfilComprador INTEGER PRIMARY KEY AUTO_INCREMENT,
-                sistemId TEXT NOT NULL UNIQUE,
-                idReputacao INTEGER,
+                idPerfilComprador INT PRIMARY KEY AUTO_INCREMENT,
+                sistemId VARCHAR(45) UNIQUE,
+                idReputacao INT,
                 FOREIGN KEY (idReputacao) REFERENCES reputacoes(idReputacao)
             );
             """,
             """
             CREATE TABLE IF NOT EXISTS vendedores (
-                idPerfilVendedor INTEGER PRIMARY KEY AUTO_INCREMENT,
-                sistemId TEXT NOT NULL UNIQUE,
-                idReputacao INTEGER,
+                idPerfilVendedor INT PRIMARY KEY AUTO_INCREMENT,
+                sistemId VARCHAR(45) UNIQUE,
+                idReputacao INT,
                 FOREIGN KEY (idReputacao) REFERENCES reputacoes(idReputacao)
             );
             """,
             """
             CREATE TABLE IF NOT EXISTS usuarios (
-                idUsuario INTEGER PRIMARY KEY AUTO_INCREMENT,
-                nome TEXT,
-                email TEXT UNIQUE NOT NULL,
-                telefone TEXT,
-                senha TEXT NOT NULL,
-                eAdmin INTEGER DEFAULT 0,
-                criado_em TEXT,
-                idPerfilComprador INTEGER,
-                idPerfilVendedor INTEGER,
+                idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+                nome VARCHAR(100),
+                email VARCHAR(100) UNIQUE NOT NULL,
+                telefone VARCHAR(45),
+                senha VARCHAR(100) NOT NULL,
+                eAdmin BOOLEAN DEFAULT FALSE,
+                criado_em TIMESTAMP,
+                idPerfilComprador INT,
+                idPerfilVendedor INT,
                 FOREIGN KEY (idPerfilComprador) REFERENCES compradores(idPerfilComprador),
                 FOREIGN KEY (idPerfilVendedor) REFERENCES vendedores(idPerfilVendedor)
             );
             """,
             """
+            CREATE TABLE IF NOT EXISTS perfil_solicitacoes (
+                idSolicitacaoPerfil INT PRIMARY KEY AUTO_INCREMENT,
+                idUsuario INT,
+                status VARCHAR(1) NOT NULL,
+                FOREIGN KEY (idUsuario) REFERENCES usuarios(idUsuario)
+            );
+            """,
+            """
             CREATE TABLE IF NOT EXISTS itens (
-                idItem INTEGER PRIMARY KEY AUTO_INCREMENT,
-                idC TEXT NOT NULL UNIQUE,
-                tipo TEXT,
-                subcategoria TEXT,
-                tamanho TEXT,
-                cor TEXT,
+                idItem INT PRIMARY KEY AUTO_INCREMENT,
+                idC VARCHAR(45) UNIQUE,
+                tipo VARCHAR(45),
+                subcategoria VARCHAR(45),
+                tamanho VARCHAR(45),
+                cor VARCHAR(45),
                 peso DOUBLE,
-                composicao TEXT,
+                composicao VARCHAR(255),
                 precoBase DOUBLE,
                 precoFinal DOUBLE,
-                gpwEvitado INTEGER,
+                gpwEvitado DOUBLE,
                 mciItem DOUBLE,
-                numeroCiclo INTEGER,
-                idPerfilVendedor INTEGER,
+                numeroCiclo INT,
+                idPerfilVendedor INT,
                 FOREIGN KEY (idPerfilVendedor) REFERENCES vendedores(idPerfilVendedor)
             );
             """,
             """
+            CREATE TABLE IF NOT EXISTS defeitos (
+                idDefeito INT PRIMARY KEY AUTO_INCREMENT,
+                descricao VARCHAR(255),
+                percentualDesconto DOUBLE
+            );
+            """,
+            """
+            CREATE TABLE IF NOT EXISTS item_defeitos (
+                idDefeito INT,
+                idItem INT,
+                valorDesconto DOUBLE,
+                PRIMARY KEY (idDefeito, idItem),
+                FOREIGN KEY (idDefeito) REFERENCES defeitos(idDefeito),
+                FOREIGN KEY (idItem) REFERENCES itens(idItem)
+            );
+            """,
+            """
             CREATE TABLE IF NOT EXISTS ofertas (
-                idOferta INTEGER PRIMARY KEY AUTO_INCREMENT,
-                dataOferta TEXT,
+                idOferta INT PRIMARY KEY AUTO_INCREMENT,
+                dataOferta TIMESTAMP,
                 valorOferta DOUBLE,
-                status TEXT,
-                idPerfilVendedor INTEGER,
-                idItem INTEGER,
-                idPerfilComprador INTEGER,
-                FOREIGN KEY (idPerfilVendedor) REFERENCES vendedores(idPerfilVendedor),
+                status VARCHAR(45),
+                idItem INT,
+                idPerfilComprador INT,
                 FOREIGN KEY (idItem) REFERENCES itens(idItem),
                 FOREIGN KEY (idPerfilComprador) REFERENCES compradores(idPerfilComprador)
             );
             """,
             """
             CREATE TABLE IF NOT EXISTS transacoes (
-                idTransacao INTEGER PRIMARY KEY AUTO_INCREMENT,
-                idC TEXT NOT NULL UNIQUE,
-                dataInicio TEXT,
-                dataTermino TEXT,
-                comentarioVendedor TEXT,
-                comentarioComprador TEXT,
-                idPerfilVendedor INTEGER,
-                idPerfilComprador INTEGER,
+                idTransacao INT PRIMARY KEY AUTO_INCREMENT,
+                idC VARCHAR(45) UNIQUE,
+                dataInicio TIMESTAMP,
+                dataTermino TIMESTAMP,
+                comentarioVendedor VARCHAR(255),
+                comentarioComprador VARCHAR(255),
+                idPerfilVendedor INT,
+                idPerfilComprador INT,
                 FOREIGN KEY (idPerfilVendedor) REFERENCES vendedores(idPerfilVendedor),
                 FOREIGN KEY (idPerfilComprador) REFERENCES compradores(idPerfilComprador)
             );
             """,
             """
             CREATE TABLE IF NOT EXISTS denuncias (
-                idDenuncia INTEGER PRIMARY KEY AUTO_INCREMENT,
-                idC TEXT NOT NULL UNIQUE,
-                descricao TEXT,
-                status TEXT,
-                idPerfilComprador INTEGER,
-                idPerfilVendedor INTEGER,
-                FOREIGN KEY (idPerfilComprador) REFERENCES compradores(idPerfilComprador),
-                FOREIGN KEY (idPerfilVendedor) REFERENCES vendedores(idPerfilVendedor)
-            );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS vendedor_insignias (
-                idInsignia INTEGER,
-                idPerfilVendedor INTEGER,
-                PRIMARY KEY (idInsignia, idPerfilVendedor),
-                FOREIGN KEY (idInsignia) REFERENCES insignias(idInsignia),
-                FOREIGN KEY (idPerfilVendedor) REFERENCES vendedores(idPerfilVendedor)
-            );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS comprador_insignias (
-                idInsignia INTEGER,
-                idPerfilComprador INTEGER,
-                PRIMARY KEY (idInsignia, idPerfilComprador),
-                FOREIGN KEY (idInsignia) REFERENCES insignias(idInsignia),
+                idDenuncia INT PRIMARY KEY AUTO_INCREMENT,
+                idC VARCHAR(45) UNIQUE,
+                descricao VARCHAR(255),
+                status VARCHAR(45),
+                idTransacao INT,
+                idPerfilVendedor INT,
+                idPerfilComprador INT,
+                FOREIGN KEY (idTransacao) REFERENCES transacoes(idTransacao),
+                FOREIGN KEY (idPerfilVendedor) REFERENCES vendedores(idPerfilVendedor),
                 FOREIGN KEY (idPerfilComprador) REFERENCES compradores(idPerfilComprador)
-            );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS vendedor_medalhas (
-                idMedalha INTEGER,
-                idPerfilVendedor INTEGER,
-                PRIMARY KEY (idMedalha, idPerfilVendedor),
-                FOREIGN KEY (idMedalha) REFERENCES medalhas(idMedalha),
-                FOREIGN KEY (idPerfilVendedor) REFERENCES vendedores(idPerfilVendedor)
-            );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS comprador_medalhas (
-                idMedalha INTEGER,
-                idPerfilComprador INTEGER,
-                PRIMARY KEY (idMedalha, idPerfilComprador),
-                FOREIGN KEY (idMedalha) REFERENCES medalhas(idMedalha),
-                FOREIGN KEY (idPerfilComprador) REFERENCES compradores(idPerfilComprador)
-            );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS item_defeitos (
-                idItem INTEGER,
-                idDefeito INTEGER,
-                PRIMARY KEY (idItem, idDefeito),
-                FOREIGN KEY (idItem) REFERENCES itens(idItem),
-                FOREIGN KEY (idDefeito) REFERENCES defeitos(idDefeito)
             );
             """,
             """
             CREATE TABLE IF NOT EXISTS denuncia_defeitos (
-                idDenuncia INTEGER,
-                idDefeito INTEGER,
+                idDenuncia INT,
+                idDefeito INT,
                 PRIMARY KEY (idDenuncia, idDefeito),
                 FOREIGN KEY (idDenuncia) REFERENCES denuncias(idDenuncia),
                 FOREIGN KEY (idDefeito) REFERENCES defeitos(idDefeito)
             );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS perfil_solicitacoes (
-                idSolicitacaoPerfil INTEGER PRIMARY KEY AUTO_INCREMENT,
-                status TEXT NOT NULL DEFAULT 'W' CHECK (status IN ('A', 'D', 'W')),
-                idUsuario INTEGER,
-                FOREIGN KEY (idUsuario) REFERENCES usuarios(idUsuario)
-            );
             """
         };
 
-        try (Connection conn = getConnection(); 
+        try (Connection conn = getConnection();
              Statement stmt = conn.createStatement()) {
-            
+
             for (String query : ddlQueries) {
                 stmt.execute(query);
             }
@@ -237,6 +191,4 @@ public class H2DatabaseConnectionFactory implements DatabaseConnectionFactory {
             throw new RuntimeException(e);
         }
     }
-
-
 }

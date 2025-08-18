@@ -4,6 +4,7 @@
  */
 package repository.teste;
 
+import java.sql.SQLException;
 import model.Conduta;
 import model.Reputacao;
 import repository.ICondutaRepository;
@@ -32,12 +33,6 @@ public class CondutaRepositoryTeste implements ICondutaRepository{
     }
 
     @Override
-    public void SalvarCondutaReputacao(Reputacao reputacao, Conduta conduta) {
-        condutasReputacaoCadastradas.add(conduta);
-        reputacao.addConduta(conduta);
-    }
-
-    @Override
     public Optional<List<Conduta>> getTotalCondutas(Reputacao reputacao) {
         List<Conduta> lista = new ArrayList<>();
         for(Conduta c:condutasReputacaoCadastradas){
@@ -61,5 +56,10 @@ public class CondutaRepositoryTeste implements ICondutaRepository{
             }
         }
         return Optional.of(lista);
+    }
+
+    @Override
+    public void salvarConduta(Conduta conduta) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

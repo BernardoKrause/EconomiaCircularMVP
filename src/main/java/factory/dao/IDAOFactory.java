@@ -4,26 +4,26 @@
  */
 package factory.dao;
 
-import dao.DenunciaDAO;
-import dao.InsigniaDAO;
-import dao.ItemDAO;
-import dao.PerfilCompradorDAO;
-import dao.PerfilSolicitacaoDAO;
-import dao.PerfilVendedorDAO;
-import dao.UsuarioDAO;
+import dao.ICondutaDAO;
+import dao.IDenunciaDAO;
+import dao.IItemDAO;
+import dao.IPerfilCompradorDAO;
+import dao.IPerfilSolicitacaoDAO;
+import dao.IPerfilVendedorDAO;
+import dao.IUsuarioDAO;
 
 /**
  *
  * @author berna
  */
 public abstract class IDAOFactory {
-    public abstract DenunciaDAO getDenunciaDAO();
-    public abstract InsigniaDAO getInsigniaDAO();
-    public abstract ItemDAO getItemDAO();
-    public abstract PerfilCompradorDAO getPerfilCompradorDAO();
-    public abstract PerfilSolicitacaoDAO getPerfilSolicitacaoDAO();
-    public abstract PerfilVendedorDAO getPerfilVendedorDAO();
-    public abstract UsuarioDAO getUsuarioDAO();
+    public abstract ICondutaDAO getCondutaDAO();
+    public abstract IDenunciaDAO getDenunciaDAO();
+    public abstract IItemDAO getItemDAO();
+    public abstract IPerfilCompradorDAO getPerfilCompradorDAO();
+    public abstract IPerfilSolicitacaoDAO getPerfilSolicitacaoDAO();
+    public abstract IPerfilVendedorDAO getPerfilVendedorDAO();
+    public abstract IUsuarioDAO getUsuarioDAO();
     
     public static IDAOFactory getDAOFactory(String sgbd) {
         if (sgbd.equalsIgnoreCase("SQLite")) {

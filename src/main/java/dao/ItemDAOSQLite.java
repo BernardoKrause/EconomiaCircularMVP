@@ -1,7 +1,6 @@
 package dao;
 
 
-import dao.ItemDAO;
 import dao.UsuarioDAOSQLite;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import model.Item;
 import util.factory.connection.DatabaseConnectionFactory;
+import dao.IItemDAO;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -23,7 +23,7 @@ import util.factory.connection.DatabaseConnectionFactory;
  *
  * @author berna
  */
-public class ItemDAOSQLite implements ItemDAO {
+public class ItemDAOSQLite implements IItemDAO {
     @Override
     public void criar(Item item) throws SQLException {
         String sql = "INSERT INTO itens "

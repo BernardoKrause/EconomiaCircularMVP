@@ -6,7 +6,6 @@ package util.factory.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import static java.sql.DriverManager.getConnection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -15,7 +14,7 @@ import java.sql.Statement;
  * @author berna
  */
 public class SQLiteDatabaseConnectionFactory implements DatabaseConnectionFactory {
-private static final String URL = "jdbc:sqlite:" + System.getProperty("user.dir") + "/database.db";
+    private static final String URL = "jdbc:sqlite:" + System.getProperty("user.dir") + "/database.db";
 
     static {
         setupDatabase();
@@ -39,28 +38,6 @@ private static final String URL = "jdbc:sqlite:" + System.getProperty("user.dir"
                 descricao TEXT,
                 tipoPerfil TEXT,
                 valorEstrelas REAL
-            );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS insignias (
-                idInsignia INTEGER PRIMARY KEY AUTOINCREMENT,
-                nome TEXT NOT NULL,
-                estrelaBonus REAL
-            );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS medalhas (
-                idMedalha INTEGER PRIMARY KEY AUTOINCREMENT,
-                nome TEXT NOT NULL,
-                visual TEXT
-            );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS defeitos (
-                idDefeito INTEGER PRIMARY KEY AUTOINCREMENT,
-                descricao TEXT,
-                percentualDesconto REAL,
-                valorDesconto REAL
             );
             """,
             """
@@ -105,9 +82,17 @@ private static final String URL = "jdbc:sqlite:" + System.getProperty("user.dir"
             );
             """,
             """
+            CREATE TABLE IF NOT EXISTS perfil_solicitacoes (
+                idSolicitacaoPerfil INTEGER PRIMARY KEY AUTOINCREMENT,
+                idUsuario INTEGER,
+                status TEXT NOT NULL,
+                FOREIGN KEY (idUsuario) REFERENCES usuarios(idUsuario)
+            );
+            """,
+            """
             CREATE TABLE IF NOT EXISTS itens (
                 idItem INTEGER PRIMARY KEY AUTOINCREMENT,
-                idC TEXT NOT NULL UNIQUE,
+                idC TEXT UNIQUE,
                 tipo TEXT,
                 subcategoria TEXT,
                 tamanho TEXT,
@@ -116,11 +101,28 @@ private static final String URL = "jdbc:sqlite:" + System.getProperty("user.dir"
                 composicao TEXT,
                 precoBase REAL,
                 precoFinal REAL,
-                gpwEvitado INTEGER,
+                gpwEvitado REAL,
                 mciItem REAL,
                 numeroCiclo INTEGER,
                 idPerfilVendedor INTEGER,
                 FOREIGN KEY (idPerfilVendedor) REFERENCES vendedores(idPerfilVendedor)
+            );
+            """,
+            """
+            CREATE TABLE IF NOT EXISTS item_defeitos (
+                idDefeito INTEGER,
+                idItem INTEGER,
+                valorDesconto REAL,
+                PRIMARY KEY (idDefeito, idItem),
+                FOREIGN KEY (idDefeito) REFERENCES defeitos(idDefeito),
+                FOREIGN KEY (idItem) REFERENCES itens(idItem)
+            );
+            """,
+            """
+            CREATE TABLE IF NOT EXISTS defeitos (
+                idDefeito INTEGER PRIMARY KEY AUTOINCREMENT,
+                descricao TEXT,
+                percentualDesconto REAL
             );
             """,
             """
@@ -129,10 +131,8 @@ private static final String URL = "jdbc:sqlite:" + System.getProperty("user.dir"
                 dataOferta TEXT,
                 valorOferta REAL,
                 status TEXT,
-                idPerfilVendedor INTEGER,
                 idItem INTEGER,
                 idPerfilComprador INTEGER,
-                FOREIGN KEY (idPerfilVendedor) REFERENCES vendedores(idPerfilVendedor),
                 FOREIGN KEY (idItem) REFERENCES itens(idItem),
                 FOREIGN KEY (idPerfilComprador) REFERENCES compradores(idPerfilComprador)
             );
@@ -140,7 +140,7 @@ private static final String URL = "jdbc:sqlite:" + System.getProperty("user.dir"
             """
             CREATE TABLE IF NOT EXISTS transacoes (
                 idTransacao INTEGER PRIMARY KEY AUTOINCREMENT,
-                idC TEXT NOT NULL UNIQUE,
+                idC TEXT UNIQUE,
                 dataInicio TEXT,
                 dataTermino TEXT,
                 comentarioVendedor TEXT,
@@ -154,58 +154,15 @@ private static final String URL = "jdbc:sqlite:" + System.getProperty("user.dir"
             """
             CREATE TABLE IF NOT EXISTS denuncias (
                 idDenuncia INTEGER PRIMARY KEY AUTOINCREMENT,
-                idC TEXT NOT NULL UNIQUE,
+                idC TEXT UNIQUE,
                 descricao TEXT,
                 status TEXT,
-                idPerfilComprador INTEGER,
+                idTransacao INTEGER,
                 idPerfilVendedor INTEGER,
-                FOREIGN KEY (idPerfilComprador) REFERENCES compradores(idPerfilComprador),
-                FOREIGN KEY (idPerfilVendedor) REFERENCES vendedores(idPerfilVendedor)
-            );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS vendedor_insignias (
-                idInsignia INTEGER,
-                idPerfilVendedor INTEGER,
-                PRIMARY KEY (idInsignia, idPerfilVendedor),
-                FOREIGN KEY (idInsignia) REFERENCES insignias(idInsignia),
-                FOREIGN KEY (idPerfilVendedor) REFERENCES vendedores(idPerfilVendedor)
-            );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS comprador_insignias (
-                idInsignia INTEGER,
                 idPerfilComprador INTEGER,
-                PRIMARY KEY (idInsignia, idPerfilComprador),
-                FOREIGN KEY (idInsignia) REFERENCES insignias(idInsignia),
+                FOREIGN KEY (idTransacao) REFERENCES transacoes(idTransacao),
+                FOREIGN KEY (idPerfilVendedor) REFERENCES vendedores(idPerfilVendedor),
                 FOREIGN KEY (idPerfilComprador) REFERENCES compradores(idPerfilComprador)
-            );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS vendedor_medalhas (
-                idMedalha INTEGER,
-                idPerfilVendedor INTEGER,
-                PRIMARY KEY (idMedalha, idPerfilVendedor),
-                FOREIGN KEY (idMedalha) REFERENCES medalhas(idMedalha),
-                FOREIGN KEY (idPerfilVendedor) REFERENCES vendedores(idPerfilVendedor)
-            );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS comprador_medalhas (
-                idMedalha INTEGER,
-                idPerfilComprador INTEGER,
-                PRIMARY KEY (idMedalha, idPerfilComprador),
-                FOREIGN KEY (idMedalha) REFERENCES medalhas(idMedalha),
-                FOREIGN KEY (idPerfilComprador) REFERENCES compradores(idPerfilComprador)
-            );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS item_defeitos (
-                idItem INTEGER,
-                idDefeito INTEGER,
-                PRIMARY KEY (idItem, idDefeito),
-                FOREIGN KEY (idItem) REFERENCES itens(idItem),
-                FOREIGN KEY (idDefeito) REFERENCES defeitos(idDefeito)
             );
             """,
             """
@@ -216,25 +173,16 @@ private static final String URL = "jdbc:sqlite:" + System.getProperty("user.dir"
                 FOREIGN KEY (idDenuncia) REFERENCES denuncias(idDenuncia),
                 FOREIGN KEY (idDefeito) REFERENCES defeitos(idDefeito)
             );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS perfil_solicitacoes (
-                idSolicitacaoPerfil INTEGER PRIMARY KEY AUTOINCREMENT,
-                status TEXT NOT NULL DEFAULT 'W' CHECK (status IN ('A', 'D', 'W')),
-                idUsuario INTEGER,
-                FOREIGN KEY (idUsuario) REFERENCES usuarios(idUsuario)
-            );
             """
         };
 
         try (Connection conn = getConnection(); Statement stmt = conn.createStatement()) {
             stmt.execute("PRAGMA foreign_keys = ON");
-            
+
             for (String query : ddlQueries) {
                 stmt.execute(query);
             }
             System.out.println("Banco de dados inicializado com sucesso.");
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

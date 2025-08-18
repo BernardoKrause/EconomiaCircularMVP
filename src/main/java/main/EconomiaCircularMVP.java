@@ -4,7 +4,6 @@
 
 package main;
 
-import dao.UsuarioDAO;
 import dao.UsuarioDAOSQLite;
 import java.sql.SQLException;
 import java.util.List;
@@ -13,6 +12,7 @@ import model.Usuario;
 import presenter.GerenciadorTelas;
 import presenter.HomePresenter;
 import repository.database.UsuarioRepository;
+import dao.IUsuarioDAO;
 
 /**
  *

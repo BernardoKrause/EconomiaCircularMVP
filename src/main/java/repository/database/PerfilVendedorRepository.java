@@ -4,8 +4,6 @@
  */
 package repository.database;
 
-import dao.PerfilVendedorDAO;
-import dao.PerfilVendedorDAOSQLite;
 import factory.dao.IDAOFactory;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,13 +12,14 @@ import java.util.Optional;
 import model.Perfil;
 import model.Vendedor;
 import repository.IPerfilRepository;
+import dao.IPerfilVendedorDAO;
 
 /**
  *
  * @author berna
  */
 public class PerfilVendedorRepository implements IPerfilRepository{
-    private final PerfilVendedorDAO perfilVendedorDAO;
+    private final IPerfilVendedorDAO perfilVendedorDAO;
 
     public PerfilVendedorRepository(IDAOFactory daoFactory) throws SQLException {
        this.perfilVendedorDAO = daoFactory.getPerfilVendedorDAO();

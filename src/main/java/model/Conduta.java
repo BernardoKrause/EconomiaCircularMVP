@@ -14,6 +14,14 @@ public class Conduta {
     private String tipo;
     private String tipoPerfil;
     private Double valorEstrela;
+    
+    public Conduta(Integer id, String tipo, String descricao, String tipoPerfil, Double valorEstrelas) {
+        this.id = id;
+        this.tipo = tipo;
+        this.descricao = descricao;
+        this.tipoPerfil = tipoPerfil;
+        this.valorEstrela = valorEstrelas;
+    }
 
     public String getDescricao() {
         return descricao;
