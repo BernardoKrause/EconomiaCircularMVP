@@ -31,7 +31,7 @@ public class AbrirVerPerfilVendedorCommand extends PerfilCommand{
     
     @Override
     public void executar() throws SQLException {
-        PerfilPresenter vendedorPresenter = new VendedorPresenter(perfil);
+        PerfilPresenter vendedorPresenter = new VendedorPresenter(perfil,service);
         vendedorPresenter.verPerfil();
         desktop.add(vendedorPresenter.getView());
     }
