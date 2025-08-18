@@ -5,11 +5,13 @@
 package factory.dao;
 
 import dao.ICondutaDAO;
+import dao.IDefeitoDAO;
 import dao.IDenunciaDAO;
 import dao.IItemDAO;
 import dao.IPerfilCompradorDAO;
 import dao.IPerfilSolicitacaoDAO;
 import dao.IPerfilVendedorDAO;
+import dao.IReputacaoDAO;
 import dao.IUsuarioDAO;
 
 /**
@@ -23,7 +25,9 @@ public abstract class IDAOFactory {
     public abstract IPerfilCompradorDAO getPerfilCompradorDAO();
     public abstract IPerfilSolicitacaoDAO getPerfilSolicitacaoDAO();
     public abstract IPerfilVendedorDAO getPerfilVendedorDAO();
+    public abstract IReputacaoDAO getReputacaoDAO();
     public abstract IUsuarioDAO getUsuarioDAO();
+    public abstract IDefeitoDAO getDefeitoDAO();
     
     public static IDAOFactory getDAOFactory(String sgbd) {
         if (sgbd.equalsIgnoreCase("SQLite")) {

@@ -16,11 +16,13 @@ import repository.IPerfilSolicitacaoRepository;
 import repository.IPerfilRepository;
 import repository.IReputacaoRepository;
 import repository.IUsuarioRepository;
+import repository.database.CondutaRepository;
 import repository.database.DefeitosTipoRepository;
 import repository.database.DenunciaRepository;
 import repository.database.ItemRepository;
 import repository.database.PerfilSolicitacaoRepository;
 import repository.database.PerfilVendedorRepository;
+import repository.database.ReputacaoRepository;
 import repository.database.UsuarioRepository;
 
 /**
@@ -95,14 +97,25 @@ public class RepositoryFactoryBD implements IRepositoryFactory{
         return null;
     }
 
+    // implementar
     @Override
     public IReputacaoRepository criarReputacaoRepository() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            return new ReputacaoRepository(daoFactory);
+        } catch (SQLException ex) {
+            Logger.getLogger(RepositoryFactoryBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override
-    public ICondutaRepository criarCondutarRepository() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public ICondutaRepository criarCondutaRepository() {
+        try {
+            return new CondutaRepository(daoFactory);
+        } catch (SQLException ex) {
+            Logger.getLogger(RepositoryFactoryBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
     
 }

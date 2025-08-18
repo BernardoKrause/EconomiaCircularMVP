@@ -32,6 +32,10 @@ public class Reputacao {
         nivel = "PRATA";
         condutas = new ArrayList<>();
     }
+
+    public Reputacao(double aDouble, double aDouble0, String string, List<Conduta> condutas) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     public Integer getId() {
         return this.id;

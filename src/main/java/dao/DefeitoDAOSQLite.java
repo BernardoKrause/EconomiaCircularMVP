@@ -2,28 +2,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package repository.database;
+package dao;
 
-import java.util.Optional;
-import model.Perfil;
-import model.Reputacao;
-import org.sqlite.SQLiteException;
-import repository.IReputacaoRepository;
+import java.sql.SQLException;
+import java.util.List;
+import model.Defeito;
 
 /**
  *
- * @author caiof
+ * @author berna
  */
-public class ReputacaoRepositorySqLite implements IReputacaoRepository{
-
+public class DefeitoDAOSQLite implements IDefeitoDAO {
+    // implementar
     @Override
-    public void salvarReputacao(Reputacao reputacao) throws SQLiteException {
+    public void criar(Defeito defeito) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Optional<Reputacao> getReputacao(Perfil perfil) {
+    public List<Defeito> buscaTodos() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
 }
