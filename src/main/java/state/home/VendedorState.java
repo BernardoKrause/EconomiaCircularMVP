@@ -128,7 +128,7 @@ public class VendedorState extends HomePresenterState{
     
     public void verPerfilVendedor() throws SQLException{
         IPerfilRepository perfilRepository = SeletorRepositoryFactory.obterInstancia().criarPerfilVendedorRepository();
-        new AbrirVerPerfilVendedorCommand(vendedor,perfilRepository);
+        new AbrirVerPerfilVendedorCommand(vendedor,perfilRepository).executar();
     }
     
 }
