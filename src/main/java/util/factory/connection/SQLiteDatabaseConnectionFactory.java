@@ -37,7 +37,9 @@ public class SQLiteDatabaseConnectionFactory implements DatabaseConnectionFactor
                 tipoConduta TEXT,
                 descricao TEXT,
                 tipoPerfil TEXT,
-                valorEstrelas REAL
+                valorEstrelas REAL,
+                idReputacao INTEGER,
+                FOREIGN KEY (idReputacao) REFERENCES reputacoes(idReputacao)
             );
             """,
             """
@@ -45,9 +47,7 @@ public class SQLiteDatabaseConnectionFactory implements DatabaseConnectionFactor
                 idReputacao INTEGER PRIMARY KEY AUTOINCREMENT,
                 estrelas REAL,
                 beneficioClimatico REAL,
-                nivel TEXT,
-                idConduta INTEGER,
-                FOREIGN KEY (idConduta) REFERENCES condutas(idConduta)
+                nivel TEXT
             );
             """,
             """

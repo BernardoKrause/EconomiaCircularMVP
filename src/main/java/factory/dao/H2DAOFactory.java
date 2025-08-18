@@ -19,7 +19,6 @@ import dao.IUsuarioDAO;
  * @author berna
  */
 public class H2DAOFactory extends IDAOFactory {
-    
     // implementar
     @Override
     public ICondutaDAO getCondutaDAO() {
@@ -60,7 +59,6 @@ public class H2DAOFactory extends IDAOFactory {
     public IReputacaoDAO getReputacaoDAO() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
     @Override
     public IDefeitoDAO getDefeitoDAO() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

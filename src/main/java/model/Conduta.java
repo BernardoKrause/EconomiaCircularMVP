@@ -23,10 +23,13 @@ public class Conduta {
         this.valorEstrela = valorEstrelas;
     }
 
-    public Conduta(String string, String string0, String string1, double aDouble) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Conduta(String descricao, String tipo, String tipoperfil, Double valorEstrelas) {
+        this.tipo = tipo;
+        this.descricao = descricao;
+        this.tipoPerfil = tipoPerfil;
+        this.valorEstrela = valorEstrelas;
     }
-
+    
     public String getDescricao() {
         return descricao;
     }
