@@ -33,11 +33,13 @@ public class CondutaRepository implements ICondutaRepository{
     @Override
     public Optional<List<Conduta>> getTodasCondutas(Reputacao reputacao) throws SQLException {
         return condutaDAO.buscaPorReputacao(reputacao);
+
     }
     
     @Override
     public Optional<List<Conduta>> getCondutasPorTipo(Reputacao reputacao, String tipo) throws SQLException {
         return condutaDAO.buscaPorTipo(reputacao.getId(), tipo);
+
     }
 
 }

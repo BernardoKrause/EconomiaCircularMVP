@@ -39,6 +39,7 @@ public class ReputacaoDAOSQLite implements IReputacaoDAO {
         }
     }
     
+    @Override
     public Optional<Reputacao> buscaPorPerfil(Perfil perfil) throws SQLException {
         String sql = """
                     SELECT * FROM reputacoes r

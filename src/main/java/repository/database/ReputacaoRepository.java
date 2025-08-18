@@ -20,7 +20,7 @@ import repository.IReputacaoRepository;
 public class ReputacaoRepository implements IReputacaoRepository{
     private final IReputacaoDAO reputacaoDAO;
     
-    public ReputacaoRepository(IDAOFactory daoFactory) {
+    public ReputacaoRepository(IDAOFactory daoFactory) throws SQLException {
         reputacaoDAO = daoFactory.getReputacaoDAO();
     }
     
