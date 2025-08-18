@@ -5,6 +5,7 @@
 package view.usuario;
 
 import javax.swing.JButton;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
@@ -34,7 +35,7 @@ public class LoginView extends javax.swing.JInternalFrame {
         lblEmail = new javax.swing.JLabel();
         lblSenha = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
-        txtSenha = new javax.swing.JTextField();
+        txtSenha = new javax.swing.JPasswordField();
 
         setTitle("Entrar");
 
@@ -63,9 +64,9 @@ public class LoginView extends javax.swing.JInternalFrame {
                             .addComponent(lblSenha)
                             .addComponent(lblEmail))
                         .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtEmail)
-                            .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSenha)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAcessar)
                         .addGap(34, 34, 34)
@@ -81,8 +82,8 @@ public class LoginView extends javax.swing.JInternalFrame {
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSenha))
+                    .addComponent(lblSenha)
+                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAcessar)
@@ -104,7 +105,7 @@ public class LoginView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblSenha;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtSenha;
+    private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
     
     public JButton getBtnAcessar() {
@@ -119,7 +120,7 @@ public class LoginView extends javax.swing.JInternalFrame {
         return txtEmail;
     }
     
-    public JTextField getTxtSenha() {
+    public JPasswordField getTxtSenha() {
         return txtSenha;
     }
 }
