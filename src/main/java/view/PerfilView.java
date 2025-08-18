@@ -6,6 +6,7 @@ package view;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JScrollPane;
 
 /**
@@ -37,14 +38,16 @@ public class PerfilView extends javax.swing.JInternalFrame {
         txtBeneficio = new javax.swing.JLabel();
         lbInsignia = new javax.swing.JLabel();
         spInsignias = new javax.swing.JScrollPane();
+        lInsignias = new javax.swing.JList<>();
         lbMedalha = new javax.swing.JLabel();
         spMedalhas = new javax.swing.JScrollPane();
+        lMedalhas = new javax.swing.JList<>();
         btnFunc1 = new javax.swing.JButton();
         lbNivel = new javax.swing.JLabel();
         txtNivel = new javax.swing.JLabel();
         txtEstrelas = new javax.swing.JLabel();
         lbEstrela = new javax.swing.JLabel();
-        btnFunc3 = new javax.swing.JButton();
+        btnFechar = new javax.swing.JButton();
         btnFunc2 = new javax.swing.JButton();
         btnHistorico = new javax.swing.JButton();
 
@@ -67,7 +70,13 @@ public class PerfilView extends javax.swing.JInternalFrame {
 
         lbInsignia.setText("Insignias:");
 
+        lInsignias.setLayoutOrientation(javax.swing.JList.HORIZONTAL_WRAP);
+        spInsignias.setViewportView(lInsignias);
+
         lbMedalha.setText("Medalhas:");
+
+        lMedalhas.setLayoutOrientation(javax.swing.JList.HORIZONTAL_WRAP);
+        spMedalhas.setViewportView(lMedalhas);
 
         btnFunc1.setText("btn1");
         btnFunc1.addActionListener(new java.awt.event.ActionListener() {
@@ -84,10 +93,10 @@ public class PerfilView extends javax.swing.JInternalFrame {
 
         lbEstrela.setText("Estrelas:");
 
-        btnFunc3.setText("btn3");
-        btnFunc3.addActionListener(new java.awt.event.ActionListener() {
+        btnFechar.setText("Fechar");
+        btnFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFunc3ActionPerformed(evt);
+                btnFecharActionPerformed(evt);
             }
         });
 
@@ -117,7 +126,7 @@ public class PerfilView extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnFunc2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnFunc3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -178,7 +187,7 @@ public class PerfilView extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFunc1)
-                    .addComponent(btnFunc3)
+                    .addComponent(btnFechar)
                     .addComponent(btnFunc2))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
@@ -190,9 +199,9 @@ public class PerfilView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnFunc1ActionPerformed
 
-    private void btnFunc3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFunc3ActionPerformed
+    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnFunc3ActionPerformed
+    }//GEN-LAST:event_btnFecharActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -208,11 +217,13 @@ public class PerfilView extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnFunc1;
     private javax.swing.JButton btnFunc2;
-    private javax.swing.JButton btnFunc3;
     private javax.swing.JButton btnHistorico;
     private javax.swing.JButton jButton3;
+    private javax.swing.JList<JButton> lInsignias;
+    private javax.swing.JList<JButton> lMedalhas;
     private javax.swing.JLabel lbBeneficio;
     private javax.swing.JLabel lbEstrela;
     private javax.swing.JLabel lbInsignia;
@@ -251,8 +262,8 @@ public class PerfilView extends javax.swing.JInternalFrame {
         return btnFunc2;
     }
 
-    public JButton getBtnFunc3() {
-        return btnFunc3;
+    public JButton getBtnFechar() {
+        return btnFechar;
     }
 
     public JButton getBtnHistorico() {
@@ -265,5 +276,13 @@ public class PerfilView extends javax.swing.JInternalFrame {
 
     public JScrollPane getSpMedalhas() {
         return spMedalhas;
+    }
+    
+    public JList getLInsignias(){
+        return lInsignias;
+    }
+    
+    public JList getLMedalhas(){
+        return lMedalhas;
     }
 }

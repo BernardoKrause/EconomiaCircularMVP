@@ -38,4 +38,11 @@ public class Conduta {
     public String getTipo() {
         return tipo;
     }
+
+    @Override
+    public String toString() {
+        return (tipo + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", estrelas ganhas=" + valorEstrela);
+    }
 }

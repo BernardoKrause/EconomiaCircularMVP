@@ -9,6 +9,7 @@ import service.PerfilService;
 import command.ICommand;
 import factory.repository.SeletorRepositoryFactory;
 import java.sql.SQLException;
+import repository.ICondutaRepository;
 import repository.IPerfilRepository;
 import repository.IReputacaoRepository;
 import service.PerfilVendedorService;
@@ -22,11 +23,13 @@ public abstract class PerfilCommand implements ICommand{
     protected Usuario usuario;
     protected PerfilService service;
     protected IReputacaoRepository reputacaoRepository;
+    protected ICondutaRepository condutaRepository;
     
     public PerfilCommand(Usuario usuario, IPerfilRepository perfilRepository) throws SQLException {
         this.usuario=usuario;
         this.reputacaoRepository = SeletorRepositoryFactory.obterInstancia().criarReputacaoRepository();
-        this.service = new PerfilVendedorService(reputacaoRepository,perfilRepository);
+        this.condutaRepository = SeletorRepositoryFactory.obterInstancia().criarCondutarRepository();
+        this.service = new PerfilVendedorService(reputacaoRepository,condutaRepository,perfilRepository);
     }
     
     public abstract void executar() throws SQLException;

@@ -68,6 +68,10 @@ public class Reputacao {
     public void setNivel(String nivel) {
         this.nivel = nivel;
     }
+    
+    public void setCondutas(List<Conduta> condutas){
+        this.condutas=condutas;
+    }
 
     public void addConduta(Conduta conduta) {
         condutas.add(conduta);

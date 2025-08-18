@@ -5,6 +5,7 @@
 package service;
 
 import java.sql.SQLException;
+import model.Reputacao;
 import model.Usuario;
 import model.Vendedor;
 import repository.ICondutaRepository;
@@ -19,8 +20,8 @@ public class PerfilVendedorService extends PerfilService{
 
     private IPerfilRepository perfilRepository;
 
-    public PerfilVendedorService(IReputacaoRepository reputacaoRepository, IPerfilRepository vendedorRepository) {
-        super(reputacaoRepository);
+    public PerfilVendedorService(IReputacaoRepository reputacaoRepository, ICondutaRepository condutaRepository, IPerfilRepository vendedorRepository) {
+        super(reputacaoRepository, condutaRepository);
         this.perfilRepository=vendedorRepository;
     }
     
@@ -35,6 +36,10 @@ public class PerfilVendedorService extends PerfilService{
             Vendedor perfil = new Vendedor("V-"+usuario.getId());
             usuario.addPerfil(perfil);
             perfil.setUsuario(usuario);
+            
+            Reputacao reputacao = new Reputacao(perfilRepository.getTodosPerfils().get().size());
+            perfil.setReputacao(reputacao);
+            
             reputacaoRepository.salvarReputacao(perfil.getReputacao());
             perfilRepository.salvarPerfil(perfil);   
         } catch (SQLException ex) {
