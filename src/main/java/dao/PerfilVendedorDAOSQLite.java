@@ -25,12 +25,12 @@ public class PerfilVendedorDAOSQLite implements IPerfilVendedorDAO {
     
     @Override
     public void criar(Vendedor vendedor) throws SQLException {
-        String sql = "INSERT INTO vendedores (idPerfilVendedor, idReputacao) "
+        String sql = "INSERT INTO vendedores (sistemId, idReputacao) "
                    + "VALUES (?, ?)";
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setInt(1, vendedor.getId());
+            pstmt.setString(1, vendedor.getSistemId());
             pstmt.setInt(2, vendedor.getReputacao().getId());
             pstmt.executeUpdate();
         }

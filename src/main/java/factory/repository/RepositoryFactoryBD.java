@@ -95,6 +95,7 @@ public class RepositoryFactoryBD implements IRepositoryFactory{
         return null;
     }
 
+    // implementar
     @Override
     public IReputacaoRepository criarReputacaoRepository() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

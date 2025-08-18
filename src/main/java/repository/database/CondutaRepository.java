@@ -19,15 +19,15 @@ import repository.ICondutaRepository;
  */
 public class CondutaRepository implements ICondutaRepository{
     
-    private ICondutaDAO daoFactory;
+    private ICondutaDAO condutaDAO;
     
     public CondutaRepository (IDAOFactory daoFactory) throws SQLException {
-        this.daoFactory = daoFactory.getCondutaDAO();
+        this.condutaDAO = daoFactory.getCondutaDAO();
     }
 
     @Override
     public void salvarConduta(Conduta conduta) throws SQLException {
-        daoFactory.criar(conduta);
+        condutaDAO.criar(conduta);
     }
     
     @Override
