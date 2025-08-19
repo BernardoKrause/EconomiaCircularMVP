@@ -20,9 +20,11 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.ListCellRenderer;
 import model.Item;
+import model.Material;
 import model.Vendedor;
 import service.ItemService;
 import view.item.FormItemView;
+import view.item.MaterialComposicao;
 
 /**
  *
@@ -74,16 +76,38 @@ public class ItemPresenter implements IPresenter{
 
             formView.getTxtSubcategoria().setText("");
             formView.getSTamanho().setValue(1);
-            formView.getTxtPeso().setText("0.0");
             formView.getTxtCor().setText("");
-            formView.getCbComposicao().removeAllItems();
 
-            for (String material : itemService.getListaMateriaisComposicao()) {
-                formView.getCbComposicao().addItem(material);
+            List<String> materiais = itemService.getListaMateriaisComposicao();
+            DefaultListModel<MaterialComposicao> modelMaterial = new DefaultListModel<>();
+            
+            for(String material : materiais){
+                MaterialComposicao materialComposicao = new MaterialComposicao();
+                materialComposicao.getLblMaterial().setText(material);
+                modelMaterial.addElement(materialComposicao);
             }
+            
+            JList<MaterialComposicao> listaMaterialComposicao = formView.getlComposicao();
+            listaMaterialComposicao.setModel(modelMaterial);
+            
+            listaMaterialComposicao.setCellRenderer(new ListCellRenderer<MaterialComposicao>() {
+                @Override
+                public Component getListCellRendererComponent(
+                    JList<? extends MaterialComposicao> list,
+                    MaterialComposicao value,
+                    int index,
+                    boolean isSelected,
+                    boolean cellHasFocus) {
 
-            formView.getTxtPrecoBase().setText("0.0");
+                    value.setBackground(isSelected ? list.getSelectionBackground() : list.getBackground());
+                    value.setForeground(isSelected ? list.getSelectionForeground() : list.getForeground());
+                    value.setEnabled(list.isEnabled());
+                    value.setFont(list.getFont());
 
+                    return value;
+                }
+            });
+                 
             List<String> defeitos = itemService.getListaDefeitosExistentes(tipoSelecionado);
             DefaultListModel<JCheckBox> model = new DefaultListModel<>();
 
@@ -151,8 +175,35 @@ public class ItemPresenter implements IPresenter{
         }
         String cor = formView.getTxtCor().getText();
         Double peso = Double.valueOf(formView.getTxtPeso().getText());
-        String composicao = String.valueOf(formView.getCbComposicao().getSelectedItem());
         Double precoBase = Double.valueOf(formView.getTxtPrecoBase().getText());
+        
+        Double porcentagemTotal=0.0;
+        
+        DefaultListModel<MaterialComposicao> modelMaterial = (DefaultListModel<MaterialComposicao>) formView.getlComposicao().getModel();
+        List<MaterialComposicao> materiais = new ArrayList<>();
+        
+        try{
+            if(porcentagemTotal != 100.0){
+                for (int i = 0; i < modelMaterial.size(); i++) {
+                    MaterialComposicao panel = modelMaterial.getElementAt(i); 
+                    if (panel.getNumPercentual().getComponentCount() != 0){
+                        porcentagemTotal += panel.getNumPercentual().getComponentCount();
+                        materiais.add(panel);
+                    }
+                }     
+            }          
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(formView, "A Porcentagem dos materiais de composicao deve ser igual 100%! " + ex);
+        }
+        
+        List<Material> composicao= new ArrayList<>();
+        for(MaterialComposicao panel : materiais){
+            String tipoMaterial = panel.getLblMaterial().getText();
+            Double fatorMaterial = itemService.getFatorMaterial(tipoMaterial);
+            Double percentualMaterial =  Double.valueOf(panel.getNumPercentual().getComponentCount()/100);
+            
+            composicao.add(new Material(tipoMaterial,fatorMaterial,percentualMaterial));
+        }
         
         DefaultListModel<JCheckBox> model = (DefaultListModel<JCheckBox>) formView.getLTiposDefeito().getModel();
         List<String> defeitos = new ArrayList<>();

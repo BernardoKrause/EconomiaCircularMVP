@@ -22,6 +22,7 @@ C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\m
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\repository\IPerfilSolicitacaoRepository.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\service\PerfilVendedorService.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\util\factory\connection\SQLiteDatabaseConnectionFactory.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\model\Material.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\repository\teste\DefeitosTipoRepositoryTeste.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\dao\IPerfilCompradorDAO.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\repository\IUsuarioRepository.java
@@ -48,6 +49,7 @@ C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\m
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\adapter\DotEnvAdapter.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\factory\dao\SQLiteDAOFactory.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\util\factory\connection\DatabaseConnectionFactory.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\view\item\MaterialComposicao.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\presenter\SignupPresenter.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\factory\repository\RepositoryFactoryTeste.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\view\HomeView.java
@@ -97,5 +99,6 @@ C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\m
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\dao\ICondutaDAO.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\presenter\LoginPresenter.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\repository\IDenunciaRepository.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\service\CalcularGPWService.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\model\Item.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\presenter\ItemPresenter.java

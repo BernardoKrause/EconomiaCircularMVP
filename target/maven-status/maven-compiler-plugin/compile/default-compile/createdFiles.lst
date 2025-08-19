@@ -16,6 +16,7 @@ presenter\ItemPresenter.class
 command\perfil\CriarPerfilVendedorCommand.class
 view\item\FormItemView.class
 factory\dao\SQLiteDAOFactory.class
+presenter\ItemPresenter$5.class
 dao\IPerfilSolicitacaoDAO.class
 dao\PerfilSolicitacaoDAOSQLite.class
 repository\teste\ItemRepositoryTeste.class
@@ -100,6 +101,7 @@ repository\teste\PerfilVendedorRepositoryTeste.class
 presenter\LoginPresenter.class
 service\PerfilService.class
 command\perfil\AcessarPerfilVendedorCommand.class
+model\Material.class
 view\HomeView.class
 dao\IPerfilVendedorDAO.class
 state\home\VendedorState$3.class
@@ -107,6 +109,7 @@ view\item\ShowItensView.class
 strategy\SistemaDefeitos\IRegraDefeitoStrategy.class
 view\HomeView$3.class
 repository\database\PerfilSolicitacaoRepository.class
+view\item\MaterialComposicao.class
 model\Comprador.class
 service\ItemService.class
 strategy\SistemaDefeitos\RegraDefeitosPercentual.class
@@ -129,6 +132,7 @@ presenter\SignupPresenter$1.class
 model\Vendedor.class
 service\PerfilVendedorService.class
 util\factory\connection\DatabaseConnectionFactory.class
+service\CalcularGPWService.class
 presenter\ItemPresenter$1.class
 dao\CondutaDAOSQLite.class
 view\HomeView$2.class

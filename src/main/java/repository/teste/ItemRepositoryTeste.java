@@ -73,5 +73,34 @@ public class ItemRepositoryTeste implements IItemRepository{
         
         return Optional.of(tiposDefeito);
     }
+
+    @Override
+    public Optional<List<String>> getTiposMaterial() {
+        List<String> lista = new ArrayList<>();
+
+        lista.add("Algodão");
+        lista.add("Poliéster");
+        lista.add("Couro");
+        lista.add("Metal");
+        lista.add("Plástico");
+        lista.add("Outros");
+
+        return Optional.of(lista);
+    }
+
+    @Override
+    public Double getFatorEmissaoMaterial(String nomeMaterial) {
+        Double fator = 4.0;
+        
+        switch (nomeMaterial){
+            case "Algodão" -> fator=5.2;
+            case "Poliéster" -> fator=9.5;
+            case "Couro" -> fator=14.8;
+            case "Metal" -> fator=8.6;
+            case "Plástico" -> fator=3.1;
+        }
+        
+        return fator;
+    }
 }
 

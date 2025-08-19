@@ -11,17 +11,18 @@ public class Item {
     private String tamanho;
     private String cor;
     private Double peso;
-    private String composicao;
+    private List<Material> composicao;
     private Double precoBase;
     private Double precoFinal;
-    private Integer GPWEvitado;
+    private Double GPWBase;
+    private Double GPWEvitado;
     private Double MCIItem;
     private Integer numeroCiclo;
     private List<Defeito> defeitos;
     
     private Vendedor vendedor;
 
-    public Item(String tipo, String subcategoria, String tamanho, String cor, Double peso, String composicao,Double precoBase) {
+    public Item(String tipo, String subcategoria, String tamanho, String cor, Double peso, List<Material> composicao,Double precoBase) {
         if (tipo.isEmpty()){
             throw new IllegalArgumentException("Tipo é obrigatorio!");
         }
@@ -51,14 +52,15 @@ public class Item {
         this.composicao = composicao;
         this.precoBase = precoBase;
         this.precoFinal = precoBase;
-        this.GPWEvitado = 0;
+        this.GPWBase = 0.0;
+        this.GPWEvitado = 0.0;
         this.MCIItem=0.0;
         this.numeroCiclo=0;
         this.defeitos = new ArrayList<Defeito>();
         this.vendedor = null;
     }
 
-    public Item(String tipo, String subcategoria, String tamanho, String cor, Double peso, String composicao,Double precoBase, List<Defeito> defeitos) {
+    public Item(String tipo, String subcategoria, String tamanho, String cor, Double peso, List<Material> composicao,Double precoBase, List<Defeito> defeitos) {
         if (tipo.isEmpty()){
             throw new IllegalArgumentException("Tipo é obrigatorio!");
         }
@@ -88,13 +90,14 @@ public class Item {
         this.composicao = composicao;
         this.precoBase = precoBase;
         this.precoFinal = precoBase;
-        this.GPWEvitado = 0;
+        this.GPWBase = 0.0;
+        this.GPWEvitado = 0.0;
         this.MCIItem=0.0;
         this.numeroCiclo=0;
         this.defeitos = defeitos;
     }
 
-    public Item(Integer id, String idC, String tipo, String subcategoria, String tamanho, String cor, Double peso, String composicao, Double precoBase, Double precoFinal, Integer gpwEvitado, Double mciItem, Integer numeroCiclo) {
+    public Item(Integer id, String idC, String tipo, String subcategoria, String tamanho, String cor, Double peso, List<Material> composicao, Double precoBase, Double precoFinal, Double gpwBase, Double gpwEvitado, Double mciItem, Integer numeroCiclo) {
         this.idC = idC;
         this.tipo = tipo;
         this.subcategoria = subcategoria;
@@ -104,6 +107,7 @@ public class Item {
         this.composicao = composicao;
         this.precoBase = precoBase;
         this.precoFinal = precoFinal;
+        this.GPWBase = gpwBase;
         this.GPWEvitado = gpwEvitado;
         this.MCIItem = mciItem;
         this.numeroCiclo = numeroCiclo;
@@ -137,7 +141,7 @@ public class Item {
         return peso;
     }
 
-    public String getComposicao() {
+    public List<Material> getComposicao() {
         return composicao;
     }
 
@@ -149,7 +153,11 @@ public class Item {
         return precoFinal;
     }
 
-    public Integer getGPWEvitado() {
+    public Double getGPWBase() {
+        return GPWBase;
+    }
+
+    public Double getGPWEvitado() {
         return GPWEvitado;
     }
 
@@ -177,7 +185,11 @@ public class Item {
         this.precoFinal = precoFinal;
     }
 
-    public void setGPWEvitado(Integer GPWEvitado) {
+    public void setGPWBase(Double GPWBase) {
+        this.GPWBase = GPWBase;
+    }
+
+    public void setGPWEvitado(Double GPWEvitado) {
         this.GPWEvitado = GPWEvitado;
     }
 
