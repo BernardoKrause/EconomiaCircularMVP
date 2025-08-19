@@ -24,7 +24,7 @@ public abstract class ItemCommand implements ICommand{
     
     public ItemCommand(Perfil perfil) throws SQLException {
         this.perfil = perfil;
-        this.service = new PerfilVendedorService(SeletorRepositoryFactory.obterInstancia().criarReputacaoRepository(), SeletorRepositoryFactory.obterInstancia().criarCondutarRepository(), SeletorRepositoryFactory.obterInstancia().criarPerfilVendedorRepository());
+        this.service = new PerfilVendedorService(SeletorRepositoryFactory.obterInstancia().criarReputacaoRepository(), SeletorRepositoryFactory.obterInstancia().criarCondutaRepository(), SeletorRepositoryFactory.obterInstancia().criarPerfilVendedorRepository());
         this.desktop = GerenciadorTelas.getInstancia().getDesktop();
     }
 
