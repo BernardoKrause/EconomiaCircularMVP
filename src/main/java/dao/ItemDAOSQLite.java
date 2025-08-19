@@ -26,28 +26,28 @@ import dao.IItemDAO;
 public class ItemDAOSQLite implements IItemDAO {
     @Override
     public void criar(Item item) throws SQLException {
-        String sql = "INSERT INTO itens "
-                    + "(idC, tipo, subcategoria, tamanho, cor, peso, composicao, precoBase, precoFinal, gpwEvitado, mciItem, numeroCiclo, idPerfilVendedor) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, item.getIdC());
-            pstmt.setString(2, item.getTipo());
-            pstmt.setString(3, item.getSubcategoria());
-            pstmt.setString(4, item.getTamanho());
-            pstmt.setString(5, item.getCor());
-            pstmt.setDouble(6, item.getPeso());
-            pstmt.setString(7, item.getComposicao());
-            pstmt.setDouble(8, item.getPrecoBase());
-            pstmt.setDouble(9, item.getPrecoFinal());
-            pstmt.setInt(10, item.getGPWEvitado());
-            pstmt.setDouble(11, item.getMCIItem());
-            pstmt.setInt(12, item.getNumeroCiclo());
-            pstmt.setInt(13, item.getVendedor().getId());
-            pstmt.executeUpdate();
-
-        }
+//        String sql = "INSERT INTO itens "
+//                    + "(idC, tipo, subcategoria, tamanho, cor, peso, composicao, precoBase, precoFinal, gpwEvitado, mciItem, numeroCiclo, idPerfilVendedor) "
+//                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+//        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
+//             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+//
+//            pstmt.setString(1, item.getIdC());
+//            pstmt.setString(2, item.getTipo());
+//            pstmt.setString(3, item.getSubcategoria());
+//            pstmt.setString(4, item.getTamanho());
+//            pstmt.setString(5, item.getCor());
+//            pstmt.setDouble(6, item.getPeso());
+//            pstmt.setString(7, item.getComposicao());
+//            pstmt.setDouble(8, item.getPrecoBase());
+//            pstmt.setDouble(9, item.getPrecoFinal());
+//            pstmt.setInt(10, item.getGPWEvitado());
+//            pstmt.setDouble(11, item.getMCIItem());
+//            pstmt.setInt(12, item.getNumeroCiclo());
+//            pstmt.setInt(13, item.getVendedor().getId());
+//            pstmt.executeUpdate();
+//
+//        }
     }
 
     @Override
@@ -59,21 +59,21 @@ public class ItemDAOSQLite implements IItemDAO {
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                itens.add(new Item(
-                    rs.getInt("idItem"),
-                    rs.getString("idC"),
-                    rs.getString("tipo"),
-                    rs.getString("subcategoria"),
-                    rs.getString("tamanho"),
-                    rs.getString("cor"),
-                    rs.getDouble("peso"),
-                    rs.getString("composicao"),
-                    rs.getDouble("precoBase"),
-                    rs.getDouble("precoFinal"),
-                    rs.getInt("gpwEvitado"),
-                    rs.getDouble("mciItem"),
-                    rs.getInt("numeroCiclo")
-                ));
+//                itens.add(new Item(
+//                    rs.getInt("idItem"),
+//                    rs.getString("idC"),
+//                    rs.getString("tipo"),
+//                    rs.getString("subcategoria"),
+//                    rs.getString("tamanho"),
+//                    rs.getString("cor"),
+//                    rs.getDouble("peso"),
+//                    rs.getString("composicao"),
+//                    rs.getDouble("precoBase"),
+//                    rs.getDouble("precoFinal"),
+//                    rs.getInt("gpwEvitado"),
+//                    rs.getDouble("mciItem"),
+//                    rs.getInt("numeroCiclo")
+//                ));
             }
             return itens;
         }
@@ -87,27 +87,27 @@ public class ItemDAOSQLite implements IItemDAO {
 
             pstmt.setInt(1, id);
 
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    Item item = new Item(
-                        rs.getInt("idItem"),
-                        rs.getString("idC"),
-                        rs.getString("tipo"),
-                        rs.getString("subcategoria"),
-                        rs.getString("tamanho"),
-                        rs.getString("cor"),
-                        rs.getDouble("peso"),
-                        rs.getString("composicao"),
-                        rs.getDouble("precoBase"),
-                        rs.getDouble("precoFinal"),
-                        rs.getInt("gpwEvitado"),
-                        rs.getDouble("mciItem"),
-                        rs.getInt("numeroCiclo")
-                    );
-                    
-                    return Optional.of(item);
-                }
-            }
+//            try (ResultSet rs = pstmt.executeQuery()) {
+//                if (rs.next()) {
+//                    Item item = new Item(
+//                        rs.getInt("idItem"),
+//                        rs.getString("idC"),
+//                        rs.getString("tipo"),
+//                        rs.getString("subcategoria"),
+//                        rs.getString("tamanho"),
+//                        rs.getString("cor"),
+//                        rs.getDouble("peso"),
+//                        rs.getString("composicao"),
+//                        rs.getDouble("precoBase"),
+//                        rs.getDouble("precoFinal"),
+//                        rs.getInt("gpwEvitado"),
+//                        rs.getDouble("mciItem"),
+//                        rs.getInt("numeroCiclo")
+//                    );
+//                    
+//                    return Optional.of(item);
+//                }
+//            }
 
         }
         return Optional.empty();
@@ -117,23 +117,23 @@ public class ItemDAOSQLite implements IItemDAO {
     public void atualizar(Item item) throws SQLException {
         String sql = "UPDATE itens SET tipo = ?, subcategoria = ?, tamanho = ?, cor = ?, peso = ?, composicao = ?, precoBase = ? , precoFinal = ? , gpwEvitado = ? , mciItem = ?, numeroCiclo = ?"
                    + "WHERE idC = ?";
-        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(2, item.getTipo());
-            pstmt.setString(3, item.getSubcategoria());
-            pstmt.setString(4, item.getTamanho());
-            pstmt.setString(5, item.getCor());
-            pstmt.setDouble(6, item.getPeso());
-            pstmt.setString(7, item.getComposicao());
-            pstmt.setDouble(8, item.getPrecoBase());
-            pstmt.setDouble(9, item.getPrecoFinal());
-            pstmt.setInt(10, item.getGPWEvitado());
-            pstmt.setDouble(11, item.getMCIItem());
-            pstmt.setInt(12, item.getNumeroCiclo());
-            pstmt.executeUpdate();
-
-        } 
+//        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
+//             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+//
+//            pstmt.setString(2, item.getTipo());
+//            pstmt.setString(3, item.getSubcategoria());
+//            pstmt.setString(4, item.getTamanho());
+//            pstmt.setString(5, item.getCor());
+//            pstmt.setDouble(6, item.getPeso());
+//            pstmt.setString(7, item.getComposicao());
+//            pstmt.setDouble(8, item.getPrecoBase());
+//            pstmt.setDouble(9, item.getPrecoFinal());
+//            pstmt.setInt(10, item.getGPWEvitado());
+//            pstmt.setDouble(11, item.getMCIItem());
+//            pstmt.setInt(12, item.getNumeroCiclo());
+//            pstmt.executeUpdate();
+//
+//        } 
     }
 
     @Override

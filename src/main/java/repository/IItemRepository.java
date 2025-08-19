@@ -25,5 +25,10 @@ public interface IItemRepository {
     public void salvarItem(Item item) throws SQLException;
     
     //Decisão de arquitetura de projeto
-    public Optional<List<String>> getTiposItem() throws SQLException;    
+    public Optional<List<String>> getTiposItem() throws SQLException;
+
+    //Decisão de arquitetura de projeto
+    public Optional<List<String>> getTiposMaterial();
+
+    public Double getFatorEmissaoMaterial(String nomeMaterial);
 }

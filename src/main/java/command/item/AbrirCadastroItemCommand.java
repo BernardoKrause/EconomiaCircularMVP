@@ -9,6 +9,7 @@ import model.Perfil;
 import model.Vendedor;
 import presenter.ItemPresenter;
 import repository.teste.DefeitosTipoRepositoryTeste;
+import service.CalcularGPWService;
 import service.ItemService;
 import service.SistemaDefeitosService;
 
@@ -29,7 +30,8 @@ public class AbrirCadastroItemCommand extends ItemCommand{
     public void executar() throws SQLException {
         DefeitosTipoRepositoryTeste tiposDefeitosRepo = new DefeitosTipoRepositoryTeste();
         SistemaDefeitosService sysDefeito = new SistemaDefeitosService();
-        ItemService itemService = new ItemService(sysDefeito, tiposDefeitosRepo);
+        CalcularGPWService sistemaGPW = new CalcularGPWService();
+        ItemService itemService = new ItemService(sysDefeito, tiposDefeitosRepo, sistemaGPW);
         ItemPresenter itemPresenter = new ItemPresenter(itemService, (Vendedor)(perfil));
         itemPresenter.createItem();
         desktop.add(itemPresenter.getView());    

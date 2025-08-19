@@ -21,8 +21,9 @@ public class ItemService {
     private IItemRepository itemRepository;
     private DefeitosTipoRepositoryTeste tiposDefeitoRepository;
     private SistemaDefeitosService sistemaDefeitos;
+    private CalcularGPWService sistemaGPW;
     
-    public ItemService(SistemaDefeitosService sistema, DefeitosTipoRepositoryTeste tiposDefeitosRepo) {
+    public ItemService(SistemaDefeitosService sistema, DefeitosTipoRepositoryTeste tiposDefeitosRepo, CalcularGPWService sistemaGPW ) {
             this.itemRepository = SeletorRepositoryFactory.obterInstancia().criarItemRepository();
         
         this.sistemaDefeitos = sistema;
@@ -32,6 +33,7 @@ public class ItemService {
     public void criar(Item item, List<String> defeitos, Vendedor vendedor) throws SQLException {
         try {
             sistemaDefeitos.AplicarDefeitos(item, defeitos);
+            sistemaGPW.calcularGPW(item);
             vendedor.publicarItem(item);
             item.gerarIdC(itemRepository.getQuantidadeItens());
             System.out.print(item.toString());
@@ -57,9 +59,13 @@ public class ItemService {
     }
     
     public List<String> getListaMateriaisComposicao(){
-        //fazer aidna
-        List<String> lista = new ArrayList<>();
-        lista.add("pano");
-        return lista;
+        if(itemRepository.getTiposMaterial().isEmpty()){
+            throw new IllegalArgumentException("Lista de Tipos de material está vazia!");
+        }
+        return itemRepository.getTiposMaterial().get();
+    }
+    
+    public Double getFatorMaterial(String nomeMaterial){
+        return itemRepository.getFatorEmissaoMaterial(nomeMaterial);
     }
 }
