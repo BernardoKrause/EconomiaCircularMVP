@@ -52,7 +52,8 @@ public class HomeView extends javax.swing.JFrame {
         mItemAcessarPerfilComprador = new javax.swing.JMenuItem();
         mItemVerPerfilComprador = new javax.swing.JMenuItem();
         menuItem = new javax.swing.JMenu();
-        mItemPublicarItem = new javax.swing.JMenuItem();
+        mIItemPublicarItem = new javax.swing.JMenuItem();
+        mIVerItens = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -125,8 +126,11 @@ public class HomeView extends javax.swing.JFrame {
 
         menuItem.setText("Item");
 
-        mItemPublicarItem.setText("Publicar Item");
-        menuItem.add(mItemPublicarItem);
+        mIItemPublicarItem.setText("Publicar Item");
+        menuItem.add(mIItemPublicarItem);
+
+        mIVerItens.setText("Ver Itens");
+        menuItem.add(mIVerItens);
 
         jMenuBar1.add(menuItem);
 
@@ -187,11 +191,12 @@ public class HomeView extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem mIItemPublicarItem;
+    private javax.swing.JMenuItem mIVerItens;
     private javax.swing.JMenuItem mItemAcessarPerfilComprador;
     private javax.swing.JMenuItem mItemAcessarPerfilVendedor;
     private javax.swing.JMenuItem mItemCriarPerfilComprador;
     private javax.swing.JMenuItem mItemCriarPerfilVendedor;
-    private javax.swing.JMenuItem mItemPublicarItem;
     private javax.swing.JMenuItem mItemVerPerfilComprador;
     private javax.swing.JMenuItem mItemVerPerfilVendedor;
     private javax.swing.JMenu menuComprador;
@@ -261,7 +266,11 @@ public class HomeView extends javax.swing.JFrame {
         return menuItem;
     }
     
-        public JMenuItem getMItemPublicarItem(){
-            return mItemPublicarItem;
+        public JMenuItem getMIItemPublicarItem(){
+            return mIItemPublicarItem;
+        }
+        
+        public JMenuItem getMIVerItem(){
+            return mIVerItens;
         }
 }

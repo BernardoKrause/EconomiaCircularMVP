@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
@@ -53,7 +54,7 @@ public class FormItemView extends javax.swing.JInternalFrame {
         txtCor = new javax.swing.JTextField();
         btnCancelar = new javax.swing.JButton();
         spComposicao = new javax.swing.JScrollPane();
-        lComposicao = new javax.swing.JList<>();
+        pMateriais = new javax.swing.JPanel();
 
         setClosable(true);
         setTitle("Cadastro de Item");
@@ -99,7 +100,18 @@ public class FormItemView extends javax.swing.JInternalFrame {
 
         btnCancelar.setText("Cancelar");
 
-        spComposicao.setViewportView(lComposicao);
+        javax.swing.GroupLayout pMateriaisLayout = new javax.swing.GroupLayout(pMateriais);
+        pMateriais.setLayout(pMateriaisLayout);
+        pMateriaisLayout.setHorizontalGroup(
+            pMateriaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 221, Short.MAX_VALUE)
+        );
+        pMateriaisLayout.setVerticalGroup(
+            pMateriaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        spComposicao.setViewportView(pMateriais);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -208,7 +220,6 @@ public class FormItemView extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnPublicar;
     private javax.swing.JComboBox<String> cbTipos;
-    private javax.swing.JList<MaterialComposicao> lComposicao;
     private javax.swing.JList<JCheckBox> lTiposDefeito;
     private javax.swing.JLabel lbPeso;
     private javax.swing.JLabel lblComposicao;
@@ -218,6 +229,7 @@ public class FormItemView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblSubcategoria;
     private javax.swing.JLabel lblTamanho;
     private javax.swing.JLabel lblTipo;
+    private javax.swing.JPanel pMateriais;
     private javax.swing.JSpinner sTamanho;
     private javax.swing.JScrollPane spComposicao;
     private javax.swing.JScrollPane spDefeitos;
@@ -251,8 +263,8 @@ public class FormItemView extends javax.swing.JInternalFrame {
         return spComposicao;
     }
 
-    public JList<MaterialComposicao> getlComposicao() {
-        return lComposicao;
+    public JPanel getPMateriais() {
+        return pMateriais;
     }
 
     public JTextField getTxtPrecoBase(){

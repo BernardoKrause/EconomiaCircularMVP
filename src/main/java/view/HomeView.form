@@ -93,9 +93,14 @@
             <Property name="text" type="java.lang.String" value="Item"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mItemPublicarItem">
+            <MenuItem class="javax.swing.JMenuItem" name="mIItemPublicarItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Publicar Item"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mIVerItens">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ver Itens"/>
               </Properties>
             </MenuItem>
           </SubComponents>

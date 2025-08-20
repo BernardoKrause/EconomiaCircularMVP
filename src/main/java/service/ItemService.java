@@ -44,6 +44,10 @@ public class ItemService {
         }
     }
     
+    public List<Item> getItens(){
+        return itemRepository.buscarTodos().get();
+    }
+    
     public List<String> getListaTiposItem() throws SQLException{
         if(itemRepository.getTiposItem().isEmpty()){
             throw new IllegalArgumentException("Lista de Tipos está vazia!");

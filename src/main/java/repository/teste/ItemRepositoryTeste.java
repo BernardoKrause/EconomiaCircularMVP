@@ -33,6 +33,11 @@ public class ItemRepositoryTeste implements IItemRepository{
     }
     
     @Override
+    public Optional<List<Item>> buscarTodos(){
+        return Optional.of(itensPublicados);
+    }
+    
+    @Override
     public Optional<List<Item>> BuscarPorVendedor(Vendedor vendedor){
         List<Item> lista=new ArrayList<>();
         for(Item item : itensPublicados){

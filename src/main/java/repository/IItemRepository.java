@@ -16,6 +16,8 @@ import model.Vendedor;
  */
 public interface IItemRepository {
     
+    public Optional<List<Item>> buscarTodos();
+    
     public Optional<List<Item>> BuscarPorVendedor(Vendedor vendedor);
     
     public Optional<Item> BuscarPorId(Integer id) throws SQLException;
@@ -31,4 +33,5 @@ public interface IItemRepository {
     public Optional<List<String>> getTiposMaterial();
 
     public Double getFatorEmissaoMaterial(String nomeMaterial);
+
 }

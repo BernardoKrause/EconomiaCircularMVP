@@ -36,6 +36,7 @@ public class ShowItensView extends javax.swing.JInternalFrame {
         lItens = new javax.swing.JList<>();
         lbTitulo = new javax.swing.JLabel();
         lbLegenda = new javax.swing.JLabel();
+        btnFechar = new javax.swing.JButton();
 
         setTitle("Itens");
 
@@ -44,18 +45,25 @@ public class ShowItensView extends javax.swing.JInternalFrame {
         lbTitulo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbTitulo.setText("Itens Publicados");
 
-        lbLegenda.setText("tipo Item | Sub-Categoria | Tamanho | Cor | Composicao | Preco Base |");
+        lbLegenda.setText("tipo Item | Sub-Categoria | Tamanho | Cor | Composicao | Preco Base | Vendedor");
+
+        btnFechar.setText("Fechar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lbTitulo)
-                    .addComponent(spItens, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
-                    .addComponent(lbLegenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lbTitulo)
+                            .addComponent(spItens, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
+                            .addComponent(lbLegenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(214, 214, 214)
+                        .addComponent(btnFechar)))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -67,7 +75,9 @@ public class ShowItensView extends javax.swing.JInternalFrame {
                 .addComponent(lbLegenda)
                 .addGap(1, 1, 1)
                 .addComponent(spItens, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnFechar)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -75,6 +85,7 @@ public class ShowItensView extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFechar;
     private javax.swing.JList<JButton> lItens;
     private javax.swing.JLabel lbLegenda;
     private javax.swing.JLabel lbTitulo;
@@ -93,4 +104,7 @@ public class ShowItensView extends javax.swing.JInternalFrame {
         return spItens;
     }
      
+    public JButton getBtnFechar(){
+        return btnFechar;
+    }
 }

@@ -11,8 +11,8 @@ import model.Perfil;
  *
  * @author caiof
  */
-public class AbrirCadastroItemCommand extends ItemCommand{
-    public AbrirCadastroItemCommand(Perfil perfil)throws SQLException {
+public class AbrirItensPublicadosCommand extends ItemCommand{
+    public AbrirItensPublicadosCommand(Perfil perfil)throws SQLException {
         super(perfil);
     }
 
@@ -22,7 +22,7 @@ public class AbrirCadastroItemCommand extends ItemCommand{
      */
     @Override
     public void executar() throws SQLException {
-        presenter.createItem();
+        presenter.showItens();
         desktop.add(presenter.getView());    
     }
     

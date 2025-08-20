@@ -12,19 +12,24 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
 import model.Item;
 import model.Material;
+import model.Perfil;
 import model.Vendedor;
 import service.ItemService;
 import view.item.FormItemView;
 import view.item.MaterialComposicao;
+import view.item.ShowItensView;
 
 /**
  *
@@ -34,11 +39,11 @@ public class ItemPresenter implements IPresenter{
     
     private JInternalFrame view;
     private ItemService itemService;
-    private Vendedor vendedor;
+    private Perfil perfil;
 
-    public ItemPresenter(ItemService itemService, Vendedor vendedor) throws SQLException{
+    public ItemPresenter(ItemService itemService, Perfil perfil) throws SQLException{
         this.itemService=itemService;
-        this.vendedor = vendedor;
+        this.perfil = perfil;
     }
     
     public void createItem() throws SQLException{
@@ -66,98 +71,90 @@ public class ItemPresenter implements IPresenter{
         });
         
          JComboBox comboBoxTipo = formView.getCbTipos();
-    for (String tipo : itemService.getListaTiposItem()) {
-        comboBoxTipo.addItem(tipo);
-    }
-
-    comboBoxTipo.addActionListener(e -> {
-        try {
-            String tipoSelecionado = String.valueOf(comboBoxTipo.getSelectedItem());
-
-            formView.getTxtSubcategoria().setText("");
-            formView.getSTamanho().setValue(1);
-            formView.getTxtCor().setText("");
-
-            List<String> materiais = itemService.getListaMateriaisComposicao();
-            DefaultListModel<MaterialComposicao> modelMaterial = new DefaultListModel<>();
-            
-            for(String material : materiais){
-                MaterialComposicao materialComposicao = new MaterialComposicao();
-                materialComposicao.getLblMaterial().setText(material);
-                modelMaterial.addElement(materialComposicao);
-            }
-            
-            JList<MaterialComposicao> listaMaterialComposicao = formView.getlComposicao();
-            listaMaterialComposicao.setModel(modelMaterial);
-            
-            listaMaterialComposicao.setCellRenderer(new ListCellRenderer<MaterialComposicao>() {
-                @Override
-                public Component getListCellRendererComponent(
-                    JList<? extends MaterialComposicao> list,
-                    MaterialComposicao value,
-                    int index,
-                    boolean isSelected,
-                    boolean cellHasFocus) {
-
-                    value.setBackground(isSelected ? list.getSelectionBackground() : list.getBackground());
-                    value.setForeground(isSelected ? list.getSelectionForeground() : list.getForeground());
-                    value.setEnabled(list.isEnabled());
-                    value.setFont(list.getFont());
-
-                    return value;
-                }
-            });
-                 
-            List<String> defeitos = itemService.getListaDefeitosExistentes(tipoSelecionado);
-            DefaultListModel<JCheckBox> model = new DefaultListModel<>();
-
-            for (String defeito : defeitos) {
-                JCheckBox check = new JCheckBox(defeito);
-                model.addElement(check);
-            }
-
-            JList<JCheckBox> listaTiposDefeitos = formView.getLTiposDefeito();
-            listaTiposDefeitos.setModel(model);
-
-            listaTiposDefeitos.setCellRenderer(new ListCellRenderer<JCheckBox>() {
-                @Override
-                public Component getListCellRendererComponent(
-                    JList<? extends JCheckBox> list,
-                    JCheckBox value,
-                    int index,
-                    boolean isSelected,
-                    boolean cellHasFocus) {
-
-                    value.setBackground(isSelected ? list.getSelectionBackground() : list.getBackground());
-                    value.setForeground(isSelected ? list.getSelectionForeground() : list.getForeground());
-                    value.setEnabled(list.isEnabled());
-                    value.setFont(list.getFont());
-                    value.setFocusPainted(false);
-                    value.setBorderPainted(true);
-
-                    return value;
-                }
-            });
-
-            listaTiposDefeitos.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    int index = listaTiposDefeitos.locationToIndex(e.getPoint());
-                    if (index != -1) {
-                        JCheckBox checkbox = model.getElementAt(index);
-                        checkbox.setSelected(!checkbox.isSelected());
-                        listaTiposDefeitos.repaint();
-                    }
-                }
-            });
-
-            formView.getSpDefeitos().setViewportView(listaTiposDefeitos);
-
-            
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(formView, ex);
+        for (String tipo : itemService.getListaTiposItem()) {
+            comboBoxTipo.addItem(tipo);
         }
-    });
+
+        comboBoxTipo.addActionListener(e -> {
+            try {
+                String tipoSelecionado = String.valueOf(comboBoxTipo.getSelectedItem());
+
+                formView.getTxtSubcategoria().setText("");
+                formView.getSTamanho().setValue(1);
+                formView.getTxtCor().setText("");
+
+                List<String> materiais = itemService.getListaMateriaisComposicao();
+                DefaultListModel<MaterialComposicao> modelMaterial = new DefaultListModel<>();
+
+                for(String material : materiais){
+                    MaterialComposicao materialComposicao = new MaterialComposicao();
+                    materialComposicao.getLblMaterial().setText(material);
+                    materialComposicao.getNumPercentual().setValue(0.0);
+                    modelMaterial.addElement(materialComposicao);
+                }
+
+                JPanel listaMaterialComposicao = formView.getPMateriais();
+                listaMaterialComposicao.setLayout(new BoxLayout(listaMaterialComposicao, BoxLayout.Y_AXIS));
+
+                for (String material : materiais) {
+                    MaterialComposicao materialComposicao = new MaterialComposicao();
+                    materialComposicao.getLblMaterial().setText(material);
+                    materialComposicao.getNumPercentual().setValue(0.0);
+
+                    listaMaterialComposicao.add(materialComposicao);
+                }
+                formView.getSpComposicao().setViewportView(listaMaterialComposicao);
+
+                List<String> defeitos = itemService.getListaDefeitosExistentes(tipoSelecionado);
+                DefaultListModel<JCheckBox> model = new DefaultListModel<>();
+
+                for (String defeito : defeitos) {
+                    JCheckBox check = new JCheckBox(defeito);
+                    model.addElement(check);
+                }
+
+                JList<JCheckBox> listaTiposDefeitos = formView.getLTiposDefeito();
+                listaTiposDefeitos.setModel(model);
+
+                listaTiposDefeitos.setCellRenderer(new ListCellRenderer<JCheckBox>() {
+                    @Override
+                    public Component getListCellRendererComponent(
+                        JList<? extends JCheckBox> list,
+                        JCheckBox value,
+                        int index,
+                        boolean isSelected,
+                        boolean cellHasFocus) {
+
+                        value.setBackground(isSelected ? list.getSelectionBackground() : list.getBackground());
+                        value.setForeground(isSelected ? list.getSelectionForeground() : list.getForeground());
+                        value.setEnabled(list.isEnabled());
+                        value.setFont(list.getFont());
+                        value.setFocusPainted(false);
+                        value.setBorderPainted(true);
+
+                        return value;
+                    }
+                });
+
+                listaTiposDefeitos.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        int index = listaTiposDefeitos.locationToIndex(e.getPoint());
+                        if (index != -1) {
+                            JCheckBox checkbox = model.getElementAt(index);
+                            checkbox.setSelected(!checkbox.isSelected());
+                            listaTiposDefeitos.repaint();
+                        }
+                    }
+                });
+
+                formView.getSpDefeitos().setViewportView(listaTiposDefeitos);
+
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(formView, ex);
+            }
+        });
 
         comboBoxTipo.setSelectedIndex(0);
 
@@ -165,6 +162,54 @@ public class ItemPresenter implements IPresenter{
         this.view=formView;
     }
 
+    public void showItens(){
+        ShowItensView itensView = new ShowItensView();
+        itensView.setVisible(false);
+        
+        itensView.getBtnFechar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    cancelar();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(itensView, ex);
+                }
+           }
+        });
+        
+        List<Item> itens = itemService.getItens();
+        DefaultListModel<JButton> model = new DefaultListModel<>();
+
+        for (Item item : itens) {
+            JButton button = new JButton(item.getIdC());
+            model.addElement(button);
+        }
+
+        JList<JButton> listaItens = itensView.getLItens();
+        listaItens.setModel(model);
+
+        listaItens.setCellRenderer(new ListCellRenderer<JButton>() {
+            @Override
+            public Component getListCellRendererComponent(
+                JList<? extends JButton> list,
+                JButton value,
+                int index,
+                boolean isSelected,
+                boolean cellHasFocus) {
+                    value.setBackground(isSelected ? list.getSelectionBackground() : list.getBackground());
+                    value.setForeground(isSelected ? list.getSelectionForeground() : list.getForeground());
+                    value.setEnabled(list.isEnabled());
+                    value.setFont(list.getFont());
+                    value.setFocusPainted(false);
+                    value.setBorderPainted(true);
+                    return value;
+            }
+        });
+        
+        itensView.setVisible(true);
+        this.view=itensView;
+    }
+    
     public void publicar(){
         FormItemView formView = (FormItemView)view;
         String tipo = String.valueOf(formView.getCbTipos().getSelectedItem());
@@ -179,30 +224,26 @@ public class ItemPresenter implements IPresenter{
         
         Double porcentagemTotal=0.0;
         
-        DefaultListModel<MaterialComposicao> modelMaterial = (DefaultListModel<MaterialComposicao>) formView.getlComposicao().getModel();
-        List<MaterialComposicao> materiais = new ArrayList<>();
-        
-        try{
-            if(porcentagemTotal != 100.0){
-                for (int i = 0; i < modelMaterial.size(); i++) {
-                    MaterialComposicao panel = modelMaterial.getElementAt(i); 
-                    if (panel.getNumPercentual().getComponentCount() != 0){
-                        porcentagemTotal += panel.getNumPercentual().getComponentCount();
-                        materiais.add(panel);
-                    }
-                }     
-            }          
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(formView, "A Porcentagem dos materiais de composicao deve ser igual 100%! " + ex);
+        JPanel listaMaterialComposicao = formView.getPMateriais();
+        List<Material> composicao = new ArrayList<>();
+
+        for (Component comp : listaMaterialComposicao.getComponents()) {
+            if (comp instanceof MaterialComposicao) {
+                MaterialComposicao panel = (MaterialComposicao) comp;
+
+                String tipoMaterial = panel.getLblMaterial().getText();
+                Double percentual = (Double) panel.getNumPercentual().getValue(); // pega direto do JSpinner
+                Double fatorMaterial = itemService.getFatorMaterial(tipoMaterial);
+
+                porcentagemTotal += percentual;
+                composicao.add(new Material(tipoMaterial, fatorMaterial, percentual / 100)); 
+            }
         }
-        
-        List<Material> composicao= new ArrayList<>();
-        for(MaterialComposicao panel : materiais){
-            String tipoMaterial = panel.getLblMaterial().getText();
-            Double fatorMaterial = itemService.getFatorMaterial(tipoMaterial);
-            Double percentualMaterial =  Double.valueOf(panel.getNumPercentual().getComponentCount()/100);
-            
-            composicao.add(new Material(tipoMaterial,fatorMaterial,percentualMaterial));
+
+        if (Math.round(porcentagemTotal) != 100) {
+            JOptionPane.showMessageDialog(formView,
+                "A soma das porcentagens deve ser igual a 100% (atual: " + porcentagemTotal + "%)");
+            return; // não continua
         }
         
         DefaultListModel<JCheckBox> model = (DefaultListModel<JCheckBox>) formView.getLTiposDefeito().getModel();
@@ -218,7 +259,7 @@ public class ItemPresenter implements IPresenter{
         Item item = new Item(tipo,subcategoria,tamanho,cor,peso,composicao,precoBase);
         
         try{;
-            itemService.criar(item, defeitos, vendedor);
+            itemService.criar(item, defeitos, (Vendedor)perfil);
             formView.dispose();
         } catch (Exception ex) {
             throw new RuntimeException(ex.getMessage());
