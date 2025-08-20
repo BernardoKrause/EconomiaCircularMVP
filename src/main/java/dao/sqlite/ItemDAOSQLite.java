@@ -1,7 +1,7 @@
-package dao;
+package dao.sqlite;
 
 
-import dao.UsuarioDAOSQLite;
+import dao.sqlite.UsuarioDAOSQLite;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import model.Item;
 import util.factory.connection.DatabaseConnectionFactory;
+import dao.IItemDAO;
 import dao.IItemDAO;
 
 /*

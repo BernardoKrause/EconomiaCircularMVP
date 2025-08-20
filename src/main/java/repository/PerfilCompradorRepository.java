@@ -4,7 +4,7 @@
  */
 package repository;
 
-import dao.PerfilCompradorDAOSQLite;
+import dao.sqlite.PerfilCompradorDAOSQLite;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;

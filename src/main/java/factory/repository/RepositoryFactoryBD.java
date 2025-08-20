@@ -97,7 +97,6 @@ public class RepositoryFactoryBD implements IRepositoryFactory{
         return null;
     }
 
-    // implementar
     @Override
     public IReputacaoRepository criarReputacaoRepository() {
         try {

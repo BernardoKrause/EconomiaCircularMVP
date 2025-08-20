@@ -4,7 +4,7 @@
  */
 package repository.teste;
 
-import dao.ItemDAOSQLite;
+import dao.sqlite.ItemDAOSQLite;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

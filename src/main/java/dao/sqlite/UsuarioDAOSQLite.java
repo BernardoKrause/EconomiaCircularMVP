@@ -1,5 +1,6 @@
-package dao;
+package dao.sqlite;
 
+import dao.IUsuarioDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
