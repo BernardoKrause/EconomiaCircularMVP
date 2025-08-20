@@ -12,16 +12,18 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.ListCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import model.Item;
 import model.Material;
 import model.Perfil;
@@ -162,7 +164,7 @@ public class ItemPresenter implements IPresenter{
         this.view=formView;
     }
 
-    public void showItens(){
+    public void showItens(Optional<List<Item>> listaExistente){
         ShowItensView itensView = new ShowItensView();
         itensView.setVisible(false);
         
@@ -177,35 +179,43 @@ public class ItemPresenter implements IPresenter{
            }
         });
         
-        List<Item> itens = itemService.getItens();
-        DefaultListModel<JButton> model = new DefaultListModel<>();
-
-        for (Item item : itens) {
-            String txtItem = (item.getTipo()+" | "+item.getSubcategoria()+" | "+item.getTamanho()+" | "+item.getCor()+" | "+ item.getPrecoFinal()+" | "+item.getVendedor().getSistemId());
-            JButton button = new JButton(txtItem);
-            model.addElement(button);
+        List<Item> itens;
+        
+        if (listaExistente.isEmpty()){
+            itens = itemService.getItens(); 
+        }
+        else{
+            itens=listaExistente.get();
         }
 
-        JList<JButton> listaItens = itensView.getLItens();
-        listaItens.setModel(model);
-
-        listaItens.setCellRenderer(new ListCellRenderer<JButton>() {
+        DefaultTableModel model = new DefaultTableModel(
+        new Object[]{"Tipo", "Subcategoria", "Tamanho", "Cor", "Preço Final", "ID Vendedor", "Ações"},
+            0
+        ) {
             @Override
-            public Component getListCellRendererComponent(
-                JList<? extends JButton> list,
-                JButton value,
-                int index,
-                boolean isSelected,
-                boolean cellHasFocus) {
-                    value.setBackground(isSelected ? list.getSelectionBackground() : list.getBackground());
-                    value.setForeground(isSelected ? list.getSelectionForeground() : list.getForeground());
-                    value.setEnabled(list.isEnabled());
-                    value.setFont(list.getFont());
-                    value.setFocusPainted(false);
-                    value.setBorderPainted(true);
-                    return value;
+            public boolean isCellEditable(int row, int column) {
+                return column == 7;
             }
-        });
+        };
+
+        for (Item item : itens) {
+            Object[] linha = {
+                item.getTipo(),
+                item.getSubcategoria(),
+                item.getTamanho(),
+                item.getCor(),
+                item.getPrecoFinal(),
+                item.getVendedor().getSistemId(),
+                "botoes" 
+            };
+            model.addRow(linha);
+        }
+
+        JTable tabelaItens = itensView.getTbItens();
+        tabelaItens.setModel(model);
+
+        
+        itensView.getSpItens().setViewportView(tabelaItens);
         
         itensView.setVisible(true);
         this.view=itensView;

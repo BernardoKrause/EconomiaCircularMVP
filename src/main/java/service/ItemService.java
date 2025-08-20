@@ -8,6 +8,7 @@ import factory.repository.SeletorRepositoryFactory;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import model.Item;
 import model.Vendedor;
 import repository.IItemRepository;
@@ -24,7 +25,7 @@ public class ItemService {
     private CalcularGPWService sistemaGPW;
     
     public ItemService(SistemaDefeitosService sistema, DefeitosTipoRepositoryTeste tiposDefeitosRepo, CalcularGPWService sistemaGPW ) {
-            this.itemRepository = SeletorRepositoryFactory.obterInstancia().criarItemRepository();
+        this.itemRepository = SeletorRepositoryFactory.obterInstancia().criarItemRepository();
         
         this.sistemaDefeitos = sistema;
         this.tiposDefeitoRepository = tiposDefeitosRepo;
@@ -47,6 +48,10 @@ public class ItemService {
     
     public List<Item> getItens(){
         return itemRepository.buscarTodos().get();
+    }
+    
+    public Optional<List<Item>> getItensVendedor(Vendedor vendedor){
+        return itemRepository.BuscarPorVendedor(vendedor);
     }
     
     public List<String> getListaTiposItem() throws SQLException{

@@ -27,6 +27,7 @@ public abstract class ItemCommand implements ICommand{
     protected PerfilService service;
     protected JDesktopPane desktop;
     protected ItemPresenter presenter;
+    protected ItemService itemService;
     
     public ItemCommand(Perfil perfil) throws SQLException {
         this.perfil = perfil;
@@ -36,7 +37,7 @@ public abstract class ItemCommand implements ICommand{
         DefeitosTipoRepositoryTeste tiposDefeitosRepo = new DefeitosTipoRepositoryTeste();
         SistemaDefeitosService sysDefeito = new SistemaDefeitosService();
         CalcularGPWService sistemaGPW = new CalcularGPWService();
-        ItemService itemService = new ItemService(sysDefeito, tiposDefeitosRepo, sistemaGPW);
+        this.itemService = new ItemService(sysDefeito, tiposDefeitosRepo, sistemaGPW);
         this.presenter=new ItemPresenter(itemService, perfil);
     }
 

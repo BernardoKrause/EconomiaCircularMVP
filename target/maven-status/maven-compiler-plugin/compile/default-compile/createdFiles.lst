@@ -113,6 +113,7 @@ dao\IPerfilVendedorDAO.class
 state\home\VendedorState$3.class
 view\item\ShowItensView.class
 strategy\SistemaDefeitos\IRegraDefeitoStrategy.class
+view\item\ShowItensView$1.class
 command\item\AbrirItensPublicadosCommand.class
 view\HomeView$3.class
 repository\database\PerfilSolicitacaoRepository.class

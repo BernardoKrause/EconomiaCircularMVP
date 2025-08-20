@@ -5,18 +5,14 @@
 package service;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import model.Conduta;
 import model.Perfil;
 import model.Reputacao;
 import model.Usuario;
-import model.Vendedor;
 import repository.ICondutaRepository;
 import repository.IReputacaoRepository;
-import repository.database.PerfilVendedorRepository;
-import repository.IPerfilRepository;
 
 /**
  *

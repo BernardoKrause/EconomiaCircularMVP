@@ -56,5 +56,13 @@ public abstract class Perfil {
     public void setReputacao(Reputacao reputacao){
         this.reputacao=reputacao;
     }
+
+    public boolean isVendedor() {
+        return usuario.getPerfilVendedor().get().equals(this);
+    }
+    
+    public boolean isComprador() {
+        return usuario.getPerfilVendedor().get().equals(this);
+    }
     
 }
