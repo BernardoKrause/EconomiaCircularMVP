@@ -84,7 +84,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lbLegenda">
       <Properties>
-        <Property name="text" type="java.lang.String" value="tipo Item | Sub-Categoria | Tamanho | Cor | Composicao | Preco Base | Vendedor"/>
+        <Property name="text" type="java.lang.String" value="tipo Item | Sub-Categoria | Tamanho | Cor | Preco do item | Vendedor"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnFechar">

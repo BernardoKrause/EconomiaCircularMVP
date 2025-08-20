@@ -181,7 +181,8 @@ public class ItemPresenter implements IPresenter{
         DefaultListModel<JButton> model = new DefaultListModel<>();
 
         for (Item item : itens) {
-            JButton button = new JButton(item.getIdC());
+            String txtItem = (item.getTipo()+" | "+item.getSubcategoria()+" | "+item.getTamanho()+" | "+item.getCor()+" | "+ item.getPrecoFinal()+" | "+item.getVendedor().getSistemId());
+            JButton button = new JButton(txtItem);
             model.addElement(button);
         }
 
@@ -214,7 +215,7 @@ public class ItemPresenter implements IPresenter{
         FormItemView formView = (FormItemView)view;
         String tipo = String.valueOf(formView.getCbTipos().getSelectedItem());
         String subcategoria = formView.getTxtSubcategoria().getText();
-        String tamanho = String.valueOf(formView.getSTamanho().getComponentCount());
+        String tamanho = String.valueOf(formView.getSTamanho().getValue().toString());
         if(tipo.equalsIgnoreCase("bolsas")){
             tamanho="Unico";
         }
@@ -232,18 +233,22 @@ public class ItemPresenter implements IPresenter{
                 MaterialComposicao panel = (MaterialComposicao) comp;
 
                 String tipoMaterial = panel.getLblMaterial().getText();
-                Double percentual = (Double) panel.getNumPercentual().getValue(); // pega direto do JSpinner
+                Double percentual =  Double.valueOf(panel.getNumPercentual().getValue().toString());
                 Double fatorMaterial = itemService.getFatorMaterial(tipoMaterial);
 
+                
+                System.out.println(porcentagemTotal);
                 porcentagemTotal += percentual;
-                composicao.add(new Material(tipoMaterial, fatorMaterial, percentual / 100)); 
+                if(percentual != 0.0){
+                    composicao.add(new Material(tipoMaterial, fatorMaterial, percentual / 100)); 
+                }
             }
         }
 
-        if (Math.round(porcentagemTotal) != 100) {
+        if (porcentagemTotal != 100) {
             JOptionPane.showMessageDialog(formView,
                 "A soma das porcentagens deve ser igual a 100% (atual: " + porcentagemTotal + "%)");
-            return; // não continua
+            return;
         }
         
         DefaultListModel<JCheckBox> model = (DefaultListModel<JCheckBox>) formView.getLTiposDefeito().getModel();

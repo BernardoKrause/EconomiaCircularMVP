@@ -28,6 +28,7 @@ public class ItemService {
         
         this.sistemaDefeitos = sistema;
         this.tiposDefeitoRepository = tiposDefeitosRepo;
+        this.sistemaGPW=sistemaGPW;
     }
     
     public void criar(Item item, List<String> defeitos, Vendedor vendedor) throws SQLException {

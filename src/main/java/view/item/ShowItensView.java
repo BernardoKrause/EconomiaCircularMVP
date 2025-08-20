@@ -45,7 +45,7 @@ public class ShowItensView extends javax.swing.JInternalFrame {
         lbTitulo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbTitulo.setText("Itens Publicados");
 
-        lbLegenda.setText("tipo Item | Sub-Categoria | Tamanho | Cor | Composicao | Preco Base | Vendedor");
+        lbLegenda.setText("tipo Item | Sub-Categoria | Tamanho | Cor | Preco do item | Vendedor");
 
         btnFechar.setText("Fechar");
 
