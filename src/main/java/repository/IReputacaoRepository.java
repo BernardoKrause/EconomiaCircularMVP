@@ -4,17 +4,20 @@
  */
 package repository;
 
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 import model.Perfil;
 import model.Reputacao;
-import org.sqlite.SQLiteException;
 
 /**
  *
  * @author caiof
  */
 public interface IReputacaoRepository {    
-    public void salvarReputacao(Reputacao reputacao) throws SQLiteException;
-    
-    public Optional<Reputacao> getReputacao(Perfil perfil);
+    public void salvarReputacao(Reputacao reputacao) throws SQLException;
+    public Optional<Reputacao> getReputacao(Perfil perfil) throws SQLException;
+    public Optional<List<Reputacao>> getTodos() throws SQLException;
+    public void atualizarReputacao(Reputacao reputacao) throws SQLException;
+    public void deletarReputacao(Integer id) throws SQLException;
 }

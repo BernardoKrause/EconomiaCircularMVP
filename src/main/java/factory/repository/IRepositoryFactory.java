@@ -25,5 +25,5 @@ public interface IRepositoryFactory {
     IDenunciaRepository criarDenunciaRepository();
     IDefeitosTipoRepository criarDefeitosTipoRepository();
     IReputacaoRepository criarReputacaoRepository();
-    ICondutaRepository criarCondutarRepository();
+    ICondutaRepository criarCondutaRepository();
 }

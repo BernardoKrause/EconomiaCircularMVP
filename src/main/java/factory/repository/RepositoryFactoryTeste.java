@@ -63,7 +63,7 @@ public class RepositoryFactoryTeste implements IRepositoryFactory{
     }
 
     @Override
-    public ICondutaRepository criarCondutarRepository() {
+    public ICondutaRepository criarCondutaRepository() {
         return CondutaRepositoryTeste.getInstancia();
     }
 }

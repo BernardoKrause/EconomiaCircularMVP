@@ -35,7 +35,7 @@ public abstract class PerfilService {
     
     public void completarPerfil(Perfil perfil) throws SQLException{
         Reputacao reputacao = reputacaoRepository.getReputacao(perfil).get();
-        reputacao.setCondutas(condutaRepository.getTotalCondutas(reputacao).get());
+        reputacao.setCondutas(condutaRepository.getTodasCondutas(reputacao).get());
         
         perfil.setReputacao(reputacao);
     }

@@ -4,8 +4,11 @@
  */
 package factory.dao;
 
+import dao.CondutaDAOSQLite;
+import dao.DefeitoDAOSQLite;
 import dao.DenunciaDAOSQLite;
 import dao.ICondutaDAO;
+import dao.IDefeitoDAO;
 import dao.ItemDAOSQLite;
 import dao.PerfilCompradorDAOSQLite;
 import dao.PerfilSolicitacaoDAOSQLite;
@@ -16,7 +19,9 @@ import dao.IItemDAO;
 import dao.IPerfilCompradorDAO;
 import dao.IPerfilSolicitacaoDAO;
 import dao.IPerfilVendedorDAO;
+import dao.IReputacaoDAO;
 import dao.IUsuarioDAO;
+import dao.ReputacaoDAOSQLite;
 
 /**
  *
@@ -26,7 +31,7 @@ public class SQLiteDAOFactory extends IDAOFactory {
 
     @Override
     public ICondutaDAO getCondutaDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return new CondutaDAOSQLite();
     }
     
     @Override
@@ -57,6 +62,16 @@ public class SQLiteDAOFactory extends IDAOFactory {
     @Override
     public IUsuarioDAO getUsuarioDAO() {
         return new UsuarioDAOSQLite();
+    }
+
+    @Override
+    public IReputacaoDAO getReputacaoDAO() {
+        return new ReputacaoDAOSQLite();
+    }
+
+    @Override
+    public IDefeitoDAO getDefeitoDAO() {
+        return new DefeitoDAOSQLite();
     }
     
 }
