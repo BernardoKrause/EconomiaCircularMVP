@@ -13,54 +13,63 @@ import dao.IPerfilSolicitacaoDAO;
 import dao.IPerfilVendedorDAO;
 import dao.IReputacaoDAO;
 import dao.IUsuarioDAO;
+import dao.h2.CondutaDAOH2;
+import dao.h2.DefeitoDAOH2;
+import dao.h2.DenunciaDAOH2;
+import dao.h2.ItemDAOH2;
+import dao.h2.PerfilCompradorDAOH2;
+import dao.h2.PerfilSolicitacaoDAOH2;
+import dao.h2.PerfilVendedorDAOH2;
+import dao.h2.ReputacaoDAOH2;
+import dao.h2.UsuarioDAOH2;
 
 /**
  *
  * @author berna
  */
 public class H2DAOFactory extends IDAOFactory {
-    // implementar
     @Override
     public ICondutaDAO getCondutaDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return new CondutaDAOH2();
     }
     
     @Override
     public IItemDAO getItemDAO() {
-        return null;
+        return new ItemDAOH2();
     }
 
     @Override
     public IDenunciaDAO getDenunciaDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return new DenunciaDAOH2();
     }
 
     @Override
     public IPerfilCompradorDAO getPerfilCompradorDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return new PerfilCompradorDAOH2();
     }
 
     @Override
     public IPerfilSolicitacaoDAO getPerfilSolicitacaoDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return new PerfilSolicitacaoDAOH2();
     }
 
     @Override
     public IPerfilVendedorDAO getPerfilVendedorDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return new PerfilVendedorDAOH2();
     }
 
     @Override
     public IUsuarioDAO getUsuarioDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return new UsuarioDAOH2();
     }
 
     @Override
     public IReputacaoDAO getReputacaoDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return new ReputacaoDAOH2();
     }
+
     @Override
     public IDefeitoDAO getDefeitoDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return new DefeitoDAOH2();
     }
 }

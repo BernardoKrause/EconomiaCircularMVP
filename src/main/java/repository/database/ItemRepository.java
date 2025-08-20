@@ -47,18 +47,21 @@ public class ItemRepository implements IItemRepository{
     @Override
     public Optional<List<String>> getTiposItem() {
         //a fazer
+        // puxar da tabela item_tipos
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public Optional<List<String>> getTiposMaterial() {
         //a fazer
+        // puxar da tabela materiais
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public Double getFatorEmissaoMaterial(String nomeMaterial) {
         //a fazer
+        // puxar da tabela materiais
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

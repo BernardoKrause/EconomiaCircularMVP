@@ -4,16 +4,16 @@
  */
 package factory.dao;
 
-import dao.CondutaDAOSQLite;
-import dao.DefeitoDAOSQLite;
-import dao.DenunciaDAOSQLite;
+import dao.sqlite.CondutaDAOSQLite;
+import dao.sqlite.DefeitoDAOSQLite;
+import dao.sqlite.DenunciaDAOSQLite;
 import dao.ICondutaDAO;
 import dao.IDefeitoDAO;
-import dao.ItemDAOSQLite;
-import dao.PerfilCompradorDAOSQLite;
-import dao.PerfilSolicitacaoDAOSQLite;
-import dao.PerfilVendedorDAOSQLite;
-import dao.UsuarioDAOSQLite;
+import dao.sqlite.ItemDAOSQLite;
+import dao.sqlite.PerfilCompradorDAOSQLite;
+import dao.sqlite.PerfilSolicitacaoDAOSQLite;
+import dao.sqlite.PerfilVendedorDAOSQLite;
+import dao.sqlite.UsuarioDAOSQLite;
 import dao.IDenunciaDAO;
 import dao.IItemDAO;
 import dao.IPerfilCompradorDAO;
@@ -21,7 +21,7 @@ import dao.IPerfilSolicitacaoDAO;
 import dao.IPerfilVendedorDAO;
 import dao.IReputacaoDAO;
 import dao.IUsuarioDAO;
-import dao.ReputacaoDAOSQLite;
+import dao.sqlite.ReputacaoDAOSQLite;
 
 /**
  *
