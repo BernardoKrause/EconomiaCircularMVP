@@ -18,10 +18,6 @@ public abstract class Perfil {
         this.id = id;
     }
     
-    public Perfil(String sistemId) {
-        this.sistemId = sistemId;
-    }
-    
     public Perfil(Integer id, String sistemId) {
         this.id = id;
         this.sistemId = sistemId;
@@ -56,5 +52,14 @@ public abstract class Perfil {
     public void setReputacao(Reputacao reputacao){
         this.reputacao=reputacao;
     }
+
+    public boolean isVendedor() {
+        return usuario.getPerfilVendedor().get().equals(this);
+    }
     
+    public boolean isComprador() {
+        return usuario.getPerfilVendedor().get().equals(this);
+    }
+    
+    abstract void setSystemId(int id);
 }

@@ -34,7 +34,8 @@ public abstract class PerfilPresenter implements IPresenter{
     public PerfilPresenter(Perfil perfil, PerfilService service) throws SQLException{
         this.service=service;
         this.perfil=perfil;
-        service.completarPerfil(perfil);
+        service.completarPerfil(this.perfil);
+        System.out.println(this.perfil.getId());
     }
     
     public void verPerfil() throws SQLException{    

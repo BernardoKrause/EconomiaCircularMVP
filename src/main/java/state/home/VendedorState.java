@@ -5,6 +5,7 @@
 package state.home;
 
 import command.item.AbrirCadastroItemCommand;
+import command.item.AbrirItensPublicadosCommand;
 import command.perfil.AbrirVerPerfilVendedorCommand;
 import command.perfil.CriarPerfilCompradorCommand;
 import command.usuario.SairUsuarioCommand;
@@ -70,12 +71,22 @@ public class VendedorState extends HomePresenterState{
             }
         });
         
-        view.getMItemPublicarItem().addActionListener(new ActionListener() {
+        view.getMIItemPublicarItem().addActionListener(new ActionListener() {
            @Override
            public  void actionPerformed(ActionEvent e) {
                try {
-                    Perfil perfil = usuario.getPerfilVendedor().get();
-                    new AbrirCadastroItemCommand(perfil).executar();
+                    publicarItem();
+               } catch (Exception ex) {
+                   JOptionPane.showMessageDialog(view, ex);
+               }
+           }
+        });
+        
+        view.getMIVerItem().addActionListener(new ActionListener() {
+           @Override
+           public  void actionPerformed(ActionEvent e) {
+               try {
+                   verItens();
                } catch (Exception ex) {
                    JOptionPane.showMessageDialog(view, ex);
                }
@@ -131,4 +142,15 @@ public class VendedorState extends HomePresenterState{
         new AbrirVerPerfilVendedorCommand(vendedor,perfilRepository).executar();
     }
     
+    @Override
+    public void publicarItem() throws SQLException{
+        Perfil perfil = usuario.getPerfilVendedor().get();
+        new AbrirCadastroItemCommand(perfil).executar();
+    }
+    
+    @Override
+    public void verItens() throws SQLException{
+        Perfil perfil = usuario.getPerfilVendedor().get();
+        new AbrirItensPublicadosCommand(perfil).executar();
+    }
 }

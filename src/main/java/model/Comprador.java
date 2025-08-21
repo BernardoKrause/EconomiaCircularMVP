@@ -14,9 +14,9 @@ public class Comprador extends Perfil {
         super(id);
     }
     
-    public Comprador (String sistemId) {
-        super(sistemId);
-    }
+//    public Comprador (String sistemId) {
+//        super(sistemId);
+//    }
     
     public Comprador(Integer id, String sistemId) {
         super(id, sistemId);
@@ -34,4 +34,9 @@ public class Comprador extends Perfil {
         
     }
     */
+
+    @Override
+    void setSystemId(int id) {
+        this.sistemId=("C-"+id);
+    }
 }

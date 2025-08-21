@@ -64,4 +64,10 @@ public class ItemRepository implements IItemRepository{
         // puxar da tabela materiais
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public Optional<List<Item>> buscarTodos() {
+        //a fazer
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

@@ -26,6 +26,7 @@ public class AbrirVerPerfilVendedorCommand extends PerfilCommand{
     public AbrirVerPerfilVendedorCommand(Vendedor vendedor, IPerfilRepository perfilRepository) throws SQLException{
         super(vendedor.getUsuario(), perfilRepository);
         this.desktop = GerenciadorTelas.getInstancia().getDesktop();
+        System.out.println("vervendedor="+vendedor.getUsuario().getId());
         this.perfil=vendedor;
     }
     

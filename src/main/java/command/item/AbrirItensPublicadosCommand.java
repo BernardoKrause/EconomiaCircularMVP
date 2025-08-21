@@ -5,14 +5,18 @@
 package command.item;
 
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
+import model.Item;
 import model.Perfil;
+import model.Vendedor;
 
 /**
  *
  * @author caiof
  */
-public class AbrirCadastroItemCommand extends ItemCommand{
-    public AbrirCadastroItemCommand(Perfil perfil)throws SQLException {
+public class AbrirItensPublicadosCommand extends ItemCommand{
+    public AbrirItensPublicadosCommand(Perfil perfil)throws SQLException {
         super(perfil);
     }
 
@@ -22,7 +26,14 @@ public class AbrirCadastroItemCommand extends ItemCommand{
      */
     @Override
     public void executar() throws SQLException {
-        presenter.createItem();
+        Optional<List<Item>> listaItens;
+        if(perfil.isVendedor()){
+            listaItens=itemService.getItensVendedor((Vendedor)perfil);
+        }
+        else{
+            listaItens=Optional.empty();
+        }
+        presenter.showItens(listaItens);
         desktop.add(presenter.getView());    
     }
     

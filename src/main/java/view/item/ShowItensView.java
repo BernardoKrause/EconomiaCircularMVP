@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 /**
  *
@@ -33,29 +34,61 @@ public class ShowItensView extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         spItens = new javax.swing.JScrollPane();
-        lItens = new javax.swing.JList<>();
+        tbItens = new javax.swing.JTable();
         lbTitulo = new javax.swing.JLabel();
-        lbLegenda = new javax.swing.JLabel();
+        btnFechar = new javax.swing.JButton();
 
         setTitle("Itens");
 
-        spItens.setViewportView(lItens);
+        tbItens.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Tipo Item", "Sub-Cat.", "Tamanho", "Cor", "Preço Total", "Vendedor", ""
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        spItens.setViewportView(tbItens);
+        if (tbItens.getColumnModel().getColumnCount() > 0) {
+            tbItens.getColumnModel().getColumn(0).setResizable(false);
+            tbItens.getColumnModel().getColumn(1).setResizable(false);
+            tbItens.getColumnModel().getColumn(2).setResizable(false);
+            tbItens.getColumnModel().getColumn(3).setResizable(false);
+            tbItens.getColumnModel().getColumn(4).setResizable(false);
+            tbItens.getColumnModel().getColumn(5).setResizable(false);
+            tbItens.getColumnModel().getColumn(6).setResizable(false);
+        }
 
         lbTitulo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbTitulo.setText("Itens Publicados");
 
-        lbLegenda.setText("tipo Item | Sub-Categoria | Tamanho | Cor | Composicao | Preco Base |");
+        btnFechar.setText("Fechar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lbTitulo)
-                    .addComponent(spItens, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
-                    .addComponent(lbLegenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbTitulo)
+                            .addComponent(spItens, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(214, 214, 214)
+                        .addComponent(btnFechar)))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -64,10 +97,10 @@ public class ShowItensView extends javax.swing.JInternalFrame {
                 .addGap(23, 23, 23)
                 .addComponent(lbTitulo)
                 .addGap(18, 18, 18)
-                .addComponent(lbLegenda)
-                .addGap(1, 1, 1)
-                .addComponent(spItens, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addComponent(spItens, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnFechar)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -75,14 +108,14 @@ public class ShowItensView extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList<JButton> lItens;
-    private javax.swing.JLabel lbLegenda;
+    private javax.swing.JButton btnFechar;
     private javax.swing.JLabel lbTitulo;
     private javax.swing.JScrollPane spItens;
+    private javax.swing.JTable tbItens;
     // End of variables declaration//GEN-END:variables
 
-    public JList<JButton> getLItens(){
-        return lItens;
+    public JTable getTbItens(){
+        return tbItens;
     }
     
     public JLabel getLbTitulo(){
@@ -93,4 +126,7 @@ public class ShowItensView extends javax.swing.JInternalFrame {
         return spItens;
     }
      
+    public JButton getBtnFechar(){
+        return btnFechar;
+    }
 }

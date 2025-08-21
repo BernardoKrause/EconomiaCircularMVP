@@ -7,7 +7,6 @@ package presenter;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JDesktopPane;
-import model.Usuario;
 
 /**
  *
