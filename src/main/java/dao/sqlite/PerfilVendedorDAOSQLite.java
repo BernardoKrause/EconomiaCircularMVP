@@ -1,5 +1,6 @@
-package dao;
+package dao.sqlite;
 
+import dao.IPerfilVendedorDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,8 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import model.Comprador;
 import model.Reputacao;
+import model.Vendedor;
 import util.factory.connection.DatabaseConnectionFactory;
 
 /*
@@ -21,31 +22,31 @@ import util.factory.connection.DatabaseConnectionFactory;
  *
  * @author berna
  */
-public class PerfilCompradorDAOSQLite implements IPerfilCompradorDAO {
+public class PerfilVendedorDAOSQLite implements IPerfilVendedorDAO {
     
     @Override
-    public void criar(Comprador comprador) throws SQLException {
-        String sql = "INSERT INTO compradores (sistemId, idReputacao) "
+    public void criar(Vendedor vendedor) throws SQLException {
+        String sql = "INSERT INTO vendedores (sistemId, idReputacao) "
                    + "VALUES (?, ?)";
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, comprador.getSistemId());
-            pstmt.setInt(2, comprador.getReputacao().getId());
+            pstmt.setString(1, vendedor.getSistemId());
+            pstmt.setInt(2, vendedor.getReputacao().getId());
             pstmt.executeUpdate();
         }
     }
-
+    
     @Override
-    public Optional<Comprador> buscaPorIdUsuario (Integer id) throws SQLException {
+    public Optional<Vendedor> buscaPorIdUsuario (Integer id) throws SQLException {
         String sql = """
-                SELECT c.*, 
+                SELECT v.*, 
                     r.estrelas AS reputacao_estrelas,
                     r.beneficioClimatico AS reputacao_beneficio,
                     r.nivel AS reputacao_nivel
-                    FROM compradores c
+                    FROM vendedores v
                     LEFT JOIN reputacoes r ON c.idReputacao = r.idReputacao 
-                    LEFT JOIN usuarios u ON u.idPerfilComprador = c.idPerfilComprador
+                    LEFT JOIN usuarios u ON u.idPerfilVendedor = c.idPerfilVendedor
                     WHERE u.idUsuario = ?""";
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -61,8 +62,8 @@ public class PerfilCompradorDAOSQLite implements IPerfilCompradorDAO {
                     );
                     reputacao.setIdReputacao(rs.getInt("idReputacao"));
                     
-                    return Optional.of(new Comprador(
-                        rs.getInt("idPerfilComprador"),
+                    return Optional.of(new Vendedor(
+                        rs.getInt("idPerfilVendedor"),
                         rs.getString("sistemId"),
                         reputacao
                     ));
@@ -74,14 +75,14 @@ public class PerfilCompradorDAOSQLite implements IPerfilCompradorDAO {
     }
     
     @Override
-    public List<Comprador> buscaTodos() throws SQLException {
-        List<Comprador> compradores = new ArrayList<>();
+    public List<Vendedor> buscaTodos() throws SQLException {
+        List<Vendedor> vendedores = new ArrayList<>();
         String sql = """
-            SELECT c.*, 
+            SELECT v.*, 
                    r.estrelas AS reputacao_estrelas,
                    r.beneficioClimatico AS reputacao_beneficio,
                    r.nivel AS reputacao_nivel
-            FROM compradores c
+            FROM vendedores v
             LEFT JOIN reputacoes r ON c.idReputacao = r.idReputacao
             """;
 
@@ -97,19 +98,19 @@ public class PerfilCompradorDAOSQLite implements IPerfilCompradorDAO {
                 );
                 reputacao.setIdReputacao(rs.getInt("idReputacao"));
 
-                compradores.add(new Comprador(
-                    rs.getInt("idPerfilComprador"),
+                vendedores.add(new Vendedor(
+                    rs.getInt("idPerfilVendedor"),
                     rs.getString("sistemId"),
                     reputacao
                 ));
             }
         }
-        return compradores;
+        return vendedores;
     }
 
     @Override
     public void deletar(Integer id) throws SQLException {
-        String sql = "DELETE FROM compradores WHERE idPerfilComprador = ?";
+        String sql = "DELETE FROM vendedores WHERE idPerfilVendedor = ?";
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -117,4 +118,5 @@ public class PerfilCompradorDAOSQLite implements IPerfilCompradorDAO {
             pstmt.executeUpdate();
         }
     }
+    
 }

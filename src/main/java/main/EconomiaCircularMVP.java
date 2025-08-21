@@ -4,7 +4,7 @@
 
 package main;
 
-import dao.UsuarioDAOSQLite;
+import dao.sqlite.UsuarioDAOSQLite;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;

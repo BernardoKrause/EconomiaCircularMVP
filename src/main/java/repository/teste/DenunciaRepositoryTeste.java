@@ -4,7 +4,7 @@
  */
 package repository.teste;
 
-import dao.DenunciaDAOSQLite;
+import dao.sqlite.DenunciaDAOSQLite;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

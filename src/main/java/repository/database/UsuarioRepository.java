@@ -4,7 +4,7 @@
  */
 package repository.database;
 
-import dao.UsuarioDAOSQLite;
+import dao.sqlite.UsuarioDAOSQLite;
 import factory.dao.IDAOFactory;
 import java.sql.SQLException;
 import java.util.List;
