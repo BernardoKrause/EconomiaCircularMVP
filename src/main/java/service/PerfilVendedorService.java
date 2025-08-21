@@ -11,6 +11,7 @@ import model.Vendedor;
 import repository.ICondutaRepository;
 import repository.IReputacaoRepository;
 import repository.IPerfilRepository;
+import repository.IUsuarioRepository;
 
 /**
  *
@@ -20,8 +21,8 @@ public class PerfilVendedorService extends PerfilService{
 
     private IPerfilRepository perfilRepository;
 
-    public PerfilVendedorService(IReputacaoRepository reputacaoRepository, ICondutaRepository condutaRepository, IPerfilRepository vendedorRepository) {
-        super(reputacaoRepository, condutaRepository);
+    public PerfilVendedorService(IReputacaoRepository reputacaoRepository, ICondutaRepository condutaRepository, IPerfilRepository vendedorRepository, IUsuarioRepository usuarioRepository) {
+        super(reputacaoRepository, condutaRepository, usuarioRepository);
         this.perfilRepository=vendedorRepository;
     }
     
@@ -33,13 +34,14 @@ public class PerfilVendedorService extends PerfilService{
         }
         
         try {
-            Vendedor perfil = new Vendedor("V-"+usuario.getId());
+            Vendedor perfil = new Vendedor(perfilRepository.getTodosPerfils().get().size()+1);
             usuario.addPerfil(perfil);
             perfil.setUsuario(usuario);
             
-            Reputacao reputacao = new Reputacao(perfilRepository.getTodosPerfils().get().size());
+            Reputacao reputacao = new Reputacao(perfilRepository.getTodosPerfils().get().size()+1);
             perfil.setReputacao(reputacao);
             
+            usuarioRepository.atualizaUsuario(usuario);
             reputacaoRepository.salvarReputacao(perfil.getReputacao());
             perfilRepository.salvarPerfil(perfil);   
         } catch (SQLException ex) {

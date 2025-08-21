@@ -20,7 +20,7 @@ public interface IUsuarioRepository {
 
     public List<Usuario> getTodosUsuarios() throws SQLException ;
 
-    public void atualizaUsuario(String id, String nome, String email, String telefone, String senha) throws SQLException;
+    public void atualizaUsuario(Usuario usuario) throws SQLException;
     
     public void deletaUsuario(String id) throws SQLException ;
     

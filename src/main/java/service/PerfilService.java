@@ -13,6 +13,7 @@ import model.Reputacao;
 import model.Usuario;
 import repository.ICondutaRepository;
 import repository.IReputacaoRepository;
+import repository.IUsuarioRepository;
 
 /**
  *
@@ -21,10 +22,12 @@ import repository.IReputacaoRepository;
 public abstract class PerfilService {
     protected IReputacaoRepository reputacaoRepository;
     protected ICondutaRepository condutaRepository;
+    protected IUsuarioRepository usuarioRepository;
     
-    public PerfilService(IReputacaoRepository reputacaoRepository,ICondutaRepository condutaRepository){
+    public PerfilService(IReputacaoRepository reputacaoRepository,ICondutaRepository condutaRepository, IUsuarioRepository usuarioRepository){
         this.reputacaoRepository=reputacaoRepository;
         this.condutaRepository=condutaRepository;
+        this.usuarioRepository=usuarioRepository;
     }
     
     public abstract void criar(Usuario usuario) throws SQLException;

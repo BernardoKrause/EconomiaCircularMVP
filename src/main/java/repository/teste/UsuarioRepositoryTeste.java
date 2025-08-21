@@ -34,6 +34,7 @@ public class UsuarioRepositoryTeste implements IUsuarioRepository{
     public void adicionaUsuario(String nome, String email, String telefone, String senha, boolean isAdmin) throws SQLException {
         Usuario u = new Usuario(nome, email, telefone, senha);
         u.setAdmin(isAdmin);
+        u.setId(usuariosCadastrados.size());
         usuariosCadastrados.add(u);
     }
 
@@ -53,8 +54,15 @@ public class UsuarioRepositoryTeste implements IUsuarioRepository{
     }
 
     @Override
-    public void atualizaUsuario(String id, String nome, String email, String telefone, String senha) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void atualizaUsuario(Usuario usuario) throws SQLException {
+        for(Usuario usuarioExistente : usuariosCadastrados){
+            System.out.println(usuario.getId() +"--"+ usuarioExistente.getId());
+            if(usuarioExistente.getId().equals(usuario.getId())){
+                System.out.println(usuarioExistente.getPerfilVendedor());
+                usuarioExistente.copy(usuario);
+                System.out.println(usuarioExistente.getPerfilVendedor());
+            }
+        }
     }
 
     @Override

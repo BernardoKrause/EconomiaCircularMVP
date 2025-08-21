@@ -40,8 +40,8 @@ public class UsuarioRepository implements IUsuarioRepository {
     }
 
     @Override
-    public void atualizaUsuario(String id, String nome, String email, String telefone, String senha) throws SQLException {
-        usuarioDAO.atualizar(new Usuario(id, nome, email, telefone, senha));
+    public void atualizaUsuario(Usuario usuario) throws SQLException {
+        usuarioDAO.atualizar(usuario);
     }
     
     @Override
