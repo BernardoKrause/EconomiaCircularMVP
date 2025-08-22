@@ -25,41 +25,43 @@ public class ItemRepository implements IItemRepository{
     }
 
     @Override
-    public Optional<List<Item>> BuscarPorVendedor(Vendedor vendedor){
+    public List<Item> buscarPorVendedor(Vendedor vendedor){
         return null;
     }
 
     @Override
-    public Optional<Item> BuscarPorId(Integer id) throws SQLException{
+    public Optional<Item> buscarPorId(Integer id) throws SQLException{
         return itemDAO.buscaPorId(id);
     }
 
     @Override
-    public Integer getQuantidadeItens() throws SQLException {
+    public Integer buscarQuantidadeItens() throws SQLException {
         return itemDAO.buscaTodos().size();
     }
 
     @Override
-    public void salvarItem(Item item) throws SQLException{
+    public void adicionarItem(Item item) throws SQLException{
         itemDAO.criar(item);
     }
+    
+    // implementar update
 
     @Override
-    public Optional<List<String>> getTiposItem() {
+    public List<String> buscarTiposItem() {
         //a fazer
         // puxar da tabela item_tipos
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Optional<List<String>> getTiposMaterial() {
+    public List<String> buscarTiposMaterial() {
         //a fazer
         // puxar da tabela materiais
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Double getFatorEmissaoMaterial(String nomeMaterial) {
+    public Double buscarFatorEmissaoMaterial(String nomeMaterial) {
         //a fazer
         // puxar da tabela materiais
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -68,6 +70,12 @@ public class ItemRepository implements IItemRepository{
     @Override
     public Optional<List<Item>> buscarTodos() {
         //a fazer
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    // implementar
+
+    @Override
+    public Double getFatorEmissaoMaterial(String nomeMaterial) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

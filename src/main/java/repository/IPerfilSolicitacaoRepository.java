@@ -14,13 +14,13 @@ import model.SolicitacaoPerfil;
  */
 public interface IPerfilSolicitacaoRepository {
     
-    public void adicionaSolicitacao(Integer idUsuario) throws SQLException ;
+    public void adicionarSolicitacao(Integer idUsuario) throws SQLException ;
 
-    public List<SolicitacaoPerfil> getTodasSolicitacoes() throws SQLException ;
+    public List<SolicitacaoPerfil> buscarTodasSolicitacoes() throws SQLException ;
     
-    public List<SolicitacaoPerfil> getTodasSolicitacoesEmAguardo() throws SQLException ;
+    public List<SolicitacaoPerfil> buscarTodasSolicitacoesEmAguardo() throws SQLException ;
 
-    public void atualizaSolicitacao(SolicitacaoPerfil solicitacaoAnalisada, String status) throws SQLException ;
+    public void atualizarSolicitacao(SolicitacaoPerfil solicitacaoAnalisada, String status) throws SQLException ;
     
-    public void deletaSolicitacao(Integer id) throws SQLException ;
+    public void deletarSolicitacao(Integer id) throws SQLException ;
 }

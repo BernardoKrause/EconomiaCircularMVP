@@ -14,17 +14,17 @@ import model.Usuario;
  * @author caiof
  */
 public interface IUsuarioRepository {
-    public void adicionaUsuario(String nome, String email, String telefone, String senha, boolean isAdmin) throws SQLException;
+    public void adicionarUsuario(String nome, String email, String telefone, String senha, boolean isAdmin) throws SQLException;
 
-    public Optional<Usuario> getUsuario(String id) throws SQLException ;
+    public Optional<Usuario> buscarUsuario(String id) throws SQLException ;
 
-    public List<Usuario> getTodosUsuarios() throws SQLException ;
+    public List<Usuario> buscarTodosUsuarios() throws SQLException ;
 
-    public void atualizaUsuario(Usuario usuario) throws SQLException;
+    public void atualizarUsuario(Usuario usuario) throws SQLException;
     
-    public void deletaUsuario(String id) throws SQLException ;
+    public void deletarUsuario(String id) throws SQLException ;
     
     public int totalUsuarios() throws SQLException;
 
-    public Optional<Usuario> getUsuarioPorEmail(String email) throws SQLException;
+    public Optional<Usuario> buscarUsuarioPorEmail(String email) throws SQLException;
 }

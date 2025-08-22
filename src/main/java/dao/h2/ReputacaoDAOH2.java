@@ -28,7 +28,7 @@ public class ReputacaoDAOH2 implements IReputacaoDAO {
     }
 
     @Override
-    public Optional<List<Reputacao>> buscaTodos() throws SQLException {
+    public List<Reputacao> buscaTodos() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

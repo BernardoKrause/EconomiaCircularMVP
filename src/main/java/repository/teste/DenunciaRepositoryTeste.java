@@ -4,7 +4,6 @@
  */
 package repository.teste;
 
-import dao.sqlite.DenunciaDAOSQLite;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +14,6 @@ import model.Comprador;
 import model.Denuncia;
 import model.Vendedor;
 import repository.IDenunciaRepository;
-import dao.IDenunciaDAO;
 
 /**
  *
@@ -41,12 +39,12 @@ public class DenunciaRepositoryTeste implements IDenunciaRepository{
     }
 
      @Override
-    public void adicionaDenuncia(String idC, String descricao, String status, Comprador comprador, Vendedor vendedor) throws SQLException {
+    public void adicionarDenuncia(String idC, String descricao, String status, Comprador comprador, Vendedor vendedor) throws SQLException {
         Denuncia d=new Denuncia(idC, descricao, status, comprador, vendedor);
     }
 
      @Override
-    public Optional<Denuncia> getDenuncia(Integer id) throws SQLException {
+    public Optional<Denuncia> buscarDenuncia(Integer id) throws SQLException {
         for(Denuncia d:denunciasPublicadas){
             if(d.getId()==id){
                 return Optional.of(d);
@@ -56,17 +54,17 @@ public class DenunciaRepositoryTeste implements IDenunciaRepository{
     }
 
     @Override
-    public List<Denuncia> getTodasDenuncias() throws SQLException {
+    public List<Denuncia> buscarTodasDenuncias() throws SQLException {
         return denunciasPublicadas;
     }
 
      @Override
-    public void atualizaDenuncia(String idC, String descricao, String status, Comprador comprador, Vendedor vendedor) throws SQLException {
+    public void atualizarDenuncia(String idC, String descricao, String status, Comprador comprador, Vendedor vendedor) throws SQLException {
         //fazer
     }
     
      @Override
-    public void deletaDenuncia(Integer id) throws SQLException {
+    public void deletarDenuncia(Integer id) throws SQLException {
         //fazer
     }
 }

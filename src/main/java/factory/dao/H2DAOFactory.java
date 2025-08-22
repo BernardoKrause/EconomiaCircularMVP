@@ -8,9 +8,8 @@ import dao.ICondutaDAO;
 import dao.IDefeitoDAO;
 import dao.IDenunciaDAO;
 import dao.IItemDAO;
-import dao.IPerfilCompradorDAO;
+import dao.IPerfilDAO;
 import dao.IPerfilSolicitacaoDAO;
-import dao.IPerfilVendedorDAO;
 import dao.IReputacaoDAO;
 import dao.IUsuarioDAO;
 import dao.h2.CondutaDAOH2;
@@ -44,7 +43,7 @@ public class H2DAOFactory extends IDAOFactory {
     }
 
     @Override
-    public IPerfilCompradorDAO getPerfilCompradorDAO() {
+    public IPerfilDAO getPerfilCompradorDAO() {
         return new PerfilCompradorDAOH2();
     }
 
@@ -54,7 +53,7 @@ public class H2DAOFactory extends IDAOFactory {
     }
 
     @Override
-    public IPerfilVendedorDAO getPerfilVendedorDAO() {
+    public IPerfilDAO getPerfilVendedorDAO() {
         return new PerfilVendedorDAOH2();
     }
 

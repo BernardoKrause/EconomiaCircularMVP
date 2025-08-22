@@ -21,9 +21,9 @@ public class SQLiteDatabaseConnectionFactory implements DatabaseConnectionFactor
     }
 
     /**
-     * 
-     * @return 
-     * @throws SQLException 
+     *
+     * @return
+     * @throws SQLException
      */
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL);
@@ -31,149 +31,165 @@ public class SQLiteDatabaseConnectionFactory implements DatabaseConnectionFactor
 
     private static void setupDatabase() {
         String[] ddlQueries = {
-            """
-            CREATE TABLE IF NOT EXISTS condutas (
-                idConduta INTEGER PRIMARY KEY AUTOINCREMENT,
-                tipoConduta TEXT,
-                descricao TEXT,
-                tipoPerfil TEXT,
-                valorEstrelas REAL,
-                idReputacao INTEGER,
-                FOREIGN KEY (idReputacao) REFERENCES reputacoes(idReputacao)
-            );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS reputacoes (
-                idReputacao INTEGER PRIMARY KEY AUTOINCREMENT,
-                estrelas REAL,
-                beneficioClimatico REAL,
-                nivel TEXT
-            );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS compradores (
-                idPerfilComprador INTEGER PRIMARY KEY AUTOINCREMENT,
-                sistemId TEXT NOT NULL UNIQUE,
-                idReputacao INTEGER,
-                FOREIGN KEY (idReputacao) REFERENCES reputacoes(idReputacao)
-            );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS vendedores (
-                idPerfilVendedor INTEGER PRIMARY KEY AUTOINCREMENT,
-                sistemId TEXT NOT NULL UNIQUE,
-                idReputacao INTEGER,
-                FOREIGN KEY (idReputacao) REFERENCES reputacoes(idReputacao)
-            );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS usuarios (
-                idUsuario INTEGER PRIMARY KEY AUTOINCREMENT,
-                nome TEXT,
-                email TEXT UNIQUE NOT NULL,
-                telefone TEXT,
-                senha TEXT NOT NULL,
-                eAdmin INTEGER DEFAULT 0,
-                criado_em TEXT,
-                idPerfilComprador INTEGER,
-                idPerfilVendedor INTEGER,
-                FOREIGN KEY (idPerfilComprador) REFERENCES compradores(idPerfilComprador),
-                FOREIGN KEY (idPerfilVendedor) REFERENCES vendedores(idPerfilVendedor)
-            );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS perfil_solicitacoes (
-                idSolicitacaoPerfil INTEGER PRIMARY KEY AUTOINCREMENT,
-                idUsuario INTEGER,
-                status TEXT NOT NULL,
-                FOREIGN KEY (idUsuario) REFERENCES usuarios(idUsuario)
-            );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS itens (
-                idItem INTEGER PRIMARY KEY AUTOINCREMENT,
-                idC TEXT UNIQUE,
-                tipo TEXT,
-                subcategoria TEXT,
-                tamanho TEXT,
-                cor TEXT,
-                peso REAL,
-                composicao TEXT,
-                precoBase REAL,
-                precoFinal REAL,
-                gpwEvitado REAL,
-                mciItem REAL,
-                numeroCiclo INTEGER,
-                idPerfilVendedor INTEGER,
-                FOREIGN KEY (idPerfilVendedor) REFERENCES vendedores(idPerfilVendedor)
-            );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS item_defeitos (
-                idDefeito INTEGER,
-                idItem INTEGER,
-                valorDesconto REAL,
-                PRIMARY KEY (idDefeito, idItem),
-                FOREIGN KEY (idDefeito) REFERENCES defeitos(idDefeito),
-                FOREIGN KEY (idItem) REFERENCES itens(idItem)
-            );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS defeitos (
-                idDefeito INTEGER PRIMARY KEY AUTOINCREMENT,
-                descricao TEXT,
-                percentualDesconto REAL
-            );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS ofertas (
-                idOferta INTEGER PRIMARY KEY AUTOINCREMENT,
-                dataOferta TEXT,
-                valorOferta REAL,
-                status TEXT,
-                idItem INTEGER,
-                idPerfilComprador INTEGER,
-                FOREIGN KEY (idItem) REFERENCES itens(idItem),
-                FOREIGN KEY (idPerfilComprador) REFERENCES compradores(idPerfilComprador)
-            );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS transacoes (
-                idTransacao INTEGER PRIMARY KEY AUTOINCREMENT,
-                idC TEXT UNIQUE,
-                dataInicio TEXT,
-                dataTermino TEXT,
-                comentarioVendedor TEXT,
-                comentarioComprador TEXT,
-                idPerfilVendedor INTEGER,
-                idPerfilComprador INTEGER,
-                FOREIGN KEY (idPerfilVendedor) REFERENCES vendedores(idPerfilVendedor),
-                FOREIGN KEY (idPerfilComprador) REFERENCES compradores(idPerfilComprador)
-            );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS denuncias (
-                idDenuncia INTEGER PRIMARY KEY AUTOINCREMENT,
-                idC TEXT UNIQUE,
-                descricao TEXT,
-                status TEXT,
-                idTransacao INTEGER,
-                idPerfilVendedor INTEGER,
-                idPerfilComprador INTEGER,
-                FOREIGN KEY (idTransacao) REFERENCES transacoes(idTransacao),
-                FOREIGN KEY (idPerfilVendedor) REFERENCES vendedores(idPerfilVendedor),
-                FOREIGN KEY (idPerfilComprador) REFERENCES compradores(idPerfilComprador)
-            );
-            """,
-            """
-            CREATE TABLE IF NOT EXISTS denuncia_defeitos (
-                idDenuncia INTEGER,
-                idDefeito INTEGER,
-                PRIMARY KEY (idDenuncia, idDefeito),
-                FOREIGN KEY (idDenuncia) REFERENCES denuncias(idDenuncia),
-                FOREIGN KEY (idDefeito) REFERENCES defeitos(idDefeito)
-            );
-            """
+                """
+                CREATE TABLE IF NOT EXISTS condutas (
+                    idConduta INTEGER PRIMARY KEY AUTOINCREMENT,
+                    tipoConduta TEXT,
+                    descricao TEXT,
+                    tipoPerfil TEXT,
+                    valorEstrelas REAL,
+                    idReputacao INTEGER,
+                    FOREIGN KEY (idReputacao) REFERENCES reputacoes(idReputacao)
+                );
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS reputacoes (
+                    idReputacao INTEGER PRIMARY KEY AUTOINCREMENT,
+                    estrelas REAL,
+                    beneficioClimatico REAL,
+                    nivel TEXT
+                );
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS compradores (
+                    idPerfilComprador INTEGER PRIMARY KEY AUTOINCREMENT,
+                    sistemId TEXT NOT NULL UNIQUE,
+                    idReputacao INTEGER,
+                    FOREIGN KEY (idReputacao) REFERENCES reputacoes(idReputacao)
+                );
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS vendedores (
+                    idPerfilVendedor INTEGER PRIMARY KEY AUTOINCREMENT,
+                    sistemId TEXT NOT NULL UNIQUE,
+                    idReputacao INTEGER,
+                    FOREIGN KEY (idReputacao) REFERENCES reputacoes(idReputacao)
+                );
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS usuarios (
+                    idUsuario INTEGER PRIMARY KEY AUTOINCREMENT,
+                    nome TEXT,
+                    email TEXT UNIQUE NOT NULL,
+                    telefone TEXT,
+                    senha TEXT NOT NULL,
+                    eAdmin INTEGER DEFAULT 0,
+                    criado_em TEXT,
+                    idPerfilComprador INTEGER,
+                    idPerfilVendedor INTEGER,
+                    FOREIGN KEY (idPerfilComprador) REFERENCES compradores(idPerfilComprador),
+                    FOREIGN KEY (idPerfilVendedor) REFERENCES vendedores(idPerfilVendedor)
+                );
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS perfil_solicitacoes (
+                    idSolicitacaoPerfil INTEGER PRIMARY KEY AUTOINCREMENT,
+                    idUsuario INTEGER,
+                    status TEXT NOT NULL,
+                    FOREIGN KEY (idUsuario) REFERENCES usuarios(idUsuario)
+                );
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS itens (
+                    idItem INTEGER PRIMARY KEY AUTOINCREMENT,
+                    idC TEXT UNIQUE,
+                    tipo TEXT,
+                    subcategoria TEXT,
+                    tamanho TEXT,
+                    cor TEXT,
+                    peso REAL,
+                    composicao TEXT,
+                    precoBase REAL,
+                    precoFinal REAL,
+                    gpwEvitado REAL,
+                    mciItem REAL,
+                    numeroCiclo INTEGER,
+                    idPerfilVendedor INTEGER,
+                    FOREIGN KEY (idPerfilVendedor) REFERENCES vendedores(idPerfilVendedor)
+                );
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS defeitos (
+                    idDefeito INTEGER PRIMARY KEY AUTOINCREMENT,
+                    descricao TEXT,
+                    percentualDesconto REAL
+                );
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS item_defeitos (
+                    idDefeito INTEGER,
+                    idItem INTEGER,
+                    valorDesconto REAL,
+                    PRIMARY KEY (idDefeito, idItem),
+                    FOREIGN KEY (idDefeito) REFERENCES defeitos(idDefeito),
+                    FOREIGN KEY (idItem) REFERENCES itens(idItem)
+                );
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS materiais (
+                    idMaterial INTEGER PRIMARY KEY AUTOINCREMENT,
+                    descricao VARCHAR(45)
+                );
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS item_materiais (
+                    idItem INTEGER,
+                    idMaterial INTEGER,
+                    percentual REAL,
+                    PRIMARY KEY (idItem, idMaterial),
+                    FOREIGN KEY (idItem) REFERENCES itens(idItem),
+                    FOREIGN KEY (idMaterial) REFERENCES materiais(idMaterial)
+                );
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS ofertas (
+                    idOferta INTEGER PRIMARY KEY AUTOINCREMENT,
+                    dataOferta TEXT,
+                    valorOferta REAL,
+                    status TEXT,
+                    idItem INTEGER,
+                    idPerfilComprador INTEGER,
+                    FOREIGN KEY (idItem) REFERENCES itens(idItem),
+                    FOREIGN KEY (idPerfilComprador) REFERENCES compradores(idPerfilComprador)
+                );
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS transacoes (
+                    idTransacao INTEGER PRIMARY KEY AUTOINCREMENT,
+                    idC TEXT UNIQUE,
+                    dataInicio TEXT,
+                    dataTermino TEXT,
+                    comentarioVendedor TEXT,
+                    comentarioComprador TEXT,
+                    idPerfilVendedor INTEGER,
+                    idPerfilComprador INTEGER,
+                    FOREIGN KEY (idPerfilVendedor) REFERENCES vendedores(idPerfilVendedor),
+                    FOREIGN KEY (idPerfilComprador) REFERENCES compradores(idPerfilComprador)
+                );
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS denuncias (
+                    idDenuncia INTEGER PRIMARY KEY AUTOINCREMENT,
+                    idC TEXT UNIQUE,
+                    descricao TEXT,
+                    status TEXT,
+                    idTransacao INTEGER,
+                    idPerfilVendedor INTEGER,
+                    idPerfilComprador INTEGER,
+                    FOREIGN KEY (idTransacao) REFERENCES transacoes(idTransacao),
+                    FOREIGN KEY (idPerfilVendedor) REFERENCES vendedores(idPerfilVendedor),
+                    FOREIGN KEY (idPerfilComprador) REFERENCES compradores(idPerfilComprador)
+                );
+                """,
+                """
+                CREATE TABLE IF NOT EXISTS denuncia_defeitos (
+                    idDenuncia INTEGER,
+                    idDefeito INTEGER,
+                    PRIMARY KEY (idDenuncia, idDefeito),
+                    FOREIGN KEY (idDenuncia) REFERENCES denuncias(idDenuncia),
+                    FOREIGN KEY (idDefeito) REFERENCES defeitos(idDefeito)
+                );
+                """
         };
 
         try (Connection conn = getConnection(); Statement stmt = conn.createStatement()) {

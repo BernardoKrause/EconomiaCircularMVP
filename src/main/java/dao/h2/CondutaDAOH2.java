@@ -28,12 +28,12 @@ public class CondutaDAOH2 implements ICondutaDAO {
     }
 
     @Override
-    public Optional<List<Conduta>> buscaPorTipo(Integer idReputacao, String tipo) throws SQLException {
+    public List<Conduta> buscaPorTipo(Integer idReputacao, String tipo) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Optional<List<Conduta>> buscaPorReputacao(Reputacao reputacao) throws SQLException {
+    public List<Conduta> buscaPorReputacao(Reputacao reputacao) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

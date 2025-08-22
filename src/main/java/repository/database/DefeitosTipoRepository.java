@@ -24,17 +24,17 @@ public class DefeitosTipoRepository implements IDefeitosTipoRepository {
     }
 
     @Override
-    public Optional<List<String>> BuscarPorTipo(String tipoItem) throws SQLException {
+    public List<String> buscarPorTipo(String tipoItem) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Double getPercentualPorDefeito(String defeito) throws SQLException {
+    public Double buscarPercentualPorDefeito(String defeito) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Optional<List<String>> getTiposItem() throws SQLException {
+    public List<String> buscarTiposItem() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

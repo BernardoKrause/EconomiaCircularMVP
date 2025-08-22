@@ -17,21 +17,22 @@ import model.Vendedor;
 public interface IItemRepository {
     
     public Optional<List<Item>> buscarTodos();
+
+    public List<Item> buscarPorVendedor(Vendedor vendedor);
     
-    public Optional<List<Item>> BuscarPorVendedor(Vendedor vendedor);
+    public Optional<Item> buscarPorId(Integer id) throws SQLException;
     
-    public Optional<Item> BuscarPorId(Integer id) throws SQLException;
+    public Integer buscarQuantidadeItens() throws SQLException ;
     
-    public Integer getQuantidadeItens() throws SQLException ;
-    
-    public void salvarItem(Item item) throws SQLException;
+    public void adicionarItem(Item item) throws SQLException;
     
     //Decisão de arquitetura de projeto
-    public Optional<List<String>> getTiposItem() throws SQLException;
+    public List<String> buscarTiposItem() throws SQLException;
 
     //Decisão de arquitetura de projeto
-    public Optional<List<String>> getTiposMaterial();
+    public List<String> buscarTiposMaterial();
 
     public Double getFatorEmissaoMaterial(String nomeMaterial);
 
+    public Double buscarFatorEmissaoMaterial(String nomeMaterial);
 }

@@ -4,36 +4,41 @@
  */
 package dao.h2;
 
-import dao.IPerfilVendedorDAO;
+import dao.IPerfilDAO;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
-import model.Vendedor;
+import model.Perfil;
 
 /**
  *
  * @author berna
  */
-public class PerfilVendedorDAOH2 implements IPerfilVendedorDAO {
+public class PerfilVendedorDAOH2 implements IPerfilDAO {
     // implementar
     @Override
-    public void criar(Vendedor vendedor) throws SQLException {
+    public void criar(Perfil vendedor) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Optional<Vendedor> buscaPorIdUsuario(Integer id) throws SQLException {
+    public Optional<Perfil> buscaPorIdUsuario(Integer id) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public List<Vendedor> buscaTodos() throws SQLException {
+    public List<Perfil> buscaTodos() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    @Override
+    public void atualizar(Perfil perfil) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
     @Override
     public void deletar(Integer id) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
 }

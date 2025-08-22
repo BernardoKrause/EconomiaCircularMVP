@@ -5,6 +5,7 @@
 package command.item;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import model.Item;
@@ -27,7 +28,7 @@ public class AbrirItensPublicadosCommand extends ItemCommand{
      */
     @Override
     public void executar() throws SQLException {
-        Optional<List<Item>> listaItens = Optional.empty();
+        List<Item> listaItens = new ArrayList<>();
         String tipoTela="Comprador";
         if(perfil.isVendedor()){
             listaItens=itemService.getItensVendedor((Vendedor)perfil);
