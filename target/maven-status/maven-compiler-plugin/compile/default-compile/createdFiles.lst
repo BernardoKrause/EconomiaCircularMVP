@@ -1,6 +1,7 @@
 dao\sqlite\CondutaDAOSQLite.class
 presenter\VendedorPresenter.class
 dao\sqlite\PerfilVendedorDAOSQLite.class
+dao\IPerfilDAO.class
 model\Reputacao.class
 state\home\HomePresenterState.class
 repository\teste\UsuarioRepositoryTeste.class
@@ -28,6 +29,7 @@ state\home\AutenticadoState.class
 command\usuario\AbrirSignupUsuarioCommand.class
 dao\sqlite\DenunciaDAOSQLite.class
 main\EconomiaCircularMVP.class
+repository\database\PerfilCompradorRepository.class
 dao\IUsuarioDAO.class
 view\usuario\LoginView.class
 view\item\ShowItemView.class
@@ -96,6 +98,7 @@ factory\dao\H2DAOFactory.class
 repository\teste\DefeitosTipoRepositoryTeste.class
 dao\h2\ReputacaoDAOH2.class
 repository\IUsuarioRepository.class
+repository\teste\CondutaRepositoryTeste.class
 dao\h2\UsuarioDAOH2.class
 presenter\VendedorPresenter$1.class
 repository\database\CondutaRepository.class
@@ -105,7 +108,6 @@ dao\h2\DefeitoDAOH2.class
 presenter\ItemPresenter$3.class
 repository\IDenunciaRepository.class
 model\SolicitacaoPerfil.class
-model\Insignia.class
 repository\teste\PerfilVendedorRepositoryTeste.class
 presenter\ItemPresenter$6.class
 presenter\LoginPresenter.class
@@ -114,7 +116,6 @@ command\perfil\AcessarPerfilVendedorCommand.class
 model\Material.class
 dao\h2\PerfilSolicitacaoDAOH2.class
 view\HomeView.class
-dao\IPerfilVendedorDAO.class
 state\home\VendedorState$3.class
 view\item\ShowItensView.class
 strategy\SistemaDefeitos\IRegraDefeitoStrategy.class
@@ -143,7 +144,6 @@ dao\h2\PerfilVendedorDAOH2.class
 presenter\LoginPresenter$1.class
 state\home\VendedorState$4.class
 dao\IDenunciaDAO.class
-repository\PerfilCompradorRepository.class
 presenter\SignupPresenter$1.class
 dao\sqlite\PerfilCompradorDAOSQLite.class
 model\Vendedor.class
@@ -154,6 +154,5 @@ service\CalcularGPWService.class
 presenter\ItemPresenter$1.class
 dao\sqlite\ItemDAOSQLite.class
 view\HomeView$2.class
-dao\IPerfilCompradorDAO.class
 repository\database\ItemRepository.class
 view\PerfilView$1.class

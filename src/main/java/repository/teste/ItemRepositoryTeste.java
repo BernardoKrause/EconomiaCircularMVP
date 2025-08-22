@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import model.Item;
+import model.Material;
 import model.Vendedor;
 import repository.IItemRepository;
 
@@ -79,15 +80,15 @@ public class ItemRepositoryTeste implements IItemRepository{
     }
 
     @Override
-    public List<String> buscarTiposMaterial() {
-        List<String> lista = new ArrayList<>();
+    public List<Material> buscarMaterialItem() {
+        List<Material> lista = new ArrayList<>();
 
-        lista.add("Algodão");
-        lista.add("Poliéster");
-        lista.add("Couro");
-        lista.add("Metal");
-        lista.add("Plástico");
-        lista.add("Outros");
+        lista.add(new Material("Algodão", 10.0, 10.0));
+        lista.add(new Material("Poliéster", 10.0, 10.0));
+        lista.add(new Material("Couro", 10.0, 10.0));
+        lista.add(new Material("Metal", 10.0, 10.0));
+        lista.add(new Material("Plástico", 10.0, 10.0));
+        lista.add(new Material("Outros", 10.0, 10.0));
 
         return lista;
     }
@@ -107,9 +108,8 @@ public class ItemRepositoryTeste implements IItemRepository{
         return fator;
     }
 
-    // implementar
     @Override
-    public Double getFatorEmissaoMaterial(String nomeMaterial) {
+    public void atualizarItem(Item item) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import model.Item;
+import model.Material;
 import model.Vendedor;
 
 /**
@@ -15,6 +16,8 @@ import model.Vendedor;
  * @author caiof
  */
 public interface IItemRepository {
+    
+    public void adicionarItem(Item item) throws SQLException;
     
     public Optional<List<Item>> buscarTodos();
 
@@ -24,15 +27,14 @@ public interface IItemRepository {
     
     public Integer buscarQuantidadeItens() throws SQLException ;
     
-    public void adicionarItem(Item item) throws SQLException;
-    
     //Decisão de arquitetura de projeto
     public List<String> buscarTiposItem() throws SQLException;
 
     //Decisão de arquitetura de projeto
-    public List<String> buscarTiposMaterial();
-
-    public Double getFatorEmissaoMaterial(String nomeMaterial);
+    // vai ser List<Material>
+    public List<Material> buscarMaterialItem();
 
     public Double buscarFatorEmissaoMaterial(String nomeMaterial);
+    
+    public void atualizarItem(Item item) throws SQLException;
 }

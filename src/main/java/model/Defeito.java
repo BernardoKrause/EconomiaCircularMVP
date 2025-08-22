@@ -1,6 +1,7 @@
 package model;
 
 public class Defeito {
+    private Integer idDefeito;
     private String descricao;
     private Integer percentualDesconto;
     private Double valorDesconto;
@@ -14,6 +15,13 @@ public class Defeito {
         }
         this.descricao = descricao;
         this.percentualDesconto = percentualDesconto;
+    }
+    
+    public Defeito(Integer idDefeito, String descricao, Integer percentualDesconto, Double valorDesconto) {
+        this.idDefeito = idDefeito; 
+        this.descricao = descricao;
+        this.percentualDesconto = percentualDesconto;
+        this.valorDesconto = valorDesconto;
     }
 
     public String getDescricao() {

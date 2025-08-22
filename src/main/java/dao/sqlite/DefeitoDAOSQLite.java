@@ -38,7 +38,8 @@ public class DefeitoDAOSQLite implements IDefeitoDAO {
     public List<Defeito> buscaTodos() throws SQLException {
         List<Defeito> defeitos = new ArrayList<>();
         String sql = """
-                     SELECT * FROM defeitos
+                     SELECT d.*, di.valorDesconto FROM defeitos d
+                     JOIN item_defeitos di ON d.idDefeito = di.idDefeito
                      """;
 
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
@@ -47,9 +48,39 @@ public class DefeitoDAOSQLite implements IDefeitoDAO {
         
             while (rs.next()) {
                 defeitos.add(new Defeito(
+                    rs.getInt("idDefeito"),
                     rs.getString("descricao"),
-                    rs.getInt("percentualDesconto")
+                    rs.getInt("percentualDesconto"),
+                    rs.getDouble("valorDesconto")
                 ));
+            }
+        }
+        return defeitos;
+    }
+
+    @Override
+    public List<Defeito> buscaDefeitosItem(Integer idItem) throws SQLException {
+        List<Defeito> defeitos = new ArrayList<>();
+        String sql = """
+                     SELECT d.*, di.valorDesconto FROM defeitos d
+                     JOIN item_defeitos di ON d.idDefeito = di.idDefeito
+                     WHERE di.idItem = ?
+                     """;
+
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, idItem);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    defeitos.add(new Defeito(
+                        rs.getInt("idDefeito"),
+                        rs.getString("descricao"),
+                        rs.getInt("percentualDesconto"),
+                        rs.getDouble("valorDesconto")
+                    ));
+                }
             }
         }
         return defeitos;

@@ -12,6 +12,7 @@ import model.Item;
 import model.Vendedor;
 import repository.IItemRepository;
 import dao.IItemDAO;
+import model.Material;
 
 /**
  *
@@ -24,6 +25,11 @@ public class ItemRepository implements IItemRepository{
         this.itemDAO = daoFactory.getItemDAO();
     }
 
+    @Override
+    public void adicionarItem(Item item) throws SQLException{
+        itemDAO.criar(item);
+    }
+    
     @Override
     public List<Item> buscarPorVendedor(Vendedor vendedor){
         return null;
@@ -40,42 +46,32 @@ public class ItemRepository implements IItemRepository{
     }
 
     @Override
-    public void adicionarItem(Item item) throws SQLException{
-        itemDAO.criar(item);
-    }
-    
-    // implementar update
-
-    @Override
     public List<String> buscarTiposItem() {
-        //a fazer
+        //implementar
         // puxar da tabela item_tipos
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public List<String> buscarTiposMaterial() {
-        //a fazer
-        // puxar da tabela materiais
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     public Double buscarFatorEmissaoMaterial(String nomeMaterial) {
-        //a fazer
+        //implementar
         // puxar da tabela materiais
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public Optional<List<Item>> buscarTodos() {
-        //a fazer
+        //implementar
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    // implementar
 
     @Override
-    public Double getFatorEmissaoMaterial(String nomeMaterial) {
+    public void atualizarItem(Item item) throws SQLException {
+        itemDAO.atualizar(item);
+    }
+
+    @Override
+    public List<Material> buscarMaterialItem() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

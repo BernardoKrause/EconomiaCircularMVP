@@ -7,7 +7,6 @@ package dao.h2;
 import dao.ICondutaDAO;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 import model.Conduta;
 import model.Reputacao;
 

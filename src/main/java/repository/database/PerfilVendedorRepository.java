@@ -30,8 +30,6 @@ public class PerfilVendedorRepository implements IPerfilRepository{
         perfilVendedorDAO.criar((Vendedor)perfil);
     }
     
-    // implementar update
-    
     @Override
     public Optional<Perfil> buscarPorIdUsuario(Integer id) throws SQLException {
         Perfil perfilAchado = perfilVendedorDAO.buscaPorIdUsuario(id).get();

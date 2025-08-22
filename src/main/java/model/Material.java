@@ -8,6 +8,8 @@ package model;
  *
  * @author caiof
  */
+
+// implementar o dao de material, o percentual item tem que ficar na tabela item_materiais
 public class Material {
     private String tipo;
     private Double fatorEmissao;

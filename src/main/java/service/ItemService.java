@@ -8,6 +8,7 @@ import factory.repository.SeletorRepositoryFactory;
 import java.sql.SQLException;
 import java.util.List;
 import model.Item;
+import model.Material;
 import model.Vendedor;
 import repository.IItemRepository;
 import repository.teste.DefeitosTipoRepositoryTeste;
@@ -66,11 +67,11 @@ public class ItemService {
         return tiposDefeitoRepository.buscarPorTipo(tipo);
     }
     
-    public List<String> getListaMateriaisComposicao(){
-        if(itemRepository.buscarTiposMaterial().isEmpty()){
+    public List<Material> getListaMateriaisComposicao(){
+        if(itemRepository.buscarMaterialItem().isEmpty()){
             throw new IllegalArgumentException("Lista de Tipos de material está vazia!");
         }
-        return itemRepository.buscarTiposMaterial();
+        return itemRepository.buscarMaterialItem();
     }
     
     public Double getFatorMaterial(String nomeMaterial){
