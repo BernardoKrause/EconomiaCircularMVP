@@ -26,13 +26,11 @@ import repository.IPerfilRepository;
  */
 public class VendedorState extends HomePresenterState{
     private Vendedor vendedor;
-    private Usuario usuario;
     
-    public VendedorState(HomePresenter presenter, Vendedor vendedor) throws SQLException {
-        super(presenter);
+    public VendedorState(HomePresenter presenter, Usuario usuarioAutenticado) throws SQLException {
+        super(presenter, usuarioAutenticado);
     
-        this.vendedor=vendedor;
-        this.usuario=vendedor.getUsuario();
+        this.vendedor= (Vendedor) usuario.getPerfilVendedor().get();
         
         setVisibles();
         
@@ -117,10 +115,6 @@ public class VendedorState extends HomePresenterState{
         }
     }
     
-    @Override
-    public void sairUsuario(){
-        new SairUsuarioCommand().executar();
-    }
     
     @Override
     public void criarPerfilComprador() throws SQLException {

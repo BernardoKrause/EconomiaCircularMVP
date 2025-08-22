@@ -17,18 +17,20 @@ import view.usuario.LoginView;
  *
  * @author berna
  */
-public class LoginPresenter implements IPresenter {
-    
-    private LoginView view;
+public class LoginPresenter extends AbstractPresenter {
+
     private UsuarioService usuarioService;
+    private LoginView loginView;
     
     public LoginPresenter(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
+
+        this.loginView = new LoginView();
+
+        loginView.setVisible(false);
         
-        view = new LoginView();
-        
-        view.setVisible(false);
-        view.getBtnAcessar().addActionListener(new ActionListener() {
+        resetButtonActions(loginView.getBtnAcessar());
+        loginView.getBtnAcessar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -38,8 +40,9 @@ public class LoginPresenter implements IPresenter {
                 }
             }
         });
-        
-        view.getBtnCancelar().addActionListener(new ActionListener() {
+
+        resetButtonActions(loginView.getBtnCancelar());
+        loginView.getBtnCancelar().addActionListener(new ActionListener() {
            @Override
            public  void actionPerformed(ActionEvent e) {
                try {
@@ -49,15 +52,16 @@ public class LoginPresenter implements IPresenter {
                }
            }
         });
-        
-        view.getTxtEmail().setText("");
-        view.getTxtSenha().setText("");
-        view.setVisible(true);
+
+        loginView.getTxtEmail().setText("");
+        loginView.getTxtSenha().setText("");
+        loginView.setVisible(true);
+        this.view = loginView;
     }
     
     public void autenticar() throws SQLException {
-        String email = view.getTxtEmail().getText();
-        String senha = view.getTxtSenha().getText();
+        String email = loginView.getTxtEmail().getText();
+        String senha = loginView.getTxtSenha().getText();
         Usuario usuario = new Usuario(email, senha);
         
         usuarioService.autenticarUsuario(usuario);
@@ -65,19 +69,15 @@ public class LoginPresenter implements IPresenter {
         if (usuario.isAutenticado()) {
             try {
                 GerenciadorTelas.getInstancia().getPresenter().entrarUsuario(usuario);
-                view.dispose();
+                GerenciadorTelas.getInstancia().removeTelaAberta("login");
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(view, ex);
+                JOptionPane.showMessageDialog(loginView, ex);
             }
         }
     }
     
     public void cancelar() {
-        view.dispose();
+        GerenciadorTelas.getInstancia().removeTelaAberta("login");
     }
 
-    @Override
-    public JInternalFrame getView() {
-        return view;
-    }
 }

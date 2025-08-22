@@ -26,14 +26,14 @@ public class AbrirVerPerfilVendedorCommand extends PerfilCommand{
     public AbrirVerPerfilVendedorCommand(Vendedor vendedor, IPerfilRepository perfilRepository) throws SQLException{
         super(vendedor.getUsuario(), perfilRepository);
         this.desktop = GerenciadorTelas.getInstancia().getDesktop();
-        System.out.println("vervendedor="+vendedor.getUsuario().getId());
-        this.perfil=vendedor;
+        this.perfil=(Vendedor)usuario.getPerfilVendedor().get();
     }
     
     @Override
     public void executar() throws SQLException {
         PerfilPresenter vendedorPresenter = new VendedorPresenter(perfil,service);
         vendedorPresenter.verPerfil();
+        GerenciadorTelas.getInstancia().addTelaAberta("Vendedor", "VerPerfil", vendedorPresenter);
         desktop.add(vendedorPresenter.getView());
     }
     

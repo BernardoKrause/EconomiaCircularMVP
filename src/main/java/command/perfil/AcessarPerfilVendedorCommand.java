@@ -6,11 +6,9 @@ package command.perfil;
 
 import java.sql.SQLException;
 import model.Usuario;
-import model.Vendedor;
 import presenter.GerenciadorTelas;
 import presenter.HomePresenter;
 import repository.IPerfilRepository;
-import service.PerfilService;
 
 /**
  *
@@ -26,7 +24,7 @@ public class AcessarPerfilVendedorCommand extends PerfilCommand{
     
     @Override
     public void executar() throws SQLException {
-        presenter.acessarVendedor((Vendedor) usuario.getPerfilVendedor().get());
+        presenter.acessarVendedor(usuario);
     }
     
 }

@@ -26,8 +26,7 @@ import view.PerfilView;
  *
  * @author caiof
  */
-public abstract class PerfilPresenter implements IPresenter{
-    protected JInternalFrame view;
+public abstract class PerfilPresenter extends AbstractPresenter {
     protected PerfilService service;
     protected Perfil perfil;
     
@@ -55,8 +54,9 @@ public abstract class PerfilPresenter implements IPresenter{
         JList<JButton> listaMedalhas = perfilView.getLMedalhas();
         criarListaCondutas("MEDALHA",listaMedalhas);
         perfilView.getSpMedalhas().setViewportView(listaMedalhas);
-        
-        
+
+
+        resetButtonActions(perfilView.getBtnFechar());
         perfilView.getBtnFechar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -77,13 +77,8 @@ public abstract class PerfilPresenter implements IPresenter{
     
     public abstract void setButtons(PerfilView perfilView);
     
-    @Override
-    public JInternalFrame getView() {
-        return view;
-    }
-    
     public void fechar(){
-        view.dispose();
+        GerenciadorTelas.getInstancia().removeTelaAberta("VerPerfil");
     }
     
     public void criarListaCondutas(String tipo, JList<JButton> listaCondutas) throws SQLException{

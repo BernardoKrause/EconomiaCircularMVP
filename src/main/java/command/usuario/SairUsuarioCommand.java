@@ -4,6 +4,8 @@
  */
 package command.usuario;
 
+import java.sql.SQLException;
+import model.Usuario;
 import presenter.GerenciadorTelas;
 
 /**
@@ -11,13 +13,15 @@ import presenter.GerenciadorTelas;
  * @author caiof
  */
 public class SairUsuarioCommand extends UsuarioCommand{
-    public SairUsuarioCommand() {
-        super();
+    
+    public SairUsuarioCommand(Usuario usuario) {
+        super(usuario);
+        
     }
     
     @Override
-    public void executar() {
-        GerenciadorTelas.getInstancia().getPresenter().sairUsuario();
+    public void executar() throws SQLException {
+        GerenciadorTelas.getInstancia().sairAutenticado(usuario);
     }
     
 }

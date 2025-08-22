@@ -28,9 +28,10 @@ public abstract class PerfilCommand implements ICommand{
     protected IUsuarioRepository usuarioRepository;
     
     public PerfilCommand(Usuario usuario, IPerfilRepository perfilRepository) throws SQLException {
+        if(usuario.isAutenticado()){    
+            this.usuario = usuario;
+        }
         this.usuarioRepository = SeletorRepositoryFactory.obterInstancia().criarUsuarioRepository();
-        this.usuario=usuarioRepository.getUsuario(usuario.getId()).get();
-        System.out.println("PerfilCOmmnad"+usuario.getId());
         this.reputacaoRepository = SeletorRepositoryFactory.obterInstancia().criarReputacaoRepository();
         this.condutaRepository = SeletorRepositoryFactory.obterInstancia().criarCondutaRepository();
         this.service = new PerfilVendedorService(reputacaoRepository,condutaRepository,perfilRepository,usuarioRepository);
