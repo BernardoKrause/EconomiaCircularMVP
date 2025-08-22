@@ -1,6 +1,6 @@
 package dao.sqlite;
 
-import dao.IPerfilVendedorDAO;
+import dao.IPerfilDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import model.Perfil;
 import model.Reputacao;
 import model.Vendedor;
 import util.factory.connection.DatabaseConnectionFactory;
@@ -22,10 +24,10 @@ import util.factory.connection.DatabaseConnectionFactory;
  *
  * @author berna
  */
-public class PerfilVendedorDAOSQLite implements IPerfilVendedorDAO {
+public class PerfilVendedorDAOSQLite implements IPerfilDAO {
     
     @Override
-    public void criar(Vendedor vendedor) throws SQLException {
+    public void criar(Perfil vendedor) throws SQLException {
         String sql = "INSERT INTO vendedores (sistemId, idReputacao) "
                    + "VALUES (?, ?)";
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
@@ -38,7 +40,7 @@ public class PerfilVendedorDAOSQLite implements IPerfilVendedorDAO {
     }
     
     @Override
-    public Optional<Vendedor> buscaPorIdUsuario (Integer id) throws SQLException {
+    public Optional<Perfil> buscaPorIdUsuario (Integer id) throws SQLException {
         String sql = """
                 SELECT v.*, 
                     r.estrelas AS reputacao_estrelas,
@@ -75,7 +77,7 @@ public class PerfilVendedorDAOSQLite implements IPerfilVendedorDAO {
     }
     
     @Override
-    public List<Vendedor> buscaTodos() throws SQLException {
+    public List<Perfil> buscaTodos() throws SQLException {
         List<Vendedor> vendedores = new ArrayList<>();
         String sql = """
             SELECT v.*, 
@@ -105,7 +107,24 @@ public class PerfilVendedorDAOSQLite implements IPerfilVendedorDAO {
                 ));
             }
         }
-        return vendedores;
+        return vendedores.stream()
+            .map(vendedor -> (Perfil) vendedor)
+            .collect(Collectors.toList());
+    }
+    
+    @Override
+    public void atualizar(Perfil perfil) throws SQLException {
+        String sql = "UPDATE vendedores SET sistemId = ?, idReputacao = ?"
+                   + "WHERE idPerfil = ?";
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, perfil.getSistemId());
+            pstmt.setInt(2, perfil.getReputacao().getId());
+            pstmt.setInt(3, perfil.getId());
+            pstmt.executeUpdate();
+
+        } 
     }
 
     @Override

@@ -36,20 +36,19 @@ public class ItemRepositoryTeste implements IItemRepository{
     public Optional<List<Item>> buscarTodos(){
         return Optional.of(itensPublicados);
     }
-    
-    @Override
-    public Optional<List<Item>> BuscarPorVendedor(Vendedor vendedor){
+
+    public List<Item> buscarPorVendedor(Vendedor vendedor){
         List<Item> lista=new ArrayList<>();
         for(Item item : itensPublicados){
             if(item.getVendedor()==vendedor){
                 lista.add(item);
             }
         }
-        return Optional.of(lista);
+        return lista;
     }
     
     @Override
-    public Optional<Item> BuscarPorId(Integer id) throws SQLException{
+    public Optional<Item> buscarPorId(Integer id) throws SQLException{
         for(Item item : itensPublicados){
             if(item.getId() == id){
                 return Optional.of(item);
@@ -59,28 +58,28 @@ public class ItemRepositoryTeste implements IItemRepository{
     }
     
     @Override
-    public Integer getQuantidadeItens() throws SQLException {
+    public Integer buscarQuantidadeItens() throws SQLException {
         return itensPublicados.size();
     }
     
     @Override
-    public void salvarItem(Item item) throws SQLException{
+    public void adicionarItem(Item item) throws SQLException{
         itensPublicados.add(item);
     }
 
     @Override
-    public Optional<List<String>> getTiposItem() {
+    public List<String> buscarTiposItem() {
         List<String> tiposDefeito = new ArrayList<>();
         tiposDefeito.add("vestuario");
         tiposDefeito.add("calcado");
         tiposDefeito.add("bolsas e mochilas");
         tiposDefeito.add("bijuterias e acessorios");
         
-        return Optional.of(tiposDefeito);
+        return tiposDefeito;
     }
 
     @Override
-    public Optional<List<String>> getTiposMaterial() {
+    public List<String> buscarTiposMaterial() {
         List<String> lista = new ArrayList<>();
 
         lista.add("Algodão");
@@ -90,11 +89,11 @@ public class ItemRepositoryTeste implements IItemRepository{
         lista.add("Plástico");
         lista.add("Outros");
 
-        return Optional.of(lista);
+        return lista;
     }
 
     @Override
-    public Double getFatorEmissaoMaterial(String nomeMaterial) {
+    public Double buscarFatorEmissaoMaterial(String nomeMaterial) {
         Double fator = 4.0;
         
         switch (nomeMaterial){
@@ -106,6 +105,12 @@ public class ItemRepositoryTeste implements IItemRepository{
         }
         
         return fator;
+    }
+
+    // implementar
+    @Override
+    public Double getFatorEmissaoMaterial(String nomeMaterial) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
 

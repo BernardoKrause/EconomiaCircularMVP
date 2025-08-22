@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import model.Conduta;
 import model.Reputacao;
 import util.factory.connection.DatabaseConnectionFactory;
@@ -64,7 +63,7 @@ public class CondutaDAOSQLite implements ICondutaDAO {
     }
 
     @Override
-    public Optional<List<Conduta>> buscaPorTipo(Integer idReputacao, String tipo) throws SQLException {
+    public List<Conduta> buscaPorTipo(Integer idReputacao, String tipo) throws SQLException {
         List<Conduta> condutas = new ArrayList<>();
         String sql = """
             SELECT *
@@ -89,13 +88,13 @@ public class CondutaDAOSQLite implements ICondutaDAO {
                     ));
                 }
                 
-                return condutas.isEmpty() ? Optional.empty() : Optional.of(condutas);
+                return condutas;
             }
         }
     }
 
     @Override
-    public Optional<List<Conduta>> buscaPorReputacao(Reputacao reputacao) throws SQLException {
+    public List<Conduta> buscaPorReputacao(Reputacao reputacao) throws SQLException {
         List<Conduta> condutas = new ArrayList<>();
         String sql = """
             SELECT *
@@ -119,7 +118,7 @@ public class CondutaDAOSQLite implements ICondutaDAO {
                     ));
                 }
                 
-                return condutas.isEmpty() ? Optional.empty() : Optional.of(condutas);
+                return condutas;
             }
         }
     }

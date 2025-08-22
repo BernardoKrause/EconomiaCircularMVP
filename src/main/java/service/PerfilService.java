@@ -6,7 +6,6 @@ package service;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 import model.Conduta;
 import model.Perfil;
 import model.Reputacao;
@@ -33,14 +32,14 @@ public abstract class PerfilService {
     public abstract void criar(Usuario usuario) throws SQLException;
     
     public void completarPerfil(Perfil perfil) throws SQLException{
-        Reputacao reputacao = reputacaoRepository.getReputacao(perfil).get();
-        reputacao.setCondutas(condutaRepository.getTodasCondutas(reputacao).get());
+        Reputacao reputacao = reputacaoRepository.buscarReputacao(perfil).get();
+        reputacao.setCondutas(condutaRepository.buscarTodasCondutas(reputacao));
         
         perfil.setReputacao(reputacao);
     }
     
-    public Optional<List<Conduta>> getListaCondutasTipo(Perfil perfil, String tipo) throws SQLException{
-        Reputacao reputacao = reputacaoRepository.getReputacao(perfil).get();
-        return condutaRepository.getCondutasPorTipo(reputacao, tipo);
+    public List<Conduta> getListaCondutasTipo(Perfil perfil, String tipo) throws SQLException{
+        Reputacao reputacao = reputacaoRepository.buscarReputacao(perfil).get();
+        return condutaRepository.buscarCondutasPorTipo(reputacao, tipo);
     }
 }

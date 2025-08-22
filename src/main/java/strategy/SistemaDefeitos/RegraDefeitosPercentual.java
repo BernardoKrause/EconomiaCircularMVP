@@ -4,7 +4,6 @@ import factory.repository.SeletorRepositoryFactory;
 import java.sql.SQLException;
 import model.Defeito;
 import model.Item;
-import repository.teste.DefeitosTipoRepositoryTeste;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -25,7 +24,7 @@ public class RegraDefeitosPercentual implements IRegraDefeitoStrategy{
                 if(!seAplica(item.getTipo(),defeitoAnalizado)){
                     throw new RuntimeException("Defeito passado não encontrado!");
                 }
-                Double percentual = tiposDefeitoRepository.getPercentualPorDefeito(defeitoAnalizado);
+                Double percentual = tiposDefeitoRepository.buscarPercentualPorDefeito(defeitoAnalizado);
                 Defeito defeito = new Defeito(defeitoAnalizado,(int) (percentual*100));
                 defeito.setValorDesconto(item.getPrecoBase()*percentual);
                 item.addDefeito(defeito);
@@ -37,7 +36,7 @@ public class RegraDefeitosPercentual implements IRegraDefeitoStrategy{
     }
 
     private boolean seAplica(String tipo, String defeito) throws SQLException {
-        List<String> defeitosExistentes = tiposDefeitoRepository.BuscarPorTipo(tipo).get();
+        List<String> defeitosExistentes = tiposDefeitoRepository.buscarPorTipo(tipo);
         for(String d : defeitosExistentes){
             if(d.equalsIgnoreCase(defeito)){
                 return true;

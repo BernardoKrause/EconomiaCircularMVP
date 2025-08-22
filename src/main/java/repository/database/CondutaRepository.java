@@ -26,18 +26,18 @@ public class CondutaRepository implements ICondutaRepository{
     }
 
     @Override
-    public void salvarConduta(Reputacao reputacao, Conduta conduta) throws SQLException {
+    public void adicionarConduta(Reputacao reputacao, Conduta conduta) throws SQLException {
         condutaDAO.criar(reputacao, conduta);
     }
 
     @Override
-    public Optional<List<Conduta>> getTodasCondutas(Reputacao reputacao) throws SQLException {
+    public List<Conduta> buscarTodasCondutas(Reputacao reputacao) throws SQLException {
         return condutaDAO.buscaPorReputacao(reputacao);
 
     }
     
     @Override
-    public Optional<List<Conduta>> getCondutasPorTipo(Reputacao reputacao, String tipo) throws SQLException {
+    public List<Conduta> buscarCondutasPorTipo(Reputacao reputacao, String tipo) throws SQLException {
         return condutaDAO.buscaPorTipo(reputacao.getId(), tipo);
 
     }

@@ -25,37 +25,36 @@ public class UsuarioRepository implements IUsuarioRepository {
     }
 
     @Override
-    public void adicionaUsuario(String nome, String email, String telefone, String senha, boolean isAdmin) throws SQLException {
+    public void adicionarUsuario(String nome, String email, String telefone, String senha, boolean isAdmin) throws SQLException {
         usuarioDAO.criar(new Usuario(nome, email, telefone, senha, isAdmin));
     }
 
     @Override
-    public Optional<Usuario> getUsuario(String id) throws SQLException {
+    public Optional<Usuario> buscarUsuario(String id) throws SQLException {
         return usuarioDAO.buscaPorId(Integer.valueOf(id));
     }
 
     @Override
-    public List<Usuario> getTodosUsuarios() throws SQLException {
+    public List<Usuario> buscarTodosUsuarios() throws SQLException {
         return usuarioDAO.buscaTodos();
     }
 
-    @Override
-    public void atualizaUsuario(Usuario usuario) throws SQLException {
+    public void atualizarUsuario(Usuario usuario) throws SQLException {
         usuarioDAO.atualizar(usuario);
     }
     
     @Override
-    public void deletaUsuario(String id) throws SQLException {
+    public void deletarUsuario(String id) throws SQLException {
         usuarioDAO.deletar(Integer.valueOf(id));
     }
     
     @Override
     public int totalUsuarios() throws SQLException {
-        return getTodosUsuarios().size();
+        return buscarTodosUsuarios().size();
     }
 
     @Override
-    public Optional<Usuario> getUsuarioPorEmail(String email) throws SQLException {
+    public Optional<Usuario> buscarUsuarioPorEmail(String email) throws SQLException {
         return usuarioDAO.buscaPorEmail(email);
 
     }

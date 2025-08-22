@@ -9,10 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.HashMap;
-import java.util.Map;
-import model.Conduta;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -71,7 +67,7 @@ public class ReputacaoDAOSQLite implements IReputacaoDAO {
     }
 
     @Override
-    public Optional<List<Reputacao>> buscaTodos() throws SQLException {
+    public List<Reputacao> buscaTodos() throws SQLException {
         List<Reputacao> reputacoes = new ArrayList<>();
         String sql = "SELECT * FROM reputacoes";
 
@@ -87,7 +83,7 @@ public class ReputacaoDAOSQLite implements IReputacaoDAO {
                     ));
                 }
                 
-                return reputacoes.isEmpty() ? Optional.empty() : Optional.of(reputacoes);
+                return reputacoes;
             }
         }
     }

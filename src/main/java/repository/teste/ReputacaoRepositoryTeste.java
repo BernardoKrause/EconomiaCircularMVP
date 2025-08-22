@@ -32,12 +32,12 @@ public class ReputacaoRepositoryTeste implements IReputacaoRepository{
     }
 
     @Override
-    public void salvarReputacao(Reputacao reputacao) {
+    public void adicionarReputacao(Reputacao reputacao) {
         reputacoes.add(reputacao);
     }
 
     @Override
-    public Optional<Reputacao> getReputacao(Perfil perfil) {
+    public Optional<Reputacao> buscarReputacao(Perfil perfil) {
         for(Reputacao rep : reputacoes){
             if(perfil.getReputacao().getId().equals(rep.getId())){
                 return Optional.of(rep);
@@ -48,7 +48,7 @@ public class ReputacaoRepositoryTeste implements IReputacaoRepository{
     }
 
     @Override
-    public Optional<List<Reputacao>> getTodos() throws SQLException {
+    public List<Reputacao> buscarTodos() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

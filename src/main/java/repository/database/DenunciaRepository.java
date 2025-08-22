@@ -26,27 +26,27 @@ public class DenunciaRepository implements IDenunciaRepository{
     }
 
      @Override
-    public void adicionaDenuncia(String idC, String descricao, String status, Comprador comprador, Vendedor vendedor) throws SQLException {
+    public void adicionarDenuncia(String idC, String descricao, String status, Comprador comprador, Vendedor vendedor) throws SQLException {
         denunciaDAO.criar(new Denuncia(idC, descricao, status, comprador, vendedor));
     }
 
      @Override
-    public Optional<Denuncia> getDenuncia(Integer id) throws SQLException {
+    public Optional<Denuncia> buscarDenuncia(Integer id) throws SQLException {
         return denunciaDAO.buscaPorId(id);
     }
 
      @Override
-    public List<Denuncia> getTodasDenuncias() throws SQLException {
+    public List<Denuncia> buscarTodasDenuncias() throws SQLException {
         return denunciaDAO.buscaTodos();
     }
 
      @Override
-    public void atualizaDenuncia(String idC, String descricao, String status, Comprador comprador, Vendedor vendedor) throws SQLException {
+    public void atualizarDenuncia(String idC, String descricao, String status, Comprador comprador, Vendedor vendedor) throws SQLException {
         denunciaDAO.atualizar(new Denuncia(idC, descricao, status, comprador, vendedor));
     }
     
      @Override
-    public void deletaDenuncia(Integer id) throws SQLException {
+    public void deletarDenuncia(Integer id) throws SQLException {
         denunciaDAO.deletar(id);
     }
 }

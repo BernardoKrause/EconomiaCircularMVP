@@ -176,7 +176,7 @@ public class ItemPresenter extends AbstractPresenter {
         this.view=formView;
     }
 
-    public void showItens(Optional<List<Item>> listaExistente){
+    public void showItens(List<Item> listaExistente){
         tipoTela="Comprador";
         nomeTela = "VerItens";
         ShowItensView itensView = new ShowItensView();
@@ -199,7 +199,7 @@ public class ItemPresenter extends AbstractPresenter {
         
         itens = itemService.getItens(); 
         if (!listaExistente.isEmpty()){
-            itens=listaExistente.get();
+            itens=listaExistente;
             tipoTela="Vendedor";
         }
 

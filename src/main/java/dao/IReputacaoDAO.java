@@ -17,7 +17,7 @@ import model.Reputacao;
 public interface IReputacaoDAO {
     public void criar(Reputacao reputacao) throws SQLException;
     public Optional<Reputacao> buscaPorPerfil(Perfil perfil) throws SQLException;
-    public Optional<List<Reputacao>> buscaTodos() throws SQLException;
+    public List<Reputacao> buscaTodos() throws SQLException;
     public void atualizar(Reputacao reputacao) throws SQLException;
     public void deletar(Integer id) throws SQLException;
 }

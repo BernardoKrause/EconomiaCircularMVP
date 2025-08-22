@@ -16,9 +16,8 @@ import dao.sqlite.PerfilVendedorDAOSQLite;
 import dao.sqlite.UsuarioDAOSQLite;
 import dao.IDenunciaDAO;
 import dao.IItemDAO;
-import dao.IPerfilCompradorDAO;
+import dao.IPerfilDAO;
 import dao.IPerfilSolicitacaoDAO;
-import dao.IPerfilVendedorDAO;
 import dao.IReputacaoDAO;
 import dao.IUsuarioDAO;
 import dao.sqlite.ReputacaoDAOSQLite;
@@ -45,7 +44,7 @@ public class SQLiteDAOFactory extends IDAOFactory {
     }
 
     @Override
-    public IPerfilCompradorDAO getPerfilCompradorDAO() {
+    public IPerfilDAO getPerfilCompradorDAO() {
         return new PerfilCompradorDAOSQLite();
     }
 
@@ -55,7 +54,7 @@ public class SQLiteDAOFactory extends IDAOFactory {
     }
 
     @Override
-    public IPerfilVendedorDAO getPerfilVendedorDAO() {
+    public IPerfilDAO getPerfilVendedorDAO() {
         return new PerfilVendedorDAOSQLite();
     }
 

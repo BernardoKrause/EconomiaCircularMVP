@@ -6,47 +6,53 @@ package repository.database;
 
 import factory.dao.IDAOFactory;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import model.Perfil;
 import model.Vendedor;
 import repository.IPerfilRepository;
-import dao.IPerfilVendedorDAO;
+import dao.IPerfilDAO;
+import java.util.stream.Collectors;
 
 /**
  *
  * @author berna
  */
 public class PerfilVendedorRepository implements IPerfilRepository{
-    private final IPerfilVendedorDAO perfilVendedorDAO;
+    private final IPerfilDAO perfilVendedorDAO;
 
     public PerfilVendedorRepository(IDAOFactory daoFactory) throws SQLException {
        this.perfilVendedorDAO = daoFactory.getPerfilVendedorDAO();
     }
     
     @Override
-    public void salvarPerfil(Perfil perfil) throws SQLException {
+    public void adicionarPerfil(Perfil perfil) throws SQLException {
         perfilVendedorDAO.criar((Vendedor)perfil);
     }
     
+    // implementar update
+    
     @Override
-    public Optional<Perfil> getPorIdUsuario(Integer id) throws SQLException {
+    public Optional<Perfil> buscarPorIdUsuario(Integer id) throws SQLException {
         Perfil perfilAchado = perfilVendedorDAO.buscaPorIdUsuario(id).get();
         return Optional.of(perfilAchado);
     }
     
     @Override
-    public Optional<List<Perfil>> getTodosPerfils() throws SQLException {
-        List<Perfil> perfilsAchados = new ArrayList<>();
-        for (Perfil v:perfilVendedorDAO.buscaTodos()){
-            perfilsAchados.add(v);
-        }
-        return Optional.of(perfilsAchados);
+    public List<Perfil> buscarTodosPerfis() throws SQLException {
+        List<Perfil> vendedores = perfilVendedorDAO.buscaTodos();
+        return vendedores.stream()
+                .map(comprador -> (Perfil) comprador)
+                .collect(Collectors.toList());
     }
     
     @Override
-    public void deletaPerfil(Integer id) throws SQLException {
+    public void atualizarPerfil (Perfil perfil) throws SQLException {
+        perfilVendedorDAO.atualizar((Vendedor)perfil);
+    }
+    
+    @Override
+    public void deletarPerfil(Integer id) throws SQLException {
         perfilVendedorDAO.deletar(id);
     }
     
