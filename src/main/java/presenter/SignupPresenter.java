@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
-import model.Usuario;
+
 import service.UsuarioService;
 import view.usuario.SignupView;
 
@@ -16,18 +16,19 @@ import view.usuario.SignupView;
  *
  * @author caiof
  */
-public class SignupPresenter implements IPresenter{
+public class SignupPresenter extends AbstractPresenter {
 
-    private SignupView view;
+    private SignupView signupView;
     private UsuarioService service;
     
     public SignupPresenter(UsuarioService service){
         this.service=service;
-        view = new SignupView();
+        signupView = new SignupView();
         
-        view.setVisible(false);
+        signupView.setVisible(false);
     
-        view.getBtnCadastrar().addActionListener(new ActionListener(){
+        resetButtonActions(signupView.getBtnCadastrar());
+        signupView.getBtnCadastrar().addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 try{
@@ -38,7 +39,8 @@ public class SignupPresenter implements IPresenter{
             }
         });
         
-        view.getBtnCancelar().addActionListener(new ActionListener() {
+        resetButtonActions(signupView.getBtnCancelar());
+        signupView.getBtnCancelar().addActionListener(new ActionListener() {
            @Override
            public  void actionPerformed(ActionEvent e) {
                try {
@@ -49,30 +51,26 @@ public class SignupPresenter implements IPresenter{
            }
         });
         
-        view.setVisible(true);
-    }
-    
-    @Override
-    public JInternalFrame getView() {
-        return view;
+        signupView.setVisible(true);
+        view=signupView;
     }
     
     private void cadastrar(){
-        String nome = view.getTxtNome().getText();
-        String email = view.getTxtEmail().getText();
-        String telefone = view.getTxtTelefone().getText();
-        String senha = view.getTxtSenha().getText();
+        String nome = signupView.getTxtNome().getText();
+        String email = signupView.getTxtEmail().getText();
+        String telefone = signupView.getTxtTelefone().getText();
+        String senha = signupView.getTxtSenha().getText();
         
         try {
             service.cadastrarUsuario(nome, email, telefone, senha);
-            JOptionPane.showMessageDialog(view, "Usuario cadastrado com sucesso!");
-            view.dispose();
+            JOptionPane.showMessageDialog(signupView, "Usuario cadastrado com sucesso!");
+            GerenciadorTelas.getInstancia().removeTelaAberta("signup");
         } catch (Exception ex) {
             throw new RuntimeException(ex.getMessage());
         }
     }
     
     public void cancelar() {
-        view.dispose();
+        GerenciadorTelas.getInstancia().removeTelaAberta("signup");
     }
 }

@@ -12,6 +12,9 @@ import factory.repository.SeletorRepositoryFactory;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Usuario;
 import presenter.HomePresenter;
@@ -21,13 +24,9 @@ import repository.IPerfilRepository;
  *
  * @author caiof
  */
-public class AutenticadoState extends HomePresenterState{
-    private Usuario usuario;
-    
-    public AutenticadoState(HomePresenter presenter, Usuario usuario) {
-        super(presenter);
-        
-        this.usuario=usuario;
+public class AutenticadoState extends HomePresenterState{    
+    public AutenticadoState(HomePresenter presenter, Usuario usuarioAutenticado) {
+        super(presenter, usuarioAutenticado);
         
         setVisibles();
             
@@ -90,10 +89,6 @@ public class AutenticadoState extends HomePresenterState{
         view.setVisible(true);
     }
     
-    @Override
-    public void sairUsuario(){
-        new SairUsuarioCommand().executar();
-    }
     
     @Override
     public void criarPerfilVendedor() throws SQLException {

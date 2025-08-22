@@ -10,6 +10,7 @@ import java.util.Optional;
 import model.Item;
 import model.Perfil;
 import model.Vendedor;
+import presenter.GerenciadorTelas;
 
 /**
  *
@@ -26,14 +27,14 @@ public class AbrirItensPublicadosCommand extends ItemCommand{
      */
     @Override
     public void executar() throws SQLException {
-        Optional<List<Item>> listaItens;
+        Optional<List<Item>> listaItens = Optional.empty();
+        String tipoTela="Comprador";
         if(perfil.isVendedor()){
             listaItens=itemService.getItensVendedor((Vendedor)perfil);
-        }
-        else{
-            listaItens=Optional.empty();
+            tipoTela="Vendedor";
         }
         presenter.showItens(listaItens);
+        GerenciadorTelas.getInstancia().addTelaAberta(tipoTela, "VerItens", presenter);
         desktop.add(presenter.getView());    
     }
     

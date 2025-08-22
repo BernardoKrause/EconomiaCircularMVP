@@ -56,7 +56,6 @@ public class UsuarioRepositoryTeste implements IUsuarioRepository{
     @Override
     public void atualizaUsuario(Usuario usuario) throws SQLException {
         for(Usuario usuarioExistente : usuariosCadastrados){
-            System.out.println(usuario.getId() +"--"+ usuarioExistente.getId());
             if(usuarioExistente.getId().equals(usuario.getId())){
                 System.out.println(usuarioExistente.getPerfilVendedor());
                 usuarioExistente.copy(usuario);

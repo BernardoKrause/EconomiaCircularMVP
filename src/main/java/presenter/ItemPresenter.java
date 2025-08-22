@@ -37,11 +37,12 @@ import view.item.ShowItensView;
  *
  * @author caiof
  */
-public class ItemPresenter implements IPresenter{
-    
-    private JInternalFrame view;
+public class ItemPresenter extends AbstractPresenter {
+
     private ItemService itemService;
     private Perfil perfil;
+    private String tipoTela;
+    private String nomeTela;
 
     public ItemPresenter(ItemService itemService, Perfil perfil) throws SQLException{
         this.itemService=itemService;
@@ -50,6 +51,13 @@ public class ItemPresenter implements IPresenter{
     
     public void createItem() throws SQLException{
         FormItemView formView = new FormItemView();
+        tipoTela = "Vendedor";
+        nomeTela = "CriarItem";
+
+        
+        resetButtonActions(formView.getBtnPublicar());
+        resetButtonActions(formView.getBtnCancelar());
+
         formView.setVisible(false);
         formView.getBtnPublicar().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
@@ -72,9 +80,13 @@ public class ItemPresenter implements IPresenter{
            }
         });
         
-         JComboBox comboBoxTipo = formView.getCbTipos();
+        JComboBox comboBoxTipo = formView.getCbTipos();
         for (String tipo : itemService.getListaTiposItem()) {
             comboBoxTipo.addItem(tipo);
+        }
+
+        for(ActionListener al : comboBoxTipo.getActionListeners()) {
+            comboBoxTipo.removeActionListener(al);
         }
 
         comboBoxTipo.addActionListener(e -> {
@@ -165,9 +177,13 @@ public class ItemPresenter implements IPresenter{
     }
 
     public void showItens(Optional<List<Item>> listaExistente){
+        tipoTela="Comprador";
+        nomeTela = "VerItens";
         ShowItensView itensView = new ShowItensView();
         itensView.setVisible(false);
-        
+
+        resetButtonActions(itensView.getBtnFechar());
+
         itensView.getBtnFechar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -181,12 +197,12 @@ public class ItemPresenter implements IPresenter{
         
         List<Item> itens;
         
-        if (listaExistente.isEmpty()){
-            itens = itemService.getItens(); 
-        }
-        else{
+        itens = itemService.getItens(); 
+        if (!listaExistente.isEmpty()){
             itens=listaExistente.get();
+            tipoTela="Vendedor";
         }
+
 
         DefaultTableModel model = new DefaultTableModel(
         new Object[]{"Tipo", "Subcategoria", "Tamanho", "Cor", "Preço Final", "ID Vendedor", "Ações"},
@@ -245,9 +261,7 @@ public class ItemPresenter implements IPresenter{
                 String tipoMaterial = panel.getLblMaterial().getText();
                 Double percentual =  Double.valueOf(panel.getNumPercentual().getValue().toString());
                 Double fatorMaterial = itemService.getFatorMaterial(tipoMaterial);
-
                 
-                System.out.println(porcentagemTotal);
                 porcentagemTotal += percentual;
                 if(percentual != 0.0){
                     composicao.add(new Material(tipoMaterial, fatorMaterial, percentual / 100)); 
@@ -275,18 +289,14 @@ public class ItemPresenter implements IPresenter{
         
         try{;
             itemService.criar(item, defeitos, (Vendedor)perfil);
-            formView.dispose();
+            GerenciadorTelas.getInstancia().removeTelaAberta(nomeTela);
         } catch (Exception ex) {
             throw new RuntimeException(ex.getMessage());
         }
     }
     
     public void cancelar() {
-        view.dispose();
+        GerenciadorTelas.getInstancia().removeTelaAberta(nomeTela);
     }
-    
-    @Override
-    public JInternalFrame getView(){
-        return view;
-    }
+
 }

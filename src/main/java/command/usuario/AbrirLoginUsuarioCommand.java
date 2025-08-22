@@ -30,6 +30,7 @@ public class AbrirLoginUsuarioCommand implements ICommand {
         IUsuarioRepository usuarioRepository = SeletorRepositoryFactory.obterInstancia().criarUsuarioRepository();
         UsuarioService usuarioService = new UsuarioService(usuarioRepository);
         LoginPresenter loginPresenter = new LoginPresenter(usuarioService);
+        GerenciadorTelas.getInstancia().addTelaAberta("Usuario", "login", loginPresenter);
         desktop.add(loginPresenter.getView());
     }
 }

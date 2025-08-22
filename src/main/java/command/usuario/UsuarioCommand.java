@@ -6,6 +6,7 @@ package command.usuario;
 
 import command.ICommand;
 import javax.swing.JDesktopPane;
+import model.Usuario;
 import presenter.GerenciadorTelas;
 
 /**
@@ -14,9 +15,15 @@ import presenter.GerenciadorTelas;
  */
 public abstract class UsuarioCommand implements ICommand{
     protected JDesktopPane desktop;
+    protected Usuario usuario;
 
     public UsuarioCommand() {
         this.desktop = GerenciadorTelas.getInstancia().getDesktop();
+    }
+    
+    public UsuarioCommand(Usuario usuario) {
+        this.desktop = GerenciadorTelas.getInstancia().getDesktop();
+        this.usuario=usuario;
     }
     
 }

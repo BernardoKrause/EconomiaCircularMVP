@@ -6,6 +6,7 @@ package command.item;
 
 import java.sql.SQLException;
 import model.Perfil;
+import presenter.GerenciadorTelas;
 
 /**
  *
@@ -23,6 +24,7 @@ public class AbrirCadastroItemCommand extends ItemCommand{
     @Override
     public void executar() throws SQLException {
         presenter.createItem();
+        GerenciadorTelas.getInstancia().addTelaAberta("Vendedor", "CriarItem", presenter);
         desktop.add(presenter.getView());    
     }
     

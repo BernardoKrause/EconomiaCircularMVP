@@ -19,6 +19,7 @@ import view.PerfilView;
  */
 public class VendedorPresenter extends PerfilPresenter{
     private Vendedor vendedor;
+    private PerfilView perfilView;
     
     public VendedorPresenter(Perfil vendedor, PerfilService service) throws SQLException{
         super(vendedor,service);
@@ -26,12 +27,14 @@ public class VendedorPresenter extends PerfilPresenter{
     }
 
     @Override
-    public void setButtons(PerfilView perfilView) {
+    public void setButtons(PerfilView perfilViewPassada) {
         view.setTitle("Meu Perfil - Vendedor");
+        this.perfilView=perfilViewPassada;
         
         perfilView.getBtnFunc1().setText("Ofertas");
         perfilView.getBtnFunc2().setText("Itens");
         
+        resetButtonActions(perfilView.getBtnFunc1());
         perfilView.getBtnFunc1().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -43,6 +46,7 @@ public class VendedorPresenter extends PerfilPresenter{
            }
         });
         
+        resetButtonActions(perfilView.getBtnFunc2());
         perfilView.getBtnFunc2().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

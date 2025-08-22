@@ -4,9 +4,12 @@
  */
 package presenter;
 
-import java.util.HashMap;
-import java.util.Map;
+import factory.repository.SeletorRepositoryFactory;
+import java.sql.SQLException;
+import java.util.*;
 import javax.swing.JDesktopPane;
+import model.Usuario;
+import view.HomeView;
 
 /**
  *
@@ -16,9 +19,11 @@ public class GerenciadorTelas {
     private static GerenciadorTelas instancia;
     private HomePresenter home;
     private Map<String, IPresenter> telasAbertas;
+    private Map<String, Map<String, IPresenter>> telasTipo;
     
     private GerenciadorTelas(){
         telasAbertas = new HashMap<>();
+        telasTipo=new HashMap<>();
     }
     
     public static GerenciadorTelas getInstancia(){
@@ -38,5 +43,39 @@ public class GerenciadorTelas {
     
     public HomePresenter getPresenter(){
         return home;
+    }
+
+    public void addTelaAberta(String telaTipo,String nomeTela, IPresenter presenter){
+
+        telasAbertas.put(nomeTela,presenter);
+        telasTipo.put(telaTipo, telasAbertas);
+    };
+
+    public void removeTelaAberta(String nomeTela){
+        telasAbertas.get(nomeTela).getView().dispose();
+        telasAbertas.remove(nomeTela);
+    }
+
+    public void removeTelasTipo(String nomeTipo){
+        for(String nomeTela : telasTipo.get(nomeTipo).keySet()){
+            removeTelaAberta(nomeTela);
+        }
+
+        telasTipo.get(nomeTipo).clear();
+    }
+
+    public void sairAutenticado(Usuario usuario) throws SQLException{
+        usuario.setAutenticado(false);
+        SeletorRepositoryFactory.obterInstancia().criarUsuarioRepository().atualizaUsuario(usuario);
+
+        for(String tipoTela : telasTipo.keySet()){
+            removeTelasTipo(tipoTela);
+        }
+        telasTipo.clear();
+
+        home.getView().dispose();
+        home.setView(new HomeView());
+
+        home.sairUsuario();
     }
 }

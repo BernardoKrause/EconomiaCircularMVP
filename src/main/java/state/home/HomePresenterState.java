@@ -4,7 +4,11 @@
  */
 package state.home;
 
+import command.usuario.SairUsuarioCommand;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Usuario;
 import presenter.HomePresenter;
 import view.HomeView;
 
@@ -13,11 +17,15 @@ import view.HomeView;
  * @author caiof
  */
 public abstract class HomePresenterState {
-    protected HomePresenter presenter;
     protected HomeView view;
+    protected Usuario usuario;
     
     public HomePresenterState(HomePresenter presenter){
-        this.presenter=presenter;
+        view = presenter.getView();
+    }
+    
+    public HomePresenterState(HomePresenter presenter, Usuario usuario){
+        this.usuario=usuario;
         view = presenter.getView();
     }
     
@@ -30,7 +38,11 @@ public abstract class HomePresenterState {
     }
     
     public void sairUsuario(){
-        throw new RuntimeException("Não é possivel salvar estando nesse estado!");
+        try {
+            new SairUsuarioCommand(usuario).executar();
+        } catch (SQLException ex) {
+            Logger.getLogger(AutenticadoState.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void criarPerfilVendedor() throws SQLException {

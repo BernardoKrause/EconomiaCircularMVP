@@ -5,6 +5,7 @@
 package command.usuario;
 
 import factory.repository.SeletorRepositoryFactory;
+import presenter.GerenciadorTelas;
 import presenter.SignupPresenter;
 import repository.IUsuarioRepository;
 import service.UsuarioService;
@@ -23,7 +24,10 @@ public class AbrirSignupUsuarioCommand extends UsuarioCommand {
     public void executar() {
         IUsuarioRepository usuarioRepository = SeletorRepositoryFactory.obterInstancia().criarUsuarioRepository();
         UsuarioService usuarioService = new UsuarioService(usuarioRepository);
-        SignupPresenter signupPresenter = new SignupPresenter(usuarioService);    
+        SignupPresenter signupPresenter = new SignupPresenter(usuarioService);
+        String telaTipo="Usuario";
+        String nomeTela="signup";
+        GerenciadorTelas.getInstancia().addTelaAberta(telaTipo, nomeTela, signupPresenter);    
         desktop.add(signupPresenter.getView());
     }
 }
