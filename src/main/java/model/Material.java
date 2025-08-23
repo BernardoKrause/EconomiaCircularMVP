@@ -9,16 +9,27 @@ package model;
  * @author caiof
  */
 
-// implementar o dao de material, o percentual item tem que ficar na tabela item_materiais
 public class Material {
+    private Integer id;
     private String tipo;
     private Double fatorEmissao;
     private Double percentualItem;
     
     public Material(String tipo, Double fator, Double percentual){
-        this.tipo=tipo;
-        this.fatorEmissao=fator;
-        this.percentualItem=percentual;
+        this.tipo = tipo;
+        this.fatorEmissao = fator;
+        this.percentualItem = percentual;
+    }
+    
+    public Material(Integer id, String tipo, Double fator, Double percentual){
+        this.id = id;
+        this.tipo = tipo;
+        this.fatorEmissao = fator;
+        this.percentualItem = percentual;
+    }
+    
+    public Integer getId() {
+        return id;
     }
 
     public String getTipo() {

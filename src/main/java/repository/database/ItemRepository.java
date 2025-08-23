@@ -12,6 +12,7 @@ import model.Item;
 import model.Vendedor;
 import repository.IItemRepository;
 import dao.IItemDAO;
+import dao.IMaterialDAO;
 import model.Material;
 
 /**
@@ -20,9 +21,11 @@ import model.Material;
  */
 public class ItemRepository implements IItemRepository{
     private IItemDAO itemDAO;
+    private IMaterialDAO materialDAO;
 
     public ItemRepository(IDAOFactory daoFactory) throws SQLException {
         this.itemDAO = daoFactory.getItemDAO();
+        this.materialDAO = daoFactory.getMaterialDAO();
     }
 
     @Override
@@ -53,16 +56,18 @@ public class ItemRepository implements IItemRepository{
     }
 
     @Override
-    public Double buscarFatorEmissaoMaterial(String nomeMaterial) {
-        //implementar
-        // puxar da tabela materiais
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Double buscarFatorEmissaoMaterial(String nomeMaterial) throws SQLException {
+        return materialDAO.buscaFatorEmissao(nomeMaterial).get();
     }
 
     @Override
-    public Optional<List<Item>> buscarTodos() {
-        //implementar
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<Item> buscarTodos() throws SQLException {
+        return itemDAO.buscaTodos();
+    }
+    
+    @Override
+    public List<Material> buscarMaterialPorTipoItem(String tipo) throws SQLException {
+        return materialDAO.buscaPorTipoItem(tipo);
     }
 
     @Override
@@ -70,8 +75,4 @@ public class ItemRepository implements IItemRepository{
         itemDAO.atualizar(item);
     }
 
-    @Override
-    public List<Material> buscarMaterialItem() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

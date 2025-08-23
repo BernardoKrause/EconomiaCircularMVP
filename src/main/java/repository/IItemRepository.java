@@ -19,7 +19,7 @@ public interface IItemRepository {
     
     public void adicionarItem(Item item) throws SQLException;
     
-    public Optional<List<Item>> buscarTodos();
+    public List<Item> buscarTodos() throws SQLException;
 
     public List<Item> buscarPorVendedor(Vendedor vendedor);
     
@@ -31,10 +31,9 @@ public interface IItemRepository {
     public List<String> buscarTiposItem() throws SQLException;
 
     //Decisão de arquitetura de projeto
-    // vai ser List<Material>
-    public List<Material> buscarMaterialItem();
+    public List<Material> buscarMaterialPorTipoItem(String tipo) throws SQLException;
 
-    public Double buscarFatorEmissaoMaterial(String nomeMaterial);
+    public Double buscarFatorEmissaoMaterial(String nomeMaterial) throws SQLException;
     
     public void atualizarItem(Item item) throws SQLException;
 }
