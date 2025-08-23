@@ -95,7 +95,7 @@ public class ItemPresenter extends AbstractPresenter {
                 formView.getSTamanho().setValue(1);
                 formView.getTxtCor().setText("");
 
-                List<Material> materiais = itemService.getListaMateriaisComposicao();
+                List<Material> materiais = itemService.getListaMateriaisComposicao(tipoSelecionado);
                 DefaultListModel<MaterialComposicao> modelMaterial = new DefaultListModel<>();
 
                 for(Material material : materiais){
@@ -174,7 +174,7 @@ public class ItemPresenter extends AbstractPresenter {
         this.view=formView;
     }
 
-    public void showItens(List<Item> listaExistente){
+    public void showItens(List<Item> listaExistente) throws Exception{
         tipoTela="Comprador";
         nomeTela = "VerItens";
         ShowItensView itensView = new ShowItensView();
@@ -235,7 +235,7 @@ public class ItemPresenter extends AbstractPresenter {
         this.view=itensView;
     }
     
-    public void publicar(){
+    public void publicar() throws Exception{
         FormItemView formView = (FormItemView)view;
         String tipo = String.valueOf(formView.getCbTipos().getSelectedItem());
         String subcategoria = formView.getTxtSubcategoria().getText();

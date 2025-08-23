@@ -45,8 +45,13 @@ public class ItemService {
         }
     }
     
-    public List<Item> getItens(){
-        return itemRepository.buscarTodos().get();
+    public List<Item> getItens() throws Exception{
+        try {
+            return itemRepository.buscarTodos();
+        } catch (Exception ex) {
+            throw ex;
+        }
+        
     }
     
     public List<Item> getItensVendedor(Vendedor vendedor){
@@ -67,14 +72,23 @@ public class ItemService {
         return tiposDefeitoRepository.buscarPorTipo(tipo);
     }
     
-    public List<Material> getListaMateriaisComposicao(){
-        if(itemRepository.buscarMaterialItem().isEmpty()){
-            throw new IllegalArgumentException("Lista de Tipos de material está vazia!");
+    public List<Material> getListaMateriaisComposicao(String tipo) throws Exception{
+        try {
+            if(itemRepository.buscarMaterialPorTipoItem(tipo).isEmpty()){
+                throw new IllegalArgumentException("Lista de Tipos de material está vazia!");
+            }
+            return itemRepository.buscarMaterialPorTipoItem(tipo);    
+        } catch (Exception ex) {
+            throw ex;
         }
-        return itemRepository.buscarMaterialItem();
+        
     }
     
-    public Double getFatorMaterial(String nomeMaterial){
-        return itemRepository.buscarFatorEmissaoMaterial(nomeMaterial);
+    public Double getFatorMaterial(String nomeMaterial) throws Exception{
+        try {
+            return itemRepository.buscarFatorEmissaoMaterial(nomeMaterial);            
+        } catch (Exception ex) {
+            throw ex;
+        }
     }
 }

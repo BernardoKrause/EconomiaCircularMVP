@@ -8,6 +8,7 @@ import dao.ICondutaDAO;
 import dao.IDefeitoDAO;
 import dao.IDenunciaDAO;
 import dao.IItemDAO;
+import dao.IMaterialDAO;
 import dao.IPerfilDAO;
 import dao.IPerfilSolicitacaoDAO;
 import dao.IReputacaoDAO;
@@ -27,6 +28,7 @@ public abstract class IDAOFactory {
     public abstract IReputacaoDAO getReputacaoDAO();
     public abstract IUsuarioDAO getUsuarioDAO();
     public abstract IDefeitoDAO getDefeitoDAO();
+    public abstract IMaterialDAO getMaterialDAO();
     
     public static IDAOFactory getDAOFactory(String sgbd) {
         if (sgbd.equalsIgnoreCase("SQLite")) {

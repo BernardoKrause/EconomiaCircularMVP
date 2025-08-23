@@ -16,10 +16,12 @@ import dao.sqlite.PerfilVendedorDAOSQLite;
 import dao.sqlite.UsuarioDAOSQLite;
 import dao.IDenunciaDAO;
 import dao.IItemDAO;
+import dao.IMaterialDAO;
 import dao.IPerfilDAO;
 import dao.IPerfilSolicitacaoDAO;
 import dao.IReputacaoDAO;
 import dao.IUsuarioDAO;
+import dao.sqlite.MaterialDAOSQLite;
 import dao.sqlite.ReputacaoDAOSQLite;
 
 /**
@@ -71,6 +73,11 @@ public class SQLiteDAOFactory extends IDAOFactory {
     @Override
     public IDefeitoDAO getDefeitoDAO() {
         return new DefeitoDAOSQLite();
+    }
+
+    @Override
+    public IMaterialDAO getMaterialDAO() {
+        return new MaterialDAOSQLite();
     }
     
 }

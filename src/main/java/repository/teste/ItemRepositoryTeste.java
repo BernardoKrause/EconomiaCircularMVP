@@ -34,8 +34,8 @@ public class ItemRepositoryTeste implements IItemRepository{
     }
     
     @Override
-    public Optional<List<Item>> buscarTodos(){
-        return Optional.of(itensPublicados);
+    public List<Item> buscarTodos(){
+        return itensPublicados;
     }
 
     public List<Item> buscarPorVendedor(Vendedor vendedor){
@@ -80,7 +80,7 @@ public class ItemRepositoryTeste implements IItemRepository{
     }
 
     @Override
-    public List<Material> buscarMaterialItem() {
+    public List<Material> buscarMaterialPorTipoItem(String tipo) {
         List<Material> lista = new ArrayList<>();
 
         lista.add(new Material("Algodão", 10.0, 10.0));
@@ -112,5 +112,6 @@ public class ItemRepositoryTeste implements IItemRepository{
     public void atualizarItem(Item item) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
 }
 
