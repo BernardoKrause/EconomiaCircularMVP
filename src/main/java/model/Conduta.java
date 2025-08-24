@@ -23,7 +23,7 @@ public class Conduta {
         this.valorEstrela = valorEstrelas;
     }
 
-    public Conduta(String descricao, String tipo, String tipoperfil, Double valorEstrelas) {
+    public Conduta(String descricao, String tipo, String tipoPerfil, Double valorEstrelas) {
         this.tipo = tipo;
         this.descricao = descricao;
         this.tipoPerfil = tipoPerfil;

@@ -45,6 +45,7 @@ public abstract class ItemCommand implements ICommand{
         CalcularGPWService sistemaGPW = new CalcularGPWService();
         this.itemService = new ItemService(sysDefeito, tiposDefeitosRepo, sistemaGPW);
         this.presenter=new ItemPresenter(itemService, perfil);
+
     }
 
     /**

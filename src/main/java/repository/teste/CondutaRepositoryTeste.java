@@ -48,7 +48,7 @@ public class CondutaRepositoryTeste implements ICondutaRepository{
         List<Conduta> lista = new ArrayList<>();
         for(Conduta c:condutasReputacaoCadastradas){
             for(Conduta cRep:reputacao.getCondutas()){
-                if(c.equals(cRep) && c.getTipo().equals(tipo)){
+                if(c.equals(cRep) && cRep.getTipo().equals(tipo)){
                     lista.add(cRep);
                 }
             }
@@ -58,7 +58,8 @@ public class CondutaRepositoryTeste implements ICondutaRepository{
 
     @Override
     public void adicionarConduta(Reputacao reputacao, Conduta conduta) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        condutasReputacaoCadastradas.add(conduta);
+
     }
 
 }

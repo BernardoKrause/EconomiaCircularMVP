@@ -56,9 +56,7 @@ public class UsuarioRepositoryTeste implements IUsuarioRepository{
     public void atualizarUsuario(Usuario usuario) throws SQLException {
         for(Usuario usuarioExistente : usuariosCadastrados){
             if(usuarioExistente.getId().equals(usuario.getId())){
-                System.out.println(usuarioExistente.getPerfilVendedor());
                 usuarioExistente.copy(usuario);
-                System.out.println(usuarioExistente.getPerfilVendedor());
             }
         }
     }

@@ -27,6 +27,7 @@ import model.Material;
 import model.Perfil;
 import model.Vendedor;
 import service.ItemService;
+import service.PerfilService;
 import view.item.FormItemView;
 import view.item.MaterialComposicao;
 import view.item.ShowItensView;
@@ -38,6 +39,7 @@ import view.item.ShowItensView;
 public class ItemPresenter extends AbstractPresenter {
 
     private ItemService itemService;
+    PerfilService perfilService;
     private Perfil perfil;
     private String tipoTela;
     private String nomeTela;
@@ -47,7 +49,8 @@ public class ItemPresenter extends AbstractPresenter {
         this.perfil = perfil;
     }
     
-    public void createItem() throws SQLException{
+    public void createItem(PerfilService perfilService) throws SQLException{
+        this.perfilService = perfilService;
         FormItemView formView = new FormItemView();
         tipoTela = "Vendedor";
         nomeTela = "CriarItem";
@@ -62,7 +65,7 @@ public class ItemPresenter extends AbstractPresenter {
                 try{
                     publicar();
                 }catch (Exception ex){
-                    JOptionPane.showMessageDialog(formView, ex);
+                    JOptionPane.showMessageDialog(formView, "Erro ao Atualizar reputacao "+ex);
                 }
             }
         });
@@ -286,11 +289,12 @@ public class ItemPresenter extends AbstractPresenter {
         
         Item item = new Item(tipo,subcategoria,tamanho,cor,peso,composicao,precoBase);
         
-        try{;
+        try{
             itemService.criar(item, defeitos, (Vendedor)perfil);
+            perfilService.atualizarReputacao(perfil, "Cadastro de item completo");
             GerenciadorTelas.getInstancia().removeTelaAberta(nomeTela);
         } catch (Exception ex) {
-            throw new RuntimeException(ex.getMessage());
+            throw new RuntimeException("Erro ao criar item"+ex.getMessage());
         }
     }
     

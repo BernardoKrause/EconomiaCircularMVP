@@ -13,7 +13,7 @@ import model.Usuario;
  *
  * @author caiof
  */
-public interface IUsuarioRepository {
+ public interface IUsuarioRepository {
     public void adicionarUsuario(String nome, String email, String telefone, String senha, boolean isAdmin) throws SQLException;
 
     public Optional<Usuario> buscarUsuario(String id) throws SQLException ;

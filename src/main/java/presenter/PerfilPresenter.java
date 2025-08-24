@@ -34,7 +34,6 @@ public abstract class PerfilPresenter extends AbstractPresenter {
         this.service=service;
         this.perfil=perfil;
         service.completarPerfil(this.perfil);
-        System.out.println(this.perfil.getId());
     }
     
     public void verPerfil() throws SQLException{    
@@ -46,15 +45,13 @@ public abstract class PerfilPresenter extends AbstractPresenter {
         perfilView.getTxtEstrelas().setText(String.valueOf(perfil.getReputacao().getEstrelas()));
         perfilView.getTxtBeneficio().setText(String.valueOf(perfil.getReputacao().getBeneficio()));
         
-        
         JList<JButton> listaInsignias = perfilView.getLInsignias();
-        criarListaCondutas("INSIGNIA",listaInsignias);
+        criarListaCondutas("Insignia",listaInsignias);
         perfilView.getSpInsignias().setViewportView(listaInsignias);
         
         JList<JButton> listaMedalhas = perfilView.getLMedalhas();
-        criarListaCondutas("MEDALHA",listaMedalhas);
+        criarListaCondutas("Medalha",listaMedalhas);
         perfilView.getSpMedalhas().setViewportView(listaMedalhas);
-
 
         resetButtonActions(perfilView.getBtnFechar());
         perfilView.getBtnFechar().addActionListener(new ActionListener() {
@@ -82,13 +79,17 @@ public abstract class PerfilPresenter extends AbstractPresenter {
     }
     
     public void criarListaCondutas(String tipo, JList<JButton> listaCondutas) throws SQLException{
-        List<Conduta> condutas = service.getListaCondutasTipo(perfil,tipo);
+        final List<Conduta> condutas = service.getListaCondutasTipo(perfil,tipo);
+        if(condutas.isEmpty()){
+            listaCondutas.setVisible(false);
+        }
+        
         DefaultListModel<JButton> model = new DefaultListModel<>();
-        Integer contadorInsignia = 0;
+        Integer contadorConduta = 0;
         
         for (Conduta conduta:condutas) {
-            contadorInsignia++;
-            JButton button = new JButton(String.valueOf(contadorInsignia));
+            contadorConduta++;
+            JButton button = new JButton(String.valueOf(contadorConduta));
             model.addElement(button);
         }
 
@@ -119,7 +120,7 @@ public abstract class PerfilPresenter extends AbstractPresenter {
             public void mouseClicked(MouseEvent e) {
                 int index = listaCondutas.locationToIndex(e.getPoint());
                 try {
-                    JOptionPane.showMessageDialog(view, (condutas.get(index).toString()));
+                    JOptionPane.showMessageDialog(view, condutas.get(index));
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(view, ex);
                 }

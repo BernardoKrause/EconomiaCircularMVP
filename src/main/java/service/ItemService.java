@@ -37,11 +37,9 @@ public class ItemService {
             sistemaGPW.calcularGPW(item);
             vendedor.publicarItem(item);
             item.gerarIdC(itemRepository.buscarQuantidadeItens());
-            System.out.print(item.toString());
             itemRepository.adicionarItem(item);
         } catch (SQLException ex) {
-            ex.printStackTrace();
-            throw ex;
+            throw new RuntimeException("Erro ao criar item" + ex);
         }
     }
     
