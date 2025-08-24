@@ -15,7 +15,7 @@ import strategy.sistemaResputacao.insignias.InsigniaVendedorPorItem;
  *
  * @author caiof
  */
-public abstract class MetodoInsignia implements IMetodoReputacao{    
+public class MetodoInsignia implements IMetodoReputacao{    
     protected Conduta conduta;
     private List<MetodoInsignia> tiposInsignias;
     protected String nomeConduta;
@@ -27,9 +27,9 @@ public abstract class MetodoInsignia implements IMetodoReputacao{
     
     @Override
     public void aplicarReputacao(Perfil perfil){
-        for(MetodoInsignia metodo : tiposInsignias){
-            for(Integer cont=0; cont<metodo.getRepeticoes(); cont++){
-                if(metodo.seAplica(perfil)){
+        for(MetodoInsignia regra : tiposInsignias){
+            for(Integer cont=0; cont<regra.getRepeticoes(); cont++){
+                if(regra.seAplica(perfil)){
                     conduta = new Conduta(nomeConduta, getTipoConduta(), "Vendedor", 0.2);
                     perfil.getReputacao().addConduta(conduta);
                 }
@@ -40,5 +40,15 @@ public abstract class MetodoInsignia implements IMetodoReputacao{
     @Override
     public String getTipoConduta(){
         return("Insignia");
+    }
+    
+    @Override
+    public boolean seAplica(Perfil perfil){
+        throw new RuntimeException("metodo não pode ser executado!");
+    }
+    
+    @Override
+    public Integer getRepeticoes(){
+        throw new RuntimeException("metodo não pode ser executado!");
     }
 }

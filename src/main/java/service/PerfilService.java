@@ -6,6 +6,7 @@ package service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 import model.Conduta;
 import model.Perfil;
 import model.Reputacao;
@@ -22,11 +23,13 @@ public abstract class PerfilService {
     protected IReputacaoRepository reputacaoRepository;
     protected ICondutaRepository condutaRepository;
     protected IUsuarioRepository usuarioRepository;
+    protected SistemaReputacaoService sysReputacaoService;
     
     public PerfilService(IReputacaoRepository reputacaoRepository,ICondutaRepository condutaRepository, IUsuarioRepository usuarioRepository){
         this.reputacaoRepository=reputacaoRepository;
         this.condutaRepository=condutaRepository;
         this.usuarioRepository=usuarioRepository;
+        this.sysReputacaoService=new SistemaReputacaoService(condutaRepository, reputacaoRepository);
     }
     
     public abstract void criar(Usuario usuario) throws SQLException;
@@ -41,5 +44,12 @@ public abstract class PerfilService {
     public List<Conduta> getListaCondutasTipo(Perfil perfil, String tipo) throws SQLException{
         Reputacao reputacao = reputacaoRepository.buscarReputacao(perfil).get();
         return condutaRepository.buscarCondutasPorTipo(reputacao, tipo);
+    }
+    
+    public void atualizarReputacao(Perfil perfil) throws SQLException{
+        sysReputacaoService.atualizarReputacao(perfil, Optional.empty());
+    }
+    public void atualizarReputacao(Perfil perfil, String nomeConduta) throws SQLException{
+        sysReputacaoService.atualizarReputacao(perfil, Optional.of(nomeConduta));
     }
 }

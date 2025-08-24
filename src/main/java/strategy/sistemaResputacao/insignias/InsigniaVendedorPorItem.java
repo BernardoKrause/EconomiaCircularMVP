@@ -36,7 +36,7 @@ public class InsigniaVendedorPorItem extends MetodoInsignia{
         boolean aplica=false;
         for(String tipo : regraConduta.keySet()){
             for(Conduta condutaAnalisada : condutas){
-                if(condutaAnalisada.getDescricao().equalsIgnoreCase(tipo) && itemRepo.BuscarPorVendedor((Vendedor) perfil).get().size() > tipoConduta.get(tipo)){
+                if(condutaAnalisada.getDescricao().equalsIgnoreCase(tipo) && itemRepo.buscarPorVendedor((Vendedor) perfil).size() > tipoConduta.get(tipo)){
                     aplica=false;
                     break;
                 }

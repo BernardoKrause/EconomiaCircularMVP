@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Item;
 import model.Perfil;
 import model.Vendedor;
@@ -34,7 +36,11 @@ public class AbrirItensPublicadosCommand extends ItemCommand{
             listaItens=itemService.getItensVendedor((Vendedor)perfil);
             tipoTela="Vendedor";
         }
-        presenter.showItens(listaItens);
+        try {
+            presenter.showItens(listaItens);
+        } catch (Exception ex) {
+            Logger.getLogger(AbrirItensPublicadosCommand.class.getName()).log(Level.SEVERE, null, ex);
+        }
         GerenciadorTelas.getInstancia().addTelaAberta(tipoTela, "VerItens", presenter);
         desktop.add(presenter.getView());    
     }

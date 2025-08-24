@@ -79,6 +79,7 @@ public class Reputacao {
 
     public void addConduta(Conduta conduta) {
         condutas.add(conduta);
+        estrelas+=conduta.getValorEstrela();
     }
 
     public void copy(Reputacao reputacao) {
