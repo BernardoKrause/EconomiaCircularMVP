@@ -23,7 +23,7 @@ public class AbrirCadastroItemCommand extends ItemCommand{
      */
     @Override
     public void executar() throws SQLException {
-        presenter.createItem();
+        presenter.createItem(service);
         GerenciadorTelas.getInstancia().addTelaAberta("Vendedor", "CriarItem", presenter);
         desktop.add(presenter.getView());    
     }

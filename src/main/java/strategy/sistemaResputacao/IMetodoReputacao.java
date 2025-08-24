@@ -4,6 +4,8 @@
  */
 package strategy.sistemaResputacao;
 
+import java.util.Optional;
+import model.Conduta;
 import model.Perfil;
 
 /**
@@ -11,7 +13,7 @@ import model.Perfil;
  * @author caiof
  */
 public interface IMetodoReputacao {
-    void aplicarReputacao(Perfil perfil);
+    Optional<Conduta> aplicarReputacao(Perfil perfil);
     boolean seAplica(Perfil perfil);
     String getTipoConduta();
     Integer getRepeticoes();

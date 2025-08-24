@@ -32,6 +32,7 @@ public class SistemaReputacaoService {
     
     public SistemaReputacaoService(ICondutaRepository condutaRepo, IReputacaoRepository reputacaoRepo){
         this.condutaRepo=condutaRepo;
+        this.reputacaoRepo=reputacaoRepo;
         condutasPorPerfil = new HashMap<>();
         condutasRecorrentesVendedor = new HashMap<>();
         condutasRecorrentesComprador = new HashMap<>();
@@ -59,9 +60,11 @@ public class SistemaReputacaoService {
             aplicarConduta(perfil,nomeConduta.get());
         }
         for(IMetodoReputacao metodo : metodos){
-            metodo.aplicarReputacao(perfil);
+            Conduta conduta = metodo.aplicarReputacao(perfil).get();
+            perfil.getReputacao().addConduta(conduta);
+            condutaRepo.adicionarConduta(perfil.getReputacao(), conduta);
+            reputacaoRepo.atualizarReputacao(perfil.getReputacao());
         }
-        reputacaoRepo.atualizarReputacao(perfil.getReputacao());
     }
     
     private void aplicarConduta(Perfil perfil, String nomeConduta) throws SQLException{
@@ -76,5 +79,6 @@ public class SistemaReputacaoService {
         Conduta conduta = new Conduta(nomeConduta, tipoConduta, tipoPerfil, condutasPorPerfil.get(tipoPerfil).get(nomeConduta));
         perfil.getReputacao().addConduta(conduta);
         condutaRepo.adicionarConduta(perfil.getReputacao(), conduta);
+        reputacaoRepo.atualizarReputacao(perfil.getReputacao());
     }
 }

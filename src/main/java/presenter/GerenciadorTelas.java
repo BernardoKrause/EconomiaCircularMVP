@@ -52,26 +52,31 @@ public class GerenciadorTelas {
     };
 
     public void removeTelaAberta(String nomeTela){
-        telasAbertas.get(nomeTela).getView().dispose();
-        telasAbertas.remove(nomeTela);
+        if(telasAbertas.get(nomeTela)!=null){
+            telasAbertas.get(nomeTela).getView().dispose(); 
+            telasAbertas.remove(nomeTela);
+        }
     }
 
     public void removeTelasTipo(String nomeTipo){
-        for(String nomeTela : telasTipo.get(nomeTipo).keySet()){
-            removeTelaAberta(nomeTela);
-        }
-
+        if(telasTipo.get(nomeTipo) != null){    
+            for(String nomeTela : telasTipo.get(nomeTipo).keySet()){
+                removeTelaAberta(nomeTela);
+            }
         telasTipo.get(nomeTipo).clear();
+        }
     }
 
     public void sairAutenticado(Usuario usuario) throws SQLException{
         usuario.setAutenticado(false);
         SeletorRepositoryFactory.obterInstancia().criarUsuarioRepository().atualizarUsuario(usuario);
 
-        for(String tipoTela : telasTipo.keySet()){
-            removeTelasTipo(tipoTela);
+        if(telasTipo != null){
+            for(String tipoTela : telasTipo.keySet()){
+                removeTelasTipo(tipoTela);
+            }
+            telasTipo.clear();
         }
-        telasTipo.clear();
 
         home.getView().dispose();
         home.setView(new HomeView());

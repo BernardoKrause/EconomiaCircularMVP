@@ -54,7 +54,11 @@ public class ReputacaoRepositoryTeste implements IReputacaoRepository{
 
     @Override
     public void atualizarReputacao(Reputacao reputacao) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        for(Reputacao r : reputacoes){
+            if(r.getId().equals(reputacao.getId())){
+                r=reputacao;
+            }
+        }
     }
 
     @Override

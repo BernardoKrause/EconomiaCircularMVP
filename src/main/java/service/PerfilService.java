@@ -49,6 +49,7 @@ public abstract class PerfilService {
     public void atualizarReputacao(Perfil perfil) throws SQLException{
         sysReputacaoService.atualizarReputacao(perfil, Optional.empty());
     }
+    
     public void atualizarReputacao(Perfil perfil, String nomeConduta) throws SQLException{
         sysReputacaoService.atualizarReputacao(perfil, Optional.of(nomeConduta));
     }
