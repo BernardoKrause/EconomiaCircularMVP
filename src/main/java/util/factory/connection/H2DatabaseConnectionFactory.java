@@ -35,6 +35,12 @@ public class H2DatabaseConnectionFactory implements DatabaseConnectionFactory {
     private static void setupDatabase() {
         String[] ddlQueries = {
                 """
+                CREATE TABLE IF NOT EXISTS tipos (
+                    idTipo INT PRIMARY KEY AUTOINCREMENT,
+                    descricao VARCHAR(45)
+                );
+                """,
+                """
                 CREATE TABLE IF NOT EXISTS reputacoes (
                     idReputacao INT PRIMARY KEY AUTO_INCREMENT,
                     estrelas DOUBLE,
@@ -96,26 +102,28 @@ public class H2DatabaseConnectionFactory implements DatabaseConnectionFactory {
                 CREATE TABLE IF NOT EXISTS itens (
                     idItem INT PRIMARY KEY AUTO_INCREMENT,
                     idC VARCHAR(45) UNIQUE,
-                    tipo VARCHAR(45),
                     subcategoria VARCHAR(45),
                     tamanho VARCHAR(45),
                     cor VARCHAR(45),
-                    peso DOUBLE,
-                    composicao VARCHAR(255),
-                    precoBase DOUBLE,
-                    precoFinal DOUBLE,
-                    gpwEvitado DOUBLE,
-                    mciItem DOUBLE,
+                    peso REAL,
+                    precoBase REAL,
+                    precoFinal REAL,
+                    gpwEvitado REAL,
+                    mciItem REAL,
                     numeroCiclo INT,
                     idPerfilVendedor INT,
-                    FOREIGN KEY (idPerfilVendedor) REFERENCES vendedores(idPerfilVendedor)
+                    idTipo INTEGER,
+                    FOREIGN KEY (idPerfilVendedor) REFERENCES vendedores(idPerfilVendedor),
+                    FOREIGN KEY (idTipo) REFERENCES tipos(idTipo)
                 );
                 """,
                 """
                 CREATE TABLE IF NOT EXISTS defeitos (
                     idDefeito INT PRIMARY KEY AUTO_INCREMENT,
-                    descricao VARCHAR(255),
-                    percentualDesconto DOUBLE
+                    descricao VARCHAR(45),
+                    percentualDesconto REAL,
+                    idTipo INT,
+                    FOREIGN KEY (idTipo) REFERENCES tipos(idTipo)
                 );
                 """,
                 """

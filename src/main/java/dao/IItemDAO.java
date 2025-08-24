@@ -18,6 +18,8 @@ public interface IItemDAO {
     public void criar(Item item) throws SQLException;
     public List<Item> buscaTodos() throws SQLException;
     public Optional<Item> buscaPorId(Integer id) throws SQLException;
+    public List<String> buscaTipos(String idC) throws SQLException;
     public void atualizar(Item item) throws SQLException;
     public void deletar(Integer id) throws SQLException;
+    public Integer buscaIdTipo (String descricao) throws SQLException;
 }

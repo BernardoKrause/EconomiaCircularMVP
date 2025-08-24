@@ -34,7 +34,11 @@ public class AbrirItensPublicadosCommand extends ItemCommand{
             listaItens=itemService.getItensVendedor((Vendedor)perfil);
             tipoTela="Vendedor";
         }
-        presenter.showItens(listaItens);
+        try {
+            presenter.showItens(listaItens);
+        } catch (Exception ex) {
+            System.getLogger(AbrirItensPublicadosCommand.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
         GerenciadorTelas.getInstancia().addTelaAberta(tipoTela, "VerItens", presenter);
         desktop.add(presenter.getView());    
     }

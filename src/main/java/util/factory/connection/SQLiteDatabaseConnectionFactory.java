@@ -32,6 +32,12 @@ public class SQLiteDatabaseConnectionFactory implements DatabaseConnectionFactor
     private static void setupDatabase() {
         String[] ddlQueries = {
                 """
+                CREATE TABLE IF NOT EXISTS tipos (
+                    idTipo INTEGER PRIMARY KEY AUTOINCREMENT,
+                    descricao TEXT
+                );
+                """,
+                """
                 CREATE TABLE IF NOT EXISTS condutas (
                     idConduta INTEGER PRIMARY KEY AUTOINCREMENT,
                     tipoConduta TEXT,
@@ -93,26 +99,28 @@ public class SQLiteDatabaseConnectionFactory implements DatabaseConnectionFactor
                 CREATE TABLE IF NOT EXISTS itens (
                     idItem INTEGER PRIMARY KEY AUTOINCREMENT,
                     idC TEXT UNIQUE,
-                    tipo TEXT,
                     subcategoria TEXT,
                     tamanho TEXT,
                     cor TEXT,
                     peso REAL,
-                    composicao TEXT,
                     precoBase REAL,
                     precoFinal REAL,
                     gpwEvitado REAL,
                     mciItem REAL,
                     numeroCiclo INTEGER,
                     idPerfilVendedor INTEGER,
-                    FOREIGN KEY (idPerfilVendedor) REFERENCES vendedores(idPerfilVendedor)
+                    idTipo INTEGER,
+                    FOREIGN KEY (idPerfilVendedor) REFERENCES vendedores(idPerfilVendedor),
+                    FOREIGN KEY (idTipo) REFERENCES tipos(idTipo)
                 );
                 """,
                 """
                 CREATE TABLE IF NOT EXISTS defeitos (
                     idDefeito INTEGER PRIMARY KEY AUTOINCREMENT,
                     descricao TEXT,
-                    percentualDesconto REAL
+                    percentualDesconto REAL,
+                    idTipo INTEGER,
+                    FOREIGN KEY (idTipo) REFERENCES tipos(idTipo)
                 );
                 """,
                 """
@@ -128,7 +136,7 @@ public class SQLiteDatabaseConnectionFactory implements DatabaseConnectionFactor
                 """
                 CREATE TABLE IF NOT EXISTS materiais (
                     idMaterial INTEGER PRIMARY KEY AUTOINCREMENT,
-                    descricao VARCHAR(45)
+                    descricao TEXT
                 );
                 """,
                 """
