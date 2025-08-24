@@ -96,7 +96,6 @@ public class AutenticadoState extends HomePresenterState{
         new CriarPerfilVendedorCommand(usuario,perfilRepository).executar();
         view.getMItemAcessarPerfilVendedor().setVisible(true); 
         view.getMItemCriarPerfilVendedor().setVisible(false); 
-        JOptionPane.showMessageDialog(view, "Solicitação enviada ao administrador");
     }
     
     @Override
@@ -111,7 +110,6 @@ public class AutenticadoState extends HomePresenterState{
 //        new CriarPerfilCompradorCommand(usuario,perfilRepository).executar();
 //        view.getMItemAcessarPerfilComprador().setVisible(true); 
 //        view.getMItemCriarPerfilComprador().setVisible(false); 
-//        JOptionPane.showMessageDialog(view, "Solicitação enviada ao administrador");
     }
     
     @Override

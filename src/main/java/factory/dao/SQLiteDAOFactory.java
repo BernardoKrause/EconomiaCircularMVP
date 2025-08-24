@@ -11,14 +11,12 @@ import dao.ICondutaDAO;
 import dao.IDefeitoDAO;
 import dao.sqlite.ItemDAOSQLite;
 import dao.sqlite.PerfilCompradorDAOSQLite;
-import dao.sqlite.PerfilSolicitacaoDAOSQLite;
 import dao.sqlite.PerfilVendedorDAOSQLite;
 import dao.sqlite.UsuarioDAOSQLite;
 import dao.IDenunciaDAO;
 import dao.IItemDAO;
 import dao.IMaterialDAO;
 import dao.IPerfilDAO;
-import dao.IPerfilSolicitacaoDAO;
 import dao.IReputacaoDAO;
 import dao.IUsuarioDAO;
 import dao.sqlite.MaterialDAOSQLite;
@@ -48,11 +46,6 @@ public class SQLiteDAOFactory extends IDAOFactory {
     @Override
     public IPerfilDAO getPerfilCompradorDAO() {
         return new PerfilCompradorDAOSQLite();
-    }
-
-    @Override
-    public IPerfilSolicitacaoDAO getPerfilSolicitacaoDAO() {
-        return new PerfilSolicitacaoDAOSQLite();
     }
 
     @Override

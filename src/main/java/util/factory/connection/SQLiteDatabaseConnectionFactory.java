@@ -88,14 +88,6 @@ public class SQLiteDatabaseConnectionFactory implements DatabaseConnectionFactor
                 );
                 """,
                 """
-                CREATE TABLE IF NOT EXISTS perfil_solicitacoes (
-                    idSolicitacaoPerfil INTEGER PRIMARY KEY AUTOINCREMENT,
-                    idUsuario INTEGER,
-                    status TEXT NOT NULL,
-                    FOREIGN KEY (idUsuario) REFERENCES usuarios(idUsuario)
-                );
-                """,
-                """
                 CREATE TABLE IF NOT EXISTS itens (
                     idItem INTEGER PRIMARY KEY AUTOINCREMENT,
                     idC TEXT UNIQUE,
