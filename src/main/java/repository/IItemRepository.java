@@ -28,7 +28,7 @@ public interface IItemRepository {
     public Integer buscarQuantidadeItens() throws SQLException ;
     
     //Decisão de arquitetura de projeto
-    public List<String> buscarTiposItem() throws SQLException;
+    public List<String> buscarTiposItem(String idC) throws SQLException;
 
     //Decisão de arquitetura de projeto
     public List<Material> buscarMaterialPorTipoItem(String tipo) throws SQLException;
