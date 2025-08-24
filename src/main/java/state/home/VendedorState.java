@@ -122,7 +122,6 @@ public class VendedorState extends HomePresenterState{
 //        new CriarPerfilCompradorCommand(usuario,perfilRepository).executar();
 //        view.getMItemAcessarPerfilComprador().setVisible(true); 
 //        view.getMItemCriarPerfilComprador().setVisible(false); 
-//        JOptionPane.showMessageDialog(view, "Solicitação enviada ao administrador");
     }
     
     @Override

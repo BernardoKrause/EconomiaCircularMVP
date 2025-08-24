@@ -10,7 +10,6 @@ import dao.IDenunciaDAO;
 import dao.IItemDAO;
 import dao.IMaterialDAO;
 import dao.IPerfilDAO;
-import dao.IPerfilSolicitacaoDAO;
 import dao.IReputacaoDAO;
 import dao.IUsuarioDAO;
 
@@ -23,7 +22,6 @@ public abstract class IDAOFactory {
     public abstract IDenunciaDAO getDenunciaDAO();
     public abstract IItemDAO getItemDAO();
     public abstract IPerfilDAO getPerfilCompradorDAO();
-    public abstract IPerfilSolicitacaoDAO getPerfilSolicitacaoDAO();
     public abstract IPerfilDAO getPerfilVendedorDAO();
     public abstract IReputacaoDAO getReputacaoDAO();
     public abstract IUsuarioDAO getUsuarioDAO();

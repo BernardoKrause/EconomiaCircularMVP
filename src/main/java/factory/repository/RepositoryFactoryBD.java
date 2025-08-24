@@ -12,7 +12,6 @@ import repository.ICondutaRepository;
 import repository.IDefeitosTipoRepository;
 import repository.IDenunciaRepository;
 import repository.IItemRepository;
-import repository.IPerfilSolicitacaoRepository;
 import repository.IPerfilRepository;
 import repository.IReputacaoRepository;
 import repository.IUsuarioRepository;
@@ -20,7 +19,6 @@ import repository.database.CondutaRepository;
 import repository.database.DefeitosTipoRepository;
 import repository.database.DenunciaRepository;
 import repository.database.ItemRepository;
-import repository.database.PerfilSolicitacaoRepository;
 import repository.database.PerfilVendedorRepository;
 import repository.database.ReputacaoRepository;
 import repository.database.UsuarioRepository;
@@ -56,17 +54,7 @@ public class RepositoryFactoryBD implements IRepositoryFactory{
         }
         return null;
     }
-
-    @Override
-    public IPerfilSolicitacaoRepository criarPerfilSolicitacaoRepository() {
-        try {
-            return new PerfilSolicitacaoRepository(daoFactory);
-        } catch (SQLException ex) {
-            Logger.getLogger(RepositoryFactoryBD.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
-
+    
     @Override
     public IItemRepository criarItemRepository() {
         try {

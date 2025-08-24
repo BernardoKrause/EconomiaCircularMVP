@@ -91,14 +91,6 @@ public class H2DatabaseConnectionFactory implements DatabaseConnectionFactory {
                 );
                 """,
                 """
-                CREATE TABLE IF NOT EXISTS perfil_solicitacoes (
-                    idSolicitacaoPerfil INT PRIMARY KEY AUTO_INCREMENT,
-                    idUsuario INT,
-                    status VARCHAR(45) NOT NULL,
-                    FOREIGN KEY (idUsuario) REFERENCES usuarios(idUsuario)
-                );
-                """,
-                """
                 CREATE TABLE IF NOT EXISTS itens (
                     idItem INT PRIMARY KEY AUTO_INCREMENT,
                     idC VARCHAR(45) UNIQUE,

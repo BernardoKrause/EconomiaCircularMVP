@@ -8,7 +8,6 @@ import repository.ICondutaRepository;
 import repository.IDefeitosTipoRepository;
 import repository.IDenunciaRepository;
 import repository.IItemRepository;
-import repository.IPerfilSolicitacaoRepository;
 import repository.IReputacaoRepository;
 import repository.IUsuarioRepository;
 import repository.IPerfilRepository;
@@ -20,7 +19,6 @@ import repository.IPerfilRepository;
 public interface IRepositoryFactory {
     IUsuarioRepository criarUsuarioRepository();
     IPerfilRepository criarPerfilVendedorRepository();
-    IPerfilSolicitacaoRepository criarPerfilSolicitacaoRepository();
     IItemRepository criarItemRepository();
     IDenunciaRepository criarDenunciaRepository();
     IDefeitosTipoRepository criarDefeitosTipoRepository();
