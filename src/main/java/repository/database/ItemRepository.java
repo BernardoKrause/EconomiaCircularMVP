@@ -49,10 +49,8 @@ public class ItemRepository implements IItemRepository{
     }
 
     @Override
-    public List<String> buscarTiposItem() {
-        //implementar
-        // puxar da tabela item_tipos
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<String> buscarTiposItem(String idC) throws SQLException {
+        return itemDAO.buscaTipos(idC);
     }
 
     @Override

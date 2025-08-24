@@ -81,6 +81,7 @@ public class ItemPresenter extends AbstractPresenter {
            }
         });
         
+        // precisa de um parametro pra informar o item
         JComboBox comboBoxTipo = formView.getCbTipos();
         for (String tipo : itemService.getListaTiposItem()) {
             comboBoxTipo.addItem(tipo);

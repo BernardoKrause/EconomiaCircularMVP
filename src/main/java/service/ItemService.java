@@ -56,11 +56,11 @@ public class ItemService {
         return itemRepository.buscarPorVendedor(vendedor);
     }
     
-    public List<String> getListaTiposItem() throws SQLException{
-        if(itemRepository.buscarTiposItem().isEmpty()){
+    public List<String> getListaTiposItem(String idC) throws SQLException{
+        if(itemRepository.buscarTiposItem(idC).isEmpty()){
             throw new IllegalArgumentException("Lista de Tipos está vazia!");
         }
-        return itemRepository.buscarTiposItem();
+        return itemRepository.buscarTiposItem(idC);
     }
     
     public List<String> getListaDefeitosExistentes(String tipo) throws SQLException{
