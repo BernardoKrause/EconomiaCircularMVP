@@ -15,7 +15,7 @@ import model.Reputacao;
  * @author caiof
  */
 public interface ICondutaRepository {
-    public void salvarConduta(Reputacao reputacao, Conduta conduta) throws SQLException;
-    public Optional<List<Conduta>> getCondutasPorTipo(Reputacao reputacao, String tipo) throws SQLException;
-    public Optional<List<Conduta>> getTodasCondutas(Reputacao reputacao) throws SQLException;
+    public void adicionarConduta(Reputacao reputacao, Conduta conduta) throws SQLException;
+    public List<Conduta> buscarCondutasPorTipo(Reputacao reputacao, String tipo) throws SQLException;
+    public List<Conduta> buscarTodasCondutas(Reputacao reputacao) throws SQLException;
 }

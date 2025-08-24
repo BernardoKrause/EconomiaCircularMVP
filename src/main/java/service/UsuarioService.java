@@ -23,7 +23,7 @@ public class UsuarioService {
     public void cadastrarUsuario(String nome, String email, String telefone, String senha) throws SQLException {
         boolean isAdmin = usuarioRepository.totalUsuarios() == 0;
         try {
-            usuarioRepository.adicionaUsuario(nome, email, telefone, senha, isAdmin);
+            usuarioRepository.adicionarUsuario(nome, email, telefone, senha, isAdmin);
         } catch (SQLException ex) {
             throw ex;
         }
@@ -32,7 +32,7 @@ public class UsuarioService {
     public void autenticarUsuario (Usuario usuario) throws SQLException {
         Optional<Usuario> optUsuario;
         try {
-            optUsuario = usuarioRepository.getUsuarioPorEmail(usuario.getEmail());
+            optUsuario = usuarioRepository.buscarUsuarioPorEmail(usuario.getEmail());
         } catch (SQLException ex) {
             throw ex;
         }

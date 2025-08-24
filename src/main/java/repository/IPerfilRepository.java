@@ -14,11 +14,13 @@ import model.Perfil;
  * @author caiof
  */
 public interface IPerfilRepository{
-    public void salvarPerfil(Perfil perfil) throws SQLException ;
+    public void adicionarPerfil(Perfil perfil) throws SQLException;
     
-    public Optional<Perfil> getPorIdUsuario(Integer id) throws SQLException;
+    public Optional<Perfil> buscarPorIdUsuario(Integer id) throws SQLException;
     
-    public Optional<List<Perfil>> getTodosPerfils() throws SQLException ;
+    public List<Perfil> buscarTodosPerfis() throws SQLException;
     
-    public void deletaPerfil(Integer id) throws SQLException ;
+    public void atualizarPerfil (Perfil perfil) throws SQLException;
+    
+    public void deletarPerfil(Integer id) throws SQLException;
 }

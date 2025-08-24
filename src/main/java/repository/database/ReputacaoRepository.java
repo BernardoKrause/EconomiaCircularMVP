@@ -25,17 +25,17 @@ public class ReputacaoRepository implements IReputacaoRepository{
     }
     
     @Override
-    public void salvarReputacao(Reputacao reputacao) throws SQLException {
+    public void adicionarReputacao(Reputacao reputacao) throws SQLException {
         reputacaoDAO.criar(reputacao);
     }
     
     @Override
-    public Optional<Reputacao> getReputacao(Perfil perfil) throws SQLException {
+    public Optional<Reputacao> buscarReputacao(Perfil perfil) throws SQLException {
         return reputacaoDAO.buscaPorPerfil(perfil);
     }
 
     @Override
-    public Optional<List<Reputacao>> getTodos() throws SQLException {
+    public List<Reputacao> buscarTodos() throws SQLException {
         return reputacaoDAO.buscaTodos();
     }
 

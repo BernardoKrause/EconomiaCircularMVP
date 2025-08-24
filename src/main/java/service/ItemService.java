@@ -6,10 +6,9 @@ package service;
 
 import factory.repository.SeletorRepositoryFactory;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import model.Item;
+import model.Material;
 import model.Vendedor;
 import repository.IItemRepository;
 import repository.teste.DefeitosTipoRepositoryTeste;
@@ -37,45 +36,59 @@ public class ItemService {
             sistemaDefeitos.AplicarDefeitos(item, defeitos);
             sistemaGPW.calcularGPW(item);
             vendedor.publicarItem(item);
-            item.gerarIdC(itemRepository.getQuantidadeItens());
+            item.gerarIdC(itemRepository.buscarQuantidadeItens());
             System.out.print(item.toString());
-            itemRepository.salvarItem(item);
+            itemRepository.adicionarItem(item);
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw ex;
         }
     }
     
-    public List<Item> getItens(){
-        return itemRepository.buscarTodos().get();
+    public List<Item> getItens() throws Exception{
+        try {
+            return itemRepository.buscarTodos();
+        } catch (Exception ex) {
+            throw ex;
+        }
+        
     }
     
-    public Optional<List<Item>> getItensVendedor(Vendedor vendedor){
-        return itemRepository.BuscarPorVendedor(vendedor);
+    public List<Item> getItensVendedor(Vendedor vendedor){
+        return itemRepository.buscarPorVendedor(vendedor);
     }
     
     public List<String> getListaTiposItem() throws SQLException{
-        if(itemRepository.getTiposItem().isEmpty()){
+        if(itemRepository.buscarTiposItem().isEmpty()){
             throw new IllegalArgumentException("Lista de Tipos está vazia!");
         }
-        return itemRepository.getTiposItem().get();
+        return itemRepository.buscarTiposItem();
     }
     
     public List<String> getListaDefeitosExistentes(String tipo) throws SQLException{
-        if(tiposDefeitoRepository.BuscarPorTipo(tipo).isEmpty()){
+        if(tiposDefeitoRepository.buscarPorTipo(tipo).isEmpty()){
             throw new IllegalArgumentException("Lista de Defeitos está vazia!");
         }   
-        return tiposDefeitoRepository.BuscarPorTipo(tipo).get();
+        return tiposDefeitoRepository.buscarPorTipo(tipo);
     }
     
-    public List<String> getListaMateriaisComposicao(){
-        if(itemRepository.getTiposMaterial().isEmpty()){
-            throw new IllegalArgumentException("Lista de Tipos de material está vazia!");
+    public List<Material> getListaMateriaisComposicao(String tipo) throws Exception{
+        try {
+            if(itemRepository.buscarMaterialPorTipoItem(tipo).isEmpty()){
+                throw new IllegalArgumentException("Lista de Tipos de material está vazia!");
+            }
+            return itemRepository.buscarMaterialPorTipoItem(tipo);    
+        } catch (Exception ex) {
+            throw ex;
         }
-        return itemRepository.getTiposMaterial().get();
+        
     }
     
-    public Double getFatorMaterial(String nomeMaterial){
-        return itemRepository.getFatorEmissaoMaterial(nomeMaterial);
+    public Double getFatorMaterial(String nomeMaterial) throws Exception{
+        try {
+            return itemRepository.buscarFatorEmissaoMaterial(nomeMaterial);            
+        } catch (Exception ex) {
+            throw ex;
+        }
     }
 }

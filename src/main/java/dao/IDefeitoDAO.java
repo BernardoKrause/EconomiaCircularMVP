@@ -15,4 +15,5 @@ import model.Defeito;
 public interface IDefeitoDAO {
     public void criar(Defeito defeito) throws SQLException;
     public List<Defeito> buscaTodos() throws SQLException;
+    public List<Defeito> buscaDefeitosItem(Integer idItem) throws SQLException;
 }

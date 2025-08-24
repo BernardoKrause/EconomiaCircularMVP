@@ -31,7 +31,7 @@ public class UsuarioRepositoryTeste implements IUsuarioRepository{
     }
 
     @Override
-    public void adicionaUsuario(String nome, String email, String telefone, String senha, boolean isAdmin) throws SQLException {
+    public void adicionarUsuario(String nome, String email, String telefone, String senha, boolean isAdmin) throws SQLException {
         Usuario u = new Usuario(nome, email, telefone, senha);
         u.setAdmin(isAdmin);
         u.setId(usuariosCadastrados.size());
@@ -39,7 +39,7 @@ public class UsuarioRepositoryTeste implements IUsuarioRepository{
     }
 
     @Override
-    public Optional<Usuario> getUsuario(String id) throws SQLException {
+    public Optional<Usuario> buscarUsuario(String id) throws SQLException {
         for(Usuario u : usuariosCadastrados){
             if(u.getId().equalsIgnoreCase(id)){
                 return Optional.of(u);
@@ -49,12 +49,11 @@ public class UsuarioRepositoryTeste implements IUsuarioRepository{
     }
 
     @Override
-    public List<Usuario> getTodosUsuarios() throws SQLException {
+    public List<Usuario> buscarTodosUsuarios() throws SQLException {
         return usuariosCadastrados;
     }
 
-    @Override
-    public void atualizaUsuario(Usuario usuario) throws SQLException {
+    public void atualizarUsuario(Usuario usuario) throws SQLException {
         for(Usuario usuarioExistente : usuariosCadastrados){
             if(usuarioExistente.getId().equals(usuario.getId())){
                 System.out.println(usuarioExistente.getPerfilVendedor());
@@ -65,7 +64,7 @@ public class UsuarioRepositoryTeste implements IUsuarioRepository{
     }
 
     @Override
-    public void deletaUsuario(String id) throws SQLException {
+    public void deletarUsuario(String id) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -75,7 +74,7 @@ public class UsuarioRepositoryTeste implements IUsuarioRepository{
     }
 
     @Override
-    public Optional<Usuario> getUsuarioPorEmail(String email) throws SQLException {
+    public Optional<Usuario> buscarUsuarioPorEmail(String email) throws SQLException {
         for(Usuario u : usuariosCadastrados){
             if(email.equals(u.getEmail())){
                 return Optional.of(u);
@@ -83,4 +82,5 @@ public class UsuarioRepositoryTeste implements IUsuarioRepository{
         }
         return Optional.empty();
     }
+
 }

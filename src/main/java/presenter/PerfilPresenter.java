@@ -82,7 +82,7 @@ public abstract class PerfilPresenter extends AbstractPresenter {
     }
     
     public void criarListaCondutas(String tipo, JList<JButton> listaCondutas) throws SQLException{
-        List<Conduta> condutas = service.getListaCondutasTipo(perfil,tipo).get();
+        List<Conduta> condutas = service.getListaCondutasTipo(perfil,tipo);
         DefaultListModel<JButton> model = new DefaultListModel<>();
         Integer contadorInsignia = 0;
         

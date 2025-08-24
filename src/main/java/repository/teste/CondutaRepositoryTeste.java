@@ -8,10 +8,8 @@ import java.sql.SQLException;
 import model.Conduta;
 import model.Reputacao;
 import repository.ICondutaRepository;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  *
@@ -33,7 +31,7 @@ public class CondutaRepositoryTeste implements ICondutaRepository{
     }
 
     @Override
-    public Optional<List<Conduta>> getTodasCondutas(Reputacao reputacao) {
+    public List<Conduta> buscarTodasCondutas(Reputacao reputacao) {
         List<Conduta> lista = new ArrayList<>();
         for(Conduta c:condutasReputacaoCadastradas){
             for(Conduta cRep:reputacao.getCondutas()){
@@ -42,11 +40,11 @@ public class CondutaRepositoryTeste implements ICondutaRepository{
                 }
             }
         }
-        return Optional.of(lista);
+        return lista;
     }
 
     @Override
-    public Optional<List<Conduta>> getCondutasPorTipo(Reputacao reputacao, String tipo){
+    public List<Conduta> buscarCondutasPorTipo(Reputacao reputacao, String tipo){
         List<Conduta> lista = new ArrayList<>();
         for(Conduta c:condutasReputacaoCadastradas){
             for(Conduta cRep:reputacao.getCondutas()){
@@ -55,11 +53,11 @@ public class CondutaRepositoryTeste implements ICondutaRepository{
                 }
             }
         }
-        return Optional.of(lista);
+        return lista;
     }
 
     @Override
-    public void salvarConduta(Reputacao reputacao, Conduta conduta) throws SQLException {
+    public void adicionarConduta(Reputacao reputacao, Conduta conduta) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

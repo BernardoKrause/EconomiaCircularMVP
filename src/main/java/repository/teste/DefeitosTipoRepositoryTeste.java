@@ -2,7 +2,6 @@ package repository.teste;
 
 import java.sql.SQLException;
 import java.util.*;
-import model.Item;
 import repository.IDefeitosTipoRepository;
 
 public class DefeitosTipoRepositoryTeste implements IDefeitosTipoRepository{
@@ -50,19 +49,16 @@ public class DefeitosTipoRepositoryTeste implements IDefeitosTipoRepository{
     }
     
     @Override
-    public Optional<List<String>> BuscarPorTipo(String tipoItem) throws SQLException {
-        if(!tiposDefeito.containsKey(tipoItem)){
-            return Optional.empty();
-        }
+    public List<String> buscarPorTipo(String tipoItem) throws SQLException {
         List<String> listaDefeitos = new ArrayList<>();
         tiposDefeito.get(tipoItem).keySet().forEach(key -> {
             listaDefeitos.add(key);
         });
-        return Optional.of(listaDefeitos);
+        return listaDefeitos;
     }
 
     @Override
-    public Double getPercentualPorDefeito(String defeito) throws SQLException {
+    public Double buscarPercentualPorDefeito(String defeito) throws SQLException {
         String tipoItem;
         for(String tipo:tiposDefeito.keySet()){
             tipoItem=tipo;
@@ -75,13 +71,13 @@ public class DefeitosTipoRepositoryTeste implements IDefeitosTipoRepository{
     }
 
     @Override
-    public Optional<List<String>> getTiposItem() {
+    public List<String> buscarTiposItem() {
         List<String> tiposItem = new ArrayList<>();
         tiposItem.add("vestuario");
         tiposItem.add("calcado");
         tiposItem.add("bolsas e mochilas");
         tiposItem.add("bijuterias e acessorios");
         
-        return Optional.of(tiposItem);
+        return tiposItem;
     }
 }

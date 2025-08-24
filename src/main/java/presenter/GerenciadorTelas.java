@@ -66,7 +66,7 @@ public class GerenciadorTelas {
 
     public void sairAutenticado(Usuario usuario) throws SQLException{
         usuario.setAutenticado(false);
-        SeletorRepositoryFactory.obterInstancia().criarUsuarioRepository().atualizaUsuario(usuario);
+        SeletorRepositoryFactory.obterInstancia().criarUsuarioRepository().atualizarUsuario(usuario);
 
         for(String tipoTela : telasTipo.keySet()){
             removeTelasTipo(tipoTela);

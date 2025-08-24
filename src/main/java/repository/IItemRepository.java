@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import model.Item;
+import model.Material;
 import model.Vendedor;
 
 /**
@@ -16,22 +17,23 @@ import model.Vendedor;
  */
 public interface IItemRepository {
     
-    public Optional<List<Item>> buscarTodos();
+    public void adicionarItem(Item item) throws SQLException;
     
-    public Optional<List<Item>> BuscarPorVendedor(Vendedor vendedor);
+    public List<Item> buscarTodos() throws SQLException;
+
+    public List<Item> buscarPorVendedor(Vendedor vendedor);
     
-    public Optional<Item> BuscarPorId(Integer id) throws SQLException;
+    public Optional<Item> buscarPorId(Integer id) throws SQLException;
     
-    public Integer getQuantidadeItens() throws SQLException ;
-    
-    public void salvarItem(Item item) throws SQLException;
+    public Integer buscarQuantidadeItens() throws SQLException ;
     
     //Decisão de arquitetura de projeto
-    public Optional<List<String>> getTiposItem() throws SQLException;
+    public List<String> buscarTiposItem() throws SQLException;
 
     //Decisão de arquitetura de projeto
-    public Optional<List<String>> getTiposMaterial();
+    public List<Material> buscarMaterialPorTipoItem(String tipo) throws SQLException;
 
-    public Double getFatorEmissaoMaterial(String nomeMaterial);
-
+    public Double buscarFatorEmissaoMaterial(String nomeMaterial) throws SQLException;
+    
+    public void atualizarItem(Item item) throws SQLException;
 }

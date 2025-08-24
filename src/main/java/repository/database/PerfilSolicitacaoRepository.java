@@ -24,27 +24,27 @@ public class PerfilSolicitacaoRepository implements IPerfilSolicitacaoRepository
     }
 
     @Override
-    public void adicionaSolicitacao(Integer idUsuario) throws SQLException {
+    public void adicionarSolicitacao(Integer idUsuario) throws SQLException {
         perfilSolicitacaoDAO.criar(new SolicitacaoPerfil(idUsuario));
     }
 
     @Override
-    public List<SolicitacaoPerfil> getTodasSolicitacoes() throws SQLException {
+    public List<SolicitacaoPerfil> buscarTodasSolicitacoes() throws SQLException {
         return perfilSolicitacaoDAO.buscaTodos();
     }
     
     @Override
-    public List<SolicitacaoPerfil> getTodasSolicitacoesEmAguardo() throws SQLException {
+    public List<SolicitacaoPerfil> buscarTodasSolicitacoesEmAguardo() throws SQLException {
         return perfilSolicitacaoDAO.buscaEmAguardo();
     }
 
     @Override
-    public void atualizaSolicitacao(SolicitacaoPerfil solicitacaoAnalisada,String status) throws SQLException {
+    public void atualizarSolicitacao(SolicitacaoPerfil solicitacaoAnalisada,String status) throws SQLException {
         perfilSolicitacaoDAO.atualizar(new SolicitacaoPerfil(status));
     }
     
     @Override
-    public void deletaSolicitacao(Integer id) throws SQLException {
+    public void deletarSolicitacao(Integer id) throws SQLException {
         perfilSolicitacaoDAO.deletar(id);
     }
 }

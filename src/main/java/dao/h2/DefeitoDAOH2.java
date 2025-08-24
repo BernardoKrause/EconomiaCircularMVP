@@ -24,5 +24,10 @@ public class DefeitoDAOH2 implements IDefeitoDAO {
     public List<Defeito> buscaTodos() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public List<Defeito> buscaDefeitosItem(Integer idItem) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

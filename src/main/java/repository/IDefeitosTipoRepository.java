@@ -13,10 +13,10 @@ import java.util.Optional;
  * @author berna
  */
 public interface IDefeitosTipoRepository {
-    public Optional<List<String>> BuscarPorTipo(String tipoItem) throws SQLException;
+    public List<String> buscarPorTipo(String tipoItem) throws SQLException;
 
-    public Double getPercentualPorDefeito(String defeito) throws SQLException;    
+    public Double buscarPercentualPorDefeito(String defeito) throws SQLException;    
     
     //Decisão de arquitetura de projeto
-    public Optional<List<String>> getTiposItem() throws SQLException;
+    public List<String> buscarTiposItem() throws SQLException;
 }

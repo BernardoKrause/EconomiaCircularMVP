@@ -37,12 +37,12 @@ public class PerfilVendedorRepositoryTeste implements IPerfilRepository{
     }
 
     @Override
-    public void salvarPerfil(Perfil vendedor) throws SQLException {
+    public void adicionarPerfil(Perfil vendedor) throws SQLException {
         vendedoresCriados.add((Vendedor)vendedor);
     }
     
     @Override
-    public Optional<Perfil> getPorIdUsuario(Integer id) throws SQLException {
+    public Optional<Perfil> buscarPorIdUsuario(Integer id) throws SQLException {
         for (Vendedor v:vendedoresCriados){
             if(id.equals(v.getId())){
                 return Optional.of(v);
@@ -52,17 +52,22 @@ public class PerfilVendedorRepositoryTeste implements IPerfilRepository{
     }
     
     @Override
-    public Optional<List<Perfil>> getTodosPerfils() throws SQLException {
+    public List<Perfil> buscarTodosPerfis() throws SQLException {
         List<Perfil> vendedores = new ArrayList<>();
         for(Perfil v : vendedoresCriados){
             vendedores.add(v);
         }
-        return Optional.of(vendedores);
+        return vendedores;
     }
     
     @Override
-    public void deletaPerfil(Integer id) throws SQLException {
+    public void deletarPerfil(Integer id) throws SQLException {
         //nao tem
+    }
+
+    @Override
+    public void atualizarPerfil(Perfil perfil) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 

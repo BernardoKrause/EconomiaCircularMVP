@@ -8,9 +8,9 @@ import dao.ICondutaDAO;
 import dao.IDefeitoDAO;
 import dao.IDenunciaDAO;
 import dao.IItemDAO;
-import dao.IPerfilCompradorDAO;
+import dao.IMaterialDAO;
+import dao.IPerfilDAO;
 import dao.IPerfilSolicitacaoDAO;
-import dao.IPerfilVendedorDAO;
 import dao.IReputacaoDAO;
 import dao.IUsuarioDAO;
 
@@ -22,12 +22,13 @@ public abstract class IDAOFactory {
     public abstract ICondutaDAO getCondutaDAO();
     public abstract IDenunciaDAO getDenunciaDAO();
     public abstract IItemDAO getItemDAO();
-    public abstract IPerfilCompradorDAO getPerfilCompradorDAO();
+    public abstract IPerfilDAO getPerfilCompradorDAO();
     public abstract IPerfilSolicitacaoDAO getPerfilSolicitacaoDAO();
-    public abstract IPerfilVendedorDAO getPerfilVendedorDAO();
+    public abstract IPerfilDAO getPerfilVendedorDAO();
     public abstract IReputacaoDAO getReputacaoDAO();
     public abstract IUsuarioDAO getUsuarioDAO();
     public abstract IDefeitoDAO getDefeitoDAO();
+    public abstract IMaterialDAO getMaterialDAO();
     
     public static IDAOFactory getDAOFactory(String sgbd) {
         if (sgbd.equalsIgnoreCase("SQLite")) {

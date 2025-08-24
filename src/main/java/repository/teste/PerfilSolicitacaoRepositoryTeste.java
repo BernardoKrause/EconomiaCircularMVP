@@ -36,12 +36,12 @@ public class PerfilSolicitacaoRepositoryTeste implements IPerfilSolicitacaoRepos
     }
 
     @Override
-    public void adicionaSolicitacao(Integer idUsuario) throws SQLException {
+    public void adicionarSolicitacao(Integer idUsuario) throws SQLException {
         solicitacoes.add(new SolicitacaoPerfil("A", idUsuario));
     }
 
     @Override
-    public List<SolicitacaoPerfil> getTodasSolicitacoes() throws SQLException {
+    public List<SolicitacaoPerfil> buscarTodasSolicitacoes() throws SQLException {
         List<SolicitacaoPerfil> lista = null;
         for(SolicitacaoPerfil solicitacao : solicitacoes){
             lista.add(solicitacao);
@@ -50,7 +50,7 @@ public class PerfilSolicitacaoRepositoryTeste implements IPerfilSolicitacaoRepos
     }
     
     @Override
-    public List<SolicitacaoPerfil> getTodasSolicitacoesEmAguardo() throws SQLException {
+    public List<SolicitacaoPerfil> buscarTodasSolicitacoesEmAguardo() throws SQLException {
         List<SolicitacaoPerfil> lista = null;
         for(SolicitacaoPerfil solicitacao : solicitacoes){
             if(solicitacao.getStatus().equalsIgnoreCase("A")){
@@ -61,12 +61,12 @@ public class PerfilSolicitacaoRepositoryTeste implements IPerfilSolicitacaoRepos
     }
 
     @Override
-    public void atualizaSolicitacao(SolicitacaoPerfil solicitacaoAnalisada, String status) throws SQLException {
+    public void atualizarSolicitacao(SolicitacaoPerfil solicitacaoAnalisada, String status) throws SQLException {
         solicitacaoAnalisada.setStatus(status);
     }
     
     @Override
-    public void deletaSolicitacao(Integer id) throws SQLException {
+    public void deletarSolicitacao(Integer id) throws SQLException {
         //para fazer
     }
 }

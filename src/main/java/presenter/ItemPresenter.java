@@ -12,12 +12,10 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JInternalFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -97,12 +95,12 @@ public class ItemPresenter extends AbstractPresenter {
                 formView.getSTamanho().setValue(1);
                 formView.getTxtCor().setText("");
 
-                List<String> materiais = itemService.getListaMateriaisComposicao();
+                List<Material> materiais = itemService.getListaMateriaisComposicao(tipoSelecionado);
                 DefaultListModel<MaterialComposicao> modelMaterial = new DefaultListModel<>();
 
-                for(String material : materiais){
+                for(Material material : materiais){
                     MaterialComposicao materialComposicao = new MaterialComposicao();
-                    materialComposicao.getLblMaterial().setText(material);
+                    materialComposicao.getLblMaterial().setText(material.getTipo());
                     materialComposicao.getNumPercentual().setValue(0.0);
                     modelMaterial.addElement(materialComposicao);
                 }
@@ -110,9 +108,9 @@ public class ItemPresenter extends AbstractPresenter {
                 JPanel listaMaterialComposicao = formView.getPMateriais();
                 listaMaterialComposicao.setLayout(new BoxLayout(listaMaterialComposicao, BoxLayout.Y_AXIS));
 
-                for (String material : materiais) {
+                for (Material material : materiais) {
                     MaterialComposicao materialComposicao = new MaterialComposicao();
-                    materialComposicao.getLblMaterial().setText(material);
+                    materialComposicao.getLblMaterial().setText(material.getTipo());
                     materialComposicao.getNumPercentual().setValue(0.0);
 
                     listaMaterialComposicao.add(materialComposicao);
@@ -176,7 +174,7 @@ public class ItemPresenter extends AbstractPresenter {
         this.view=formView;
     }
 
-    public void showItens(Optional<List<Item>> listaExistente){
+    public void showItens(List<Item> listaExistente) throws Exception{
         tipoTela="Comprador";
         nomeTela = "VerItens";
         ShowItensView itensView = new ShowItensView();
@@ -199,7 +197,7 @@ public class ItemPresenter extends AbstractPresenter {
         
         itens = itemService.getItens(); 
         if (!listaExistente.isEmpty()){
-            itens=listaExistente.get();
+            itens=listaExistente;
             tipoTela="Vendedor";
         }
 
@@ -237,7 +235,7 @@ public class ItemPresenter extends AbstractPresenter {
         this.view=itensView;
     }
     
-    public void publicar(){
+    public void publicar() throws Exception{
         FormItemView formView = (FormItemView)view;
         String tipo = String.valueOf(formView.getCbTipos().getSelectedItem());
         String subcategoria = formView.getTxtSubcategoria().getText();
