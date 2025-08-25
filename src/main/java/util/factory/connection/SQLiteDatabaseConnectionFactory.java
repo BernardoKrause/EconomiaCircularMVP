@@ -203,6 +203,36 @@ public class SQLiteDatabaseConnectionFactory implements DatabaseConnectionFactor
                 "INSERT OR IGNORE INTO materiais (descricao, fatorEmissao) VALUES ('Outros', 4.0);"
         };
 
+        String[] insertTipoQueries = {
+                "INSERT OR IGNORE INTO tipos (descricao) VALUES ('vestuario');",
+                "INSERT OR IGNORE INTO tipos (descricao) VALUES ('calcado');",
+                "INSERT OR IGNORE INTO tipos (descricao) VALUES ('bolsas e mochilas');",
+                "INSERT OR IGNORE INTO tipos (descricao) VALUES ('bijuterias e acessorios');"
+        };
+
+        String[] insertDefeitoQueries = {
+                "INSERT OR IGNORE INTO defeitos (descricao, percentualDesconto, idTipo) VALUES ('rasgo estruturante', 0.3, 1);",
+                "INSERT OR IGNORE INTO defeitos (descricao, percentualDesconto, idTipo) VALUES ('Ausência de botão principal', 0.15, 1);",
+                "INSERT OR IGNORE INTO defeitos (descricao, percentualDesconto, idTipo) VALUES ('ziper parcialmente funcional', 0.15, 1);",
+                "INSERT OR IGNORE INTO defeitos (descricao, percentualDesconto, idTipo) VALUES ('mancha permanente', 0.20, 1);",
+                "INSERT OR IGNORE INTO defeitos (descricao, percentualDesconto, idTipo) VALUES ('desgaste por pilling acentuado', 0.10, 1);",
+                
+                "INSERT OR IGNORE INTO defeitos (descricao, percentualDesconto, idTipo) VALUES ('sola sem relevo funcional', 0.25, 2);",
+                "INSERT OR IGNORE INTO defeitos (descricao, percentualDesconto, idTipo) VALUES ('descolamento parcial de entressola', 0.20, 2);",
+                "INSERT OR IGNORE INTO defeitos (descricao, percentualDesconto, idTipo) VALUES ('arranhões profundos', 0.15, 2);",
+                "INSERT OR IGNORE INTO defeitos (descricao, percentualDesconto, idTipo) VALUES ('palmilha original ausente', 0.10, 2);",
+                "INSERT OR IGNORE INTO defeitos (descricao, percentualDesconto, idTipo) VALUES ('odor persistente leve', 0.10, 2);",
+                
+                "INSERT OR IGNORE INTO defeitos (descricao, percentualDesconto, idTipo) VALUES ('alça reparada', 0.2, 3);",
+                "INSERT OR IGNORE INTO defeitos (descricao, percentualDesconto, idTipo) VALUES ('fecho defeituoso', 0.20, 3);",
+                "INSERT OR IGNORE INTO defeitos (descricao, percentualDesconto, idTipo) VALUES ('desbotamento extenso', 0.15, 3);",
+                "INSERT OR IGNORE INTO defeitos (descricao, percentualDesconto, idTipo) VALUES ('forro rasgado', 0.15, 3);",
+                
+                "INSERT OR IGNORE INTO defeitos (descricao, percentualDesconto, idTipo) VALUES ('oxidação visível', 0.2, 4);",
+                "INSERT OR IGNORE INTO defeitos (descricao, percentualDesconto, idTipo) VALUES ('pedra ausente', 0.15, 4);",
+                "INSERT OR IGNORE INTO defeitos (descricao, percentualDesconto, idTipo) VALUES ('fecho frouxo', 0.10, 4);"
+        };
+
         try (Connection conn = getConnection(); Statement stmt = conn.createStatement()) {
             stmt.execute("PRAGMA foreign_keys = ON");
 
@@ -211,6 +241,14 @@ public class SQLiteDatabaseConnectionFactory implements DatabaseConnectionFactor
             }
 
             for (String query : insertMaterialQueries) {
+                stmt.execute(query);
+            }
+            
+            for (String query : insertTipoQueries) {
+                stmt.execute(query);
+            }
+            
+            for (String query : insertDefeitoQueries) {
                 stmt.execute(query);
             }
             
