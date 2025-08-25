@@ -6,21 +6,25 @@ package command.perfil;
 
 import java.sql.SQLException;
 import model.Usuario;
+import presenter.GerenciadorTelas;
+import presenter.HomePresenter;
 import repository.IPerfilRepository;
 
 /**
  *
  * @author caiof
  */
-public class CriarPerfilCompradorCommand extends PerfilCommand{
-    public CriarPerfilCompradorCommand(Usuario usuario,IPerfilRepository perfilRepository) throws SQLException {
+public class AcessarPerfilCompradorCommand extends PerfilCommand{
+    private HomePresenter presenter;
+
+    public AcessarPerfilCompradorCommand(Usuario usuario, IPerfilRepository perfilRepository) throws SQLException {
         super(usuario,perfilRepository);
+        this.presenter = GerenciadorTelas.getInstancia().getPresenter();
     }
     
     @Override
     public void executar() throws SQLException {
-        service.criar(usuario);
+        presenter.acessarComprador(usuario);
     }
     
 }
-

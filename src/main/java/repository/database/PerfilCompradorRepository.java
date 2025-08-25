@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import model.Comprador;
 import dao.IPerfilDAO;
+import factory.dao.IDAOFactory;
 import java.util.stream.Collectors;
 import model.Perfil;
 import repository.IPerfilRepository;
@@ -20,7 +21,11 @@ import repository.IPerfilRepository;
  */
 public class PerfilCompradorRepository implements IPerfilRepository {
     private final IPerfilDAO perfilCompradorDAO;
-
+    
+    public PerfilCompradorRepository(IDAOFactory daoFactory) throws SQLException {
+       this.perfilCompradorDAO = daoFactory.getPerfilCompradorDAO();
+    }
+    
     public PerfilCompradorRepository() throws SQLException {
        this.perfilCompradorDAO = new PerfilCompradorDAOSQLite();
     }

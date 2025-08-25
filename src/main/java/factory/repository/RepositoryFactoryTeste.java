@@ -18,6 +18,7 @@ import repository.teste.PerfilVendedorRepositoryTeste;
 import repository.teste.ReputacaoRepositoryTeste;
 import repository.teste.UsuarioRepositoryTeste;
 import repository.IPerfilRepository;
+import repository.teste.PerfilCompradorRepositoryTeste;
 
 /**
  *
@@ -58,6 +59,11 @@ public class RepositoryFactoryTeste implements IRepositoryFactory{
     @Override
     public ICondutaRepository criarCondutaRepository() {
         return CondutaRepositoryTeste.getInstancia();
+    }
+
+    @Override
+    public IPerfilRepository criarPerfilCompradorRepository() {
+        return PerfilCompradorRepositoryTeste.getInstancia();
     }
 }
 

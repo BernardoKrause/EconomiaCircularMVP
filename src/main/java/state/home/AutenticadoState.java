@@ -4,6 +4,7 @@
  */
 package state.home;
 
+import command.perfil.AcessarPerfilCompradorCommand;
 import command.perfil.AcessarPerfilVendedorCommand;
 import command.perfil.CriarPerfilCompradorCommand;
 import command.perfil.CriarPerfilVendedorCommand;
@@ -106,16 +107,16 @@ public class AutenticadoState extends HomePresenterState{
     
     @Override
     public void criarPerfilComprador() throws SQLException {
-//        IPerfilRepository perfilRepository = SeletorRepositoryFactory.obterInstancia().criarPerfilCompradorRepository();
-//        new CriarPerfilCompradorCommand(usuario,perfilRepository).executar();
-//        view.getMItemAcessarPerfilComprador().setVisible(true); 
-//        view.getMItemCriarPerfilComprador().setVisible(false); 
+        IPerfilRepository perfilRepository = SeletorRepositoryFactory.obterInstancia().criarPerfilCompradorRepository();
+        new CriarPerfilVendedorCommand(usuario,perfilRepository).executar();
+        view.getMItemAcessarPerfilComprador().setVisible(true); 
+        view.getMItemCriarPerfilComprador().setVisible(false); 
     }
     
     @Override
-    public void acessarPerfilComprador(){
-//        IPerfilRepository perfilRepository = SeletorRepositoryFactory.obterInstancia().criarPerfilCompradorRepository();
-//        new AcessarPerfilCompradorCommand(usuario,perfilRepository).executar();
+    public void acessarPerfilComprador() throws SQLException{
+        IPerfilRepository perfilRepository = SeletorRepositoryFactory.obterInstancia().criarPerfilCompradorRepository();
+        new AcessarPerfilCompradorCommand(usuario,perfilRepository).executar();
     }
     
     @Override

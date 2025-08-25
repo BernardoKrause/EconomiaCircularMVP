@@ -19,6 +19,7 @@ import repository.database.CondutaRepository;
 import repository.database.DefeitosTipoRepository;
 import repository.database.DenunciaRepository;
 import repository.database.ItemRepository;
+import repository.database.PerfilCompradorRepository;
 import repository.database.PerfilVendedorRepository;
 import repository.database.ReputacaoRepository;
 import repository.database.UsuarioRepository;
@@ -103,6 +104,16 @@ public class RepositoryFactoryBD implements IRepositoryFactory{
             Logger.getLogger(RepositoryFactoryBD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    @Override
+    public IPerfilRepository criarPerfilCompradorRepository() {
+        try {
+            return new PerfilCompradorRepository(daoFactory);
+        } catch (SQLException ex) {
+            Logger.getLogger(RepositoryFactoryBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;    
     }
     
 }

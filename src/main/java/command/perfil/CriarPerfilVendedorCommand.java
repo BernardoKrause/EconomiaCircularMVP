@@ -1,13 +1,9 @@
 package command.perfil;
 
 
-import factory.repository.SeletorRepositoryFactory;
 import java.sql.SQLException;
 import model.Usuario;
 import repository.IPerfilRepository;
-import repository.IReputacaoRepository;
-import service.PerfilService;
-import service.PerfilVendedorService;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
