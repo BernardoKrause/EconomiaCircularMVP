@@ -66,7 +66,7 @@ public class SignupPresenter extends AbstractPresenter {
             JOptionPane.showMessageDialog(signupView, "Usuario cadastrado com sucesso!");
             GerenciadorTelas.getInstancia().removeTelaAberta("signup");
         } catch (Exception ex) {
-            throw new RuntimeException(ex.getMessage());
+            JOptionPane.showMessageDialog(view, ex);
         }
     }
     

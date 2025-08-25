@@ -7,6 +7,7 @@ package service;
 import factory.repository.SeletorRepositoryFactory;
 import java.sql.SQLException;
 import java.util.Optional;
+import javax.swing.JOptionPane;
 import model.Usuario;
 import repository.IUsuarioRepository;
 
@@ -21,7 +22,12 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
     
-    public void cadastrarUsuario(String nome, String email, String telefone, String senha) throws SQLException {
+    public void cadastrarUsuario(String nome, String email, String telefone, String senha) throws SQLException, Exception {
+        
+        ValidadorSenhaService validador = new ValidadorSenhaService();
+        
+        validador.valida(senha);
+
         boolean isAdmin = usuarioRepository.totalUsuarios() == 0;
         try {
             usuarioRepository.adicionarUsuario(nome, email, telefone, senha, isAdmin);
