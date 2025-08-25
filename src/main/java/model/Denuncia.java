@@ -15,14 +15,16 @@ public class Denuncia {
     private String status;
     private Comprador comprador;
     private Vendedor vendedor;
+    private Transacao transacao;
     
-    public Denuncia (Integer id, String idC, String descricao, String status, Comprador comprador, Vendedor vendedor) {
+    public Denuncia (Integer id, String idC, String descricao, String status, Comprador comprador, Vendedor vendedor, Transacao transacao) {
         this.id = id;
         this.idC = idC;
         this.descricao = descricao;
         this.status = status;
         this.comprador = comprador;
         this.vendedor = vendedor;
+        this.transacao = transacao;
     }
     
     public Denuncia (String idC, String descricao, String status, Comprador comprador, Vendedor vendedor) {
@@ -55,5 +57,9 @@ public class Denuncia {
     
     public Vendedor getVendedor() {
         return this.vendedor;
+    }
+
+    public Transacao getTransacao() {
+        return transacao;
     }
 }

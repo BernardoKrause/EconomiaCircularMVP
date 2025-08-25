@@ -18,9 +18,11 @@ import dao.IItemDAO;
 import dao.IMaterialDAO;
 import dao.IPerfilDAO;
 import dao.IReputacaoDAO;
+import dao.ITransacaoDAO;
 import dao.IUsuarioDAO;
 import dao.sqlite.MaterialDAOSQLite;
 import dao.sqlite.ReputacaoDAOSQLite;
+import dao.sqlite.TransacaoDAOSQLite;
 
 /**
  *
@@ -71,6 +73,11 @@ public class SQLiteDAOFactory extends IDAOFactory {
     @Override
     public IMaterialDAO getMaterialDAO() {
         return new MaterialDAOSQLite();
+    }
+
+    @Override
+    public ITransacaoDAO getTransacaoDAO() {
+        return new TransacaoDAOSQLite();
     }
     
 }

@@ -23,7 +23,7 @@ public class DefeitoDAOSQLite implements IDefeitoDAO {
 
     @Override
     public void criar(Defeito defeito) throws SQLException {
-        String sql = "INSERT INTO defeitos (descricao, percentualDesconto)"
+        String sql = "INSERT INTO defeitos (descricao, percentualDesconto) "
                    + "VALUES (?, ?)";
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -62,8 +62,8 @@ public class DefeitoDAOSQLite implements IDefeitoDAO {
     public List<Defeito> buscaDefeitosItem(Integer idItem) throws SQLException {
         List<Defeito> defeitos = new ArrayList<>();
         String sql = """
-                     SELECT d.*, di.valorDesconto FROM defeitos d
-                     JOIN item_defeitos di ON d.idDefeito = di.idDefeito
+                     SELECT d.*, di.valorDesconto FROM defeitos d 
+                     JOIN item_defeitos di ON d.idDefeito = di.idDefeito 
                      WHERE di.idItem = ?
                      """;
 
