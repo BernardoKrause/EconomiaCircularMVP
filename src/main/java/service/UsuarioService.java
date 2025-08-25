@@ -50,7 +50,6 @@ public class UsuarioService {
     
     public void completarUsuario(Usuario usuario) throws SQLException{
         usuario.addPerfil(SeletorRepositoryFactory.obterInstancia().criarPerfilVendedorRepository().buscarPorIdUsuario(usuario.getId()).get());
-        
         usuario.addPerfil(SeletorRepositoryFactory.obterInstancia().criarPerfilCompradorRepository().buscarPorIdUsuario(usuario.getId()).get());
     }
 }
