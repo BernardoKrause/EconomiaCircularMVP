@@ -509,10 +509,11 @@ public class ItemPresenter extends AbstractPresenter {
 
         try{
             itemService.criar(item, defeitos, (Vendedor)perfil);
+            perfilService.completarPerfil(perfil);
             perfilService.atualizarReputacao(perfil, "Cadastro de item completo");
             GerenciadorTelas.getInstancia().removeTelaAberta(nomeTela);
         } catch (Exception ex) {
-            throw new RuntimeException("Erro ao criar item "+ex.getMessage());
+            JOptionPane.showMessageDialog(view, ex);
         }
     }
 

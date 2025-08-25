@@ -39,6 +39,7 @@ public class PerfilVendedorService extends PerfilService{
             
             usuarioRepository.atualizarUsuario(usuario);
             reputacaoRepository.adicionarReputacao(perfil.getReputacao());
+            completarPerfil(perfil);
             perfilRepository.adicionarPerfil(perfil);
         } catch (SQLException ex) {
             throw new RuntimeException("Seu Perfil não pode ser criado!");

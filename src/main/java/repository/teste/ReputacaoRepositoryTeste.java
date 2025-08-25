@@ -33,6 +33,7 @@ public class ReputacaoRepositoryTeste implements IReputacaoRepository{
 
     @Override
     public void adicionarReputacao(Reputacao reputacao) {
+        reputacao.setIdReputacao(reputacoes.size());
         reputacoes.add(reputacao);
     }
 
@@ -55,7 +56,7 @@ public class ReputacaoRepositoryTeste implements IReputacaoRepository{
     @Override
     public void atualizarReputacao(Reputacao reputacao) throws SQLException {
         for(Reputacao r : reputacoes){
-            if(r.getId().equals(reputacao.getId())){
+            if(r.equals(reputacao)){
                 r=reputacao;
             }
         }
