@@ -5,13 +5,13 @@
 package command.perfil;
 
 import java.sql.SQLException;
+import java.util.Optional;
 import javax.swing.JDesktopPane;
 import model.Comprador;
 import model.Perfil;
-import model.Vendedor;
+import presenter.CompradorPresenter;
 import presenter.GerenciadorTelas;
 import presenter.PerfilPresenter;
-import presenter.VendedorPresenter;
 import repository.IPerfilRepository;
 
 /**
@@ -23,17 +23,17 @@ public class AbrirVerPerfilCompradorCommand extends PerfilCommand{
     private Perfil perfil;
     
     public AbrirVerPerfilCompradorCommand(Comprador comprador, IPerfilRepository perfilRepository) throws SQLException{
-        super(comprador.getUsuario(), perfilRepository);
+        super(comprador.getUsuario(), perfilRepository,Optional.of("Comprador"));
         this.desktop = GerenciadorTelas.getInstancia().getDesktop();
-        this.perfil=(Vendedor)usuario.getPerfilVendedor().get();
+        this.perfil=(Comprador)usuario.getPerfilComprador().get();
     }
     
     @Override
     public void executar() throws SQLException {
-        PerfilPresenter vendedorPresenter = new VendedorPresenter(perfil,service);
-        vendedorPresenter.verPerfil();
-        GerenciadorTelas.getInstancia().addTelaAberta("Vendedor", "VerPerfil", vendedorPresenter);
-        desktop.add(vendedorPresenter.getView());
+        PerfilPresenter compradorPresenter = new CompradorPresenter(perfil,service);
+        compradorPresenter.verPerfil();
+        GerenciadorTelas.getInstancia().addTelaAberta("Comprador", "VerPerfil", compradorPresenter);
+        desktop.add(compradorPresenter.getView());
     }
     
 }

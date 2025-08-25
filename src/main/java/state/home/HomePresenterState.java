@@ -5,9 +5,12 @@
 package state.home;
 
 import command.usuario.SairUsuarioCommand;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JMenuItem;
 import model.Usuario;
 import presenter.HomePresenter;
 import view.HomeView;
@@ -71,6 +74,12 @@ public abstract class HomePresenterState {
     
     public void verItens() throws SQLException {
         throw new RuntimeException("Não é possivel salvar estando nesse estado!");
+    }
+    
+    protected void resetMenuItemActions(JMenuItem mi) {
+        for(ActionListener al : mi.getActionListeners()) {
+            mi.removeActionListener(al);
+        }
     }
     
     public abstract void setVisibles();

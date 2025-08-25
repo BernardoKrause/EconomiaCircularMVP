@@ -9,10 +9,12 @@ import service.PerfilService;
 import command.ICommand;
 import factory.repository.SeletorRepositoryFactory;
 import java.sql.SQLException;
+import java.util.Optional;
 import repository.ICondutaRepository;
 import repository.IPerfilRepository;
 import repository.IReputacaoRepository;
 import repository.IUsuarioRepository;
+import service.PerfilCompradorService;
 import service.PerfilVendedorService;
 
 /**
@@ -27,14 +29,20 @@ public abstract class PerfilCommand implements ICommand{
     protected ICondutaRepository condutaRepository;
     protected IUsuarioRepository usuarioRepository;
     
-    public PerfilCommand(Usuario usuario, IPerfilRepository perfilRepository) throws SQLException {
+    public PerfilCommand(Usuario usuario, IPerfilRepository perfilRepository, Optional<String> tipoPerfil) throws SQLException {
         if(usuario.isAutenticado()){    
             this.usuario = usuario;
         }
         this.usuarioRepository = SeletorRepositoryFactory.obterInstancia().criarUsuarioRepository();
         this.reputacaoRepository = SeletorRepositoryFactory.obterInstancia().criarReputacaoRepository();
         this.condutaRepository = SeletorRepositoryFactory.obterInstancia().criarCondutaRepository();
-        this.service = new PerfilVendedorService(reputacaoRepository,condutaRepository,perfilRepository,usuarioRepository);
+        if(!tipoPerfil.isEmpty()){
+            if(tipoPerfil.get().equals("Vendedor")){
+                this.service = new PerfilVendedorService(reputacaoRepository,condutaRepository,perfilRepository,usuarioRepository);
+            }else{
+                this.service = new PerfilCompradorService(reputacaoRepository,condutaRepository,perfilRepository,usuarioRepository);
+            }
+        }
     }
     
     public abstract void executar() throws SQLException;

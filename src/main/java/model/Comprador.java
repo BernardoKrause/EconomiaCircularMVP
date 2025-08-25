@@ -4,14 +4,20 @@
  */
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author berna
  */
 public class Comprador extends Perfil {
+    private List<Oferta> ofertas;
     
     public Comprador (Integer id) {
         super(id);
+        setSystemId(id);
+        this.ofertas=new ArrayList<>();
     }
     
 //    public Comprador (String sistemId) {

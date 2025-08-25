@@ -12,7 +12,7 @@ import java.util.List;
  * @author berna
  */
 public class Vendedor extends Perfil {
-    private final List<Item> itens;
+    private List<Item> itens;
   
     public Vendedor(int id) {
         super(id);

@@ -5,6 +5,7 @@
 package command.perfil;
 
 import java.sql.SQLException;
+import java.util.Optional;
 import model.Usuario;
 import repository.IPerfilRepository;
 
@@ -14,7 +15,7 @@ import repository.IPerfilRepository;
  */
 public class CriarPerfilCompradorCommand extends PerfilCommand{
     public CriarPerfilCompradorCommand(Usuario usuario,IPerfilRepository perfilRepository) throws SQLException {
-        super(usuario,perfilRepository);
+        super(usuario,perfilRepository,Optional.of("Comprador"));
     }
     
     @Override
