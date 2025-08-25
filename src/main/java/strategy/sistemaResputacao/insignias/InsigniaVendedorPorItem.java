@@ -5,6 +5,7 @@
 package strategy.sistemaResputacao.insignias;
 
 import factory.repository.SeletorRepositoryFactory;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,9 +37,13 @@ public class InsigniaVendedorPorItem extends MetodoInsignia{
         boolean aplica=false;
         for(String tipo : regraConduta.keySet()){
             for(Conduta condutaAnalisada : condutas){
-                if(condutaAnalisada.getDescricao().equalsIgnoreCase(tipo) && itemRepo.buscarPorVendedor((Vendedor) perfil).size() > tipoConduta.get(tipo)){
-                    aplica=false;
-                    break;
+                try {
+                    if(condutaAnalisada.getDescricao().equalsIgnoreCase(tipo) && itemRepo.buscarPorVendedor((Vendedor) perfil).size() > tipoConduta.get(tipo)){
+                        aplica=false;
+                        break;
+                    }
+                } catch (SQLException ex) {
+                    System.getLogger(InsigniaVendedorPorItem.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
                 }
             }
             nomeConduta=tipo;

@@ -128,7 +128,8 @@ public class SQLiteDatabaseConnectionFactory implements DatabaseConnectionFactor
                 """
                 CREATE TABLE IF NOT EXISTS materiais (
                     idMaterial INTEGER PRIMARY KEY AUTOINCREMENT,
-                    descricao TEXT
+                    descricao TEXT,
+                    fatorEmissao REAL
                 );
                 """,
                 """
@@ -192,13 +193,28 @@ public class SQLiteDatabaseConnectionFactory implements DatabaseConnectionFactor
                 """
         };
 
+        String[] insertMaterialQueries = {
+                "INSERT OR IGNORE INTO materiais (descricao, fatorEmissao) VALUES ('Algodão', 5.2);",
+                "INSERT OR IGNORE INTO materiais (descricao, fatorEmissao) VALUES ('Poliéster', 9.5);",
+                "INSERT OR IGNORE INTO materiais (descricao, fatorEmissao) VALUES ('Couro', 14.8);",
+                "INSERT OR IGNORE INTO materiais (descricao, fatorEmissao) VALUES ('Metal (ligas leves)', 8.6);",
+                "INSERT OR IGNORE INTO materiais (descricao, fatorEmissao) VALUES ('Plástico de base fóssil', 3.1);",
+                "INSERT OR IGNORE INTO materiais (descricao, fatorEmissao) VALUES ('Outros', 4.0);"
+        };
+
         try (Connection conn = getConnection(); Statement stmt = conn.createStatement()) {
             stmt.execute("PRAGMA foreign_keys = ON");
 
             for (String query : ddlQueries) {
                 stmt.execute(query);
             }
+
+            for (String query : insertMaterialQueries) {
+                stmt.execute(query);
+            }
+            
             System.out.println("Banco de dados inicializado com sucesso.");
+            System.out.println("Materiais inseridos: Algodão, Poliéster, Couro, Metal, Plástico, Outros");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

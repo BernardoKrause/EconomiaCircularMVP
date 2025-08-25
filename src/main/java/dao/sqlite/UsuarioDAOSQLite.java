@@ -18,8 +18,8 @@ public class UsuarioDAOSQLite implements IUsuarioDAO {
 
     @Override
     public void criar(Usuario usuario) throws SQLException {
-        String sql = "INSERT INTO usuarios (nome, email, telefone, senha, eAdmin) "
-                   + "VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO usuarios (nome, email, telefone, senha, eAdmin, criado_em) "
+                   + "VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -52,9 +52,10 @@ public class UsuarioDAOSQLite implements IUsuarioDAO {
                         rs.getString("idUsuario"),
                         rs.getString("nome"),
                         rs.getString("email"),
+                        rs.getString("senha"),
                         rs.getString("telefone"),
-                        admin,
-                        dt 
+                        dt, 
+                        admin
                     );
                     
                     return Optional.of(usuario);
@@ -80,16 +81,18 @@ public class UsuarioDAOSQLite implements IUsuarioDAO {
                 LocalDateTime dt = (ts != null) ? LocalDateTime.parse(ts, formatter) : null;
                 boolean admin = rs.getInt("eAdmin") == 1;
 
-                usuarios.add(new Usuario(
-                    rs.getString("idUsuario"),
-                    rs.getString("nome"),
-                    rs.getString("email"),
-                    rs.getString("telefone"),
-                    admin,
-                    dt
-                ));
+                Usuario usuario = new Usuario(
+                        rs.getString("idUsuario"),
+                        rs.getString("nome"),
+                        rs.getString("email"),
+                        rs.getString("senha"),
+                        rs.getString("telefone"),
+                        dt, 
+                        admin
+                );
+                
+                usuarios.add(usuario);
             }
-
         }
         return usuarios;
     }

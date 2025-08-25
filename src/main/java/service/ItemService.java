@@ -18,14 +18,13 @@ import repository.teste.DefeitosTipoRepositoryTeste;
  * @author caiof
  */
 public class ItemService {
-    private IItemRepository itemRepository;
-    private DefeitosTipoRepositoryTeste tiposDefeitoRepository;
-    private SistemaDefeitosService sistemaDefeitos;
-    private CalcularGPWService sistemaGPW;
+    private final IItemRepository itemRepository;
+    private final DefeitosTipoRepositoryTeste tiposDefeitoRepository;
+    private final SistemaDefeitosService sistemaDefeitos;
+    private final CalcularGPWService sistemaGPW;
     
-    public ItemService(SistemaDefeitosService sistema, DefeitosTipoRepositoryTeste tiposDefeitosRepo, CalcularGPWService sistemaGPW ) {
+    public ItemService(SistemaDefeitosService sistema, DefeitosTipoRepositoryTeste tiposDefeitosRepo, CalcularGPWService sistemaGPW) {
         this.itemRepository = SeletorRepositoryFactory.obterInstancia().criarItemRepository();
-        
         this.sistemaDefeitos = sistema;
         this.tiposDefeitoRepository = tiposDefeitosRepo;
         this.sistemaGPW=sistemaGPW;
@@ -46,46 +45,62 @@ public class ItemService {
     public List<Item> getItens() throws Exception{
         try {
             return itemRepository.buscarTodos();
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             throw ex;
         }
         
     }
     
-    public List<Item> getItensVendedor(Vendedor vendedor){
-        return itemRepository.buscarPorVendedor(vendedor);
+    public List<Item> getItensVendedor(Vendedor vendedor) throws SQLException {
+        try {
+            return itemRepository.buscarPorVendedor(vendedor);
+        } catch (SQLException ex) {
+            throw ex;
+        }
+        
     }
     
-    public List<String> getListaTiposItem(String idC) throws SQLException{
-        if(itemRepository.buscarTiposItem(idC).isEmpty()){
-            throw new IllegalArgumentException("Lista de Tipos está vazia!");
+    public List<String> getListaTipos() throws SQLException{
+        try {
+            List<String> tipos = itemRepository.buscarTipos();
+            if(tipos.isEmpty()){
+                throw new IllegalArgumentException("Lista de Tipos está vazia!");
+            }
+            return tipos;
+        } catch (SQLException ex) {
+            throw ex;
         }
-        return itemRepository.buscarTiposItem(idC);
+        
     }
     
     public List<String> getListaDefeitosExistentes(String tipo) throws SQLException{
-        if(tiposDefeitoRepository.buscarPorTipo(tipo).isEmpty()){
-            throw new IllegalArgumentException("Lista de Defeitos está vazia!");
-        }   
-        return tiposDefeitoRepository.buscarPorTipo(tipo);
-    }
-    
-    public List<Material> getListaMateriaisComposicao(String tipo) throws Exception{
         try {
-            if(itemRepository.buscarMaterialPorTipoItem(tipo).isEmpty()){
-                throw new IllegalArgumentException("Lista de Tipos de material está vazia!");
-            }
-            return itemRepository.buscarMaterialPorTipoItem(tipo);    
-        } catch (Exception ex) {
+            List<String> defeitos = tiposDefeitoRepository.buscarPorTipo(tipo);
+            if(defeitos.isEmpty()){
+                throw new IllegalArgumentException("Lista de Defeitos está vazia!");
+            }   
+            return defeitos;
+        } catch (IllegalArgumentException | SQLException ex) {
             throw ex;
         }
-        
     }
     
-    public Double getFatorMaterial(String nomeMaterial) throws Exception{
+    public List<Material> getListaMateriaisComposicao(String tipo) throws SQLException {
+        try {
+            List<Material> materiais = itemRepository.buscarMaterialPorTipoItem(tipo);
+            if(materiais.isEmpty()){
+                throw new IllegalArgumentException("Lista de Tipos de material está vazia!");
+            }
+            return materiais;    
+        } catch (IllegalArgumentException | SQLException ex) {
+            throw ex;
+        }
+    }
+    
+    public Double getFatorMaterial(String nomeMaterial) throws SQLException {
         try {
             return itemRepository.buscarFatorEmissaoMaterial(nomeMaterial);            
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             throw ex;
         }
     }

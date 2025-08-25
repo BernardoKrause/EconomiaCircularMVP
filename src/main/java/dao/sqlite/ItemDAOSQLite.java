@@ -271,26 +271,19 @@ public class ItemDAOSQLite implements IItemDAO {
     }
 
     @Override
-    public List<String> buscaTipos(String idC) throws SQLException {
+    public List<String> buscaTipos() throws SQLException {
         List<String> tipos = new ArrayList<>();
-        String sql = "SELECT t.descricao " +
-                     "FROM itens i " +
-                     "INNER JOIN tipos t ON i.idTipo = t.idTipo " +
-                     "WHERE i.idC = ?";
+        String sql = "SELECT * FROM tipos";
 
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
 
-            pstmt.setString(1, idC);
-
-            try (ResultSet rs = pstmt.executeQuery()) {
-                while (rs.next()) {
-                    tipos.add(rs.getString("descricao"));
-                }
+            while (rs.next()) {
+                tipos.add(rs.getString("descricao"));
             }
+            return tipos;
         }
-
-        return tipos;
     }
     
     @Override
@@ -312,4 +305,61 @@ public class ItemDAOSQLite implements IItemDAO {
         
         return null;
     } 
+
+    @Override
+    public List<Item> buscaPorVendedor(Integer idVendedor) throws SQLException {
+        List<Item> itens = new ArrayList<>();
+        String sqlItem = "SELECT * FROM itens WHERE idPerfilVendedor = ?";
+        String sqlMateriais = "SELECT m.idMaterial, m.tipo, m.fatorEmissao, im.percentual " +
+                              "FROM item_materiais im " +
+                              "INNER JOIN materiais m ON im.idMaterial = m.idMaterial " +
+                              "WHERE im.idItem = ?";
+
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
+             PreparedStatement pstmtItem = conn.prepareStatement(sqlItem);
+             PreparedStatement pstmtMateriais = conn.prepareStatement(sqlMateriais)) {
+
+            pstmtItem.setInt(1, idVendedor);
+
+            try (ResultSet rsItem = pstmtItem.executeQuery()) {
+                while (rsItem.next()) {
+                    List<Material> materiais = new ArrayList<>();
+                    int idItem = rsItem.getInt("idItem");
+                    pstmtMateriais.setInt(1, idItem);
+
+                    try (ResultSet rsMateriais = pstmtMateriais.executeQuery()) {
+                        while (rsMateriais.next()) {
+                            Material material = new Material(
+                                rsMateriais.getInt("idMaterial"),
+                                rsMateriais.getString("tipo"),
+                                rsMateriais.getDouble("fatorEmissao"),
+                                rsMateriais.getDouble("percentual")
+                            );
+                            materiais.add(material);
+                        }
+                    }
+
+                    Item item = new Item(
+                        rsItem.getInt("idItem"),
+                        rsItem.getString("idC"),
+                        rsItem.getString("tipo"),
+                        rsItem.getString("subcategoria"),
+                        rsItem.getString("tamanho"),
+                        rsItem.getString("cor"),
+                        rsItem.getDouble("peso"),
+                        materiais,
+                        rsItem.getDouble("precoBase"),
+                        rsItem.getDouble("precoFinal"),
+                        rsItem.getDouble("GPWBase"),
+                        rsItem.getDouble("GPWEvitado"),
+                        rsItem.getDouble("MCIItem"),
+                        rsItem.getInt("numeroCiclo")
+                    );
+
+                    itens.add(item);
+                }
+            }
+        }
+        return itens;
+    }
 }

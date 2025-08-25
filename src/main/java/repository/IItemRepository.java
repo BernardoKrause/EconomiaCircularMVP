@@ -21,14 +21,14 @@ public interface IItemRepository {
     
     public List<Item> buscarTodos() throws SQLException;
 
-    public List<Item> buscarPorVendedor(Vendedor vendedor);
+    public List<Item> buscarPorVendedor(Vendedor vendedor) throws SQLException;
     
     public Optional<Item> buscarPorId(Integer id) throws SQLException;
     
     public Integer buscarQuantidadeItens() throws SQLException ;
     
     //Decisão de arquitetura de projeto
-    public List<String> buscarTiposItem(String idC) throws SQLException;
+    public List<String> buscarTipos() throws SQLException;
 
     //Decisão de arquitetura de projeto
     public List<Material> buscarMaterialPorTipoItem(String tipo) throws SQLException;
