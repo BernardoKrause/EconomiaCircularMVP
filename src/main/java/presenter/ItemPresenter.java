@@ -275,7 +275,7 @@ public class ItemPresenter extends AbstractPresenter {
         this.view = itensView;
     }
 
-    public void showItem(Item item){
+    public void showItem(Item item) throws SQLException{
         tipoTela = "Comprador";
         if(perfil.isVendedor()){
             tipoTela="Vendedor";

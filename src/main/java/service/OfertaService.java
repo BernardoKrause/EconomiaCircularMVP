@@ -4,9 +4,12 @@
  */
 package service;
 
+import factory.repository.RepositoryFactoryBD;
 import factory.repository.SeletorRepositoryFactory;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Comprador;
 import model.Item;
 import model.Oferta;
@@ -33,7 +36,12 @@ public class OfertaService {
         compradorRepository.atualizarPerfil(comprador);
     }
     
-    public List<Oferta> getOfertasPorItem(Item item){
-        return ofertaRepository.buscarPorItem(item.getIdC());
+    public List<Oferta> getOfertasPorItem(Item item) throws SQLException {
+        try {
+            return ofertaRepository.buscarPorItem(item.getIdC());
+        } catch (SQLException ex) {
+            Logger.getLogger(RepositoryFactoryBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null; 
     }
 }

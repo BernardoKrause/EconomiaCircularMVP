@@ -9,6 +9,7 @@ import dao.IDefeitoDAO;
 import dao.IDenunciaDAO;
 import dao.IItemDAO;
 import dao.IMaterialDAO;
+import dao.IOfertaDAO;
 import dao.IPerfilDAO;
 import dao.IReputacaoDAO;
 import dao.ITransacaoDAO;
@@ -18,6 +19,7 @@ import dao.h2.DefeitoDAOH2;
 import dao.h2.DenunciaDAOH2;
 import dao.h2.ItemDAOH2;
 import dao.h2.MaterialDAOH2;
+import dao.h2.OfertaDAOH2;
 import dao.h2.PerfilCompradorDAOH2;
 import dao.h2.PerfilVendedorDAOH2;
 import dao.h2.ReputacaoDAOH2;
@@ -77,5 +79,10 @@ public class H2DAOFactory extends IDAOFactory {
     @Override
     public ITransacaoDAO getTransacaoDAO() {
         return new TransacaoDAOH2();
+    }
+    
+    @Override
+    public IOfertaDAO getOfertaDAO() {
+        return new OfertaDAOH2();
     }
 }

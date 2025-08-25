@@ -9,6 +9,7 @@ import dao.IDefeitoDAO;
 import dao.IDenunciaDAO;
 import dao.IItemDAO;
 import dao.IMaterialDAO;
+import dao.IOfertaDAO;
 import dao.IPerfilDAO;
 import dao.IReputacaoDAO;
 import dao.ITransacaoDAO;
@@ -29,6 +30,7 @@ public abstract class IDAOFactory {
     public abstract IReputacaoDAO getReputacaoDAO();
     public abstract ITransacaoDAO getTransacaoDAO();
     public abstract IUsuarioDAO getUsuarioDAO();
+    public abstract IOfertaDAO getOfertaDAO();
     
     public static IDAOFactory getDAOFactory(String sgbd) {
         if (sgbd.equalsIgnoreCase("SQLite")) {
