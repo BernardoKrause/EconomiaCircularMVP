@@ -22,6 +22,7 @@ public class Item {
     private Integer numeroCiclo;
     private List<Defeito> defeitos;
     private LocalDateTime publicadoEm;
+    private List<Oferta> ofertas;
     
     private Vendedor vendedor;
 
@@ -60,6 +61,7 @@ public class Item {
         this.MCIItem=0.0;
         this.numeroCiclo=0;
         this.defeitos = new ArrayList<Defeito>();
+        this.ofertas = new ArrayList<Oferta>();
         this.vendedor = null;
     }
 
@@ -98,6 +100,7 @@ public class Item {
         this.MCIItem=0.0;
         this.numeroCiclo=0;
         this.defeitos = defeitos;
+        this.ofertas = new ArrayList<Oferta>();
     }
 
     public Item(Integer id, String idC, String tipo, String subcategoria, String tamanho, String cor, Double peso, List<Material> composicao, Double precoBase, Double precoFinal, Double gpwBase, Double gpwEvitado, Double mciItem, Integer numeroCiclo, Timestamp publicadoEm) {
@@ -177,6 +180,10 @@ public class Item {
         return defeitos;
     }
     
+    public List<Oferta> getOfertas(){
+        return ofertas;
+    }
+    
     public Vendedor getVendedor(){
         return vendedor;
     }
@@ -238,6 +245,10 @@ public class Item {
 
     public void addDefeito(Defeito defeito){
         this.defeitos.add(defeito);
+    }
+    
+    public void addOferta(Oferta oferta){
+        this.ofertas.add(oferta);
     }
 
     @Override

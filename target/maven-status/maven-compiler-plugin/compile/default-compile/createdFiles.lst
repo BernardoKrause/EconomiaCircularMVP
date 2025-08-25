@@ -25,7 +25,6 @@ dao\IUsuarioDAO.class
 view\usuario\LoginView.class
 view\item\ShowItemView.class
 service\SistemaDefeitosService.class
-presenter\ItemPresenter$10.class
 state\home\AutenticadoState$1.class
 state\home\NaoAutenticadoState$2.class
 repository\database\DefeitosTipoRepository.class
@@ -107,6 +106,7 @@ presenter\SignupPresenter$1.class
 model\Vendedor.class
 state\home\CompradorState$4.class
 dao\sqlite\ReputacaoDAOSQLite.class
+view\item\ShowItemView$1.class
 util\factory\connection\DatabaseConnectionFactory.class
 presenter\ItemPresenter$1.class
 dao\sqlite\ItemDAOSQLite.class
@@ -125,6 +125,7 @@ service\UsuarioService.class
 factory\repository\RepositoryFactoryTeste.class
 model\Defeito.class
 state\home\CompradorState$1.class
+command\item\AbrirVerItemCommand.class
 command\perfil\CriarPerfilVendedorCommand.class
 presenter\ItemPresenter$5.class
 model\Transacao.class
@@ -163,12 +164,12 @@ repository\ICondutaRepository.class
 repository\teste\DefeitosTipoRepositoryTeste.class
 dao\h2\ReputacaoDAOH2.class
 presenter\VendedorPresenter$1.class
+command\Oferta\AbrirPublicarOfertaCommand.class
 model\Oferta.class
 dao\h2\DefeitoDAOH2.class
 service\SistemaReputacaoService.class
 presenter\ItemPresenter$6.class
 command\perfil\AcessarPerfilVendedorCommand.class
-presenter\ItemPresenter$9.class
 view\HomeView.class
 command\item\AbrirItensPublicadosCommand.class
 service\ItemService.class

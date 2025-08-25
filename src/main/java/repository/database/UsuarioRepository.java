@@ -30,7 +30,7 @@ public class UsuarioRepository implements IUsuarioRepository {
     }
 
     @Override
-    public Optional<Usuario> buscarUsuario(String id) throws SQLException {
+    public Optional<Usuario> buscarUsuario(Integer id) throws SQLException {
         return usuarioDAO.buscaPorId(Integer.valueOf(id));
     }
 

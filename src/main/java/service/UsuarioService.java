@@ -4,6 +4,7 @@
  */
 package service;
 
+import factory.repository.SeletorRepositoryFactory;
 import java.sql.SQLException;
 import java.util.Optional;
 import model.Usuario;
@@ -46,5 +47,10 @@ public class UsuarioService {
             throw new RuntimeException("Email e senha não correspondem à um usuário.");
         }
     }
-
+    
+    public void completarUsuario(Usuario usuario) throws SQLException{
+        usuario.addPerfil(SeletorRepositoryFactory.obterInstancia().criarPerfilVendedorRepository().buscarPorIdUsuario(usuario.getId()).get());
+        
+        usuario.addPerfil(SeletorRepositoryFactory.obterInstancia().criarPerfilCompradorRepository().buscarPorIdUsuario(usuario.getId()).get());
+    }
 }

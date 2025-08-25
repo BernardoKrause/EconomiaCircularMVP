@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,21 +26,32 @@ public class ReputacaoDAOSQLite implements IReputacaoDAO {
     @Override
     public void criar(Reputacao reputacao) throws SQLException {
         String sql = "INSERT INTO reputacoes (estrelas, beneficioClimatico, nivel) "
-                   + "VALUES (?, ?, ?)";
+                + "VALUES (?, ?, ?)";
+
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             pstmt.setDouble(1, reputacao.getEstrelas());
             pstmt.setDouble(2, reputacao.getBeneficio());
             pstmt.setString(3, reputacao.getNivel());
             pstmt.executeUpdate();
+
+            // Recuperar o ID gerado
+            try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    int idGerado = generatedKeys.getInt(1);
+                    reputacao.setIdReputacao(idGerado);
+                } else {
+                    throw new SQLException("Falha ao criar reputação, nenhum ID obtido.");
+                }
+            }
         }
     }
-    
+
     @Override
     public Optional<Reputacao> buscaPorPerfil(Perfil perfil) throws SQLException {
         String sql = """
-                    SELECT * FROM reputacoes r
+                    SELECT r.* FROM reputacoes r
                     LEFT JOIN vendedores v ON v.idReputacao = r.idReputacao
                     LEFT JOIN compradores c ON c.idReputacao = r.idReputacao
                     WHERE v.sistemId = ? OR c.sistemId = ?
@@ -53,11 +65,12 @@ public class ReputacaoDAOSQLite implements IReputacaoDAO {
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     Reputacao reputacao = new Reputacao(
-                        rs.getDouble("estrelas"),
-                        rs.getDouble("beneficioClimatico"),
-                        rs.getString("nivel")
+                            rs.getDouble("estrelas"),
+                            rs.getDouble("beneficioClimatico"),
+                            rs.getString("nivel")
                     );
-                    
+                    reputacao.setIdReputacao(rs.getInt("idReputacao"));
+
                     return Optional.of(reputacao);
                 }
             }
@@ -72,26 +85,26 @@ public class ReputacaoDAOSQLite implements IReputacaoDAO {
         String sql = "SELECT * FROM reputacoes";
 
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
 
-            try (ResultSet rs = pstmt.executeQuery()) {
-                while (rs.next()) {
-                    reputacoes.add(new Reputacao(
+            while (rs.next()) {
+                Reputacao reputacao = new Reputacao(
                         rs.getDouble("estrelas"),
                         rs.getDouble("beneficioClimatico"),
                         rs.getString("nivel")
-                    ));
-                }
-                
-                return reputacoes;
+                );
+                reputacao.setIdReputacao(rs.getInt("idReputacao"));
+                reputacoes.add(reputacao);
             }
         }
+        return reputacoes;
     }
 
     @Override
     public void atualizar(Reputacao reputacao) throws SQLException {
-        String sql = "UPDATE reputacoes SET estrelas = ?, beneficioClimatico = ?, nivel = ?"
-                   + "WHERE idReputacao = ?";
+        String sql = "UPDATE reputacoes SET estrelas = ?, beneficioClimatico = ?, nivel = ? "
+                + "WHERE idReputacao = ?";
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -101,7 +114,7 @@ public class ReputacaoDAOSQLite implements IReputacaoDAO {
             pstmt.setInt(4, reputacao.getId());
             pstmt.executeUpdate();
 
-        } 
+        }
     }
 
     @Override
@@ -114,5 +127,5 @@ public class ReputacaoDAOSQLite implements IReputacaoDAO {
             pstmt.executeUpdate();
         }
     }
-    
+
 }

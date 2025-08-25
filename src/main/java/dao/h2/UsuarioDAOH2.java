@@ -51,7 +51,7 @@ public class UsuarioDAOH2 implements IUsuarioDAO {
                     boolean admin = rs.getInt("eAdmin") == 1; 
 
                     Usuario usuario = new Usuario(
-                        rs.getString("idUsuario"),
+                        rs.getInt("idUsuario"),
                         rs.getString("nome"),
                         rs.getString("email"),
                         rs.getString("senha"),
@@ -79,7 +79,7 @@ public class UsuarioDAOH2 implements IUsuarioDAO {
                 boolean admin = rs.getInt("eAdmin") == 1;
 
                 Usuario usuario = new Usuario(
-                        rs.getString("idUsuario"),
+                        rs.getInt("idUsuario"),
                         rs.getString("nome"),
                         rs.getString("email"),
                         rs.getString("senha"),
@@ -106,7 +106,7 @@ public class UsuarioDAOH2 implements IUsuarioDAO {
             pstmt.setString(3, usuario.getTelefone());
             pstmt.setString(4, usuario.getSenha());
             pstmt.setInt(5, usuario.isAdmin() ? 1 : 0);
-            pstmt.setInt(6, Integer.parseInt(usuario.getId()));
+            pstmt.setInt(6, usuario.getId());
             pstmt.executeUpdate();
         } 
     }
@@ -136,7 +136,7 @@ public class UsuarioDAOH2 implements IUsuarioDAO {
                     boolean admin = rs.getInt("eAdmin") == 1;
                     
                     Usuario usuario = new Usuario(
-                        rs.getString("idUsuario"),
+                        rs.getInt("idUsuario"),
                         rs.getString("nome"),
                         rs.getString("email"),
                         rs.getString("senha"),

@@ -37,7 +37,7 @@ public class HomePresenter {
         return view.getDesktopPane();
     }
     
-    public void entrarUsuario(Usuario usuarioAutenticado){
+    public void entrarUsuario(Usuario usuarioAutenticado) throws SQLException{
         GerenciadorTelas.getInstancia().removeTelasTipo("Usuario");
         estado = new AutenticadoState(this, usuarioAutenticado); 
     }
