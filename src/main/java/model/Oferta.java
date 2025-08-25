@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
  *
  * @author caiof
  */
-class Oferta {
+public class Oferta {
     private Item item;
     private Comprador comprador;
     private Double valorOferta;

@@ -39,7 +39,7 @@ import view.item.ShowItensView;
 public class ItemPresenter extends AbstractPresenter {
 
     private ItemService itemService;
-    PerfilService perfilService;
+    private PerfilService perfilService;
     private Perfil perfil;
     private String tipoTela;
     private String nomeTela;
