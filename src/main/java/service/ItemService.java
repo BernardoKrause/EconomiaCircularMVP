@@ -9,10 +9,10 @@ import java.sql.SQLException;
 import java.util.List;
 import model.Item;
 import model.Material;
+import model.Oferta;
 import model.Vendedor;
 import repository.IDefeitosTipoRepository;
 import repository.IItemRepository;
-import repository.teste.DefeitosTipoRepositoryTeste;
 
 /**
  *
@@ -23,12 +23,14 @@ public class ItemService {
     private final IDefeitosTipoRepository tiposDefeitoRepository;
     private final SistemaDefeitosService sistemaDefeitos;
     private final CalcularGPWService sistemaGPW;
+    private OfertaService ofertaService;
     
-    public ItemService(SistemaDefeitosService sistema, IDefeitosTipoRepository tiposDefeitosRepo, CalcularGPWService sistemaGPW) {
+    public ItemService(SistemaDefeitosService sistema, IDefeitosTipoRepository tiposDefeitosRepo, CalcularGPWService sistemaGPW, OfertaService ofertaService) {
         this.itemRepository = SeletorRepositoryFactory.obterInstancia().criarItemRepository();
         this.sistemaDefeitos = sistema;
         this.tiposDefeitoRepository = tiposDefeitosRepo;
         this.sistemaGPW=sistemaGPW;
+        this.ofertaService=ofertaService;
     }
     
     public void criar(Item item, List<String> defeitos, Vendedor vendedor) throws SQLException {
@@ -39,7 +41,7 @@ public class ItemService {
             item.gerarIdC(itemRepository.buscarQuantidadeItens());
             itemRepository.adicionarItem(item);
         } catch (SQLException ex) {
-            throw new RuntimeException("Erro ao criar item" + ex);
+            throw new RuntimeException("Erro ao criar item " + ex);
         }
     }
     
@@ -104,5 +106,9 @@ public class ItemService {
         } catch (SQLException ex) {
             throw ex;
         }
+    }
+    
+    public List<Oferta> getOfertasPorItem(Item item){
+        return ofertaService.getOfertasPorItem(item);
     }
 }

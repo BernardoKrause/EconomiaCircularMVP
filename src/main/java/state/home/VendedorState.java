@@ -43,7 +43,7 @@ public class VendedorState extends HomePresenterState{
         resetMenuItemActions(view.getMItemAcessarPerfilComprador());
         resetMenuItemActions(view.getMIVerItem());
         resetMenuItemActions(view.getMItemSairUsuario());
-        resetMenuItemActions(view.getMIVerItem());
+        resetMenuItemActions(view.getMIItemPublicarItem());
         
         view.getMItemVerPerfilVendedor().addActionListener(new ActionListener() {
             @Override
@@ -115,6 +115,7 @@ public class VendedorState extends HomePresenterState{
         view.getMItemCriarPerfilVendedor().setVisible(false);
         view.getMItemVerPerfilVendedor().setVisible(true);
         view.getMItemVerPerfilComprador().setVisible(false);
+        view.getMIItemPublicarItem().setVisible(true);
         if (usuario.getPerfilComprador().isEmpty()) {
             view.getMItemAcessarPerfilComprador().setVisible(false);
             view.getMItemCriarPerfilComprador().setVisible(true);
@@ -128,7 +129,7 @@ public class VendedorState extends HomePresenterState{
     @Override
     public void criarPerfilComprador() throws SQLException {
         IPerfilRepository perfilRepository = SeletorRepositoryFactory.obterInstancia().criarPerfilCompradorRepository();
-        new CriarPerfilVendedorCommand(usuario,perfilRepository).executar();
+        new CriarPerfilCompradorCommand(usuario,perfilRepository).executar();
         view.getMItemAcessarPerfilComprador().setVisible(true); 
         view.getMItemCriarPerfilComprador().setVisible(false); 
     }

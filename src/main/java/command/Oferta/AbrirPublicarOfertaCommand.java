@@ -2,15 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package command.item;
+package command.Oferta;
 
 import command.ICommand;
+import command.item.AbrirItensPublicadosCommand;
 import factory.repository.SeletorRepositoryFactory;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDesktopPane;
+import model.Comprador;
+import model.Item;
 import model.Perfil;
-import presenter.GerenciadorTelas;;
-import presenter.ItemPresenter;
+import presenter.GerenciadorTelas;
+import presenter.OfertaPresenter;
 import repository.teste.DefeitosTipoRepositoryTeste;
 import service.CalcularGPWService;
 import service.ItemService;
@@ -23,15 +28,18 @@ import service.SistemaDefeitosService;
  *
  * @author caiof
  */
-public abstract class ItemCommand implements ICommand{
+public class AbrirPublicarOfertaCommand implements ICommand{
     protected Perfil perfil;
     protected PerfilService service;
     protected JDesktopPane desktop;
-    protected ItemPresenter presenter;
+    protected OfertaPresenter presenter;
     protected ItemService itemService;
+    protected OfertaService ofertaService;
+    private Item item;
     
-    public ItemCommand(Perfil perfil) throws SQLException {
+    public AbrirPublicarOfertaCommand(Perfil perfil, Item item) throws SQLException {
         this.perfil = perfil;
+        this.item=item;
         this.service = new PerfilVendedorService(
                 SeletorRepositoryFactory.obterInstancia().criarReputacaoRepository(), 
                 SeletorRepositoryFactory.obterInstancia().criarCondutaRepository(), 
@@ -44,9 +52,9 @@ public abstract class ItemCommand implements ICommand{
         DefeitosTipoRepositoryTeste tiposDefeitosRepo = new DefeitosTipoRepositoryTeste();
         SistemaDefeitosService sysDefeito = new SistemaDefeitosService();
         CalcularGPWService sistemaGPW = new CalcularGPWService();
-        OfertaService ofertaService = new OfertaService();
+        this.ofertaService = new OfertaService();
         this.itemService = new ItemService(sysDefeito, tiposDefeitosRepo, sistemaGPW, ofertaService);
-        this.presenter=new ItemPresenter(itemService, perfil);
+        this.presenter=new OfertaPresenter(item, (Comprador) perfil, ofertaService);
 
     }
 
@@ -55,5 +63,15 @@ public abstract class ItemCommand implements ICommand{
      * @throws SQLException
      */
     @Override
-    public abstract void executar() throws SQLException;
+    public void executar() throws SQLException {
+        String tipoTela="Comprador";
+        
+        try {
+            presenter.createOferta(service);
+        } catch (Exception ex) {
+            Logger.getLogger(AbrirItensPublicadosCommand.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        GerenciadorTelas.getInstancia().addTelaAberta(tipoTela, "PublicarOferta", presenter);
+        desktop.add(presenter.getView());    
+    }
 }

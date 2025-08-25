@@ -58,7 +58,7 @@ public abstract class Perfil {
     }
     
     public boolean isComprador() {
-        return usuario.getPerfilVendedor().get().equals(this);
+        return usuario.getPerfilComprador().get().equals(this);
     }
     
     abstract void setSystemId(int id);
