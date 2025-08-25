@@ -133,7 +133,7 @@ public class CompradorState extends HomePresenterState{
     
     @Override
     public void verItens() throws SQLException{
-        Perfil perfil = usuario.getPerfilVendedor().get();
+        Perfil perfil = usuario.getPerfilComprador().get();
         new AbrirItensPublicadosCommand(perfil).executar();
     }
 }

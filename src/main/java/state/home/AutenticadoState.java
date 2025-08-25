@@ -26,7 +26,9 @@ public class AutenticadoState extends HomePresenterState{
     private UsuarioService usuarioService;
     public AutenticadoState(HomePresenter presenter, Usuario usuarioAutenticado) throws SQLException {
         super(presenter, usuarioAutenticado);
-        //new UsuarioService(SeletorRepositoryFactory.obterInstancia().criarUsuarioRepository()).completarUsuario(usuario);
+        
+        new UsuarioService(SeletorRepositoryFactory.obterInstancia().criarUsuarioRepository()).completarUsuario(usuario);
+        
         setVisibles();
             
         resetMenuItemActions(view.getMItemCriarPerfilComprador());

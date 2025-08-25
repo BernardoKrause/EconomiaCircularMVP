@@ -146,6 +146,7 @@ dao\ITransacaoDAO.class
 repository\teste\ReputacaoRepositoryTeste.class
 command\item\AbrirCadastroItemCommand.class
 util\factory\connection\H2DatabaseConnectionFactory.class
+repository\database\OfertaRepository.class
 view\PerfilView$5.class
 factory\repository\IRepositoryFactory.class
 state\home\AutenticadoState$3.class
