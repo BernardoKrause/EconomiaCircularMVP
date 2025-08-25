@@ -102,14 +102,8 @@ public class CompradorState extends HomePresenterState{
         view.getMItemVerPerfilVendedor().setVisible(false);
         view.getMItemVerPerfilComprador().setVisible(true);
         view.getMIItemPublicarItem().setVisible(false);
-        if (usuario.getPerfilVendedor().isEmpty()) {
-            view.getMItemAcessarPerfilVendedor().setVisible(false);
-            view.getMItemCriarPerfilVendedor().setVisible(true);
-        }
-        else{
-            view.getMItemAcessarPerfilVendedor().setVisible(true);
-            view.getMItemCriarPerfilVendedor().setVisible(false);
-        }
+        view.getMItemCriarPerfilVendedor().setVisible(true);
+        view.getMItemAcessarPerfilVendedor().setVisible(true);
     }
     
     @Override
