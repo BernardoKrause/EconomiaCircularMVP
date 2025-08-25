@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
  * @author caiof
  */
 public class Oferta {
+    private Integer id;
     private Item item;
     private Comprador comprador;
     private Double valorOferta;
@@ -23,6 +24,10 @@ public class Oferta {
         this.valorOferta=valorOferta;
         this.dataOferta=LocalDateTime.now();
         this.status='W';
+    }
+    
+    public Integer getId(){
+        return id;
     }
     
     public Item getItem(){
@@ -51,5 +56,9 @@ public class Oferta {
     
     public void setNegado(){
         this.status='D';
+    }
+    
+    public void setID(Integer id){
+        this.id=id;
     }
 }

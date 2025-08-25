@@ -8,6 +8,7 @@ import repository.ICondutaRepository;
 import repository.IDefeitosTipoRepository;
 import repository.IDenunciaRepository;
 import repository.IItemRepository;
+import repository.IOfertaRepository;
 import repository.IReputacaoRepository;
 import repository.IUsuarioRepository;
 import repository.IPerfilRepository;
@@ -25,4 +26,5 @@ public interface IRepositoryFactory {
     IReputacaoRepository criarReputacaoRepository();
     ICondutaRepository criarCondutaRepository();
     IPerfilRepository criarPerfilCompradorRepository();
+    IOfertaRepository criarOfertaRepository();
 }

@@ -31,15 +31,10 @@ public class Comprador extends Perfil {
     public Comprador(Integer id, String sistemId, Reputacao reputacao) {
         super(id, sistemId, reputacao);
     }
-    /*
-    public void enviarOferta (Item item, Double valor) {
-        
-    }
     
-    public void enviarReclamcao(Item item, String reclamacao) {
-        
+    public void addOferta(Oferta oferta){
+        ofertas.add(oferta);
     }
-    */
 
     @Override
     void setSystemId(int id) {

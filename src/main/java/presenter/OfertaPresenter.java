@@ -6,11 +6,13 @@ package presenter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import model.Comprador;
 import model.Item;
 import model.Perfil;
 import model.Oferta;
+import service.OfertaService;
 import service.PerfilService;
 import view.item.FormOfertaView;
 
@@ -20,7 +22,7 @@ import view.item.FormOfertaView;
  */
 public class OfertaPresenter extends AbstractPresenter{
     private PerfilService perfilService;
-    private OfertaService ofertaService
+    private OfertaService ofertaService;
     private String nomeTela;
     private Perfil perfil;
     private Item item;
@@ -68,17 +70,19 @@ public class OfertaPresenter extends AbstractPresenter{
         this.view=ofertaView;
     }
     
-    public void ofertar(){
+    public void ofertar() throws SQLException{
         FormOfertaView ofertaView = (FormOfertaView)view;
         Double valor = Double.valueOf(ofertaView.getTxtValor().getText());
         
         Oferta oferta = new Oferta(item,(Comprador)perfil,valor);
                 
         try{
-            ofertaService
+            ofertaService.criar(oferta);
             if(valor<=item.getPrecoFinal()*0.99 && valor>=item.getPrecoFinal()*0.80){
                 perfilService.atualizarReputacao(perfil, "Oferta dentro do intervalo permitido");
             }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(ofertaView, ex);
         }
     }
     
