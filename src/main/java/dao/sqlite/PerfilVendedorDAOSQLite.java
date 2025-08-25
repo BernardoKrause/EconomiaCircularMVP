@@ -47,8 +47,8 @@ public class PerfilVendedorDAOSQLite implements IPerfilDAO {
                     r.beneficioClimatico AS reputacao_beneficio,
                     r.nivel AS reputacao_nivel
                     FROM vendedores v
-                    LEFT JOIN reputacoes r ON c.idReputacao = r.idReputacao 
-                    LEFT JOIN usuarios u ON u.idPerfilVendedor = c.idPerfilVendedor
+                    LEFT JOIN reputacoes r ON v.idReputacao = r.idReputacao 
+                    LEFT JOIN usuarios u ON u.idPerfilVendedor = v.idPerfilVendedor
                     WHERE u.idUsuario = ?""";
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -85,7 +85,7 @@ public class PerfilVendedorDAOSQLite implements IPerfilDAO {
                    r.beneficioClimatico AS reputacao_beneficio,
                    r.nivel AS reputacao_nivel
             FROM vendedores v
-            LEFT JOIN reputacoes r ON c.idReputacao = r.idReputacao
+            LEFT JOIN reputacoes r ON v.idReputacao = r.idReputacao
             """;
 
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
