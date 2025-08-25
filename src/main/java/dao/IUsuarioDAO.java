@@ -22,4 +22,5 @@ public interface IUsuarioDAO {
     public void atualizar(Usuario usuario) throws SQLException;
     public void deletar(Integer id) throws SQLException;
     public Optional<Usuario> buscaPorEmail(String email) throws SQLException;
+    public boolean emailExiste(String email) throws SQLException;
 }

@@ -80,7 +80,7 @@ public class SQLiteDatabaseConnectionFactory implements DatabaseConnectionFactor
                     telefone TEXT,
                     senha TEXT NOT NULL,
                     eAdmin INTEGER DEFAULT 0,
-                    criado_em TEXT,
+                    criado_em DATETIME DEFAULT CURRENT_TIMESTAMP,
                     idPerfilComprador INTEGER,
                     idPerfilVendedor INTEGER,
                     FOREIGN KEY (idPerfilComprador) REFERENCES compradores(idPerfilComprador),
@@ -100,6 +100,7 @@ public class SQLiteDatabaseConnectionFactory implements DatabaseConnectionFactor
                     gpwEvitado REAL,
                     mciItem REAL,
                     numeroCiclo INTEGER,
+                    publicado_em DATETIME DEFAULT CURRENT_TIMESTAMP,
                     idPerfilVendedor INTEGER,
                     idTipo INTEGER,
                     FOREIGN KEY (idPerfilVendedor) REFERENCES vendedores(idPerfilVendedor),
@@ -145,7 +146,7 @@ public class SQLiteDatabaseConnectionFactory implements DatabaseConnectionFactor
                 """
                 CREATE TABLE IF NOT EXISTS ofertas (
                     idOferta INTEGER PRIMARY KEY AUTOINCREMENT,
-                    dataOferta TEXT,
+                    dataOferta DATETIME DEFAULT CURRENT_TIMESTAMP,
                     valorOferta REAL,
                     status TEXT,
                     idItem INTEGER,
@@ -158,8 +159,8 @@ public class SQLiteDatabaseConnectionFactory implements DatabaseConnectionFactor
                 CREATE TABLE IF NOT EXISTS transacoes (
                     idTransacao INTEGER PRIMARY KEY AUTOINCREMENT,
                     idC TEXT UNIQUE,
-                    dataInicio TEXT,
-                    dataTermino TEXT,
+                    dataInicio DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    dataTermino DATETIME,
                     comentarioVendedor TEXT,
                     comentarioComprador TEXT,
                     idPerfilVendedor INTEGER,
@@ -214,7 +215,6 @@ public class SQLiteDatabaseConnectionFactory implements DatabaseConnectionFactor
             }
             
             System.out.println("Banco de dados inicializado com sucesso.");
-            System.out.println("Materiais inseridos: Algodão, Poliéster, Couro, Metal, Plástico, Outros");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

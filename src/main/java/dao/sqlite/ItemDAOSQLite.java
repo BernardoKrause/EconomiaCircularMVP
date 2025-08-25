@@ -1,6 +1,5 @@
 package dao.sqlite;
 
-
 import dao.sqlite.UsuarioDAOSQLite;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,7 +27,8 @@ public class ItemDAOSQLite implements IItemDAO {
     @Override
     public void criar(Item item) throws SQLException {
         String sqlItem = "INSERT INTO itens "
-                    + "(idC, tipo, subcategoria, tamanho, cor, peso, precoBase, precoFinal, gpwEvitado, mciItem, numeroCiclo, idPerfilVendedor, idTipo) "
+                    + "(idC, tipo, subcategoria, tamanho, cor, peso, precoBase, precoFinal, "
+                    + "gpwEvitado, mciItem, numeroCiclo, idPerfilVendedor, idTipo) "
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
         String sqlItemMateriais = "INSERT INTO item_materiais (idItem, idMaterial, percentual) VALUES (?, ?, ?)";
@@ -89,7 +89,7 @@ public class ItemDAOSQLite implements IItemDAO {
     public List<Item> buscaTodos() throws SQLException {
         List<Item> itens = new ArrayList<>();
         String sqlItem = "SELECT * FROM itens";
-        String sqlMateriais = "SELECT m.idMaterial, m.tipo, m.fatorEmissao, im.percentual " +
+        String sqlMateriais = "SELECT m.idMaterial, m.descricao, m.fatorEmissao, im.percentual " +
                               "FROM item_materiais im " +
                               "INNER JOIN materiais m ON im.idMaterial = m.idMaterial " +
                               "WHERE im.idItem = ?";
@@ -107,7 +107,7 @@ public class ItemDAOSQLite implements IItemDAO {
                     while (rsMateriais.next()) {
                         Material material = new Material(
                             rsMateriais.getInt("idMaterial"),
-                            rsMateriais.getString("tipo"),
+                            rsMateriais.getString("descricao"),
                             rsMateriais.getDouble("fatorEmissao"),
                             rsMateriais.getDouble("percentual")
                         );
@@ -129,7 +129,8 @@ public class ItemDAOSQLite implements IItemDAO {
                     rsItem.getDouble("GPWBase"),
                     rsItem.getDouble("GPWEvitado"),
                     rsItem.getDouble("MCIItem"),
-                    rsItem.getInt("numeroCiclo")
+                    rsItem.getInt("numeroCiclo"),
+                    rsItem.getTimestamp("publicado_em")
                 );
 
                 itens.add(item);
@@ -141,7 +142,7 @@ public class ItemDAOSQLite implements IItemDAO {
     @Override
     public Optional<Item> buscaPorId(Integer id) throws SQLException {
         String sqlItem = "SELECT * FROM itens WHERE idItem = ?";
-        String sqlMateriais = "SELECT m.idMaterial, m.tipo, m.fatorEmissao, im.percentual " +
+        String sqlMateriais = "SELECT m.idMaterial, m.descricao, m.fatorEmissao, im.percentual " +
                               "FROM item_materiais im " +
                               "INNER JOIN materiais m ON im.idMaterial = m.idMaterial " +
                               "WHERE im.idItem = ?";
@@ -161,7 +162,7 @@ public class ItemDAOSQLite implements IItemDAO {
                         while (rsMateriais.next()) {
                             Material material = new Material(
                                 rsMateriais.getInt("idMaterial"),
-                                rsMateriais.getString("tipo"),
+                                rsMateriais.getString("descricao"),
                                 rsMateriais.getDouble("fatorEmissao"),
                                 rsMateriais.getDouble("percentual")
                             );
@@ -177,13 +178,14 @@ public class ItemDAOSQLite implements IItemDAO {
                         rsItem.getString("tamanho"),
                         rsItem.getString("cor"),
                         rsItem.getDouble("peso"),
-                        materiais,
+                        materiais, 
                         rsItem.getDouble("precoBase"),
                         rsItem.getDouble("precoFinal"),
                         rsItem.getDouble("GPWBase"),
                         rsItem.getDouble("GPWEvitado"),
                         rsItem.getDouble("MCIItem"),
-                        rsItem.getInt("numeroCiclo")
+                        rsItem.getInt("numeroCiclo"),
+                        rsItem.getTimestamp("publicado_em")
                     );
 
                     return Optional.of(item);
@@ -310,7 +312,7 @@ public class ItemDAOSQLite implements IItemDAO {
     public List<Item> buscaPorVendedor(Integer idVendedor) throws SQLException {
         List<Item> itens = new ArrayList<>();
         String sqlItem = "SELECT * FROM itens WHERE idPerfilVendedor = ?";
-        String sqlMateriais = "SELECT m.idMaterial, m.tipo, m.fatorEmissao, im.percentual " +
+        String sqlMateriais = "SELECT m.idMaterial, m.descricao, m.fatorEmissao, im.percentual " +
                               "FROM item_materiais im " +
                               "INNER JOIN materiais m ON im.idMaterial = m.idMaterial " +
                               "WHERE im.idItem = ?";
@@ -331,7 +333,7 @@ public class ItemDAOSQLite implements IItemDAO {
                         while (rsMateriais.next()) {
                             Material material = new Material(
                                 rsMateriais.getInt("idMaterial"),
-                                rsMateriais.getString("tipo"),
+                                rsMateriais.getString("descricao"),
                                 rsMateriais.getDouble("fatorEmissao"),
                                 rsMateriais.getDouble("percentual")
                             );
@@ -347,15 +349,73 @@ public class ItemDAOSQLite implements IItemDAO {
                         rsItem.getString("tamanho"),
                         rsItem.getString("cor"),
                         rsItem.getDouble("peso"),
-                        materiais,
+                        materiais, 
                         rsItem.getDouble("precoBase"),
                         rsItem.getDouble("precoFinal"),
                         rsItem.getDouble("GPWBase"),
                         rsItem.getDouble("GPWEvitado"),
                         rsItem.getDouble("MCIItem"),
-                        rsItem.getInt("numeroCiclo")
+                        rsItem.getInt("numeroCiclo"),
+                        rsItem.getTimestamp("publicado_em")
                     );
 
+                    itens.add(item);
+                }
+            }
+        }
+        return itens;
+    }
+    
+    public List<Item> buscaRecentes(int limite) throws SQLException {
+        List<Item> itens = new ArrayList<>();
+        String sqlItem = "SELECT * FROM itens ORDER BY publicado_em DESC LIMIT ?";
+        String sqlMateriais = "SELECT m.idMaterial, m.descricao, m.fatorEmissao, im.percentual " +
+                              "FROM item_materiais im " +
+                              "INNER JOIN materiais m ON im.idMaterial = m.idMaterial " +
+                              "WHERE im.idItem = ?";
+
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
+             PreparedStatement pstmtItem = conn.prepareStatement(sqlItem);
+             PreparedStatement pstmtMateriais = conn.prepareStatement(sqlMateriais)) {
+
+            pstmtItem.setInt(1, limite);
+
+            try (ResultSet rsItem = pstmtItem.executeQuery()) {
+                while (rsItem.next()) {
+                    List<Material> materiais = new ArrayList<>();
+                    int idItem = rsItem.getInt("idItem");
+                    pstmtMateriais.setInt(1, idItem);
+
+                    try (ResultSet rsMateriais = pstmtMateriais.executeQuery()) {
+                        while (rsMateriais.next()) {
+                            Material material = new Material(
+                                rsMateriais.getInt("idMaterial"),
+                                rsMateriais.getString("descricao"),
+                                rsMateriais.getDouble("fatorEmissao"),
+                                rsMateriais.getDouble("percentual")
+                            );
+                            materiais.add(material);
+                        }
+                    }
+
+                    Item item = new Item(
+                        rsItem.getInt("idItem"),
+                        rsItem.getString("idC"),
+                        rsItem.getString("tipo"),
+                        rsItem.getString("subcategoria"),
+                        rsItem.getString("tamanho"),
+                        rsItem.getString("cor"),
+                        rsItem.getDouble("peso"),
+                        materiais, 
+                        rsItem.getDouble("precoBase"),
+                        rsItem.getDouble("precoFinal"),
+                        rsItem.getDouble("GPWBase"),
+                        rsItem.getDouble("GPWEvitado"),
+                        rsItem.getDouble("MCIItem"),
+                        rsItem.getInt("numeroCiclo"),
+                        rsItem.getTimestamp("publicado_em")
+                    );
+                    
                     itens.add(item);
                 }
             }

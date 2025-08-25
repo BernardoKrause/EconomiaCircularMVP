@@ -23,4 +23,5 @@ public interface IItemDAO {
     public void atualizar(Item item) throws SQLException;
     public void deletar(Integer id) throws SQLException;
     public Integer buscaIdTipo (String descricao) throws SQLException;
+    public List<Item> buscaRecentes(int limite) throws SQLException;
 }

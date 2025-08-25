@@ -14,9 +14,9 @@ import java.util.List;
 public class Comprador extends Perfil {
     private List<Oferta> ofertas;
     
-    public Comprador (Integer id) {
-        super(id);
-        setSystemId(id);
+    public Comprador (Usuario usuario) {
+        super(usuario);
+        this.sistemId=("C-"+usuario.getId());
         this.ofertas=new ArrayList<>();
     }
     
@@ -36,8 +36,4 @@ public class Comprador extends Perfil {
         ofertas.add(oferta);
     }
 
-    @Override
-    void setSystemId(int id) {
-        this.sistemId=("C-"+id);
-    }
 }

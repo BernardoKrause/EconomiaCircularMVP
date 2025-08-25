@@ -34,16 +34,17 @@ public class PerfilVendedorService extends PerfilService{
         }
         
         try {
-            Vendedor perfil = new Vendedor(perfilRepository.buscarTodosPerfis().size()+1);
+            Vendedor perfil = new Vendedor(usuario);
             usuario.addPerfil(perfil);
-            perfil.setUsuario(usuario);
             
-            Reputacao reputacao = new Reputacao(perfilRepository.buscarTodosPerfis().size()+1);
-            perfil.setReputacao(reputacao);
+            System.out.println("erro"); 
             
+            System.out.println("erro1");
             usuarioRepository.atualizarUsuario(usuario);
+            System.out.println("erro2");
             reputacaoRepository.adicionarReputacao(perfil.getReputacao());
-            perfilRepository.adicionarPerfil(perfil);   
+            System.out.println("erro3");
+            perfilRepository.adicionarPerfil(perfil);
         } catch (SQLException ex) {
             throw new RuntimeException("Seu Perfil não pode ser criado!");
         }    
