@@ -16,11 +16,13 @@ import dao.sqlite.UsuarioDAOSQLite;
 import dao.IDenunciaDAO;
 import dao.IItemDAO;
 import dao.IMaterialDAO;
+import dao.IOfertaDAO;
 import dao.IPerfilDAO;
 import dao.IReputacaoDAO;
 import dao.ITransacaoDAO;
 import dao.IUsuarioDAO;
 import dao.sqlite.MaterialDAOSQLite;
+import dao.sqlite.OfertaDAOSQLite;
 import dao.sqlite.ReputacaoDAOSQLite;
 import dao.sqlite.TransacaoDAOSQLite;
 
@@ -78,6 +80,11 @@ public class SQLiteDAOFactory extends IDAOFactory {
     @Override
     public ITransacaoDAO getTransacaoDAO() {
         return new TransacaoDAOSQLite();
+    }
+
+    @Override
+    public IOfertaDAO getOfertaDAO() {
+        return new OfertaDAOSQLite();
     }
     
 }

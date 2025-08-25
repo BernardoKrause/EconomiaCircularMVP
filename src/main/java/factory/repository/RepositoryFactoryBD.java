@@ -20,6 +20,7 @@ import repository.database.CondutaRepository;
 import repository.database.DefeitosTipoRepository;
 import repository.database.DenunciaRepository;
 import repository.database.ItemRepository;
+import repository.database.OfertaRepository;
 import repository.database.PerfilCompradorRepository;
 import repository.database.PerfilVendedorRepository;
 import repository.database.ReputacaoRepository;
@@ -118,9 +119,13 @@ public class RepositoryFactoryBD implements IRepositoryFactory{
     }
 
     @Override
-    //A fazer
     public IOfertaRepository criarOfertaRepository() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            return new OfertaRepository(daoFactory);
+        } catch (SQLException ex) {
+            Logger.getLogger(RepositoryFactoryBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null; 
     }
     
 }

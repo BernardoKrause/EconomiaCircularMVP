@@ -4,6 +4,7 @@
  */
 package repository;
 
+import java.sql.SQLException;
 import java.util.List;
 import model.Oferta;
 
@@ -13,8 +14,8 @@ import model.Oferta;
  */
 public interface IOfertaRepository {
 
-    public void adicionarOferta(Oferta oferta);
-    public void atualizarOferta(Oferta oferta);
-    public List<Oferta> buscarTodas();
-    public List<Oferta> buscarPorItem(String idC);
+    public void adicionarOferta(Oferta oferta) throws SQLException;
+    public void atualizarOferta(Oferta oferta) throws SQLException;
+    public List<Oferta> buscarTodas() throws SQLException;
+    public List<Oferta> buscarPorItem(String idC) throws SQLException;
 }

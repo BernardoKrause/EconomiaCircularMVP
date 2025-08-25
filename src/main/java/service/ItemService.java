@@ -108,7 +108,11 @@ public class ItemService {
         }
     }
     
-    public List<Oferta> getOfertasPorItem(Item item){
-        return ofertaService.getOfertasPorItem(item);
+    public List<Oferta> getOfertasPorItem(Item item) throws SQLException {
+        try {
+            return ofertaService.getOfertasPorItem(item);
+        } catch (SQLException ex) {
+            throw ex;
+        }
     }
 }
