@@ -22,6 +22,10 @@ public class NaoAutenticadoState extends HomePresenterState{
                 
         setVisibles();
         
+        
+        resetMenuItemActions(view.getMItemEntrarUsuario());
+        resetMenuItemActions(view.getMItemCadastrarUsuario());
+        
         view.getMItemEntrarUsuario().addActionListener(
             new ActionListener(){
                 @Override

@@ -1,13 +1,10 @@
 package command.perfil;
 
 
-import factory.repository.SeletorRepositoryFactory;
 import java.sql.SQLException;
+import java.util.Optional;
 import model.Usuario;
 import repository.IPerfilRepository;
-import repository.IReputacaoRepository;
-import service.PerfilService;
-import service.PerfilVendedorService;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -21,7 +18,7 @@ import service.PerfilVendedorService;
 public class CriarPerfilVendedorCommand extends PerfilCommand{
           
     public CriarPerfilVendedorCommand(Usuario usuario, IPerfilRepository perfilRepository)  throws SQLException {
-        super(usuario,perfilRepository);        
+        super(usuario,perfilRepository, Optional.of("Vendedor"));        
     }
 
     @Override

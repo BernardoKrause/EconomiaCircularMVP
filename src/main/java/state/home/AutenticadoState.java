@@ -4,17 +4,14 @@
  */
 package state.home;
 
+import command.perfil.AcessarPerfilCompradorCommand;
 import command.perfil.AcessarPerfilVendedorCommand;
 import command.perfil.CriarPerfilCompradorCommand;
 import command.perfil.CriarPerfilVendedorCommand;
-import command.usuario.SairUsuarioCommand;
 import factory.repository.SeletorRepositoryFactory;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Usuario;
 import presenter.HomePresenter;
@@ -30,6 +27,12 @@ public class AutenticadoState extends HomePresenterState{
         
         setVisibles();
             
+        resetMenuItemActions(view.getMItemCriarPerfilComprador());
+        resetMenuItemActions(view.getMItemAcessarPerfilComprador());
+        resetMenuItemActions(view.getMItemCriarPerfilVendedor());
+        resetMenuItemActions(view.getMItemAcessarPerfilVendedor());
+        resetMenuItemActions(view.getMItemSairUsuario());
+        
         view.getMItemCriarPerfilComprador().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -106,16 +109,16 @@ public class AutenticadoState extends HomePresenterState{
     
     @Override
     public void criarPerfilComprador() throws SQLException {
-//        IPerfilRepository perfilRepository = SeletorRepositoryFactory.obterInstancia().criarPerfilCompradorRepository();
-//        new CriarPerfilCompradorCommand(usuario,perfilRepository).executar();
-//        view.getMItemAcessarPerfilComprador().setVisible(true); 
-//        view.getMItemCriarPerfilComprador().setVisible(false); 
+        IPerfilRepository perfilRepository = SeletorRepositoryFactory.obterInstancia().criarPerfilCompradorRepository();
+        new CriarPerfilCompradorCommand(usuario,perfilRepository).executar();
+        view.getMItemAcessarPerfilComprador().setVisible(true); 
+        view.getMItemCriarPerfilComprador().setVisible(false); 
     }
     
     @Override
-    public void acessarPerfilComprador(){
-//        IPerfilRepository perfilRepository = SeletorRepositoryFactory.obterInstancia().criarPerfilCompradorRepository();
-//        new AcessarPerfilCompradorCommand(usuario,perfilRepository).executar();
+    public void acessarPerfilComprador() throws SQLException{
+        IPerfilRepository perfilRepository = SeletorRepositoryFactory.obterInstancia().criarPerfilCompradorRepository();
+        new AcessarPerfilCompradorCommand(usuario,perfilRepository).executar();
     }
     
     @Override

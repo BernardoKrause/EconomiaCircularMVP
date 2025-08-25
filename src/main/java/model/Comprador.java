@@ -4,14 +4,20 @@
  */
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author berna
  */
 public class Comprador extends Perfil {
+    private List<Oferta> ofertas;
     
     public Comprador (Integer id) {
         super(id);
+        setSystemId(id);
+        this.ofertas=new ArrayList<>();
     }
     
 //    public Comprador (String sistemId) {
@@ -25,15 +31,10 @@ public class Comprador extends Perfil {
     public Comprador(Integer id, String sistemId, Reputacao reputacao) {
         super(id, sistemId, reputacao);
     }
-    /*
-    public void enviarOferta (Item item, Double valor) {
-        
-    }
     
-    public void enviarReclamcao(Item item, String reclamacao) {
-        
+    public void addOferta(Oferta oferta){
+        ofertas.add(oferta);
     }
-    */
 
     @Override
     void setSystemId(int id) {

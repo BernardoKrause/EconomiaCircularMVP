@@ -15,17 +15,17 @@ import repository.IPerfilRepository;
  *
  * @author caiof
  */
-public class AcessarPerfilVendedorCommand extends PerfilCommand{
+public class AcessarPerfilCompradorCommand extends PerfilCommand{
     private HomePresenter presenter;
 
-    public AcessarPerfilVendedorCommand(Usuario usuario, IPerfilRepository perfilRepository) throws SQLException {
-        super(usuario,perfilRepository, Optional.of("Vendedor"));
+    public AcessarPerfilCompradorCommand(Usuario usuario, IPerfilRepository perfilRepository) throws SQLException {
+        super(usuario,perfilRepository,Optional.of("Comprador"));
         this.presenter = GerenciadorTelas.getInstancia().getPresenter();
     }
     
     @Override
     public void executar() throws SQLException {
-        presenter.acessarVendedor(usuario);
+        presenter.acessarComprador(usuario);
     }
     
 }

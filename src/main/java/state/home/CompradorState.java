@@ -6,19 +6,17 @@ package state.home;
 
 import command.item.AbrirCadastroItemCommand;
 import command.item.AbrirItensPublicadosCommand;
-import command.perfil.AbrirVerPerfilVendedorCommand;
-import command.perfil.AcessarPerfilCompradorCommand;
-import command.perfil.CriarPerfilCompradorCommand;
+import command.perfil.AbrirVerPerfilCompradorCommand;
+import command.perfil.AcessarPerfilVendedorCommand;
 import command.perfil.CriarPerfilVendedorCommand;
-import command.usuario.SairUsuarioCommand;
 import factory.repository.SeletorRepositoryFactory;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import model.Comprador;
 import model.Perfil;
 import model.Usuario;
-import model.Vendedor;
 import presenter.HomePresenter;
 import repository.IPerfilRepository;
 
@@ -26,67 +24,55 @@ import repository.IPerfilRepository;
  *
  * @author caiof
  */
-public class VendedorState extends HomePresenterState{
-    private Vendedor vendedor;
+public class CompradorState extends HomePresenterState{
+    private Comprador comprador;
     
-    public VendedorState(HomePresenter presenter, Usuario usuarioAutenticado) throws SQLException {
+    public CompradorState(HomePresenter presenter, Usuario usuarioAutenticado) throws SQLException {
         super(presenter, usuarioAutenticado);
     
-        this.vendedor= (Vendedor) usuario.getPerfilVendedor().get();
+        this.comprador= (Comprador) usuario.getPerfilComprador().get();
         
         setVisibles();
         
-        verPerfilVendedor();
+        verPerfilComprador();
         
-        resetMenuItemActions(view.getMItemVerPerfilVendedor());
-        resetMenuItemActions(view.getMItemCriarPerfilComprador());
-        resetMenuItemActions(view.getMItemAcessarPerfilComprador());
-        resetMenuItemActions(view.getMIVerItem());
+        resetMenuItemActions(view.getMItemVerPerfilComprador());
+        resetMenuItemActions(view.getMItemCriarPerfilVendedor());
+        resetMenuItemActions(view.getMItemAcessarPerfilVendedor());
         resetMenuItemActions(view.getMItemSairUsuario());
         resetMenuItemActions(view.getMIVerItem());
         
-        view.getMItemVerPerfilVendedor().addActionListener(new ActionListener() {
+        view.getMItemVerPerfilComprador().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    verPerfilVendedor();
+                    verPerfilComprador();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(view, ex);
                 }
             }
         });
         
-        view.getMItemCriarPerfilComprador().addActionListener(new ActionListener() {
+        view.getMItemCriarPerfilVendedor().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    criarPerfilComprador();
+                    criarPerfilVendedor();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(view, ex);
                 }
             }
         });
         
-        view.getMItemAcessarPerfilComprador().addActionListener(new ActionListener() {
+        view.getMItemAcessarPerfilVendedor().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    acessarPerfilComprador();
+                    acessarPerfilVendedor();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(view, ex);
                 }
             }
-        });
-        
-        view.getMIItemPublicarItem().addActionListener(new ActionListener() {
-           @Override
-           public  void actionPerformed(ActionEvent e) {
-               try {
-                    publicarItem();
-               } catch (Exception ex) {
-                   JOptionPane.showMessageDialog(view, ex);
-               }
-           }
         });
         
         view.getMIVerItem().addActionListener(new ActionListener() {
@@ -111,43 +97,37 @@ public class VendedorState extends HomePresenterState{
         view.getMItemEntrarUsuario().setVisible(false);
         view.getMItemCadastrarUsuario().setVisible(false);
         view.getMItemSairUsuario().setVisible(true);
-        view.getMItemAcessarPerfilVendedor().setVisible(false);
+        view.getMItemAcessarPerfilComprador().setVisible(false);
         view.getMItemCriarPerfilVendedor().setVisible(false);
-        view.getMItemVerPerfilVendedor().setVisible(true);
-        view.getMItemVerPerfilComprador().setVisible(false);
-        if (usuario.getPerfilComprador().isEmpty()) {
-            view.getMItemAcessarPerfilComprador().setVisible(false);
-            view.getMItemCriarPerfilComprador().setVisible(true);
+        view.getMItemVerPerfilVendedor().setVisible(false);
+        view.getMItemVerPerfilComprador().setVisible(true);
+        if (usuario.getPerfilVendedor().isEmpty()) {
+            view.getMItemAcessarPerfilVendedor().setVisible(false);
+            view.getMItemCriarPerfilVendedor().setVisible(true);
         }
         else{
-            view.getMItemAcessarPerfilComprador().setVisible(true);
-            view.getMItemCriarPerfilComprador().setVisible(false);
+            view.getMItemAcessarPerfilVendedor().setVisible(true);
+            view.getMItemCriarPerfilVendedor().setVisible(false);
         }
     }
     
     @Override
-    public void criarPerfilComprador() throws SQLException {
-        IPerfilRepository perfilRepository = SeletorRepositoryFactory.obterInstancia().criarPerfilCompradorRepository();
-        new CriarPerfilVendedorCommand(usuario,perfilRepository).executar();
-        view.getMItemAcessarPerfilComprador().setVisible(true); 
-        view.getMItemCriarPerfilComprador().setVisible(false); 
-    }
-    
-    @Override
-    public void acessarPerfilComprador() throws SQLException{
-        IPerfilRepository perfilRepository = SeletorRepositoryFactory.obterInstancia().criarPerfilCompradorRepository();
-        new AcessarPerfilCompradorCommand(usuario,perfilRepository).executar();
-    }
-    
-    public void verPerfilVendedor() throws SQLException{
+    public void criarPerfilVendedor() throws SQLException {
         IPerfilRepository perfilRepository = SeletorRepositoryFactory.obterInstancia().criarPerfilVendedorRepository();
-        new AbrirVerPerfilVendedorCommand(vendedor,perfilRepository).executar();
+        new CriarPerfilVendedorCommand(usuario,perfilRepository).executar();
+        view.getMItemAcessarPerfilVendedor().setVisible(true); 
+        view.getMItemCriarPerfilVendedor().setVisible(false); 
     }
     
     @Override
-    public void publicarItem() throws SQLException{
-        Perfil perfil = usuario.getPerfilVendedor().get();
-        new AbrirCadastroItemCommand(perfil).executar();
+    public void acessarPerfilVendedor() throws SQLException {
+        IPerfilRepository perfilRepository = SeletorRepositoryFactory.obterInstancia().criarPerfilVendedorRepository();
+        new AcessarPerfilVendedorCommand(usuario,perfilRepository).executar();
+    }
+    
+    public void verPerfilComprador() throws SQLException{
+        IPerfilRepository perfilRepository = SeletorRepositoryFactory.obterInstancia().criarPerfilVendedorRepository();
+        new AbrirVerPerfilCompradorCommand(comprador,perfilRepository).executar();
     }
     
     @Override
@@ -156,3 +136,4 @@ public class VendedorState extends HomePresenterState{
         new AbrirItensPublicadosCommand(perfil).executar();
     }
 }
+

@@ -4,13 +4,10 @@
  */
 package command.perfil;
 
-import factory.repository.SeletorRepositoryFactory;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Optional;
 import model.Usuario;
 import repository.IPerfilRepository;
-import service.PerfilService;
 
 /**
  *
@@ -18,16 +15,12 @@ import service.PerfilService;
  */
 public class CriarPerfilCompradorCommand extends PerfilCommand{
     public CriarPerfilCompradorCommand(Usuario usuario,IPerfilRepository perfilRepository) throws SQLException {
-        super(usuario,perfilRepository);
+        super(usuario,perfilRepository,Optional.of("Comprador"));
     }
     
     @Override
-    public void executar() {
-        try {
-            service.criar(usuario);
-        } catch (SQLException ex) {
-            Logger.getLogger(CriarPerfilCompradorCommand.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void executar() throws SQLException {
+        service.criar(usuario);
     }
     
 }

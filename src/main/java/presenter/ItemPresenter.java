@@ -5,6 +5,10 @@
 package presenter;
 
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Insets;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -13,7 +17,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JList;
@@ -22,6 +28,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.ListCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import model.Item;
 import model.Material;
 import model.Perfil;
@@ -39,7 +46,7 @@ import view.item.ShowItensView;
 public class ItemPresenter extends AbstractPresenter {
 
     private ItemService itemService;
-    PerfilService perfilService;
+    private PerfilService perfilService;
     private Perfil perfil;
     private String tipoTela;
     private String nomeTela;
@@ -48,14 +55,14 @@ public class ItemPresenter extends AbstractPresenter {
         this.itemService=itemService;
         this.perfil = perfil;
     }
-    
+
     public void createItem(PerfilService perfilService) throws SQLException{
         this.perfilService = perfilService;
         FormItemView formView = new FormItemView();
         tipoTela = "Vendedor";
         nomeTela = "CriarItem";
 
-        
+
         resetButtonActions(formView.getBtnPublicar());
         resetButtonActions(formView.getBtnCancelar());
 
@@ -69,7 +76,7 @@ public class ItemPresenter extends AbstractPresenter {
                 }
             }
         });
-        
+
         formView.getBtnCancelar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -80,7 +87,7 @@ public class ItemPresenter extends AbstractPresenter {
                 }
            }
         });
-        
+
         // precisa de um parametro pra informar o item
         JComboBox comboBoxTipo = formView.getCbTipos();
         for (String tipo : itemService.getListaTipos()) {
@@ -196,10 +203,10 @@ public class ItemPresenter extends AbstractPresenter {
                 }
            }
         });
-        
+
         List<Item> itens;
-        
-        itens = itemService.getItens(); 
+
+        itens = itemService.getItens();
         if (!listaExistente.isEmpty()){
             itens=listaExistente;
             tipoTela="Vendedor";
@@ -216,29 +223,106 @@ public class ItemPresenter extends AbstractPresenter {
             }
         };
 
+        JTable tabelaItens = itensView.getTbItens();
+        tabelaItens.setModel(model);
+
+
         for (Item item : itens) {
+            JButton btnVer = new JButton("V");
+            JButton btnAcao = new JButton(tipoTela.equals("Vendedor") ? "E" : "O");
+
+            btnVer.setMargin(new Insets(2, 6, 2, 6));
+            btnAcao.setMargin(new Insets(2, 6, 2, 6));
+            btnVer.setPreferredSize(new Dimension(40, 25));
+            btnAcao.setPreferredSize(new Dimension(40, 25));
+
+            resetButtonActions(btnVer);
+            resetButtonActions(btnAcao);
+            
+            btnVer.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        verItem(item);
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(itensView, ex);
+                    }
+                }
+            });
+
+            btnAcao.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        func2(item);
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(itensView, ex);
+                    }
+                }
+            });
+
+            List<JButton> botoes = new ArrayList<>();
+            botoes.add(btnVer);
+            botoes.add(btnAcao);
+
             Object[] linha = {
-                item.getTipo(),
-                item.getSubcategoria(),
-                item.getTamanho(),
-                item.getCor(),
-                item.getPrecoFinal(),
-                item.getVendedor().getSistemId(),
-                "botoes" 
+                    item.getTipo(),
+                    item.getSubcategoria(),
+                    item.getTamanho(),
+                    item.getCor(),
+                    item.getPrecoFinal(),
+                    item.getVendedor().getSistemId(),
+                    botoes
             };
             model.addRow(linha);
         }
 
-        JTable tabelaItens = itensView.getTbItens();
-        tabelaItens.setModel(model);
+        tabelaItens.getColumn("Ações").setCellRenderer(new TableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value,
+                                                           boolean isSelected, boolean hasFocus,
+                                                           int row, int column) {
+                JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
+                if (value instanceof List<?>) {
+                    for (Object obj : (List<?>) value) {
+                        if (obj instanceof JButton) {
+                            panel.add((JButton) obj);
+                        }
+                    }
+                }
+                return panel;
+            }
+        });
 
-        
+        tabelaItens.getColumn("Ações").setCellEditor(new DefaultCellEditor(new JCheckBox()) {
+            private JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
+
+            @Override
+            public Component getTableCellEditorComponent(JTable table, Object value,
+                                                         boolean isSelected, int row, int column) {
+                panel.removeAll();
+                if (value instanceof List<?>) {
+                    for (Object obj : (List<?>) value) {
+                        if (obj instanceof JButton) {
+                            panel.add((JButton) obj);
+                        }
+                    }
+                }
+                return panel;
+            }
+
+            @Override
+            public Object getCellEditorValue() {
+                return null;
+            }
+        });
+
         itensView.getSpItens().setViewportView(tabelaItens);
-        
+
         itensView.setVisible(true);
         this.view=itensView;
     }
-    
+
     public void publicar() throws Exception{
         FormItemView formView = (FormItemView)view;
         String tipo = String.valueOf(formView.getCbTipos().getSelectedItem());
@@ -250,9 +334,9 @@ public class ItemPresenter extends AbstractPresenter {
         String cor = formView.getTxtCor().getText();
         Double peso = Double.valueOf(formView.getTxtPeso().getText());
         Double precoBase = Double.valueOf(formView.getTxtPrecoBase().getText());
-        
+
         Double porcentagemTotal=0.0;
-        
+
         JPanel listaMaterialComposicao = formView.getPMateriais();
         List<Material> composicao = new ArrayList<>();
 
@@ -263,10 +347,10 @@ public class ItemPresenter extends AbstractPresenter {
                 String tipoMaterial = panel.getLblMaterial().getText();
                 Double percentual =  Double.valueOf(panel.getNumPercentual().getValue().toString());
                 Double fatorMaterial = itemService.getFatorMaterial(tipoMaterial);
-                
+
                 porcentagemTotal += percentual;
                 if(percentual != 0.0){
-                    composicao.add(new Material(tipoMaterial, fatorMaterial, percentual / 100)); 
+                    composicao.add(new Material(tipoMaterial, fatorMaterial, percentual / 100));
                 }
             }
         }
@@ -276,7 +360,7 @@ public class ItemPresenter extends AbstractPresenter {
                 "A soma das porcentagens deve ser igual a 100% (atual: " + porcentagemTotal + "%)");
             return;
         }
-        
+
         DefaultListModel<JCheckBox> model = (DefaultListModel<JCheckBox>) formView.getLTiposDefeito().getModel();
         List<String> defeitos = new ArrayList<>();
 
@@ -286,9 +370,9 @@ public class ItemPresenter extends AbstractPresenter {
                 defeitos.add(box.getText());
             }
         }
-        
+
         Item item = new Item(tipo,subcategoria,tamanho,cor,peso,composicao,precoBase);
-        
+
         try{
             itemService.criar(item, defeitos, (Vendedor)perfil);
             perfilService.atualizarReputacao(perfil, "Cadastro de item completo");
@@ -297,9 +381,21 @@ public class ItemPresenter extends AbstractPresenter {
             throw new RuntimeException("Erro ao criar item"+ex.getMessage());
         }
     }
-    
+
     public void cancelar() {
         GerenciadorTelas.getInstancia().removeTelaAberta(nomeTela);
     }
 
+    public void verItem(Item item){
+        
+        JOptionPane.showMessageDialog(view, "Ver detalhes do item: " + item.getTipo());
+    }
+
+    public void func2(Item item){
+        if(tipoTela.equals("Vendedor")){
+            JOptionPane.showMessageDialog(view, "Editar item: " + item.getTipo());
+        } else {
+            JOptionPane.showMessageDialog(view, "Comprar item: " + item.getTipo());
+        }
+    }
 }

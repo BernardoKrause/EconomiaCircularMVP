@@ -9,6 +9,7 @@ import javax.swing.JDesktopPane;
 import model.Usuario;
 import service.PerfilService;
 import state.home.AutenticadoState;
+import state.home.CompradorState;
 import state.home.HomePresenterState;
 import state.home.NaoAutenticadoState;
 import state.home.VendedorState;
@@ -49,6 +50,12 @@ public class HomePresenter {
         GerenciadorTelas.getInstancia().removeTelasTipo("Comprador");
         GerenciadorTelas.getInstancia().removeTelasTipo("Item");
         estado = new VendedorState(this,usuarioAutenticado);
+    }
+    
+    public void acessarComprador(Usuario usuarioAutenticado) throws SQLException{
+        GerenciadorTelas.getInstancia().removeTelasTipo("Vendedor");
+        GerenciadorTelas.getInstancia().removeTelasTipo("Item");
+        estado = new CompradorState(this,usuarioAutenticado);
     }
 
     public void setView(HomeView view){

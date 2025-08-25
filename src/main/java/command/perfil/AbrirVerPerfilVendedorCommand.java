@@ -6,6 +6,7 @@ package command.perfil;
 
 import command.ICommand;
 import java.sql.SQLException;
+import java.util.Optional;
 import javax.swing.JDesktopPane;
 import model.Perfil;
 import model.Usuario;
@@ -24,7 +25,7 @@ public class AbrirVerPerfilVendedorCommand extends PerfilCommand{
     private Perfil perfil;
     
     public AbrirVerPerfilVendedorCommand(Vendedor vendedor, IPerfilRepository perfilRepository) throws SQLException{
-        super(vendedor.getUsuario(), perfilRepository);
+        super(vendedor.getUsuario(), perfilRepository,Optional.of("Vendedor"));
         this.desktop = GerenciadorTelas.getInstancia().getDesktop();
         this.perfil=(Vendedor)usuario.getPerfilVendedor().get();
     }

@@ -12,6 +12,7 @@ import repository.ICondutaRepository;
 import repository.IDefeitosTipoRepository;
 import repository.IDenunciaRepository;
 import repository.IItemRepository;
+import repository.IOfertaRepository;
 import repository.IPerfilRepository;
 import repository.IReputacaoRepository;
 import repository.IUsuarioRepository;
@@ -19,6 +20,7 @@ import repository.database.CondutaRepository;
 import repository.database.DefeitosTipoRepository;
 import repository.database.DenunciaRepository;
 import repository.database.ItemRepository;
+import repository.database.PerfilCompradorRepository;
 import repository.database.PerfilVendedorRepository;
 import repository.database.ReputacaoRepository;
 import repository.database.UsuarioRepository;
@@ -103,6 +105,22 @@ public class RepositoryFactoryBD implements IRepositoryFactory{
             Logger.getLogger(RepositoryFactoryBD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    @Override
+    public IPerfilRepository criarPerfilCompradorRepository() {
+        try {
+            return new PerfilCompradorRepository(daoFactory);
+        } catch (SQLException ex) {
+            Logger.getLogger(RepositoryFactoryBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;    
+    }
+
+    @Override
+    //A fazer
+    public IOfertaRepository criarOfertaRepository() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

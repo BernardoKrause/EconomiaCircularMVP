@@ -10,6 +10,7 @@ import java.util.List;
 import model.Item;
 import model.Material;
 import model.Vendedor;
+import repository.IDefeitosTipoRepository;
 import repository.IItemRepository;
 import repository.teste.DefeitosTipoRepositoryTeste;
 
@@ -19,11 +20,11 @@ import repository.teste.DefeitosTipoRepositoryTeste;
  */
 public class ItemService {
     private final IItemRepository itemRepository;
-    private final DefeitosTipoRepositoryTeste tiposDefeitoRepository;
+    private final IDefeitosTipoRepository tiposDefeitoRepository;
     private final SistemaDefeitosService sistemaDefeitos;
     private final CalcularGPWService sistemaGPW;
     
-    public ItemService(SistemaDefeitosService sistema, DefeitosTipoRepositoryTeste tiposDefeitosRepo, CalcularGPWService sistemaGPW) {
+    public ItemService(SistemaDefeitosService sistema, IDefeitosTipoRepository tiposDefeitosRepo, CalcularGPWService sistemaGPW) {
         this.itemRepository = SeletorRepositoryFactory.obterInstancia().criarItemRepository();
         this.sistemaDefeitos = sistema;
         this.tiposDefeitoRepository = tiposDefeitosRepo;

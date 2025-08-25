@@ -8,6 +8,7 @@ import repository.ICondutaRepository;
 import repository.IDefeitosTipoRepository;
 import repository.IDenunciaRepository;
 import repository.IItemRepository;
+import repository.IOfertaRepository;
 import repository.IReputacaoRepository;
 import repository.IUsuarioRepository;
 import repository.teste.CondutaRepositoryTeste;
@@ -18,6 +19,8 @@ import repository.teste.PerfilVendedorRepositoryTeste;
 import repository.teste.ReputacaoRepositoryTeste;
 import repository.teste.UsuarioRepositoryTeste;
 import repository.IPerfilRepository;
+import repository.teste.OfertaRepositoryTeste;
+import repository.teste.PerfilCompradorRepositoryTeste;
 
 /**
  *
@@ -58,6 +61,16 @@ public class RepositoryFactoryTeste implements IRepositoryFactory{
     @Override
     public ICondutaRepository criarCondutaRepository() {
         return CondutaRepositoryTeste.getInstancia();
+    }
+
+    @Override
+    public IPerfilRepository criarPerfilCompradorRepository() {
+        return PerfilCompradorRepositoryTeste.getInstancia();
+    }
+
+    @Override
+    public IOfertaRepository criarOfertaRepository() {
+        return OfertaRepositoryTeste.getInstancia();
     }
 }
 
