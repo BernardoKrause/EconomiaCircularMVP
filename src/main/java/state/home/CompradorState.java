@@ -39,8 +39,8 @@ public class CompradorState extends HomePresenterState{
         resetMenuItemActions(view.getMItemVerPerfilComprador());
         resetMenuItemActions(view.getMItemCriarPerfilVendedor());
         resetMenuItemActions(view.getMItemAcessarPerfilVendedor());
-        resetMenuItemActions(view.getMItemSairUsuario());
         resetMenuItemActions(view.getMIVerItem());
+        resetMenuItemActions(view.getMItemSairUsuario());
         
         view.getMItemVerPerfilComprador().addActionListener(new ActionListener() {
             @Override
@@ -101,6 +101,7 @@ public class CompradorState extends HomePresenterState{
         view.getMItemCriarPerfilVendedor().setVisible(false);
         view.getMItemVerPerfilVendedor().setVisible(false);
         view.getMItemVerPerfilComprador().setVisible(true);
+        view.getMIItemPublicarItem().setVisible(false);
         if (usuario.getPerfilVendedor().isEmpty()) {
             view.getMItemAcessarPerfilVendedor().setVisible(false);
             view.getMItemCriarPerfilVendedor().setVisible(true);

@@ -6,7 +6,9 @@ package service;
 
 import factory.repository.SeletorRepositoryFactory;
 import java.sql.SQLException;
+import java.util.List;
 import model.Comprador;
+import model.Item;
 import model.Oferta;
 import repository.IOfertaRepository;
 import repository.IPerfilRepository;
@@ -29,5 +31,9 @@ public class OfertaService {
         comprador.addOferta(oferta);
         ofertaRepository.adicionarOferta(oferta);
         compradorRepository.atualizarPerfil(comprador);
+    }
+    
+    public List<Oferta> getOfertasPorItem(Item item){
+        return ofertaRepository.buscarPorItem(item.getIdC());
     }
 }
