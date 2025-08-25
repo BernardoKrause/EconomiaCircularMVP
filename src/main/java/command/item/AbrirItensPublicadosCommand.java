@@ -32,7 +32,7 @@ public class AbrirItensPublicadosCommand extends ItemCommand{
     public void executar() throws SQLException {
         List<Item> listaItens = new ArrayList<>();
         String tipoTela="Comprador";
-        if(perfil.isVendedor()){
+        if(perfil.getSistemId().startsWith("V")){
             listaItens=itemService.getItensVendedor((Vendedor)perfil);
             tipoTela="Vendedor";
         }

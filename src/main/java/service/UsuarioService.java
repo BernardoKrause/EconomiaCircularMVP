@@ -8,6 +8,7 @@ import factory.repository.SeletorRepositoryFactory;
 import java.sql.SQLException;
 import java.util.Optional;
 import model.Usuario;
+import repository.IPerfilRepository;
 import repository.IUsuarioRepository;
 
 /**
@@ -35,7 +36,7 @@ public class UsuarioService {
         try {
             optUsuario = usuarioRepository.buscarUsuarioPorEmail(usuario.getEmail());
         } catch (SQLException ex) {
-            throw ex;
+            throw new RuntimeException ("Erro ao buscar usuario"+ex.getMessage());
         }
         
         if (optUsuario.isPresent()) {
@@ -49,7 +50,24 @@ public class UsuarioService {
     }
     
     public void completarUsuario(Usuario usuario) throws SQLException{
-        usuario.addPerfil(SeletorRepositoryFactory.obterInstancia().criarPerfilVendedorRepository().buscarPorIdUsuario(usuario.getId()).get());
-        usuario.addPerfil(SeletorRepositoryFactory.obterInstancia().criarPerfilCompradorRepository().buscarPorIdUsuario(usuario.getId()).get());
+        IPerfilRepository repoVendedor = SeletorRepositoryFactory.obterInstancia().criarPerfilVendedorRepository();
+        IPerfilRepository repoComprador = SeletorRepositoryFactory.obterInstancia().criarPerfilCompradorRepository();
+        
+                System.out.println("erro");
+        System.out.println(repoVendedor.buscarPorIdUsuario(usuario.getId()).isEmpty());
+                System.out.println("erro");
+        System.out.println(repoComprador.buscarPorIdUsuario(usuario.getId()).isEmpty());
+                System.out.println("erro");
+        try{
+            if(!repoVendedor.buscarPorIdUsuario(usuario.getId()).isEmpty()){
+                usuario.addPerfil(repoVendedor.buscarPorIdUsuario(usuario.getId()).get());   
+            }
+            if(!repoComprador.buscarPorIdUsuario(usuario.getId()).isEmpty()){
+                usuario.addPerfil(repoComprador.buscarPorIdUsuario(usuario.getId()).get()); 
+            }
+            
+        }catch(Exception ex){
+            throw new RuntimeException("erro ao puxar perfis");
+        }
     }
 }

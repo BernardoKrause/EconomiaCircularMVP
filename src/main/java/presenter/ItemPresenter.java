@@ -443,10 +443,12 @@ public class ItemPresenter extends AbstractPresenter {
         resetButtonActions(itemView.getBtnFunc());
         itemView.getBtnFunc().addActionListener(e -> {
             try {
-                if(perfil.isComprador()){
+                if(perfil.getSistemId().startsWith("C")){
                     ofertar(item);
-                }else if(perfil.isVendedor()){
+                    itemView.getBtnFunc().setText("Oferta");
+                }else{
                     editar(item);
+                    itemView.getBtnFunc().setText("Editar");
                 }
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(itemView, ex);

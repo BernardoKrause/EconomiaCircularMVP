@@ -60,15 +60,11 @@ public class SistemaReputacaoService {
             aplicarConduta(perfil,nomeConduta.get());
         }
         for(IMetodoReputacao metodo : metodos){
-            System.out.println("erro5");
             Conduta conduta = metodo.aplicarReputacao(perfil).get();
             perfil.getReputacao().addConduta(conduta);
-            System.out.println(perfil.getReputacao().getId());
             try{
                 condutaRepo.adicionarConduta(perfil.getReputacao(), conduta);
-                System.out.println("erro6");
                 reputacaoRepo.atualizarReputacao(perfil.getReputacao());
-                System.out.println("erro7");
             } catch (Exception ex){
                 throw new RuntimeException("Erro ao atualizar a reputaçao " + ex.getMessage());
             }
