@@ -32,8 +32,7 @@ public class PerfilVendedorRepository implements IPerfilRepository{
     
     @Override
     public Optional<Perfil> buscarPorIdUsuario(Integer id) throws SQLException {
-        Perfil perfilAchado = perfilVendedorDAO.buscaPorIdUsuario(id).get();
-        return Optional.of(perfilAchado);
+        return perfilVendedorDAO.buscaPorIdUsuario(id);
     }
     
     @Override
