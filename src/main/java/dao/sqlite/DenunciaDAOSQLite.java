@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 import model.Comprador;
 import model.Denuncia;
+import model.Transacao;
 import model.Vendedor;
 import util.factory.connection.DatabaseConnectionFactory;
 
@@ -26,8 +27,8 @@ public class DenunciaDAOSQLite implements IDenunciaDAO {
 
     @Override
     public void criar(Denuncia denuncia) throws SQLException {
-        String sql = "INSERT INTO denuncias (idC, descricao, status, idPerfilComprador, idPerfilVendedor)"
-                   + "VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO denuncias (idC, descricao, status, idPerfilComprador, idPerfilVendedor, idTransacao)"
+                   + "VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -36,6 +37,8 @@ public class DenunciaDAOSQLite implements IDenunciaDAO {
             pstmt.setString(3, denuncia.getStatus());
             pstmt.setInt(4, denuncia.getComprador().getId());
             pstmt.setInt(5, denuncia.getVendedor().getId());
+            pstmt.setInt(6, denuncia.getTransacao().getId());
+            
             pstmt.executeUpdate();
         }
     }
@@ -46,10 +49,12 @@ public class DenunciaDAOSQLite implements IDenunciaDAO {
         String sql = """
             SELECT d.*, 
                    c.sistemId AS comprador_sistemId,
-                   v.sistemId AS vendedor_sistemId
+                   v.sistemId AS vendedor_sistemId,
+                   t.*
             FROM denuncias d
             LEFT JOIN compradores c ON d.idPerfilComprador = c.idPerfilComprador
             LEFT JOIN vendedores v ON d.idPerfilVendedor = v.idPerfilVendedor
+            LEFT JOIN transacoes t ON d.idTransacao = t.idTransacao
             """;
 
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
@@ -67,14 +72,28 @@ public class DenunciaDAOSQLite implements IDenunciaDAO {
                     rs.getString("vendedor_sistemId")
                 );
 
-                denuncias.add(new Denuncia(
+                Transacao transacao = new Transacao(
+                        rs.getInt("idTransacao"),
+                        rs.getString("idC"),
+                        rs.getString("dataInicio"),
+                        rs.getString("dataTermino"),
+                        rs.getString("comentarioVendedor"),
+                        rs.getString("comentarioComprador"),
+                        vendedor,
+                        comprador
+                    );
+
+                Denuncia denuncia = new Denuncia(
                     rs.getInt("idDenuncia"),
                     rs.getString("idC"),
                     rs.getString("descricao"),
                     rs.getString("status"),
                     comprador,
-                    vendedor
-                ));
+                    vendedor,
+                    transacao
+                );
+                
+                denuncias.add(denuncia);
             }
         }
         return denuncias;
@@ -85,10 +104,12 @@ public class DenunciaDAOSQLite implements IDenunciaDAO {
         String sql = """
             SELECT d.*, 
                    c.sistemId AS comprador_sistemId,
-                   v.sistemId AS vendedor_sistemId
+                   v.sistemId AS vendedor_sistemId,
+                   t.*
             FROM denuncias d
             LEFT JOIN compradores c ON d.idPerfilComprador = c.idPerfilComprador
             LEFT JOIN vendedores v ON d.idPerfilVendedor = v.idPerfilVendedor
+            LEFT JOIN transacoes t ON d.idTransacao = t.idTransacao
             WHERE d.idDenuncia = ?
             """;
         
@@ -109,13 +130,25 @@ public class DenunciaDAOSQLite implements IDenunciaDAO {
                         rs.getString("vendedor_sistemId")
                     );
 
+                    Transacao transacao = new Transacao(
+                        rs.getInt("idTransacao"),
+                        rs.getString("idC"),
+                        rs.getString("dataInicio"),
+                        rs.getString("dataTermino"),
+                        rs.getString("comentarioVendedor"),
+                        rs.getString("comentarioComprador"),
+                        vendedor,
+                        comprador
+                    );
+
                     Denuncia denuncia = new Denuncia(
                         rs.getInt("idDenuncia"),
                         rs.getString("idC"),
                         rs.getString("descricao"),
                         rs.getString("status"),
                         comprador,
-                        vendedor
+                        vendedor,
+                        transacao
                     );
                     
                     return Optional.of(denuncia);
@@ -127,7 +160,8 @@ public class DenunciaDAOSQLite implements IDenunciaDAO {
 
     @Override
     public void atualizar(Denuncia denuncia) throws SQLException {
-        String sql = "UPDATE denuncias SET idC = ?, descricao = ?, status = ?, idPerfilComprador = ?, idPerfilVendedor = ? "
+        String sql = "UPDATE denuncias SET idC = ?, descricao = ?, status = ?, "
+                   + "idPerfilComprador = ?, idPerfilVendedor = ?, idTransacao = ? "
                    + "WHERE idDenuncia = ?";
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -137,9 +171,10 @@ public class DenunciaDAOSQLite implements IDenunciaDAO {
             pstmt.setString(3, denuncia.getStatus());
             pstmt.setInt(4, denuncia.getComprador().getId());
             pstmt.setInt(5, denuncia.getVendedor().getId());
-            pstmt.setInt(6, denuncia.getId());
+            pstmt.setInt(6, denuncia.getTransacao().getId());
+            pstmt.setInt(7, denuncia.getId());
+            
             pstmt.executeUpdate();
-
         } 
     }
 
