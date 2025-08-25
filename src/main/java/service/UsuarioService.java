@@ -59,11 +59,6 @@ public class UsuarioService {
         IPerfilRepository repoVendedor = SeletorRepositoryFactory.obterInstancia().criarPerfilVendedorRepository();
         IPerfilRepository repoComprador = SeletorRepositoryFactory.obterInstancia().criarPerfilCompradorRepository();
         
-                System.out.println("erro");
-        System.out.println(repoVendedor.buscarPorIdUsuario(usuario.getId()).isEmpty());
-                System.out.println("erro");
-        System.out.println(repoComprador.buscarPorIdUsuario(usuario.getId()).isEmpty());
-                System.out.println("erro");
         try{
             if(!repoVendedor.buscarPorIdUsuario(usuario.getId()).isEmpty()){
                 usuario.addPerfil(repoVendedor.buscarPorIdUsuario(usuario.getId()).get());   

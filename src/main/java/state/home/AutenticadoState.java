@@ -27,7 +27,7 @@ public class AutenticadoState extends HomePresenterState{
     public AutenticadoState(HomePresenter presenter, Usuario usuarioAutenticado) throws SQLException {
         super(presenter, usuarioAutenticado);
         
-        new UsuarioService(SeletorRepositoryFactory.obterInstancia().criarUsuarioRepository()).completarUsuario(usuario);
+        new UsuarioService(SeletorRepositoryFactory.obterInstancia().criarUsuarioRepository()).completarUsuario(usuarioAutenticado);
         
         setVisibles();
             
@@ -137,22 +137,11 @@ public class AutenticadoState extends HomePresenterState{
         view.getMItemVerPerfilVendedor().setVisible(false);
         view.getMItemVerPerfilComprador().setVisible(false);
         
-        if (usuario.getPerfilComprador().isEmpty()) {
-            view.getMItemAcessarPerfilComprador().setVisible(false);
-            view.getMItemCriarPerfilComprador().setVisible(true);
-        }
-        else{
-            view.getMItemAcessarPerfilComprador().setVisible(true);
-            view.getMItemCriarPerfilComprador().setVisible(false);
-        }
+        view.getMItemAcessarPerfilComprador().setVisible(true);
+        view.getMItemCriarPerfilComprador().setVisible(true);
+            
+        view.getMItemAcessarPerfilVendedor().setVisible(true);
+        view.getMItemCriarPerfilVendedor().setVisible(true);
         
-        if (usuario.getPerfilVendedor().isEmpty()) {
-            view.getMItemAcessarPerfilVendedor().setVisible(false);
-            view.getMItemCriarPerfilVendedor().setVisible(true);
-        }
-        else{
-            view.getMItemAcessarPerfilVendedor().setVisible(true);
-            view.getMItemCriarPerfilVendedor().setVisible(false);
-        }
     }
 }

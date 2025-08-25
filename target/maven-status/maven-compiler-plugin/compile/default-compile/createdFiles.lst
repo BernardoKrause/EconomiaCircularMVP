@@ -179,6 +179,7 @@ presenter\ItemPresenter$7.class
 factory\repository\SeletorRepositoryFactory.class
 presenter\AbstractPresenter.class
 presenter\VendedorPresenter$2.class
+service\ValidadorSenhaService.class
 presenter\PerfilPresenter.class
 presenter\SignupPresenter.class
 dao\h2\PerfilCompradorDAOH2.class
