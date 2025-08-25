@@ -34,8 +34,8 @@ public class ItemRepository implements IItemRepository{
     }
     
     @Override
-    public List<Item> buscarPorVendedor(Vendedor vendedor){
-        return null;
+    public List<Item> buscarPorVendedor(Vendedor vendedor) throws SQLException{
+        return itemDAO.buscaPorVendedor(vendedor.getId());
     }
 
     @Override
@@ -49,8 +49,8 @@ public class ItemRepository implements IItemRepository{
     }
 
     @Override
-    public List<String> buscarTiposItem(String idC) throws SQLException {
-        return itemDAO.buscaTipos(idC);
+    public List<String> buscarTipos() throws SQLException {
+        return itemDAO.buscaTipos();
     }
 
     @Override

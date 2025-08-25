@@ -69,7 +69,7 @@ public class ItemRepositoryTeste implements IItemRepository{
     }
 
     @Override
-    public List<String> buscarTiposItem(String idC) {
+    public List<String> buscarTipos() {
         List<String> tiposDefeito = new ArrayList<>();
         tiposDefeito.add("vestuario");
         tiposDefeito.add("calcado");

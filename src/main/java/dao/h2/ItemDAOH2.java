@@ -42,12 +42,17 @@ public class ItemDAOH2 implements IItemDAO {
     }
 
     @Override
-    public List<String> buscaTipos(String idC) throws SQLException {
+    public List<String> buscaTipos() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public Integer buscaIdTipo(String descricao) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Item> buscaPorVendedor(Integer idVendedor) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
