@@ -198,12 +198,42 @@ public class H2DatabaseConnectionFactory implements DatabaseConnectionFactory {
         };
 
         String[] insertMaterialQueries = {
-                "INSERT INTO materiais (descricao, fatorEmissao) VALUES ('Algodão', 5.2) ON CONFLICT DO NOTHING;",
-                "INSERT INTO materiais (descricao, fatorEmissao) VALUES ('Poliéster', 9.5) ON CONFLICT DO NOTHING;",
-                "INSERT INTO materiais (descricao, fatorEmissao) VALUES ('Couro', 14.8) ON CONFLICT DO NOTHING;",
-                "INSERT INTO materiais (descricao, fatorEmissao) VALUES ('Metal (ligas leves)', 8.6) ON CONFLICT DO NOTHING;",
-                "INSERT INTO materiais (descricao, fatorEmissao) VALUES ('Plástico de base fóssil', 3.1) ON CONFLICT DO NOTHING;",
-                "INSERT INTO materiais (descricao, fatorEmissao) VALUES ('Outros', 4.0) ON CONFLICT DO NOTHING;"
+                "MERGE INTO materiais (descricao, fatorEmissao) KEY(descricao) VALUES ('Algodão', 5.2);",
+                "MERGE INTO materiais (descricao, fatorEmissao) KEY(descricao) VALUES ('Poliéster', 9.5);",
+                "MERGE INTO materiais (descricao, fatorEmissao) KEY(descricao) VALUES ('Couro', 14.8);",
+                "MERGE INTO materiais (descricao, fatorEmissao) KEY(descricao) VALUES ('Metal (ligas leves)', 8.6);",
+                "MERGE INTO materiais (descricao, fatorEmissao) KEY(descricao) VALUES ('Plástico de base fóssil', 3.1);",
+                "MERGE INTO materiais (descricao, fatorEmissao) KEY(descricao) VALUES ('Outros', 4.0);"
+        };
+
+        String[] insertTipoQueries = {
+                "MERGE INTO tipos (descricao) KEY(descricao) VALUES ('vestuario');",
+                "MERGE INTO tipos (descricao) KEY(descricao) VALUES ('calcado');",
+                "MERGE INTO tipos (descricao) KEY(descricao) VALUES ('bolsas e mochilas');",
+                "MERGE INTO tipos (descricao) KEY(descricao) VALUES ('bijuterias e acessorios');"
+        };
+
+        String[] insertDefeitoQueries = {
+                "MERGE INTO defeitos (descricao, percentualDesconto, idTipo) KEY(descricao, idTipo) VALUES ('rasgo estruturante', 0.3, 1);",
+                "MERGE INTO defeitos (descricao, percentualDesconto, idTipo) KEY(descricao, idTipo) VALUES ('Ausência de botão principal', 0.15, 1);",
+                "MERGE INTO defeitos (descricao, percentualDesconto, idTipo) KEY(descricao, idTipo) VALUES ('ziper parcialmente funcional', 0.15, 1);",
+                "MERGE INTO defeitos (descricao, percentualDesconto, idTipo) KEY(descricao, idTipo) VALUES ('mancha permanente', 0.20, 1);",
+                "MERGE INTO defeitos (descricao, percentualDesconto, idTipo) KEY(descricao, idTipo) VALUES ('desgaste por pilling acentuado', 0.10, 1);",
+                
+                "MERGE INTO defeitos (descricao, percentualDesconto, idTipo) KEY(descricao, idTipo) VALUES ('sola sem relevo funcional', 0.25, 2);",
+                "MERGE INTO defeitos (descricao, percentualDesconto, idTipo) KEY(descricao, idTipo) VALUES ('descolamento parcial de entressola', 0.20, 2);",
+                "MERGE INTO defeitos (descricao, percentualDesconto, idTipo) KEY(descricao, idTipo) VALUES ('arranhões profundos', 0.15, 2);",
+                "MERGE INTO defeitos (descricao, percentualDesconto, idTipo) KEY(descricao, idTipo) VALUES ('palmilha original ausente', 0.10, 2);",
+                "MERGE INTO defeitos (descricao, percentualDesconto, idTipo) KEY(descricao, idTipo) VALUES ('odor persistente leve', 0.10, 2);",
+                
+                "MERGE INTO defeitos (descricao, percentualDesconto, idTipo) KEY(descricao, idTipo) VALUES ('alça reparada', 0.2, 3);",
+                "MERGE INTO defeitos (descricao, percentualDesconto, idTipo) KEY(descricao, idTipo) VALUES ('fecho defeituoso', 0.20, 3);",
+                "MERGE INTO defeitos (descricao, percentualDesconto, idTipo) KEY(descricao, idTipo) VALUES ('desbotamento extenso', 0.15, 3);",
+                "MERGE INTO defeitos (descricao, percentualDesconto, idTipo) KEY(descricao, idTipo) VALUES ('forro rasgado', 0.15, 3);",
+                
+                "MERGE INTO defeitos (descricao, percentualDesconto, idTipo) KEY(descricao, idTipo) VALUES ('oxidação visível', 0.2, 4);",
+                "MERGE INTO defeitos (descricao, percentualDesconto, idTipo) KEY(descricao, idTipo) VALUES ('pedra ausente', 0.15, 4);",
+                "MERGE INTO defeitos (descricao, percentualDesconto, idTipo) KEY(descricao, idTipo) VALUES ('fecho frouxo', 0.10, 4);"
         };
 
         try (Connection conn = getConnection();
@@ -214,6 +244,14 @@ public class H2DatabaseConnectionFactory implements DatabaseConnectionFactory {
             }
 
             for (String query : insertMaterialQueries) {
+                stmt.execute(query);
+            }
+            
+            for (String query : insertTipoQueries) {
+                stmt.execute(query);
+            }
+            
+            for (String query : insertDefeitoQueries) {
                 stmt.execute(query);
             }
             
