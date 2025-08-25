@@ -37,8 +37,7 @@ public class PerfilCompradorRepository implements IPerfilRepository {
     
     @Override
     public Optional<Perfil> buscarPorIdUsuario(Integer id) throws SQLException {
-        return perfilCompradorDAO.buscaPorIdUsuario(id)
-            .map(comprador -> (Perfil) comprador);
+        return perfilCompradorDAO.buscaPorIdUsuario(id);
     }
     
     @Override
