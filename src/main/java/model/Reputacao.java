@@ -18,6 +18,13 @@ public class Reputacao {
     private String nivel;
     private List<Conduta> condutas;
     
+    public Reputacao(Integer id,Double estrelas, Double beneficio, String nivel) {
+        this.estrelas = estrelas;
+        this.beneficio = beneficio;
+        this.nivel = nivel;
+        this.condutas = new ArrayList<>();
+    } 
+    
     public Reputacao(Double estrelas, Double beneficio, String nivel) {
         this.estrelas = estrelas;
         this.beneficio = beneficio;

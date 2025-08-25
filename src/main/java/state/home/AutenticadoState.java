@@ -16,15 +16,17 @@ import javax.swing.JOptionPane;
 import model.Usuario;
 import presenter.HomePresenter;
 import repository.IPerfilRepository;
+import service.UsuarioService;
 
 /**
  *
  * @author caiof
  */
-public class AutenticadoState extends HomePresenterState{    
-    public AutenticadoState(HomePresenter presenter, Usuario usuarioAutenticado) {
+public class AutenticadoState extends HomePresenterState{  
+    private UsuarioService usuarioService;
+    public AutenticadoState(HomePresenter presenter, Usuario usuarioAutenticado) throws SQLException {
         super(presenter, usuarioAutenticado);
-        
+        new UsuarioService(SeletorRepositoryFactory.obterInstancia().criarUsuarioRepository()).completarUsuario(usuario);
         setVisibles();
             
         resetMenuItemActions(view.getMItemCriarPerfilComprador());

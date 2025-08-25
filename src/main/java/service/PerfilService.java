@@ -35,9 +35,12 @@ public abstract class PerfilService {
     public abstract void criar(Usuario usuario) throws SQLException;
     
     public void completarPerfil(Perfil perfil) throws SQLException{
+        System.out.println("erri");
         Reputacao reputacao = reputacaoRepository.buscarReputacao(perfil).get();
+        System.out.println("erri2");
         reputacao.setCondutas(condutaRepository.buscarTodasCondutas(reputacao));
-        
+        System.out.println("erri3");
+        System.out.println(reputacao.getId());
         perfil.setReputacao(reputacao);
     }
     

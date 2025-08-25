@@ -39,9 +39,9 @@ public class UsuarioRepositoryTeste implements IUsuarioRepository{
     }
 
     @Override
-    public Optional<Usuario> buscarUsuario(String id) throws SQLException {
+    public Optional<Usuario> buscarUsuario(Integer id) throws SQLException {
         for(Usuario u : usuariosCadastrados){
-            if(u.getId().equalsIgnoreCase(id)){
+            if(u.getId().equals(id)){
                 return Optional.of(u);
             }
         }

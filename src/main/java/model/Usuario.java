@@ -15,7 +15,7 @@ import java.util.Optional;
  * @author berna
  */
 public class Usuario {
-    private String id;
+    private Integer id;
     private String nome;
     private String email;
     private String telefone;
@@ -66,7 +66,7 @@ public class Usuario {
     } 
     
     
-    public Usuario(String id, String nome, String email, String telefone, String senha) {    
+    public Usuario(Integer id, String nome, String email, String telefone, String senha) {    
         
         if (nome == null) {
             throw new IllegalArgumentException("Nome precisa ser informado.");
@@ -99,7 +99,7 @@ public class Usuario {
         this.perfis = new ArrayList<>();
     } 
     
-    public Usuario(String id, String nome, String email, String senha, String telefone, Timestamp dataCriacaoDaConta, boolean isAdmin) {
+    public Usuario(Integer id, String nome, String email, String senha, String telefone, Timestamp dataCriacaoDaConta, boolean isAdmin) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -109,7 +109,7 @@ public class Usuario {
         this.admin = isAdmin;
     }
     
-    public String getId() {
+    public Integer getId() {
         return this.id;
     }
     
@@ -164,7 +164,7 @@ public class Usuario {
     }
        
     public void setId(Integer id){
-        this.id=String.valueOf(id);
+        this.id=id;
     }
     
     public void setAdmin(boolean admin) {
