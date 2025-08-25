@@ -18,14 +18,17 @@ C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\m
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\perfil\AcessarPerfilCompradorCommand.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\service\SistemaDefeitosService.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\dao\sqlite\TransacaoDAOSQLite.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\repository\teste\OfertaRepositoryTeste.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\perfil\PerfilCommand.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\service\PerfilVendedorService.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\service\SistemaReputacaoService.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\util\factory\connection\SQLiteDatabaseConnectionFactory.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\model\Material.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\view\item\FormOfertaView.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\repository\teste\DefeitosTipoRepositoryTeste.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\repository\IUsuarioRepository.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\repository\teste\DenunciaRepositoryTeste.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\presenter\OfertaPresenter.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\repository\database\PerfilCompradorRepository.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\dao\h2\ItemDAOH2.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\presenter\HomePresenter.java
@@ -64,6 +67,7 @@ C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\m
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\state\home\NaoAutenticadoState.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\item\ItemCommand.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\dao\IItemDAO.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\repository\IOfertaRepository.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\dao\IMaterialDAO.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\presenter\IPresenter.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\usuario\AbrirSignupUsuarioCommand.java
@@ -89,6 +93,7 @@ C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\m
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\service\UsuarioService.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\command\item\AbrirCadastroItemCommand.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\service\PerfilService.java
+C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\service\OfertaService.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\view\usuario\LoginView.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\model\Oferta.java
 C:\Users\caiof\OneDrive\Documentos\ufes\PSS\TRAB FINAL\EconomiaCircularMVP\src\main\java\repository\teste\ItemRepositoryTeste.java

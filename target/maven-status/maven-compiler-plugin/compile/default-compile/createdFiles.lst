@@ -14,6 +14,7 @@ view\PerfilView$3.class
 factory\repository\RepositoryFactoryTeste.class
 model\Defeito.class
 factory\dao\IDAOFactory.class
+repository\teste\OfertaRepositoryTeste.class
 view\HomeView$1.class
 presenter\PerfilPresenter$1.class
 presenter\ItemPresenter.class
@@ -26,6 +27,8 @@ dao\h2\DenunciaDAOH2.class
 view\item\FormItemView.class
 factory\dao\SQLiteDAOFactory.class
 presenter\ItemPresenter$5.class
+repository\IOfertaRepository.class
+presenter\OfertaPresenter$1.class
 repository\teste\ItemRepositoryTeste.class
 view\item\FormItemView$3.class
 model\Transacao.class
@@ -45,6 +48,7 @@ presenter\PerfilPresenter$3.class
 view\usuario\SignupView$1.class
 adapter\DotEnvAdapter.class
 service\SistemaDefeitosService.class
+presenter\ItemPresenter$10.class
 model\Item.class
 state\home\VendedorState$2.class
 state\home\AutenticadoState$1.class
@@ -89,6 +93,7 @@ state\home\NaoAutenticadoState.class
 repository\database\UsuarioRepository.class
 command\item\ItemCommand.class
 view\usuario\SignupView.class
+view\item\FormOfertaView.class
 command\perfil\AbrirVerPerfilCompradorCommand.class
 command\perfil\AcessarPerfilCompradorCommand.class
 dao\h2\ItemDAOH2.class
@@ -96,6 +101,7 @@ repository\database\PerfilVendedorRepository.class
 repository\IPerfilRepository.class
 presenter\GerenciadorTelas.class
 model\Perfil.class
+presenter\OfertaPresenter.class
 state\home\VendedorState$1.class
 command\perfil\CriarPerfilCompradorCommand.class
 presenter\PerfilPresenter$2.class
@@ -105,6 +111,7 @@ presenter\IPresenter.class
 view\item\FormItemView$1.class
 dao\IItemDAO.class
 repository\ICondutaRepository.class
+view\item\FormOfertaView$1.class
 factory\dao\H2DAOFactory.class
 repository\teste\DefeitosTipoRepositoryTeste.class
 state\home\CompradorState$2.class
@@ -127,6 +134,7 @@ presenter\LoginPresenter.class
 service\PerfilService.class
 command\perfil\AcessarPerfilVendedorCommand.class
 model\Material.class
+presenter\ItemPresenter$9.class
 view\HomeView.class
 state\home\VendedorState$3.class
 view\item\ShowItensView.class
@@ -140,6 +148,7 @@ view\item\MaterialComposicao.class
 model\Comprador.class
 service\ItemService.class
 strategy\SistemaDefeitos\RegraDefeitosPercentual.class
+presenter\ItemPresenter$7.class
 presenter\SignupPresenter$2.class
 factory\repository\SeletorRepositoryFactory.class
 presenter\AbstractPresenter.class
@@ -161,6 +170,7 @@ dao\IDenunciaDAO.class
 presenter\SignupPresenter$1.class
 dao\sqlite\PerfilCompradorDAOSQLite.class
 model\Vendedor.class
+presenter\ItemPresenter$8.class
 state\home\CompradorState$4.class
 dao\sqlite\ReputacaoDAOSQLite.class
 presenter\CompradorPresenter$1.class
@@ -170,5 +180,7 @@ service\CalcularGPWService.class
 presenter\ItemPresenter$1.class
 dao\sqlite\ItemDAOSQLite.class
 view\HomeView$2.class
+presenter\OfertaPresenter$2.class
 repository\database\ItemRepository.class
 view\PerfilView$1.class
+service\OfertaService.class
