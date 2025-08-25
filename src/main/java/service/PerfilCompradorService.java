@@ -34,12 +34,8 @@ public class PerfilCompradorService extends PerfilService{
         }
         
         try {
-            Comprador perfil = new Comprador(perfilRepository.buscarTodosPerfis().size()+1);
+            Comprador perfil = new Comprador(usuario);
             usuario.addPerfil(perfil);
-            perfil.setUsuario(usuario);
-            
-            Reputacao reputacao = new Reputacao(perfilRepository.buscarTodosPerfis().size()+1);
-            perfil.setReputacao(reputacao);
             
             usuarioRepository.atualizarUsuario(usuario);
             reputacaoRepository.adicionarReputacao(perfil.getReputacao());

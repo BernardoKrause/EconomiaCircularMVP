@@ -40,7 +40,7 @@ public class PerfilVendedorRepository implements IPerfilRepository{
     public List<Perfil> buscarTodosPerfis() throws SQLException {
         List<Perfil> vendedores = perfilVendedorDAO.buscaTodos();
         return vendedores.stream()
-                .map(comprador -> (Perfil) comprador)
+                .map(vendedor -> (Vendedor) vendedor)
                 .collect(Collectors.toList());
     }
     

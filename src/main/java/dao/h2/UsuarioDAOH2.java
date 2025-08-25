@@ -10,8 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,8 +24,8 @@ public class UsuarioDAOH2 implements IUsuarioDAO {
 
     @Override
     public void criar(Usuario usuario) throws SQLException {
-        String sql = "INSERT INTO usuarios (nome, email, telefone, senha, eAdmin, criado_em) "
-                   + "VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
+        String sql = "INSERT INTO usuarios (nome, email, telefone, senha, eAdmin) "
+                   + "VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -50,10 +48,6 @@ public class UsuarioDAOH2 implements IUsuarioDAO {
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                    String ts = rs.getString("criado_em");
-                    LocalDateTime dt = (ts != null) ? LocalDateTime.parse(ts, formatter) : null;
-
                     boolean admin = rs.getInt("eAdmin") == 1; 
 
                     Usuario usuario = new Usuario(
@@ -62,7 +56,7 @@ public class UsuarioDAOH2 implements IUsuarioDAO {
                         rs.getString("email"),
                         rs.getString("senha"),
                         rs.getString("telefone"),
-                        dt, 
+                        rs.getTimestamp("criado_em"), 
                         admin
                     );
                     
@@ -81,11 +75,7 @@ public class UsuarioDAOH2 implements IUsuarioDAO {
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
             while (rs.next()) {
-                String ts = rs.getString("criado_em");
-                LocalDateTime dt = (ts != null) ? LocalDateTime.parse(ts, formatter) : null;
                 boolean admin = rs.getInt("eAdmin") == 1;
 
                 Usuario usuario = new Usuario(
@@ -94,7 +84,7 @@ public class UsuarioDAOH2 implements IUsuarioDAO {
                         rs.getString("email"),
                         rs.getString("senha"),
                         rs.getString("telefone"),
-                        dt, 
+                        rs.getTimestamp("criado_em"), 
                         admin
                 );
                 
@@ -143,9 +133,6 @@ public class UsuarioDAOH2 implements IUsuarioDAO {
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    String ts = rs.getString("criado_em");
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                    LocalDateTime dt = (ts != null) ? LocalDateTime.parse(ts, formatter) : null;
                     boolean admin = rs.getInt("eAdmin") == 1;
                     
                     Usuario usuario = new Usuario(
@@ -154,7 +141,7 @@ public class UsuarioDAOH2 implements IUsuarioDAO {
                         rs.getString("email"),
                         rs.getString("senha"),
                         rs.getString("telefone"),
-                        dt, 
+                        rs.getTimestamp("criado_em"), 
                         admin
                     );
                     
@@ -165,7 +152,7 @@ public class UsuarioDAOH2 implements IUsuarioDAO {
         return Optional.empty();
     }
     
-    // Método adicional para verificar se email já existe (útil para cadastro)
+    @Override
     public boolean emailExiste(String email) throws SQLException {
         String sql = "SELECT COUNT(*) FROM usuarios WHERE email = ?";
         
@@ -181,40 +168,5 @@ public class UsuarioDAOH2 implements IUsuarioDAO {
             }
         }
         return false;
-    }
-    
-    // Método adicional para buscar usuários por nome (busca parcial)
-    public List<Usuario> buscaPorNome(String nome) throws SQLException {
-        List<Usuario> usuarios = new ArrayList<>();
-        String sql = "SELECT * FROM usuarios WHERE nome LIKE ?";
-        
-        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, "%" + nome + "%");
-
-            try (ResultSet rs = pstmt.executeQuery()) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                
-                while (rs.next()) {
-                    String ts = rs.getString("criado_em");
-                    LocalDateTime dt = (ts != null) ? LocalDateTime.parse(ts, formatter) : null;
-                    boolean admin = rs.getInt("eAdmin") == 1;
-
-                    Usuario usuario = new Usuario(
-                        rs.getString("idUsuario"),
-                        rs.getString("nome"),
-                        rs.getString("email"),
-                        rs.getString("senha"),
-                        rs.getString("telefone"),
-                        dt, 
-                        admin
-                    );
-                    
-                    usuarios.add(usuario);
-                }
-            }
-        }
-        return usuarios;
     }
 }

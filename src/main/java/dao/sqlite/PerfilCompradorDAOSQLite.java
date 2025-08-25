@@ -137,5 +137,43 @@ public class PerfilCompradorDAOSQLite implements IPerfilDAO {
             pstmt.executeUpdate();
         }
     }
+ 
+    @Override
+    public Optional<Perfil> buscaPorId(Integer id) throws SQLException {
+        String sql = """
+            SELECT c.*, 
+                   r.estrelas AS reputacao_estrelas,
+                   r.beneficioClimatico AS reputacao_beneficio,
+                   r.nivel AS reputacao_nivel
+            FROM compradores c
+            LEFT JOIN reputacoes r ON c.idReputacao = r.idReputacao
+            WHERE c.idPerfilComprador = ?
+            """;
+        
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
+            pstmt.setInt(1, id);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    Reputacao reputacao = new Reputacao(
+                        rs.getDouble("reputacao_estrelas"),
+                        rs.getDouble("reputacao_beneficio"),
+                        rs.getString("reputacao_nivel")
+                    );
+                    reputacao.setIdReputacao(rs.getInt("idReputacao"));
+
+                    Comprador comprador = new Comprador(
+                        rs.getInt("idPerfilComprador"),
+                        rs.getString("sistemId"),
+                        reputacao
+                    );
+                    
+                    return Optional.of(comprador);
+                }
+            }
+        }
+        return Optional.empty();
+    }
 }

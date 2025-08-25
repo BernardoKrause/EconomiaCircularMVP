@@ -1,5 +1,7 @@
 package model;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +21,7 @@ public class Item {
     private Double MCIItem;
     private Integer numeroCiclo;
     private List<Defeito> defeitos;
+    private LocalDateTime publicadoEm;
     private List<Oferta> ofertas;
     
     private Vendedor vendedor;
@@ -100,7 +103,7 @@ public class Item {
         this.ofertas = new ArrayList<Oferta>();
     }
 
-    public Item(Integer id, String idC, String tipo, String subcategoria, String tamanho, String cor, Double peso, List<Material> composicao, Double precoBase, Double precoFinal, Double gpwBase, Double gpwEvitado, Double mciItem, Integer numeroCiclo) {
+    public Item(Integer id, String idC, String tipo, String subcategoria, String tamanho, String cor, Double peso, List<Material> composicao, Double precoBase, Double precoFinal, Double gpwBase, Double gpwEvitado, Double mciItem, Integer numeroCiclo, Timestamp publicadoEm) {
         this.idC = idC;
         this.tipo = tipo;
         this.subcategoria = subcategoria;
@@ -114,6 +117,7 @@ public class Item {
         this.GPWEvitado = gpwEvitado;
         this.MCIItem = mciItem;
         this.numeroCiclo = numeroCiclo;
+        this.publicadoEm = publicadoEm.toLocalDateTime();
     }
     
     public Integer getId() {
@@ -182,6 +186,10 @@ public class Item {
     
     public Vendedor getVendedor(){
         return vendedor;
+    }
+    
+    public LocalDateTime getPublicadoEm() {
+        return publicadoEm;
     }
 
     public void setPrecoFinal() {

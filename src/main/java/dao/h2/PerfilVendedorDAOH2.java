@@ -137,4 +137,42 @@ public class PerfilVendedorDAOH2 implements IPerfilDAO {
         }
     }
     
+    @Override
+    public Optional<Perfil> buscaPorId(Integer id) throws SQLException {
+        String sql = """
+            SELECT v.*, 
+                   r.estrelas AS reputacao_estrelas,
+                   r.beneficioClimatico AS reputacao_beneficio,
+                   r.nivel AS reputacao_nivel
+            FROM vendedores v
+            LEFT JOIN reputacoes r ON v.idReputacao = r.idReputacao
+            WHERE v.idPerfilVendedor = ?
+            """;
+        
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, id);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    Reputacao reputacao = new Reputacao(
+                        rs.getDouble("reputacao_estrelas"),
+                        rs.getDouble("reputacao_beneficio"),
+                        rs.getString("reputacao_nivel")
+                    );
+                    reputacao.setIdReputacao(rs.getInt("idReputacao"));
+
+                    Vendedor vendedor = new Vendedor(
+                        rs.getInt("idPerfilVendedor"),
+                        rs.getString("sistemId"),
+                        reputacao
+                    );
+                    
+                    return Optional.of(vendedor);
+                }
+            }
+        }
+        return Optional.empty();
+    }
 }

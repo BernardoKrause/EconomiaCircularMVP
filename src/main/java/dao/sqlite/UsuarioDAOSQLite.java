@@ -6,8 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,10 +16,10 @@ public class UsuarioDAOSQLite implements IUsuarioDAO {
 
     @Override
     public void criar(Usuario usuario) throws SQLException {
-        String sql = "INSERT INTO usuarios (nome, email, telefone, senha, eAdmin, criado_em) "
-                   + "VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
+        String sql = "INSERT INTO usuarios (nome, email, telefone, senha, eAdmin) "
+                   + "VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             pstmt.setString(1, usuario.getNome());
             pstmt.setString(2, usuario.getEmail());
@@ -42,10 +40,6 @@ public class UsuarioDAOSQLite implements IUsuarioDAO {
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                    String ts = rs.getString("criado_em");
-                    LocalDateTime dt = (ts != null) ? LocalDateTime.parse(ts, formatter) : null;
-
                     boolean admin = rs.getInt("eAdmin") == 1; 
 
                     Usuario usuario = new Usuario(
@@ -54,14 +48,13 @@ public class UsuarioDAOSQLite implements IUsuarioDAO {
                         rs.getString("email"),
                         rs.getString("senha"),
                         rs.getString("telefone"),
-                        dt, 
+                        rs.getTimestamp("criado_em"), 
                         admin
                     );
                     
                     return Optional.of(usuario);
                 }
             }
-
         }
         return Optional.empty();
     }
@@ -74,11 +67,7 @@ public class UsuarioDAOSQLite implements IUsuarioDAO {
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
             while (rs.next()) {
-                String ts = rs.getString("criado_em");
-                LocalDateTime dt = (ts != null) ? LocalDateTime.parse(ts, formatter) : null;
                 boolean admin = rs.getInt("eAdmin") == 1;
 
                 Usuario usuario = new Usuario(
@@ -87,7 +76,7 @@ public class UsuarioDAOSQLite implements IUsuarioDAO {
                         rs.getString("email"),
                         rs.getString("senha"),
                         rs.getString("telefone"),
-                        dt, 
+                        rs.getTimestamp("criado_em"), 
                         admin
                 );
                 
@@ -99,7 +88,7 @@ public class UsuarioDAOSQLite implements IUsuarioDAO {
 
     @Override
     public void atualizar(Usuario usuario) throws SQLException {
-        String sql = "UPDATE usuarios SET nome = ?, email = ?, telefone = ?, senha = ? "
+        String sql = "UPDATE usuarios SET nome = ?, email = ?, telefone = ?, senha = ?, eAdmin = ? "
                    + "WHERE idUsuario = ?";
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -108,9 +97,9 @@ public class UsuarioDAOSQLite implements IUsuarioDAO {
             pstmt.setString(2, usuario.getEmail());
             pstmt.setString(3, usuario.getTelefone());
             pstmt.setString(4, usuario.getSenha());
-            pstmt.setInt(5, Integer.parseInt(usuario.getId()));
+            pstmt.setInt(5, usuario.isAdmin() ? 1 : 0);
+            pstmt.setInt(6, Integer.parseInt(usuario.getId()));
             pstmt.executeUpdate();
-
         } 
     }
 
@@ -122,16 +111,9 @@ public class UsuarioDAOSQLite implements IUsuarioDAO {
 
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
-
         }
     }
 
-    /**
-     *
-     * @param email
-     * @return
-     * @throws SQLException
-     */
     @Override
     public Optional<Usuario> buscaPorEmail(String email) throws SQLException {
         String sql = "SELECT * FROM usuarios WHERE email = ?";
@@ -143,17 +125,15 @@ public class UsuarioDAOSQLite implements IUsuarioDAO {
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    String ts = rs.getString("criado_em");
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                    LocalDateTime dt = (ts != null) ? LocalDateTime.parse(ts, formatter) : null;
                     boolean admin = rs.getInt("eAdmin") == 1;
+                    
                     Usuario usuario = new Usuario(
                         rs.getString("idUsuario"),
                         rs.getString("nome"),
                         rs.getString("email"),
                         rs.getString("senha"),
                         rs.getString("telefone"),
-                        dt, 
+                        rs.getTimestamp("criado_em"), 
                         admin
                     );
                     
@@ -162,5 +142,22 @@ public class UsuarioDAOSQLite implements IUsuarioDAO {
             }
         }
         return Optional.empty();
+    }
+    
+    public boolean emailExiste(String email) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM usuarios WHERE email = ?";
+        
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, email);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        }
+        return false;
     }
 }

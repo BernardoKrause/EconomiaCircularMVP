@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
-
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 /**
@@ -16,14 +16,23 @@ public class Oferta {
     private Comprador comprador;
     private Double valorOferta;
     private LocalDateTime dataOferta;
-    private char status;
+    private String status;
     
     public Oferta(Item item, Comprador comprador, Double valorOferta){
         this.item=item;
         this.comprador=comprador;
         this.valorOferta=valorOferta;
         this.dataOferta=LocalDateTime.now();
-        this.status='W';
+        this.status="W";
+    }
+
+    public Oferta(Integer id, Timestamp dataOferta, Double valorOferta, String status, Item item, Comprador comprador) {
+        this.id = id;
+        this.item=item;
+        this.comprador=comprador;
+        this.valorOferta=valorOferta;
+        this.dataOferta=dataOferta.toLocalDateTime();
+        this.status=status;
     }
     
     public Integer getId(){
@@ -46,19 +55,20 @@ public class Oferta {
         return dataOferta;
     }
     
-    public char getStatus(){
+    public String getStatus(){
         return status;
     }
     
     public void setAceito(){
-        this.status='A';
+        this.status="A";
     }
     
     public void setNegado(){
-        this.status='D';
+        this.status="D";
     }
     
     public void setID(Integer id){
         this.id=id;
     }
+
 }

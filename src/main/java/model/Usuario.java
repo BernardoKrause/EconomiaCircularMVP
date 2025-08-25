@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,6 @@ public class Usuario {
         this.admin = false;
         this.autenticado = false;
         this.perfis = new ArrayList<>();
-        this.dataCriacaoDaConta = LocalDateTime.now();      
     } 
     
     public Usuario(String nome, String email, String telefone, String senha) {    
@@ -62,8 +62,7 @@ public class Usuario {
         this.senha = senha;
         this.admin = false;
         this.autenticado = false;
-        this.perfis = new ArrayList<>();
-        this.dataCriacaoDaConta = LocalDateTime.now();        
+        this.perfis = new ArrayList<>();  
     } 
     
     
@@ -99,23 +98,14 @@ public class Usuario {
         this.autenticado = false;
         this.perfis = new ArrayList<>();
     } 
-
-    public Usuario(String id, String nome, String email, String telefone, boolean isAdmin, LocalDateTime dataCriacaoDaConta) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
-        this.admin = isAdmin;
-        this.dataCriacaoDaConta = dataCriacaoDaConta;
-    }
     
-    public Usuario(String id, String nome, String email, String senha, String telefone, LocalDateTime dataCraicaoDaConta, boolean isAdmin) {
+    public Usuario(String id, String nome, String email, String senha, String telefone, Timestamp dataCriacaoDaConta, boolean isAdmin) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.telefone = telefone;
-        this.dataCriacaoDaConta = dataCriacaoDaConta;
+        this.dataCriacaoDaConta = dataCriacaoDaConta.toLocalDateTime();
         this.admin = isAdmin;
     }
     

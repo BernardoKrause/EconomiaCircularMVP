@@ -14,9 +14,9 @@ import java.util.List;
 public class Vendedor extends Perfil {
     private List<Item> itens;
   
-    public Vendedor(int id) {
-        super(id);
-        setSystemId(id);
+    public Vendedor(Usuario usuario) {
+        super(usuario);
+        this.sistemId=("V-"+usuario.getId());
         this.itens=new ArrayList<>();
     }
     
@@ -43,9 +43,4 @@ public class Vendedor extends Perfil {
         
     }
     */
-
-    @Override
-    void setSystemId(int id) {
-        this.sistemId=("V-"+id);
-    }
 }

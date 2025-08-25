@@ -4,20 +4,20 @@
  */
 package dao;
 
+import model.Oferta;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
-import model.Perfil;
 
 /**
  *
  * @author berna
  */
-public interface IPerfilDAO {
-    public void criar(Perfil perfil) throws SQLException;
-    public Optional<Perfil> buscaPorIdUsuario (Integer id) throws SQLException;
-    public List<Perfil> buscaTodos() throws SQLException;
-    public void atualizar(Perfil perfil) throws SQLException;
+public interface IOfertaDAO {
+    public void criar(Oferta oferta) throws SQLException;
+    public List<Oferta> buscaTodos() throws SQLException;
+    public List<Oferta> buscaPorComprador(Integer id) throws SQLException;
+    public void atualizar(Oferta oferta) throws SQLException;
     public void deletar(Integer id) throws SQLException;
-    public Optional<Perfil> buscaPorId(Integer id) throws SQLException;
+    public List<Oferta> buscaRecentes(int limite) throws SQLException;
 }
