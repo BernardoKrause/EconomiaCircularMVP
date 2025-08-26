@@ -122,7 +122,7 @@ public class ItemPresenter extends AbstractPresenter {
                 formView.getSTamanho().setValue(1);
                 formView.getTxtCor().setText("");
 
-                List<Material> materiais = itemService.getListaMateriaisComposicao(tipoSelecionado);
+                List<Material> materiais = itemService.getListaMateriaisComposicao();
                 DefaultListModel<MaterialComposicao> modelMaterial = new DefaultListModel<>();
 
                 for(Material material : materiais){

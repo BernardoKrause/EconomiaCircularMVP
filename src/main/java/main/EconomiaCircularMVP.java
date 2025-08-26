@@ -4,15 +4,11 @@
 
 package main;
 
-import dao.sqlite.UsuarioDAOSQLite;
+import factory.dao.IDAOFactory;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Optional;
-import model.Usuario;
+import model.Material;
 import presenter.GerenciadorTelas;
 import presenter.HomePresenter;
-import repository.database.UsuarioRepository;
-import dao.IUsuarioDAO;
 
 /**
  *
@@ -23,6 +19,5 @@ public class EconomiaCircularMVP {
     public static void main(String[] args) throws SQLException {
         HomePresenter homePresenter = new HomePresenter();
         GerenciadorTelas.getInstancia().inicializar(homePresenter);
-        
     }
 }

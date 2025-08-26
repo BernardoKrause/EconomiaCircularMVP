@@ -66,14 +66,14 @@ public class MaterialDAOH2 implements IMaterialDAO {
     }
 
     @Override
-    public Optional<Double> buscaFatorEmissao(String nomeMaterial) throws SQLException {
-        String sql = "SELECT fatorEmissao FROM materiais m " +
+    public Optional<Double> buscaFatorEmissao(String tipoMaterial) throws SQLException {
+        String sql = "SELECT fatorEmissao FROM materiais " +
                     "WHERE descricao = ?";
         
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, nomeMaterial);
+            pstmt.setString(1, tipoMaterial);
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
@@ -85,17 +85,37 @@ public class MaterialDAOH2 implements IMaterialDAO {
     }
 
     @Override
-    public List<Material> buscaPorTipoItem(String tipo) throws SQLException {
+    public List<Material> buscaMateriaisBase() throws SQLException {
+        List<Material> materiais = new ArrayList<>();
+        String sql = "SELECT * FROM materiais";
+        
+        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                materiais.add(new Material(
+                    rs.getInt("idMaterial"),
+                    rs.getString("descricao"),
+                    rs.getDouble("fatorEmissao"),
+                    null 
+                ));
+            }
+        }
+        return materiais;
+    }
+
+    @Override
+    public List<Material> buscaPorItem(Integer idItem) throws SQLException {
         List<Material> materiais = new ArrayList<>();
         String sql = "SELECT m.*, im.percentual FROM materiais m " +
                     "JOIN item_materiais im ON im.idMaterial = m.idMaterial " +
-                    "JOIN itens i ON i.idItem = im.idItem " +
-                    "WHERE i.tipo = ?";
+                    "WHERE im.idItem = ?";
 
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, tipo);
+            pstmt.setInt(1, idItem);
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {

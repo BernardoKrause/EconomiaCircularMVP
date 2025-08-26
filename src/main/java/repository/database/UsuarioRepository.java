@@ -44,8 +44,8 @@ public class UsuarioRepository implements IUsuarioRepository {
     }
     
     @Override
-    public void deletarUsuario(String id) throws SQLException {
-        usuarioDAO.deletar(Integer.valueOf(id));
+    public void deletarUsuario(Integer id) throws SQLException {
+        usuarioDAO.deletar(id);
     }
     
     @Override
