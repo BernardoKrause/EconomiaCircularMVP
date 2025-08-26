@@ -88,9 +88,9 @@ public class ItemService {
         }
     }
     
-    public List<Material> getListaMateriaisComposicao(String tipo) throws SQLException {
+    public List<Material> getListaMateriaisComposicao() throws SQLException {
         try {
-            List<Material> materiais = itemRepository.buscarMaterialPorTipoItem(tipo);
+            List<Material> materiais = itemRepository.buscarMateriais();
             if(materiais.isEmpty()){
                 throw new IllegalArgumentException("Lista de Tipos de material está vazia!");
             }

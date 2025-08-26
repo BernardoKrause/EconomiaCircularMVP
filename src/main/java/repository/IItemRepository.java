@@ -31,7 +31,7 @@ public interface IItemRepository {
     public List<String> buscarTipos() throws SQLException;
 
     //Decisão de arquitetura de projeto
-    public List<Material> buscarMaterialPorTipoItem(String tipo) throws SQLException;
+    public List<Material> buscarMateriais() throws SQLException;
 
     public Double buscarFatorEmissaoMaterial(String nomeMaterial) throws SQLException;
     

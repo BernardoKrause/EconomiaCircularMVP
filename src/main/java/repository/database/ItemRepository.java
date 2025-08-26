@@ -64,8 +64,8 @@ public class ItemRepository implements IItemRepository{
     }
     
     @Override
-    public List<Material> buscarMaterialPorTipoItem(String tipo) throws SQLException {
-        return materialDAO.buscaPorTipoItem(tipo);
+    public List<Material> buscarMateriais() throws SQLException {
+        return materialDAO.buscaMateriaisBase();
     }
 
     @Override

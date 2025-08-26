@@ -85,34 +85,6 @@ public class MaterialDAOH2 implements IMaterialDAO {
     }
 
     @Override
-    public List<Material> buscaPorTipoItem(String tipo) throws SQLException {
-        List<Material> materiais = new ArrayList<>();
-        String sql = "SELECT m.*, im.percentual FROM materiais m " +
-                    "JOIN item_materiais im ON im.idMaterial = m.idMaterial " +
-                    "JOIN itens i ON i.idItem = im.idItem " +
-                    "JOIN tipos t ON t.idTipo = i.idTipo " +
-                    "WHERE t.descricao = ?";
-
-        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, tipo);
-
-            try (ResultSet rs = pstmt.executeQuery()) {
-                while (rs.next()) {
-                    materiais.add(new Material(
-                        rs.getInt("idMaterial"),
-                        rs.getString("descricao"),
-                        rs.getDouble("fatorEmissao"),
-                        rs.getDouble("percentual")
-                    ));
-                }
-            }
-        }
-        return materiais;
-    }
-
-    @Override
     public List<Material> buscaMateriaisBase() throws SQLException {
         List<Material> materiais = new ArrayList<>();
         String sql = "SELECT * FROM materiais";

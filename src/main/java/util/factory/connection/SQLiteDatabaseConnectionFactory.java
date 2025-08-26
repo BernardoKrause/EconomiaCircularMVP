@@ -6,6 +6,7 @@ package util.factory.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -15,21 +16,64 @@ import java.sql.Statement;
  */
 public class SQLiteDatabaseConnectionFactory implements DatabaseConnectionFactory {
     private static final String URL = "jdbc:sqlite:" + System.getProperty("user.dir") + "/database.db";
+    private static final int DATABASE_VERSION = 1; // Incremente esta versão quando fizer mudanças
+    private static boolean isInitialized = false;
 
     static {
         setupDatabase();
     }
 
-    /**
-     *
-     * @return
-     * @throws SQLException
-     */
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL);
     }
-
+    
     private static void setupDatabase() {
+        if (isInitialized) {
+            return;
+        }
+
+        try (Connection conn = getConnection(); Statement stmt = conn.createStatement()) {
+            stmt.execute("""
+                CREATE TABLE IF NOT EXISTS database_info (
+                    id INTEGER PRIMARY KEY,
+                    version INTEGER NOT NULL,
+                    initialized BOOLEAN NOT NULL DEFAULT FALSE
+                );
+            """);
+
+            ResultSet rs = stmt.executeQuery(
+                "SELECT version, initialized FROM database_info WHERE id = 1"
+            );
+
+            if (rs.next()) {
+                int currentVersion = rs.getInt("version");
+                boolean initialized = rs.getBoolean("initialized");
+                
+                if (initialized && currentVersion >= DATABASE_VERSION) {
+                    System.out.println("Banco de dados já inicializado. Versão: " + currentVersion);
+                    isInitialized = true;
+                    return;
+                }
+            }
+
+            initializeDatabase(stmt);
+            
+            stmt.execute(
+                "INSERT OR REPLACE INTO database_info (id, version, initialized) " +
+                "VALUES (1, " + DATABASE_VERSION + ", TRUE)"
+            );
+            
+            isInitialized = true;
+            System.out.println("Banco de dados inicializado com sucesso. Versão: " + DATABASE_VERSION);
+            
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao inicializar banco de dados", e);
+        }
+    }
+
+    private static void initializeDatabase(Statement stmt) throws SQLException {
+        stmt.execute("PRAGMA foreign_keys = ON");
+        
         String[] ddlQueries = {
                 """
                 CREATE TABLE IF NOT EXISTS tipos (
@@ -233,9 +277,6 @@ public class SQLiteDatabaseConnectionFactory implements DatabaseConnectionFactor
                 "INSERT OR IGNORE INTO defeitos (descricao, percentualDesconto, idTipo) VALUES ('fecho frouxo', 0.10, 4);"
         };
 
-        try (Connection conn = getConnection(); Statement stmt = conn.createStatement()) {
-            stmt.execute("PRAGMA foreign_keys = ON");
-
             for (String query : ddlQueries) {
                 stmt.execute(query);
             }
@@ -252,9 +293,5 @@ public class SQLiteDatabaseConnectionFactory implements DatabaseConnectionFactor
                 stmt.execute(query);
             }
             
-            System.out.println("Banco de dados inicializado com sucesso.");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

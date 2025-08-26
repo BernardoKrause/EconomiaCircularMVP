@@ -80,7 +80,7 @@ public class ItemRepositoryTeste implements IItemRepository{
     }
 
     @Override
-    public List<Material> buscarMaterialPorTipoItem(String tipo) {
+    public List<Material> buscarMateriais() {
         List<Material> lista = new ArrayList<>();
 
         lista.add(new Material("Algodão", 10.0, 10.0));
