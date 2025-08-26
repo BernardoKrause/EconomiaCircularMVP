@@ -34,6 +34,12 @@ public class Vendedor extends Perfil {
         if(item==null){
             throw new IllegalArgumentException("O item que esta tentando publicar não existe!");
         }
+        for(Item i: itens){
+            if(i.getIdC().equals(item.getIdC())){
+                i=item;
+                return;
+            }
+        }
         item.setVendedor(this);
         itens.add(item);
     }

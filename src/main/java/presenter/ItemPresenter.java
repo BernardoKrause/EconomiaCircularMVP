@@ -5,6 +5,7 @@
 package presenter;
 
 import command.Oferta.AbrirPublicarOfertaCommand;
+import command.item.AbrirCadastroItemCommand;
 import command.item.AbrirVerItemCommand;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -16,6 +17,7 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultListModel;
@@ -59,13 +61,25 @@ public class ItemPresenter extends AbstractPresenter {
         this.perfil = perfil;
     }
 
-    public void createItem(PerfilService perfilService) throws SQLException{
+    public void createItem(PerfilService perfilService, Optional<Item> itemEditavel) throws SQLException{
         this.perfilService = perfilService;
         FormItemView formView = new FormItemView();
         tipoTela = "Vendedor";
         nomeTela = "CriarItem";
+        formView.setTitle("Cadastro item");
 
-
+        if(!itemEditavel.isEmpty()){
+            nomeTela = "EditarItem";
+            formView.setTitle("Editar Item");
+            Item item= itemEditavel.get();
+            
+            formView.getTxtSubcategoria().setText(item.getSubcategoria());
+            formView.getSTamanho().setValue(item.getTamanho());
+            formView.getTxtPeso().setText(String.valueOf(item.getPeso()));
+            formView.getTxtCor().setText(item.getCor());
+            formView.getTxtPrecoBase().setText(String.valueOf(item.getPrecoBase()));
+        }
+        
         resetButtonActions(formView.getBtnPublicar());
         resetButtonActions(formView.getBtnCancelar());
 
@@ -276,12 +290,15 @@ public class ItemPresenter extends AbstractPresenter {
     }
 
     public void showItem(Item item) throws SQLException{
+        ShowItemView itemView = new ShowItemView();
         tipoTela = "Comprador";
-        if(perfil.isVendedor()){
+        itemView.getBtnExcluir().setVisible(false);
+        if(perfil.getSistemId().startsWith("V")){
             tipoTela="Vendedor";
+            
+            itemView.getBtnExcluir().setVisible(true);
         }
         
-        ShowItemView itemView = new ShowItemView();
         
         itemView.setVisible(false);
         itemView.setTitle("item - "+item.getIdC());
@@ -434,7 +451,16 @@ public class ItemPresenter extends AbstractPresenter {
         resetButtonActions(itemView.getBtnCancelar());
         itemView.getBtnCancelar().addActionListener(e -> {
             try {
-                cancelar("VerItens");
+                cancelar("VerItem");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(itemView, ex);
+            }
+        });
+        
+        resetButtonActions(itemView.getBtnExcluir());
+        itemView.getBtnExcluir().addActionListener(e -> {
+            try {
+                excluir(item);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(itemView, ex);
             }
@@ -510,10 +536,15 @@ public class ItemPresenter extends AbstractPresenter {
         Item item = new Item(tipo,subcategoria,tamanho,cor,peso,composicao,precoBase);
 
         try{
-            itemService.criar(item, defeitos, (Vendedor)perfil);
+            if(nomeTela.equals("EditarItem")){
+                itemService.editar(item, defeitos, (Vendedor)perfil);
+            }else{
+                itemService.criar(item, defeitos, (Vendedor)perfil);  
+            }
             perfilService.completarPerfil(perfil);
             perfilService.atualizarReputacao(perfil, "Cadastro de item completo");
             GerenciadorTelas.getInstancia().removeTelaAberta(nomeTela);
+            verItem(item);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(view, ex);
         }
@@ -546,13 +577,16 @@ public class ItemPresenter extends AbstractPresenter {
     }
     
     private void ofertar(Item item) throws SQLException{
-        System.out.println(perfil.isComprador());
         new AbrirPublicarOfertaCommand(perfil,item).executar();
     }
     
     private void editar(Item item) throws SQLException{
-//        new AbrirPublicarOfertaCommand(perfil,item).executar();
+        new AbrirCadastroItemCommand(perfil,Optional.of(item)).executar();
 
         System.out.println("Editar");
+    }
+    
+    private void excluir(Item item){
+        itemService.excluir(item);
     }
 }
