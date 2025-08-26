@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import model.Comprador;
 import model.Item;
 import model.Oferta;
+import repository.IItemRepository;
 import repository.IOfertaRepository;
 import repository.IPerfilRepository;
 
@@ -23,15 +24,20 @@ import repository.IPerfilRepository;
 public class OfertaService {
     private IOfertaRepository ofertaRepository;
     private IPerfilRepository compradorRepository;
+    private IItemRepository itemRepository;
     
     public OfertaService(){
        ofertaRepository = SeletorRepositoryFactory.obterInstancia().criarOfertaRepository();
        compradorRepository = SeletorRepositoryFactory.obterInstancia().criarPerfilCompradorRepository();
+       
     }
     
     public void criar(Oferta oferta) throws SQLException{
         Comprador comprador = oferta.getComprador();
         comprador.addOferta(oferta);
+        Item item= oferta.getItem();
+        item.addOferta(oferta);
+        itemRepository.atualizarItem(item);
         ofertaRepository.adicionarOferta(oferta);
         compradorRepository.atualizarPerfil(comprador);
     }

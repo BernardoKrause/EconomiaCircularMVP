@@ -434,7 +434,7 @@ public class ItemPresenter extends AbstractPresenter {
         resetButtonActions(itemView.getBtnCancelar());
         itemView.getBtnCancelar().addActionListener(e -> {
             try {
-                cancelar("VerItens");
+                cancelar("VerItem");
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(itemView, ex);
             }
@@ -514,6 +514,7 @@ public class ItemPresenter extends AbstractPresenter {
             perfilService.completarPerfil(perfil);
             perfilService.atualizarReputacao(perfil, "Cadastro de item completo");
             GerenciadorTelas.getInstancia().removeTelaAberta(nomeTela);
+            verItem(item);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(view, ex);
         }
