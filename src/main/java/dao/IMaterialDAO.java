@@ -18,4 +18,6 @@ public interface IMaterialDAO {
     public List<Material> buscaTodos() throws SQLException;
     public Optional<Double> buscaFatorEmissao(String nomeMaterial) throws SQLException;
     public List<Material> buscaPorTipoItem(String tipo) throws SQLException;
+    public List<Material> buscaMateriaisBase() throws SQLException;
+    public List<Material> buscaPorItem(Integer idItem) throws SQLException;
 }

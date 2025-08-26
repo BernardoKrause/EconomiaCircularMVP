@@ -22,7 +22,7 @@ import model.Usuario;
 
     public void atualizarUsuario(Usuario usuario) throws SQLException;
     
-    public void deletarUsuario(String id) throws SQLException ;
+    public void deletarUsuario(Integer id) throws SQLException ;
     
     public int totalUsuarios() throws SQLException;
 

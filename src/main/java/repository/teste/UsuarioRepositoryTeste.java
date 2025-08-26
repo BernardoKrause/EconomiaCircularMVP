@@ -62,7 +62,7 @@ public class UsuarioRepositoryTeste implements IUsuarioRepository{
     }
 
     @Override
-    public void deletarUsuario(String id) throws SQLException {
+    public void deletarUsuario(Integer id) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
