@@ -41,6 +41,11 @@
 	    <artifactId>validadorsenha</artifactId>
 	    <version>master</version>
 	</dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>2.2.224</version> <!-- Use a versão mais recente -->
+        </dependency>
     </dependencies>
     <repositories>
 	<repository>
