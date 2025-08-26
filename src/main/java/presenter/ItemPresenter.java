@@ -68,7 +68,7 @@ public class ItemPresenter extends AbstractPresenter {
         nomeTela = "CriarItem";
         formView.setTitle("Cadastro item");
 
-        if(!itemEditavel.isEmpty()){
+        if(itemEditavel!=null){
             nomeTela = "EditarItem";
             formView.setTitle("Editar Item");
             Item item= itemEditavel.get();
@@ -546,7 +546,7 @@ public class ItemPresenter extends AbstractPresenter {
             GerenciadorTelas.getInstancia().removeTelaAberta(nomeTela);
             verItem(item);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(view, ex);
+            JOptionPane.showMessageDialog(view, "Erro ao publicar" + ex.getMessage());
         }
     }
 

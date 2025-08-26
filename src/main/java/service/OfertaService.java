@@ -44,7 +44,7 @@ public class OfertaService {
     
     public List<Oferta> getOfertasPorItem(Item item) throws SQLException {
         try {
-            return ofertaRepository.buscarPorItem(item.getIdC());
+            return ofertaRepository.buscarPorItem(item.getId());
         } catch (SQLException ex) {
             Logger.getLogger(RepositoryFactoryBD.class.getName()).log(Level.SEVERE, null, ex);
         }

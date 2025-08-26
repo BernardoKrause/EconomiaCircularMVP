@@ -4,6 +4,7 @@
  */
 package repository.teste;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Oferta;
@@ -49,16 +50,9 @@ public class OfertaRepositoryTeste implements IOfertaRepository{
     }
 
     @Override
-    public List<Oferta> buscarPorItem(String idC) {
-        List<Oferta> lista = new ArrayList<>();
-        
-        for(Oferta o : ofertasPublicadas){
-            if(o.getItem().getIdC().equalsIgnoreCase(idC)){
-                lista.add(o);
-            }
-        }
-        
-        return lista;
+    public List<Oferta> buscarPorItem(Integer id) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
     
 }
