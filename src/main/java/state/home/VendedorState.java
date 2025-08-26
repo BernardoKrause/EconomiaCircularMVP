@@ -15,6 +15,7 @@ import factory.repository.SeletorRepositoryFactory;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.Optional;
 import javax.swing.JOptionPane;
 import model.Perfil;
 import model.Usuario;
@@ -142,7 +143,7 @@ public class VendedorState extends HomePresenterState{
     @Override
     public void publicarItem() throws SQLException{
         Perfil perfil = usuario.getPerfilVendedor().get();
-        new AbrirCadastroItemCommand(perfil).executar();
+        new AbrirCadastroItemCommand(perfil, Optional.empty()).executar();
     }
     
     @Override

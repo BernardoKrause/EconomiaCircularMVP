@@ -5,6 +5,8 @@
 package command.item;
 
 import java.sql.SQLException;
+import java.util.Optional;
+import model.Item;
 import model.Perfil;
 import presenter.GerenciadorTelas;
 
@@ -13,7 +15,8 @@ import presenter.GerenciadorTelas;
  * @author caiof
  */
 public class AbrirCadastroItemCommand extends ItemCommand{
-    public AbrirCadastroItemCommand(Perfil perfil)throws SQLException {
+    private Optional<Item> item;
+    public AbrirCadastroItemCommand(Perfil perfil, Optional<Item> item)throws SQLException {
         super(perfil);
     }
 
@@ -23,7 +26,7 @@ public class AbrirCadastroItemCommand extends ItemCommand{
      */
     @Override
     public void executar() throws SQLException {
-        presenter.createItem(service);
+        presenter.createItem(service,item);
         GerenciadorTelas.getInstancia().addTelaAberta("Vendedor", "CriarItem", presenter);
         desktop.add(presenter.getView());    
     }

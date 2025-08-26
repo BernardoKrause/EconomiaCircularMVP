@@ -13,7 +13,6 @@ import java.sql.SQLException;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JInternalFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.ListCellRenderer;
@@ -68,7 +67,7 @@ public abstract class PerfilPresenter extends AbstractPresenter {
         setButtons(perfilView);
         
         view.setVisible(false);
-        view=perfilView;
+        view= perfilView;
         view.setVisible(true);
     }
     

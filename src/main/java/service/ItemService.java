@@ -45,6 +45,25 @@ public class ItemService {
         }
     }
     
+    public void editar(Item item, List<String> defeitos, Vendedor vendedor) throws SQLException {
+        try {
+            sistemaDefeitos.AplicarDefeitos(item, defeitos);
+            sistemaGPW.calcularGPW(item);
+            vendedor.publicarItem(item);
+            itemRepository.atualizarItem(item);
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao criar item " + ex);
+        }
+    }
+    
+    public void excluir(Item item){
+        try{
+            itemRepository.excluirItem(item);
+        }catch(Exception ex){
+            throw new RuntimeException("Erro ao tentar excluir item! "+ ex.getMessage());
+        }
+    }
+    
     public List<Item> getItens() throws Exception{
         try {
             return itemRepository.buscarTodos();
