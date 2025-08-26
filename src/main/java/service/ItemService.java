@@ -38,7 +38,7 @@ public class ItemService {
             sistemaDefeitos.AplicarDefeitos(item, defeitos);
             sistemaGPW.calcularGPW(item);
             vendedor.publicarItem(item);
-            item.gerarIdC(itemRepository.buscarQuantidadeItens());
+            item.gerarIdC();
             itemRepository.adicionarItem(item);
         } catch (SQLException ex) {
             throw new RuntimeException("Erro ao criar item " + ex);

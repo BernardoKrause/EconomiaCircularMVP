@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import util.generator.IdCGenerator;
 
 public class Item {
     private Integer id;
@@ -226,13 +227,11 @@ public class Item {
         this.vendedor=vendedor;
     }
 
-    public void gerarIdC(Integer codigo) {
-        String idC = String.valueOf(codigo);
-        //codigo
+    public void gerarIdC() {
         if (this.idC != null){
             throw new IllegalArgumentException("O ID-C desse item ja foi gerado!");
         }
-        this.idC=idC;
+        this.idC=IdCGenerator.gerarIdC();
     }
 
     public void calcularPrecoFinal(){
