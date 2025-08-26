@@ -36,4 +36,6 @@ public interface IItemRepository {
     public Double buscarFatorEmissaoMaterial(String nomeMaterial) throws SQLException;
     
     public void atualizarItem(Item item) throws SQLException;
+    
+    public void excluirItem(Item item) throws SQLException; 
 }

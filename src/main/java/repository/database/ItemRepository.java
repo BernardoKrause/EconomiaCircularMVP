@@ -73,4 +73,9 @@ public class ItemRepository implements IItemRepository{
         itemDAO.atualizar(item);
     }
 
+    @Override
+    public void excluirItem(Item item) throws SQLException {
+        itemDAO.deletar(item.getId());
+    }
+
 }
