@@ -89,6 +89,7 @@ view\HomeView$3.class
 presenter\CompradorPresenter.class
 view\item\MaterialComposicao.class
 model\Comprador.class
+util\generator\IdCGenerator.class
 presenter\SignupPresenter$2.class
 command\usuario\AbrirLoginUsuarioCommand.class
 repository\IItemRepository.class

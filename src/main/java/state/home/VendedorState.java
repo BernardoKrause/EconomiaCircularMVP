@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.Optional;
 import javax.swing.JOptionPane;
+import model.Item;
 import model.Perfil;
 import model.Usuario;
 import model.Vendedor;
@@ -143,7 +144,8 @@ public class VendedorState extends HomePresenterState{
     @Override
     public void publicarItem() throws SQLException{
         Perfil perfil = usuario.getPerfilVendedor().get();
-        new AbrirCadastroItemCommand(perfil, Optional.empty()).executar();
+        Optional<Item> item = Optional.empty();
+        new AbrirCadastroItemCommand(perfil, item).executar();
     }
     
     @Override

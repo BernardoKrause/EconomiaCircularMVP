@@ -19,5 +19,7 @@ public interface IOfertaDAO {
     public List<Oferta> buscaPorComprador(Integer id) throws SQLException;
     public void atualizar(Oferta oferta) throws SQLException;
     public void deletar(Integer id) throws SQLException;
+    public List<Oferta> buscaPorItem(Integer idItem) throws SQLException ;
+    public List<Oferta> buscaPorStatus(String status) throws SQLException;
     public List<Oferta> buscaRecentes(int limite) throws SQLException;
 }

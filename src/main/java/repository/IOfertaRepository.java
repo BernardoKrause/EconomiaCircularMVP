@@ -17,5 +17,5 @@ public interface IOfertaRepository {
     public void adicionarOferta(Oferta oferta) throws SQLException;
     public void atualizarOferta(Oferta oferta) throws SQLException;
     public List<Oferta> buscarTodas() throws SQLException;
-    public List<Oferta> buscarPorItem(String idC) throws SQLException;
+    public List<Oferta> buscarPorItem(Integer id) throws SQLException;
 }

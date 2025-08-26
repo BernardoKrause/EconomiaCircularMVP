@@ -166,6 +166,7 @@ public class OfertaDAOSQLite implements IOfertaDAO {
     }
     
     // Métodos adicionais
+    @Override
     public List<Oferta> buscaPorItem(Integer idItem) throws SQLException {
         List<Oferta> ofertas = new ArrayList<>();
         String sql = "SELECT * FROM ofertas WHERE idItem = ? ORDER BY dataOferta DESC";
@@ -196,6 +197,7 @@ public class OfertaDAOSQLite implements IOfertaDAO {
         return ofertas;
     }
     
+    @Override
     public List<Oferta> buscaPorStatus(String status) throws SQLException {
         List<Oferta> ofertas = new ArrayList<>();
         String sql = "SELECT * FROM ofertas WHERE status = ? ORDER BY dataOferta DESC";

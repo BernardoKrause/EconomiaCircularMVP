@@ -24,23 +24,23 @@ public class OfertaRepository implements IOfertaRepository {
     }
     
     @Override
-    public void adicionarOferta(Oferta oferta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void adicionarOferta(Oferta oferta) throws SQLException {
+        ofertaDAO.criar(oferta);
     }
 
     @Override
-    public void atualizarOferta(Oferta oferta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void atualizarOferta(Oferta oferta) throws SQLException {
+        ofertaDAO.atualizar(oferta);
     }
 
     @Override
-    public List<Oferta> buscarTodas() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<Oferta> buscarTodas() throws SQLException {
+        return ofertaDAO.buscaTodos();
     }
 
     @Override
-    public List<Oferta> buscarPorItem(String idC) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<Oferta> buscarPorItem(Integer id) throws SQLException{
+        return ofertaDAO.buscaPorItem(id);
     }
     
 }
