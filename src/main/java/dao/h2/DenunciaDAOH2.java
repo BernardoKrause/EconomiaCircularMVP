@@ -27,9 +27,8 @@ public class DenunciaDAOH2 implements IDenunciaDAO {
 
     @Override
     public void criar(Denuncia denuncia) throws SQLException {
-        String sql = "INSERT INTO denuncias (idC, descricao, status, idPerfilComprador, idPerfilVendedor) " +
-                   "VALUES (?, ?, ?, ?, ?)";
-        
+        String sql = "INSERT INTO denuncias (idC, descricao, status, idPerfilComprador, idPerfilVendedor, idTransacao)"
+                   + "VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -38,6 +37,8 @@ public class DenunciaDAOH2 implements IDenunciaDAO {
             pstmt.setString(3, denuncia.getStatus());
             pstmt.setInt(4, denuncia.getComprador().getId());
             pstmt.setInt(5, denuncia.getVendedor().getId());
+            pstmt.setInt(6, denuncia.getTransacao().getId());
+            
             pstmt.executeUpdate();
         }
     }
@@ -159,9 +160,9 @@ public class DenunciaDAOH2 implements IDenunciaDAO {
 
     @Override
     public void atualizar(Denuncia denuncia) throws SQLException {
-        String sql = "UPDATE denuncias SET idC = ?, descricao = ?, status = ?, idPerfilComprador = ?, idPerfilVendedor = ? " +
-                   "WHERE idDenuncia = ?";
-        
+        String sql = "UPDATE denuncias SET idC = ?, descricao = ?, status = ?, "
+                   + "idPerfilComprador = ?, idPerfilVendedor = ?, idTransacao = ? "
+                   + "WHERE idDenuncia = ?";
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -170,20 +171,21 @@ public class DenunciaDAOH2 implements IDenunciaDAO {
             pstmt.setString(3, denuncia.getStatus());
             pstmt.setInt(4, denuncia.getComprador().getId());
             pstmt.setInt(5, denuncia.getVendedor().getId());
-            pstmt.setInt(6, denuncia.getId());
+            pstmt.setInt(6, denuncia.getTransacao().getId());
+            pstmt.setInt(7, denuncia.getId());
+            
             pstmt.executeUpdate();
         } 
     }
 
     @Override
-    public void deletar(Integer idDenuncia) throws SQLException {
-        String sql = "DELETE FROM denuncias WHERE idDenuncia = ?";
-        
-        try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+    public void deletar(Integer id) throws SQLException {
+       String sql = "DELETE FROM denuncias WHERE idDenuncia = ?";
+       try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
+           PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setInt(1, idDenuncia);
-            pstmt.executeUpdate();
-        }
+           pstmt.setInt(1, id);
+           pstmt.executeUpdate();
+       }
     }
 }

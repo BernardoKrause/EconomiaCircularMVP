@@ -19,8 +19,6 @@ import model.Comprador;
 import util.factory.connection.DatabaseConnectionFactory;
 import dao.IItemDAO;
 import dao.IPerfilDAO;
-import dao.sqlite.ItemDAOSQLite;
-import dao.sqlite.PerfilCompradorDAOSQLite;
 import model.Perfil;
 
 /**
@@ -29,8 +27,8 @@ import model.Perfil;
  */
 public class OfertaDAOSQLite implements IOfertaDAO {
 
-    private IItemDAO itemDAO;
-    private IPerfilDAO compradorDAO;
+    private final IItemDAO itemDAO;
+    private final IPerfilDAO compradorDAO;
 
     public OfertaDAOSQLite() {
         this.itemDAO = new ItemDAOSQLite();

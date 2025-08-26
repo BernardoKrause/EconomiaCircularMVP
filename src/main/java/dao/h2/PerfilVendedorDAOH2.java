@@ -30,7 +30,7 @@ public class PerfilVendedorDAOH2 implements IPerfilDAO {
         String sql = "INSERT INTO vendedores (sistemId, idReputacao) "
                    + "VALUES (?, ?)";
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
-             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, vendedor.getSistemId());
             pstmt.setInt(2, vendedor.getReputacao().getId());
@@ -39,7 +39,7 @@ public class PerfilVendedorDAOH2 implements IPerfilDAO {
     }
     
     @Override
-    public Optional<Perfil> buscaPorIdUsuario(Integer id) throws SQLException {
+    public Optional<Perfil> buscaPorIdUsuario (Integer id) throws SQLException {
         String sql = """
                 SELECT v.*, 
                     r.estrelas AS reputacao_estrelas,
@@ -63,15 +63,14 @@ public class PerfilVendedorDAOH2 implements IPerfilDAO {
                     );
                     reputacao.setIdReputacao(rs.getInt("idReputacao"));
                     
-                    Vendedor vendedor = new Vendedor(
+                    return Optional.of(new Vendedor(
                         rs.getInt("idPerfilVendedor"),
                         rs.getString("sistemId"),
                         reputacao
-                    );
-                    
-                    return Optional.of(vendedor);
+                    ));
                 }
             }
+
         }
         return Optional.empty();
     }
@@ -114,8 +113,8 @@ public class PerfilVendedorDAOH2 implements IPerfilDAO {
     
     @Override
     public void atualizar(Perfil perfil) throws SQLException {
-        String sql = "UPDATE vendedores SET sistemId = ?, idReputacao = ? "
-                   + "WHERE idPerfilVendedor = ?";
+        String sql = "UPDATE vendedores SET sistemId = ?, idReputacao = ?"
+                   + "WHERE idPerfil = ?";
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -123,6 +122,7 @@ public class PerfilVendedorDAOH2 implements IPerfilDAO {
             pstmt.setInt(2, perfil.getReputacao().getId());
             pstmt.setInt(3, perfil.getId());
             pstmt.executeUpdate();
+
         } 
     }
 

@@ -7,6 +7,8 @@ package dao.h2;
 import dao.IItemDAO;
 import dao.IOfertaDAO;
 import dao.IPerfilDAO;
+import dao.sqlite.ItemDAOSQLite;
+import dao.sqlite.PerfilCompradorDAOSQLite;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,12 +29,12 @@ import util.factory.connection.DatabaseConnectionFactory;
  */
 public class OfertaDAOH2 implements IOfertaDAO {
     
-    private IItemDAO itemDAO;
-    private IPerfilDAO compradorDAO;
+    private final IItemDAO itemDAO;
+    private final IPerfilDAO compradorDAO;
 
     public OfertaDAOH2() {
-        this.itemDAO = new ItemDAOH2();
-        this.compradorDAO = new PerfilCompradorDAOH2();
+        this.itemDAO = new ItemDAOSQLite();
+        this.compradorDAO = new PerfilCompradorDAOSQLite();
     }
 
     @Override

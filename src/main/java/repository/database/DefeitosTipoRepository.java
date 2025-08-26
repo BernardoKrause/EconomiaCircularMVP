@@ -8,7 +8,6 @@ import dao.IDefeitoDAO;
 import factory.dao.IDAOFactory;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 import repository.IDefeitosTipoRepository;
 
 /**
@@ -25,17 +24,17 @@ public class DefeitosTipoRepository implements IDefeitosTipoRepository {
 
     @Override
     public List<String> buscarPorTipo(String tipoItem) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return defeitoDAO.buscaPorTipo(tipoItem);
     }
 
     @Override
     public Double buscarPercentualPorDefeito(String defeito) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return defeitoDAO.buscaPercentualPorDefeito(defeito);
     }
 
     @Override
     public List<String> buscarTiposItem() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return defeitoDAO.buscarTiposItem();
     }
 
 }

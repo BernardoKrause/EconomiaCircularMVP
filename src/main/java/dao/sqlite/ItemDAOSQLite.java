@@ -1,6 +1,5 @@
 package dao.sqlite;
 
-import dao.sqlite.UsuarioDAOSQLite;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -267,7 +266,7 @@ public class ItemDAOSQLite implements IItemDAO {
             pstmt.executeUpdate();
 
         } catch (SQLException ex) {
-            System.getLogger(UsuarioDAOSQLite.class.getName())
+            System.getLogger(ItemDAOSQLite.class.getName())
                   .log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }

@@ -20,9 +20,9 @@ public class MaterialDAOH2 implements IMaterialDAO {
     
     @Override
     public Optional<Material> buscaPorId(Integer id) throws SQLException {
-        String sql = "SELECT m.*, im.percentual FROM materiais m " +
-                    "JOIN item_materiais im ON im.idMaterial = m.idMaterial " +
-                    "WHERE m.idMaterial = ?";
+        String sql = "SELECT m.*, im.percentual FROM materiais m "
+                    + "JOIN item_materiais im ON im.idMaterial = m.idMaterial "
+                    + "WHERE m.idMaterial = ?";
         
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -39,6 +39,7 @@ public class MaterialDAOH2 implements IMaterialDAO {
                     ));
                 }
             }
+
         }
         return Optional.empty();
     }
@@ -46,8 +47,8 @@ public class MaterialDAOH2 implements IMaterialDAO {
     @Override
     public List<Material> buscaTodos() throws SQLException {
         List<Material> materiais = new ArrayList<>();
-        String sql = "SELECT m.*, im.percentual FROM materiais m " +
-                    "JOIN item_materiais im ON im.idMaterial = m.idMaterial";
+        String sql = "SELECT m.*, im.percentual FROM materiais m "
+                    + "JOIN item_materiais im ON im.idMaterial = m.idMaterial";
         
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              Statement stmt = conn.createStatement();
@@ -61,14 +62,15 @@ public class MaterialDAOH2 implements IMaterialDAO {
                     rs.getDouble("percentual")
                 ));
             }
+
         }
         return materiais;
     }
-
+    
     @Override
     public Optional<Double> buscaFatorEmissao(String tipoMaterial) throws SQLException {
-        String sql = "SELECT fatorEmissao FROM materiais " +
-                    "WHERE descricao = ?";
+        String sql = "SELECT fatorEmissao FROM materiais "
+                    + "WHERE descricao = ?";
         
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -80,10 +82,11 @@ public class MaterialDAOH2 implements IMaterialDAO {
                     return Optional.of(rs.getDouble("fatorEmissao"));
                 }
             }
+
         }
         return Optional.empty();
     }
-
+   
     @Override
     public List<Material> buscaMateriaisBase() throws SQLException {
         List<Material> materiais = new ArrayList<>();
@@ -98,9 +101,10 @@ public class MaterialDAOH2 implements IMaterialDAO {
                     rs.getInt("idMaterial"),
                     rs.getString("descricao"),
                     rs.getDouble("fatorEmissao"),
-                    null 
+                    null // percentualItem é nulo para materiais base
                 ));
             }
+
         }
         return materiais;
     }
@@ -108,9 +112,9 @@ public class MaterialDAOH2 implements IMaterialDAO {
     @Override
     public List<Material> buscaPorItem(Integer idItem) throws SQLException {
         List<Material> materiais = new ArrayList<>();
-        String sql = "SELECT m.*, im.percentual FROM materiais m " +
-                    "JOIN item_materiais im ON im.idMaterial = m.idMaterial " +
-                    "WHERE im.idItem = ?";
+        String sql = "SELECT m.*, im.percentual FROM materiais m "
+                    + "JOIN item_materiais im ON im.idMaterial = m.idMaterial "
+                    + "WHERE im.idItem = ?";
 
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

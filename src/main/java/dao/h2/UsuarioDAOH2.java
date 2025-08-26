@@ -152,7 +152,6 @@ public class UsuarioDAOH2 implements IUsuarioDAO {
         return Optional.empty();
     }
     
-    @Override
     public boolean emailExiste(String email) throws SQLException {
         String sql = "SELECT COUNT(*) FROM usuarios WHERE email = ?";
         

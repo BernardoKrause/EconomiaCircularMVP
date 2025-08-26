@@ -35,16 +35,16 @@ public class PerfilCompradorDAOH2 implements IPerfilDAO {
     }
 
     @Override
-    public Optional<Perfil> buscaPorIdUsuario(Integer id) throws SQLException {
-        String sql = "SELECT c.*, " +
-                    "r.estrelas AS reputacao_estrelas, " +
-                    "r.beneficioClimatico AS reputacao_beneficio, " +
-                    "r.nivel AS reputacao_nivel " +
-                    "FROM compradores c " +
-                    "LEFT JOIN reputacoes r ON c.idReputacao = r.idReputacao " +
-                    "LEFT JOIN usuarios u ON u.idPerfilComprador = c.idPerfilComprador " +
-                    "WHERE u.idUsuario = ?";
-        
+    public Optional<Perfil> buscaPorIdUsuario (Integer id) throws SQLException {
+        String sql = """
+                SELECT c.*, 
+                    r.estrelas AS reputacao_estrelas,
+                    r.beneficioClimatico AS reputacao_beneficio,
+                    r.nivel AS reputacao_nivel
+                    FROM compradores c
+                    LEFT JOIN reputacoes r ON c.idReputacao = r.idReputacao 
+                    LEFT JOIN usuarios u ON u.idPerfilComprador = c.idPerfilComprador
+                    WHERE u.idUsuario = ?""";
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -66,19 +66,22 @@ public class PerfilCompradorDAOH2 implements IPerfilDAO {
                     ));
                 }
             }
+
         }
         return Optional.empty();
     }
-
+    
     @Override
     public List<Perfil> buscaTodos() throws SQLException {
         List<Comprador> compradores = new ArrayList<>();
-        String sql = "SELECT c.*, " +
-                    "r.estrelas AS reputacao_estrelas, " +
-                    "r.beneficioClimatico AS reputacao_beneficio, " +
-                    "r.nivel AS reputacao_nivel " +
-                    "FROM compradores c " +
-                    "LEFT JOIN reputacoes r ON c.idReputacao = r.idReputacao";
+        String sql = """
+            SELECT c.*, 
+                   r.estrelas AS reputacao_estrelas,
+                   r.beneficioClimatico AS reputacao_beneficio,
+                   r.nivel AS reputacao_nivel
+            FROM compradores c
+            LEFT JOIN reputacoes r ON c.idReputacao = r.idReputacao
+            """;
 
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              Statement stmt = conn.createStatement();
@@ -106,8 +109,8 @@ public class PerfilCompradorDAOH2 implements IPerfilDAO {
 
     @Override
     public void atualizar(Perfil perfil) throws SQLException {
-        String sql = "UPDATE compradores SET sistemId = ?, idReputacao = ? " +
-                   "WHERE idPerfilComprador = ?";
+        String sql = "UPDATE compradores SET sistemId = ?, idReputacao = ?"
+                   + "WHERE idPerfil = ?";
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -115,6 +118,7 @@ public class PerfilCompradorDAOH2 implements IPerfilDAO {
             pstmt.setInt(2, perfil.getReputacao().getId());
             pstmt.setInt(3, perfil.getId());
             pstmt.executeUpdate();
+
         } 
     }
     
@@ -128,7 +132,7 @@ public class PerfilCompradorDAOH2 implements IPerfilDAO {
             pstmt.executeUpdate();
         }
     }
-
+ 
     @Override
     public Optional<Perfil> buscaPorId(Integer id) throws SQLException {
         String sql = """

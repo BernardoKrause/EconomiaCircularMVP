@@ -266,7 +266,7 @@ public class ItemDAOH2 implements IItemDAO {
             pstmt.executeUpdate();
 
         } catch (SQLException ex) {
-            System.getLogger(UsuarioDAOH2.class.getName())
+            System.getLogger(ItemDAOH2.class.getName())
                   .log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }
@@ -365,7 +365,6 @@ public class ItemDAOH2 implements IItemDAO {
         return itens;
     }
     
-    @Override
     public List<Item> buscaRecentes(int limite) throws SQLException {
         List<Item> itens = new ArrayList<>();
         String sqlItem = "SELECT * FROM itens ORDER BY publicado_em DESC LIMIT ?";

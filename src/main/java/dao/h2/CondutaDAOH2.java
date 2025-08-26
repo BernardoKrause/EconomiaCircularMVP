@@ -24,9 +24,8 @@ public class CondutaDAOH2 implements ICondutaDAO {
 
     @Override
     public void criar(Reputacao reputacao, Conduta conduta) throws SQLException {
-        String sql = "INSERT INTO condutas (tipoConduta, descricao, tipoPerfil, valorEstrelas, idReputacao) "
+        String sql = "INSERT INTO condutas (tipoConduta, descricao, tipoPerfil, valorEstrelas, idReputacao)"
                    + "VALUES (?, ?, ?, ?, ?)";
-        
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -38,16 +37,18 @@ public class CondutaDAOH2 implements ICondutaDAO {
             pstmt.executeUpdate();
         }
     }
-
+    
     @Override
     public List<Conduta> buscaTodos() throws SQLException {
         List<Conduta> condutas = new ArrayList<>();
-        String sql = "SELECT * FROM condutas";
+        String sql = """
+                     SELECT * FROM condutas
+                     """;
 
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)) {
+        
             while (rs.next()) {
                 condutas.add(new Conduta(
                     rs.getInt("idConduta"),
@@ -64,7 +65,11 @@ public class CondutaDAOH2 implements ICondutaDAO {
     @Override
     public List<Conduta> buscaPorTipo(Integer idReputacao, String tipo) throws SQLException {
         List<Conduta> condutas = new ArrayList<>();
-        String sql = "SELECT * FROM condutas WHERE tipoConduta = ? AND idReputacao = ?";
+        String sql = """
+            SELECT *
+            FROM condutas
+            WHERE tipoConduta = ? AND idReputacao = ?
+            """;
 
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -91,7 +96,11 @@ public class CondutaDAOH2 implements ICondutaDAO {
     @Override
     public List<Conduta> buscaPorReputacao(Reputacao reputacao) throws SQLException {
         List<Conduta> condutas = new ArrayList<>();
-        String sql = "SELECT * FROM condutas WHERE idReputacao = ?";
+        String sql = """
+            SELECT *
+            FROM condutas
+            WHERE idReputacao = ?
+            """;
 
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

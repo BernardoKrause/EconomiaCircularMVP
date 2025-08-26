@@ -26,7 +26,8 @@ public class ReputacaoDAOH2 implements IReputacaoDAO {
     @Override
     public void criar(Reputacao reputacao) throws SQLException {
         String sql = "INSERT INTO reputacoes (estrelas, beneficioClimatico, nivel) "
-                   + "VALUES (?, ?, ?)";
+                + "VALUES (?, ?, ?)";
+
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -34,9 +35,19 @@ public class ReputacaoDAOH2 implements IReputacaoDAO {
             pstmt.setDouble(2, reputacao.getBeneficio());
             pstmt.setString(3, reputacao.getNivel());
             pstmt.executeUpdate();
+
+            // Recuperar o ID gerado
+            try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    int idGerado = generatedKeys.getInt(1);
+                    reputacao.setIdReputacao(idGerado);
+                } else {
+                    throw new SQLException("Falha ao criar reputação, nenhum ID obtido.");
+                }
+            }
         }
     }
-    
+
     @Override
     public Optional<Reputacao> buscaPorPerfil(Perfil perfil) throws SQLException {
         String sql = """
@@ -54,15 +65,16 @@ public class ReputacaoDAOH2 implements IReputacaoDAO {
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     Reputacao reputacao = new Reputacao(
-                        rs.getDouble("estrelas"),
-                        rs.getDouble("beneficioClimatico"),
-                        rs.getString("nivel")
+                            rs.getDouble("estrelas"),
+                            rs.getDouble("beneficioClimatico"),
+                            rs.getString("nivel")
                     );
                     reputacao.setIdReputacao(rs.getInt("idReputacao"));
-                    
+
                     return Optional.of(reputacao);
                 }
             }
+
         }
         return Optional.empty();
     }
@@ -78,12 +90,11 @@ public class ReputacaoDAOH2 implements IReputacaoDAO {
 
             while (rs.next()) {
                 Reputacao reputacao = new Reputacao(
-                    rs.getDouble("estrelas"),
-                    rs.getDouble("beneficioClimatico"),
-                    rs.getString("nivel")
+                        rs.getDouble("estrelas"),
+                        rs.getDouble("beneficioClimatico"),
+                        rs.getString("nivel")
                 );
                 reputacao.setIdReputacao(rs.getInt("idReputacao"));
-                
                 reputacoes.add(reputacao);
             }
         }
@@ -93,7 +104,7 @@ public class ReputacaoDAOH2 implements IReputacaoDAO {
     @Override
     public void atualizar(Reputacao reputacao) throws SQLException {
         String sql = "UPDATE reputacoes SET estrelas = ?, beneficioClimatico = ?, nivel = ? "
-                   + "WHERE idReputacao = ?";
+                + "WHERE idReputacao = ?";
         try (Connection conn = DatabaseConnectionFactory.getDatabaseConnectionFactory();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -102,7 +113,8 @@ public class ReputacaoDAOH2 implements IReputacaoDAO {
             pstmt.setString(3, reputacao.getNivel());
             pstmt.setInt(4, reputacao.getId());
             pstmt.executeUpdate();
-        } 
+
+        }
     }
 
     @Override
