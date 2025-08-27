@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 import model.Item;
 import model.Perfil;
+import model.Vendedor;
 import presenter.GerenciadorTelas;
 
 /**
@@ -16,7 +17,7 @@ import presenter.GerenciadorTelas;
  */
 public class AbrirCadastroItemCommand extends ItemCommand{
     private Optional<Item> item;
-    public AbrirCadastroItemCommand(Perfil perfil, Optional<Item> item)throws SQLException {
+    public AbrirCadastroItemCommand(Vendedor perfil, Optional<Item> item)throws SQLException {
         super(perfil);
     }
 

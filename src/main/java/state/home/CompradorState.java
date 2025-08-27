@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import model.Comprador;
 import model.Perfil;
 import model.Usuario;
+import model.Vendedor;
 import presenter.HomePresenter;
 import repository.IPerfilRepository;
 
@@ -27,10 +28,14 @@ import repository.IPerfilRepository;
 public class CompradorState extends HomePresenterState{
     private Comprador comprador;
     
-    public CompradorState(HomePresenter presenter, Usuario usuarioAutenticado) throws SQLException {
+    public CompradorState(HomePresenter presenter, Usuario usuarioAutenticado, Comprador comprador) throws SQLException {
         super(presenter, usuarioAutenticado);
-    
-        this.comprador= (Comprador) usuario.getPerfilComprador().get();
+        
+        if(comprador==null){
+            this.comprador = comprador;
+        }else{
+            this.comprador= (Comprador)SeletorRepositoryFactory.obterInstancia().criarPerfilCompradorRepository().buscarPorIdUsuario(usuarioAutenticado.getId()).get();        
+        }
         
         setVisibles();
         
@@ -117,7 +122,8 @@ public class CompradorState extends HomePresenterState{
     @Override
     public void acessarPerfilVendedor() throws SQLException {
         IPerfilRepository perfilRepository = SeletorRepositoryFactory.obterInstancia().criarPerfilVendedorRepository();
-        new AcessarPerfilVendedorCommand(usuario,perfilRepository).executar();
+        Vendedor vendedor = (Vendedor)SeletorRepositoryFactory.obterInstancia().criarPerfilVendedorRepository().buscarPorIdUsuario(comprador.getUsuario().getId()).get();
+        new AcessarPerfilVendedorCommand(usuario,perfilRepository,vendedor).executar();
     }
     
     public void verPerfilComprador() throws SQLException{
@@ -127,8 +133,7 @@ public class CompradorState extends HomePresenterState{
     
     @Override
     public void verItens() throws SQLException{
-        Perfil perfil = usuario.getPerfilComprador().get();
-        new AbrirItensPublicadosCommand(perfil).executar();
+        new AbrirItensPublicadosCommand(comprador).executar();
     }
 }
 

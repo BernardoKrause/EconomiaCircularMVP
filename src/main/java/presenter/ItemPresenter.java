@@ -32,6 +32,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.ListCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import model.Comprador;
 import model.Defeito;
 import model.Item;
 import model.Material;
@@ -56,10 +57,19 @@ public class ItemPresenter extends AbstractPresenter {
     private Perfil perfil;
     private String tipoTela;
     private String nomeTela;
+    private Vendedor vendedor;
+    private Comprador comprador;
 
-    public ItemPresenter(ItemService itemService, Perfil perfil) throws SQLException{
+    public ItemPresenter(ItemService itemService, Perfil perfil, Vendedor vendedor) throws SQLException{
         this.itemService=itemService;
         this.perfil = perfil;
+        this.vendedor = vendedor;
+    }
+    
+    public ItemPresenter(ItemService itemService, Perfil perfil, Comprador comprador) throws SQLException{
+        this.itemService=itemService;
+        this.perfil = perfil;
+        this.vendedor = vendedor;
     }
 
     public void createItem(PerfilService perfilService, Optional<Item> itemEditavel) throws SQLException{
@@ -537,7 +547,6 @@ public class ItemPresenter extends AbstractPresenter {
         Item item = new Item(tipo,subcategoria,tamanho,cor,peso,composicao,precoBase);
         
         try{
-            Vendedor vendedor = (Vendedor)SeletorRepositoryFactory.obterInstancia().criarPerfilVendedorRepository().buscarPorIdUsuario(perfil.getUsuario().getId()).get();
             if(nomeTela.equals("EditarItem")){
                 itemService.editar(item, defeitos, vendedor);
             }else{
@@ -561,7 +570,11 @@ public class ItemPresenter extends AbstractPresenter {
     }
 
     public void verItem(Item item) throws SQLException{
-        new AbrirVerItemCommand(perfil,item).executar();
+        if(tipoTela.equals("Vendedor")){
+            new AbrirVerItemCommand(vendedor,item).executar();
+        }else{
+            new AbrirVerItemCommand(comprador,item).executar();
+        }
     }
     
     private void aceitarOferta(Oferta oferta, Item item){
@@ -579,11 +592,11 @@ public class ItemPresenter extends AbstractPresenter {
     }
     
     private void ofertar(Item item) throws SQLException{
-        new AbrirPublicarOfertaCommand(perfil,item).executar();
+        new AbrirPublicarOfertaCommand(comprador,item).executar();
     }
     
     private void editar(Item item) throws SQLException{
-        new AbrirCadastroItemCommand(perfil,Optional.of(item)).executar();
+        new AbrirCadastroItemCommand(vendedor,Optional.of(item)).executar();
 
         System.out.println("Editar");
     }

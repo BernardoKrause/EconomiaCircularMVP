@@ -7,7 +7,6 @@ package service;
 import factory.repository.SeletorRepositoryFactory;
 import java.sql.SQLException;
 import java.util.Optional;
-import javax.swing.JOptionPane;
 import model.Usuario;
 import repository.IPerfilRepository;
 import repository.IUsuarioRepository;
@@ -61,10 +60,12 @@ public class UsuarioService {
         
         try{
             if(!repoVendedor.buscarPorIdUsuario(usuario.getId()).isEmpty()){
-                usuario.addPerfil(repoVendedor.buscarPorIdUsuario(usuario.getId()).get());   
+                usuario.addPerfil(repoVendedor.buscarPorIdUsuario(usuario.getId()).get());  
+                System.out.println(repoVendedor.buscarPorIdUsuario(usuario.getId()).get());
             }
             if(!repoComprador.buscarPorIdUsuario(usuario.getId()).isEmpty()){
                 usuario.addPerfil(repoComprador.buscarPorIdUsuario(usuario.getId()).get()); 
+                System.out.println(repoComprador.buscarPorIdUsuario(usuario.getId()).get());
             }
             
         }catch(Exception ex){

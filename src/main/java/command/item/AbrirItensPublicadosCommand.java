@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Comprador;
 import model.Item;
 import model.Perfil;
 import model.Vendedor;
@@ -20,7 +21,10 @@ import presenter.GerenciadorTelas;
  * @author caiof
  */
 public class AbrirItensPublicadosCommand extends ItemCommand{
-    public AbrirItensPublicadosCommand(Perfil perfil)throws SQLException {
+    public AbrirItensPublicadosCommand(Vendedor perfil)throws SQLException {
+        super(perfil);
+    }
+    public AbrirItensPublicadosCommand(Comprador perfil)throws SQLException {
         super(perfil);
     }
 

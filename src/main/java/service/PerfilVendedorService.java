@@ -35,6 +35,7 @@ public class PerfilVendedorService extends PerfilService{
         
         try {
             Vendedor perfil = new Vendedor(usuario);
+            perfil.setId(perfilRepository.buscarTodosPerfis().size());
             usuario.addPerfil(perfil);
             
             usuarioRepository.atualizarUsuario(usuario);

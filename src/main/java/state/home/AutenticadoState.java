@@ -13,7 +13,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import model.Comprador;
 import model.Usuario;
+import model.Vendedor;
 import presenter.HomePresenter;
 import repository.IPerfilRepository;
 import service.UsuarioService;
@@ -24,6 +26,8 @@ import service.UsuarioService;
  */
 public class AutenticadoState extends HomePresenterState{  
     private UsuarioService usuarioService;
+    private Vendedor vendedor;
+    private Comprador comprador;
     public AutenticadoState(HomePresenter presenter, Usuario usuarioAutenticado) throws SQLException {
         super(presenter, usuarioAutenticado);
         
@@ -103,12 +107,14 @@ public class AutenticadoState extends HomePresenterState{
         new CriarPerfilVendedorCommand(usuario,perfilRepository).executar();
         view.getMItemAcessarPerfilVendedor().setVisible(true); 
         view.getMItemCriarPerfilVendedor().setVisible(false); 
+        this.vendedor = (Vendedor)usuario.getPerfilVendedor().get();
+
     }
     
     @Override
     public void acessarPerfilVendedor() throws SQLException {
         IPerfilRepository perfilRepository = SeletorRepositoryFactory.obterInstancia().criarPerfilVendedorRepository();
-        new AcessarPerfilVendedorCommand(usuario,perfilRepository).executar();
+        new AcessarPerfilVendedorCommand(usuario,perfilRepository,vendedor).executar();
     }
     
     @Override
@@ -117,12 +123,14 @@ public class AutenticadoState extends HomePresenterState{
         new CriarPerfilCompradorCommand(usuario,perfilRepository).executar();
         view.getMItemAcessarPerfilComprador().setVisible(true); 
         view.getMItemCriarPerfilComprador().setVisible(false); 
+        this.comprador = (Comprador)usuario.getPerfilComprador().get();
+
     }
     
     @Override
     public void acessarPerfilComprador() throws SQLException{
         IPerfilRepository perfilRepository = SeletorRepositoryFactory.obterInstancia().criarPerfilCompradorRepository();
-        new AcessarPerfilCompradorCommand(usuario,perfilRepository).executar();
+        new AcessarPerfilCompradorCommand(usuario,perfilRepository, comprador).executar();
     }
     
     @Override

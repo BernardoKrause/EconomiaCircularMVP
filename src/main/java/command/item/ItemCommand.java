@@ -8,7 +8,9 @@ import command.ICommand;
 import factory.repository.SeletorRepositoryFactory;
 import java.sql.SQLException;
 import javax.swing.JDesktopPane;
+import model.Comprador;
 import model.Perfil;
+import model.Vendedor;
 import presenter.GerenciadorTelas;;
 import presenter.ItemPresenter;
 import repository.teste.DefeitosTipoRepositoryTeste;
@@ -30,7 +32,7 @@ public abstract class ItemCommand implements ICommand{
     protected ItemPresenter presenter;
     protected ItemService itemService;
     
-    public ItemCommand(Perfil perfil) throws SQLException {
+    public ItemCommand(Vendedor perfil) throws SQLException {
         this.perfil = perfil;
         this.service = new PerfilVendedorService(
                 SeletorRepositoryFactory.obterInstancia().criarReputacaoRepository(), 
@@ -46,8 +48,26 @@ public abstract class ItemCommand implements ICommand{
         CalcularGPWService sistemaGPW = new CalcularGPWService();
         OfertaService ofertaService = new OfertaService();
         this.itemService = new ItemService(sysDefeito, tiposDefeitosRepo, sistemaGPW, ofertaService);
-        this.presenter=new ItemPresenter(itemService, perfil);
-
+        this.presenter=new ItemPresenter(itemService,this.perfil,perfil);
+    }
+    
+        public ItemCommand(Comprador perfil) throws SQLException {
+        this.perfil = perfil;
+        this.service = new PerfilVendedorService(
+                SeletorRepositoryFactory.obterInstancia().criarReputacaoRepository(), 
+                SeletorRepositoryFactory.obterInstancia().criarCondutaRepository(), 
+                SeletorRepositoryFactory.obterInstancia().criarPerfilVendedorRepository(),
+                SeletorRepositoryFactory.obterInstancia().criarUsuarioRepository());
+        
+        
+        this.desktop = GerenciadorTelas.getInstancia().getDesktop();
+        
+        DefeitosTipoRepositoryTeste tiposDefeitosRepo = new DefeitosTipoRepositoryTeste();
+        SistemaDefeitosService sysDefeito = new SistemaDefeitosService();
+        CalcularGPWService sistemaGPW = new CalcularGPWService();
+        OfertaService ofertaService = new OfertaService();
+        this.itemService = new ItemService(sysDefeito, tiposDefeitosRepo, sistemaGPW, ofertaService);
+        this.presenter=new ItemPresenter(itemService,this.perfil,perfil);
     }
 
     /**

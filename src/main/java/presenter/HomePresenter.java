@@ -6,7 +6,9 @@ package presenter;
 
 import java.sql.SQLException;
 import javax.swing.JDesktopPane;
+import model.Comprador;
 import model.Usuario;
+import model.Vendedor;
 import service.PerfilService;
 import state.home.AutenticadoState;
 import state.home.CompradorState;
@@ -46,16 +48,16 @@ public class HomePresenter {
         estado = new NaoAutenticadoState(this);
     }
     
-    public void acessarVendedor(Usuario usuarioAutenticado) throws SQLException{
+    public void acessarVendedor(Usuario usuarioAutenticado, Vendedor vendedor) throws SQLException{
         GerenciadorTelas.getInstancia().removeTelasTipo("Comprador");
         GerenciadorTelas.getInstancia().removeTelasTipo("Item");
-        estado = new VendedorState(this,usuarioAutenticado);
+        estado = new VendedorState(this,usuarioAutenticado, vendedor);
     }
     
-    public void acessarComprador(Usuario usuarioAutenticado) throws SQLException{
+    public void acessarComprador(Usuario usuarioAutenticado, Comprador comprador) throws SQLException{
         GerenciadorTelas.getInstancia().removeTelasTipo("Vendedor");
         GerenciadorTelas.getInstancia().removeTelasTipo("Item");
-        estado = new CompradorState(this,usuarioAutenticado);
+        estado = new CompradorState(this,usuarioAutenticado, comprador);
     }
 
     public void setView(HomeView view){

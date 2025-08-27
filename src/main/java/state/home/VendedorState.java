@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.Optional;
 import javax.swing.JOptionPane;
+import model.Comprador;
 import model.Item;
 import model.Perfil;
 import model.Usuario;
@@ -31,11 +32,14 @@ import repository.IPerfilRepository;
 public class VendedorState extends HomePresenterState{
     private Vendedor vendedor;
     
-    public VendedorState(HomePresenter presenter, Usuario usuarioAutenticado) throws SQLException {
+    public VendedorState(HomePresenter presenter, Usuario usuarioAutenticado, Vendedor vendedor) throws SQLException {
         super(presenter, usuarioAutenticado);
-    
-        this.vendedor= (Vendedor) usuario.getPerfilVendedor().get();
-        
+        if(vendedor == null){
+            this.vendedor = vendedor;
+        }else{
+            this.vendedor = (Vendedor)SeletorRepositoryFactory.obterInstancia().criarPerfilVendedorRepository().buscarPorIdUsuario(usuarioAutenticado.getId()).get();
+        }
+
         setVisibles();
         
         verPerfilVendedor();
@@ -133,7 +137,9 @@ public class VendedorState extends HomePresenterState{
     @Override
     public void acessarPerfilComprador() throws SQLException{
         IPerfilRepository perfilRepository = SeletorRepositoryFactory.obterInstancia().criarPerfilCompradorRepository();
-        new AcessarPerfilCompradorCommand(usuario,perfilRepository).executar();
+        Comprador comprador= (Comprador)SeletorRepositoryFactory.obterInstancia().criarPerfilCompradorRepository().buscarPorIdUsuario(vendedor.getUsuario().getId()).get();        
+
+        new AcessarPerfilCompradorCommand(usuario,perfilRepository, comprador).executar();
     }
     
     public void verPerfilVendedor() throws SQLException{
@@ -145,12 +151,12 @@ public class VendedorState extends HomePresenterState{
     public void publicarItem() throws SQLException{
         Perfil perfil = usuario.getPerfilVendedor().get();
         Optional<Item> item = Optional.empty();
-        new AbrirCadastroItemCommand(perfil, item).executar();
+        new AbrirCadastroItemCommand(vendedor, item).executar();
     }
     
     @Override
     public void verItens() throws SQLException{
         Perfil perfil = usuario.getPerfilVendedor().get();
-        new AbrirItensPublicadosCommand(perfil).executar();
+        new AbrirItensPublicadosCommand(vendedor).executar();
     }
 }

@@ -37,7 +37,7 @@ public class AbrirPublicarOfertaCommand implements ICommand{
     protected OfertaService ofertaService;
     private Item item;
     
-    public AbrirPublicarOfertaCommand(Perfil perfil, Item item) throws SQLException {
+    public AbrirPublicarOfertaCommand(Comprador perfil, Item item) throws SQLException {
         this.perfil = perfil;
         this.item=item;
         this.service = new PerfilVendedorService(
@@ -54,7 +54,7 @@ public class AbrirPublicarOfertaCommand implements ICommand{
         CalcularGPWService sistemaGPW = new CalcularGPWService();
         this.ofertaService = new OfertaService();
         this.itemService = new ItemService(sysDefeito, tiposDefeitosRepo, sistemaGPW, ofertaService);
-        this.presenter=new OfertaPresenter(item, (Comprador) perfil, ofertaService);
+        this.presenter=new OfertaPresenter(item, perfil, ofertaService);
 
     }
 

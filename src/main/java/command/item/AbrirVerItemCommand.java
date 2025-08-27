@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Comprador;
 import model.Item;
 import model.Perfil;
 import model.Vendedor;
@@ -20,7 +21,11 @@ import presenter.GerenciadorTelas;
  */
 public class AbrirVerItemCommand extends ItemCommand{
     private Item item;
-    public AbrirVerItemCommand(Perfil perfil, Item item)throws SQLException {
+    public AbrirVerItemCommand(Vendedor perfil, Item item)throws SQLException {
+        super(perfil);
+        this.item = item;
+    }
+    public AbrirVerItemCommand(Comprador perfil, Item item)throws SQLException {
         super(perfil);
         this.item = item;
     }

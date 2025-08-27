@@ -36,13 +36,12 @@ public abstract class PerfilCommand implements ICommand{
         this.usuarioRepository = SeletorRepositoryFactory.obterInstancia().criarUsuarioRepository();
         this.reputacaoRepository = SeletorRepositoryFactory.obterInstancia().criarReputacaoRepository();
         this.condutaRepository = SeletorRepositoryFactory.obterInstancia().criarCondutaRepository();
-        if(!tipoPerfil.isEmpty()){
-            if(tipoPerfil.get().equals("Vendedor")){
-                this.service = new PerfilVendedorService(reputacaoRepository,condutaRepository,perfilRepository,usuarioRepository);
-            }else{
-                this.service = new PerfilCompradorService(reputacaoRepository,condutaRepository,perfilRepository,usuarioRepository);
-            }
+        if(tipoPerfil.get().equals("Vendedor")){
+            this.service = new PerfilVendedorService(reputacaoRepository,condutaRepository,perfilRepository,usuarioRepository);
+        }else{
+            this.service = new PerfilCompradorService(reputacaoRepository,condutaRepository,perfilRepository,usuarioRepository);
         }
+
     }
     
     public abstract void executar() throws SQLException;

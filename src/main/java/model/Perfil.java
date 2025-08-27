@@ -61,5 +61,8 @@ public abstract class Perfil {
     public boolean isComprador() {
         return usuario.getPerfilComprador().get().equals(this);
     }
-    
+        
+    public void setId(Integer id){
+        this.id=id;
+    }
 }
