@@ -40,6 +40,7 @@ public class Vendedor extends Perfil {
                 return;
             }
         }
+        System.out.println(getId());
         item.setVendedor(this);
         itens.add(item);
     }

@@ -37,6 +37,7 @@ public class TransacaoDAOH2 implements ITransacaoDAO {
             pstmt.setString(3, transacao.getDataTermino());
             pstmt.setString(4, transacao.getComentarioVendedor());
             pstmt.setString(5, transacao.getComentarioComprador());
+            System.out.println(transacao.getVendedor().getId());
             pstmt.setInt(6, transacao.getVendedor().getId());
             pstmt.setInt(7, transacao.getComprador().getId());
             

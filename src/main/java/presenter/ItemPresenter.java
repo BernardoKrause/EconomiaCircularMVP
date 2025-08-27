@@ -7,6 +7,7 @@ package presenter;
 import command.Oferta.AbrirPublicarOfertaCommand;
 import command.item.AbrirCadastroItemCommand;
 import command.item.AbrirVerItemCommand;
+import factory.repository.SeletorRepositoryFactory;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Insets;
@@ -534,12 +535,13 @@ public class ItemPresenter extends AbstractPresenter {
         }
 
         Item item = new Item(tipo,subcategoria,tamanho,cor,peso,composicao,precoBase);
-
+        
         try{
+            Vendedor vendedor = (Vendedor)SeletorRepositoryFactory.obterInstancia().criarPerfilVendedorRepository().buscarPorIdUsuario(perfil.getUsuario().getId()).get();
             if(nomeTela.equals("EditarItem")){
-                itemService.editar(item, defeitos, (Vendedor)perfil);
+                itemService.editar(item, defeitos, vendedor);
             }else{
-                itemService.criar(item, defeitos, (Vendedor)perfil);  
+                itemService.criar(item, defeitos, vendedor);  
             }
             perfilService.completarPerfil(perfil);
             perfilService.atualizarReputacao(perfil, "Cadastro de item completo");

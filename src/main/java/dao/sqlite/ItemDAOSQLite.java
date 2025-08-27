@@ -46,6 +46,7 @@ public void criar(Item item) throws SQLException {
         pstmtItem.setDouble(8, item.getGPWEvitado());
         pstmtItem.setDouble(9, item.getMCIItem());
         pstmtItem.setInt(10, item.getNumeroCiclo());
+        System.out.println(item.getVendedor().getId());
         pstmtItem.setInt(11, item.getVendedor().getId());
         pstmtItem.setInt(12, buscaIdTipo(item.getTipo()));
 
